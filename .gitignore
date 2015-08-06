@@ -1,0 +1,10 @@
+*.aux
+*.log
+*.out
+.Rhistory
+.Rproj.user
+*~
+.#*
+#*
+*.Rout
+*.RData
