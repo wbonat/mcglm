@@ -1,1 +1,1 @@
-The mcglm package fitting multivariate covariance generalized linear models (Bonat and Jorgensen, 2015).
+The mcglm package fit multivariate covariance generalized linear models (Bonat and Jorgensen, 2015).
