@@ -3,7 +3,7 @@
 #' @description Computes confidence intervals for parameters in a fitted mcglm.
 #'
 #' @param object a fitted mcglm object.
-#' @level the confidence level required.
+#' @param level the confidence level required.
 #' @return A data.frame with confidence intervals, parameters names, response number and parameters type.
 
 confint.mcglm <- function(object, level = 0.95){

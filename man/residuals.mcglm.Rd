@@ -4,7 +4,7 @@
 \alias{residuals.mcglm}
 \title{Residulas for Multivariate Covariance Generalized Linear Models (McGLM)}
 \usage{
-\method{residuals}{mcglm}(object, type = "ordinary")
+\method{residuals}{mcglm}(object, type = "raw")
 }
 \arguments{
 \item{object}{An of class mcglm, typically the result of a call to \code{mcglm}.}

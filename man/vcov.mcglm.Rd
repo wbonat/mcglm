@@ -9,6 +9,9 @@
 \arguments{
 \item{object}{a fitted model mcglm object.}
 }
+\value{
+A variance-covariance matrix.
+}
 \description{
 Returns the variance-covariance matrix for all parameters of a mcglm fitted model object.
 }

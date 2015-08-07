@@ -22,6 +22,7 @@
 #' \code{\link[mcglm]{fit_mcglm}} for details.
 #' @param check_convergence Logical if TRUE provide a convergence check.
 #' @return mcglm returns an object of class "mcglm".
+#' @export
 
 mcglm <- function(linear_pred, matrix_pred,
                   link, variance, covariance,
