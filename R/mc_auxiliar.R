@@ -14,6 +14,7 @@
 #' M <- Matrix(rep(0.8,5)%*%t(rep(0.8,5)))
 #' mc_sandwich(middle = M, bord1 = X1, bord2 = X1)
 #' mc_sandwich_negative(middle = M, bord1 = X1, bord2 = X1)
+#' @export
 ## Auxiliar function to multiply matrices
 mc_sandwich <- function(middle, bord1, bord2){bord1%*%middle%*%bord2}
 

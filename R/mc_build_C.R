@@ -1,6 +1,6 @@
 #' Build the joint covariance matrix
 #'
-#' @description This function builds the joint variance-covariance matrix using the Generalized
+#'@description This function builds the joint variance-covariance matrix using the Generalized
 #' Kronecker product and its derivatives with respect to rho, power and tau parameters.
 #'
 #'@param list_mu A list with values of the mean.
@@ -15,6 +15,7 @@
 #'
 #'@return A list with the inverse of the C matrix and the derivatives of the C matrix with respect to
 #'rho, power and tau parameters.
+#'@export
 
 mc_build_C <- function(list_mu, list_Ntrial, rho, list_tau, list_power, list_Z, list_sparse,
                        list_variance, list_covariance, list_power_fixed, compute_C = FALSE,

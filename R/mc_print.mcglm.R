@@ -3,12 +3,13 @@
 #' @description The default print method for a mcglm object.
 #'
 #' @param object fitted model objects of class mcglm as produced by mcglm().
-
-print.mcglm <- function(object){
+#' @export print mcglm
+#' @aliases print print.mcglm
+print.mcglm <- function(object) {
   n_resp <- length(object$beta_names)
-  regression <- updatedBeta(list_initial = list(), betas = object$Regression,
+  regression <- mc_updateBeta(list_initial = list(), betas = object$Regression,
                             information = object$Information, n_resp = n_resp)
-  for(i in 1:n_resp){
+  for(i in 1:n_resp) {
     cat("Call: ")
     print(object$linear_pred[[i]])
     cat("\n")

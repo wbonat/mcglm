@@ -30,7 +30,7 @@
 fit_mcglm <- function(list_initial, list_link, list_variance, list_covariance, list_X, list_Z,
                       list_offset, list_Ntrial, list_power_fixed, list_sparse, y_vec,
                       correct = TRUE, max_iter, tol = 1e-03, method = "rc", tunning = 0,
-                      verbose){
+                      verbose) {
   ## Transformation from list to vector
   parametros <- mc_list2vec(list_initial, list_power_fixed)
   n_resp <- length(list_initial$regression)
@@ -40,6 +40,8 @@ fit_mcglm <- function(list_initial, list_link, list_variance, list_covariance, l
   ## Creating a matrix to sote all values used in the fitting step
   solucao_beta <- matrix(NA, max_iter,length(parametros$beta_ini))
   solucao_cov <- matrix(NA, max_iter, length(parametros$cov_ini))
+  score_beta_temp <- matrix(NA, max_iter, length(parametros$beta_ini))
+  score_disp_temp <- matrix(NA, max_iter, length(parametros$cov_ini))
   ## Setting the initial values
   solucao_beta[1,] <- parametros$beta_ini
   solucao_cov[1,] <- parametros$cov_ini
@@ -63,7 +65,8 @@ fit_mcglm <- function(list_initial, list_link, list_variance, list_covariance, l
     # Step 1.3 - Update the regression parameters
   beta_temp <- mc_quasi_score(D = D, inv_C = Cfeatures$inv_C, y_vec = y_vec, mu_vec = mu_vec)
   solucao_beta[i,] <- as.numeric(beta_ini - solve(beta_temp$Sensitivity, beta_temp$Score))
-  list_initial <- updatedBeta(list_initial, solucao_beta[i,], information = inf, n_resp = n_resp)
+  score_beta_temp[i,] <- as.numeric(beta_temp$Score)
+  list_initial <- mc_updateBeta(list_initial, solucao_beta[i,], information = inf, n_resp = n_resp)
     # Step 1.4 - Updated the mean structure to use in the Pearson estimating function step.
   mu_list <- Map(mc_link_function, beta = list_initial$regression, offset = list_offset, X = list_X,
                  link = list_link)
@@ -95,8 +98,9 @@ fit_mcglm <- function(list_initial, list_link, list_variance, list_covariance, l
                     cov_temp$Sensitivity)%*%cov_temp$Score
   }
   ## Step 2.2 - Upedating the covariance parameters
+  score_disp_temp[i,] <- cov_temp$Score
   cov_next <- as.numeric(cov_ini - step)
-  list_initial <- updatedCov(list_initial = list_initial, list_power_fixed = list_power_fixed,
+  list_initial <- mc_updateCov(list_initial = list_initial, list_power_fixed = list_power_fixed,
                              covariance = cov_next,
                              information = inf, n_resp = n_resp)
   ## print the parameters values
@@ -136,13 +140,11 @@ fit_mcglm <- function(list_initial, list_link, list_variance, list_covariance, l
   joint_inv_sensitivity <- cbind(p1,p2)
   VarCov <- joint_inv_sensitivity%*%joint_variability%*%t(joint_inv_sensitivity)
   output <- list("IterationRegression" = solucao_beta, "IterationCovariance" = solucao_cov,
+                 "ScoreRegression" = score_beta_temp, "ScoreCovariance" = score_disp_temp,
                  "Regression" = beta_ini, "Covariance" = cov_ini, "vcov" = VarCov,
                  "fitted" = mu_vec, "residuals" = res, "inv_C" = D_C_beta$inv_C,
                  "C" = D_C_beta$C, "Information" = inf)
   return(output)
 }
-
-
-
 
 

@@ -5,6 +5,7 @@
 #' @param tau A numeric vector.
 #' @param Z   A list of known matrices.
 #' @return A matrix.
+#' @export
 #' @details Given a list with a set of known matrices (\eqn{Z_0,...,Z_D}) the function
 #' \code{mc_matrix_linear_predictor} returns \eqn{U = \tau_0 Z_0 + ... + \tau_D Z_D}.
 #' @examples

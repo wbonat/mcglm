@@ -1,4 +1,4 @@
-#' Derivative of C with respect to rho
+#' Derivative of C with respect to rho.
 #'
 #'@description Compute the derivative of the C matrix with respect to the correlation parameters rho.
 #'
@@ -8,7 +8,7 @@
 #'@param II A diagonal matrix.
 #'@return A matrix.
 #'@details It is an internal function used to build the derivatives of the C matrix.
-
+#'@export
 mc_derivative_C_rho <- function(D_Sigmab, Bdiag_chol_Sigma_within, t_Bdiag_chol_Sigma_within, II){
   output <- lapply(D_Sigmab, function(x){
     t_Bdiag_chol_Sigma_within%*%kronecker(x,II)%*%Bdiag_chol_Sigma_within

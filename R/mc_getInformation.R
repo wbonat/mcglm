@@ -1,16 +1,17 @@
-#' Getting information about the model parameters
+#' Getting information about model parameters
 #'
 #' @description This computes all information required about the number of model parameters.
 #'
 #' @param list_initial A list of initial values.
 #' @param list_power_fixed A list of logical specyfing if the power parameters should be estimated or not.
 #' @param n_resp A number specyfing the nmber of response variables.
-#' @return The number of \eq{\beta}'s, \eq{\tau}'s, power and correlation parameters.
-mc_getInformation <- function(list_initial, list_power_fixed, n_resp){
+#' @return The number of \eqn{\beta}'s, \eqn{\tau}'s, power and correlation parameters.
+#' @export
+mc_getInformation <- function(list_initial, list_power_fixed, n_resp) {
   n_betas <- lapply(list_initial$regression, length)
   n_taus <- lapply(list_initial$tau, length)
   n_power <- lapply(list_initial$power, length)
-  for(i in 1:n_resp){
+  for(i in 1:n_resp) {
     if(list_power_fixed[[i]] == TRUE){n_power[i] = 0 }
   }
   n_rho <- length(list_initial$rho)

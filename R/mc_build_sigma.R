@@ -21,6 +21,7 @@
 #'of \eqn{\Sigma} with respect to the power and tau parameters.
 #'@seealso \code{\link{mc_link_function}}, \code{\link{mc_variance_function}},
 #'\code{\link{mc_build_omega}}.
+#'@export
 
 mc_build_sigma <- function(mu, Ntrial = 1, tau, power, Z, sparse, variance,
                            covariance, power_fixed, compute_derivative_beta = FALSE) {

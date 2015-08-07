@@ -1,6 +1,6 @@
 #' Cross variability matrix
 #'
-#' @description COmpute the cross-covariance matrix between covariance and regression parameters.
+#' @description Compute the cross-covariance matrix between covariance and regression parameters.
 #' Equation (11) of Bonat and Jorgensen (2015).
 #'
 #' @param A A matrix.

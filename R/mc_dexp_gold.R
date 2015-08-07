@@ -13,6 +13,7 @@
 #' M <- matrix(c(1,0.8,0.8,1), 2,2)
 #' dM <- matrix(c(0,1,1,0),2,2)
 #' mc_dexp_gold(M = M, dM = dM)
+#' @export
 mc_dexp_gold <- function(M,dM) {
   N = dim(M)
   AM = rbind(cbind(M,matrix(0,N[1],N[2])),cbind(dM,M))

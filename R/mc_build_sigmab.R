@@ -6,6 +6,7 @@
 #' @param n_resp A numeric.
 #' @param inverse Logical
 #' @return A list with sigmab and its derivatives with respect to rho.
+#' @export
 
 mc_build_sigma_between <- function(rho, n_resp, inverse = FALSE){
   output <- list("Sigmab" = 1, "D_Sigmab" = 1)

@@ -4,14 +4,15 @@
 #'
 #' @param mu  A numeric vector. In general the output from \code{\link{mc_link_function}}.
 #' @param power  A numeric value (\code{power} and \code{binomialP}) or vector
-#' (\code{binomialPQ}) of the power parameter.
+#' (\code{binomialPQ}) of the power parameters.
 #' @param Ntrial  Number of trials, useful only when dealing with binomial response variables.
 #' @param variance  A string specifing the name (\code{power, binomialP or binomialPQ}) of
 #' the variance function.
 #' @param inverse Logical.
-#' @param derivative_power  Logical if compute or not the derivatives with respect
+#' @param derivative_power  Logical if compute (TRUE) or not (FALSE) the derivatives with respect
 #' to the power parameter.
-#' @param derivative_mu  Logical if compute or not the derivative with respect to the mu parameter.
+#' @param derivative_mu  Logical if compute (TRUE) or not (FALSE) the derivative with respect
+#' to the mu parameter.
 #' @return A list with from one to four elements depends on the arguments.
 #' @seealso \code{\link{mc_link_function}}.
 #' @details The function \code{mc_variance_function} computing three features related with
@@ -27,7 +28,6 @@
 #' mu <- mc_link_function(beta = c(1,0.5), X = X, offset = NULL, link = "logit")
 #' mc_variance_function(mu = mu$mu, power = c(2,1), Ntrial = 1, variance = "binomialPQ",
 #' inverse = FALSE, derivative_power = TRUE, derivative_mu = TRUE)
-#'
 # Generic variance function ---------------------------
 mc_variance_function <- function(mu, power, Ntrial, variance, inverse,
                                  derivative_power, derivative_mu) {

@@ -30,6 +30,7 @@
 #' X <- model.matrix(~ x1)
 #' mc_link_function(beta = c(1,0.5), X = X, offset = NULL, link = "log")
 #' mc_link_function(beta = c(1,0.5), X = X, offset = rep(10,5), link = "identity")
+#' @export
 # Generic link function ---------------------------
 mc_link_function <- function(beta, X, offset, link) {
   assert_that(noNA(beta))

@@ -8,7 +8,7 @@
 #' @details It is an internal function, in general the users never will use this function.
 #' It will be useful, only if the user wants to implement a different variance-covariance matrix.
 #' @export
-mc_list2vec <- function(list_initial, list_power_fixed){
+mc_list2vec <- function(list_initial, list_power_fixed) {
   power_vec <- do.call(c, list_initial$power)
   n_power <- do.call(c,lapply(list_initial$power, length))
   indi <- rep(do.call(c, list_power_fixed), n_power)
@@ -18,10 +18,3 @@ mc_list2vec <- function(list_initial, list_power_fixed){
   cov_ini <- c("rho" = list_initial$rho, "power" = power_ini, "tau" = do.call(c,list_initial$tau))
   return(list("beta_ini" = as.numeric(beta_ini), "cov_ini" = as.numeric(cov_ini)))
 }
-
-
-
-
-
-
-

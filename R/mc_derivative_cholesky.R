@@ -6,8 +6,8 @@
 #' @param chol_Sigma A matrix.
 #' @return A list of matrix.
 #' @details It is an internal function.
-
-mc_derivative_cholesky <- function(derivada, inv_chol_Sigma, chol_Sigma){
+#' @export
+mc_derivative_cholesky <- function(derivada, inv_chol_Sigma, chol_Sigma) {
   faux <- function(derivada,inv_chol_Sigma, chol_Sigma){
     t1 <- inv_chol_Sigma%*%derivada%*%t(inv_chol_Sigma)
     t1 <- tril(t1)
