@@ -27,6 +27,6 @@ Compute the Pearson estimating function its sensitivity and variability matrices
 }
 \details{
 Compute the Pearson estimating function its sensitivity and variability matrices.
-For more details see Bonat and Jorgensen (2015) equations \eq{6--8}.
+For more details see Bonat and Jorgensen (2015) equations 6-8.
 }
 

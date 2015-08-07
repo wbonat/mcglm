@@ -14,7 +14,7 @@ mc_getInformation(list_initial, list_power_fixed, n_resp)
 \item{n_resp}{A number specyfing the nmber of response variables.}
 }
 \value{
-The number of \eq{\beta}'s, \eq{\tau}'s, power and correlation parameters.
+The number of \eqn{\beta}'s, \eqn{\tau}'s, power and correlation parameters.
 }
 \description{
 This computes all information required about the number of model parameters.

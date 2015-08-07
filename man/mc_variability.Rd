@@ -24,6 +24,6 @@ The variability matrix associated witht the Pearson estimating function.
 Compute the variability matrix associated with the Pearson estimating function.
 }
 \details{
-This function implements the equation \eq{8} of Bonat and Jorgensen (2015).
+This function implements the equation 8 of Bonat and Jorgensen (2015).
 }
 

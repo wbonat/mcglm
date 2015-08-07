@@ -4,22 +4,23 @@
 \alias{coef.mcglm}
 \title{Extract model coefficients for mcglm class}
 \usage{
-\method{coef}{mcglm}(object, response = c(NA, 1:length(object$beta_names)),
-  which = c("beta", "tau", "power", "correlation"))
+\method{coef}{mcglm}(object, std.error = FALSE, response = c(NA,
+  1:length(object$beta_names)), type = c("beta", "tau", "power",
+  "correlation"))
 }
 \arguments{
-\item{object}{An object of "mcglm" class.}
+\item{object}{An object of mcglm class.}
 
-\item{response}{A numeric or vector specyfing for which response variable the coefficients
+\item{response}{A numeric or vector specyfing for which response variables the coefficients
 should be returned.}
 
-\item{which}{A string specyfing which coefficients should be returned. Options are "all",
-"regression", "correlation", "power" and "tau".}
+\item{type}{A string or string vector specyfing which coefficients should be returned.
+Options are "beta", "tau", "power", "tau" and "correlation".}
 }
 \value{
-A vector of coefficients.
+A data.frame with estimates, parameters names, response number and parameters type.
 }
 \description{
-coefficient is a function which extracts model coefficients from objects of "mcglm" class.
+coef.mcglm is a function which extracts model coefficients from objects of mcglm class.
 }
 
