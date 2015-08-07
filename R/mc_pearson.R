@@ -10,7 +10,7 @@
 #' @param correct Logical.
 #' @param compute_variability Logical.
 #' @details Compute the Pearson estimating function its sensitivity and variability matrices.
-#' For more details see Bonat and Jorgensen (2015) equations \eq{6--8}.
+#' For more details see Bonat and Jorgensen (2015) equations 6-8.
 mc_pearson <- function(y_vec, mu_vec, Cfeatures, inv_J_beta = NULL, D = NULL,
                        correct = FALSE, compute_variability = FALSE){
   product <- lapply(Cfeatures$D_C, mc_multiply, bord2 = Cfeatures$inv_C)
