@@ -5,7 +5,12 @@
 \title{Fitting Multivariate Covariance Generalized Linear Models (McGLM)}
 \usage{
 mcglm(linear_pred, matrix_pred, link, variance, covariance, offset, Ntrial,
+<<<<<<< HEAD
   power_fixed, data, control_initial, control_algorithm = list())
+=======
+  power_fixed, data, control_initial, control_algorithm = list(),
+  check_convergence = FALSE)
+>>>>>>> b258eea0594d0aef2a35c6f727b6b001959cfae1
 }
 \arguments{
 \item{linear_pred}{A list of formula see \code{\link[stats]{formula}} for details.}

@@ -12,8 +12,12 @@
 \item{level}{the confidence level required.}
 }
 \value{
+<<<<<<< HEAD
 A data.frame with confidence intervals, parameters names,
 response number and parameters type.
+=======
+A data.frame with confidence intervals, parameters names, response number and parameters type.
+>>>>>>> b258eea0594d0aef2a35c6f727b6b001959cfae1
 }
 \description{
 Computes confidence intervals for parameters in a fitted mcglm.

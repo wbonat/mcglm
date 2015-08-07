@@ -7,7 +7,7 @@
 #' @param n_resp A number specyfing the nmber of response variables.
 #' @return The number of \eqn{\beta}'s, \eqn{\tau}'s, power and correlation parameters.
 #' @export
-mc_getInformation <- function(list_initial, list_power_fixed, n_resp) {
+mc_getInformation <- function(list_initial, list_power_fixed, n_resp){
   n_betas <- lapply(list_initial$regression, length)
   n_taus <- lapply(list_initial$tau, length)
   n_power <- lapply(list_initial$power, length)
