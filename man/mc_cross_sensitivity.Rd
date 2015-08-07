@@ -16,7 +16,7 @@ mc_cross_sensitivity(Product_cov, Product_beta,
 The cross-sensitivity matrix. Equation (10) of Bonat and Jorgensen (2015).
 }
 \description{
-Compute the cross-sensitivit matrix between regression and covariance parameters.
+Compute the cross-sensitivity matrix between regression and covariance parameters.
 Equation 10 of Bonat and Jorgensen (2015).
 }
 

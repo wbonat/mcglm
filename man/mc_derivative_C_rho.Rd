@@ -2,7 +2,7 @@
 % Please edit documentation in R/mc_derivative_C_rho.R
 \name{mc_derivative_C_rho}
 \alias{mc_derivative_C_rho}
-\title{Derivative of C with respect to rho}
+\title{Derivative of C with respect to rho.}
 \usage{
 mc_derivative_C_rho(D_Sigmab, Bdiag_chol_Sigma_within,
   t_Bdiag_chol_Sigma_within, II)

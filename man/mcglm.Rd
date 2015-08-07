@@ -5,9 +5,7 @@
 \title{Fitting Multivariate Covariance Generalized Linear Models (McGLM)}
 \usage{
 mcglm(linear_pred, matrix_pred, link, variance, covariance, offset, Ntrial,
-  power_fixed, data, control_initial, control_algorithm = list(correct =
-  FALSE, max_iter = 20, tol = 1e-08, method = "chaser", tunning = 1, verbose =
-  TRUE), check_convergence = FALSE)
+  power_fixed, data, control_initial, control_algorithm = list())
 }
 \arguments{
 \item{linear_pred}{A list of formula see \code{\link[stats]{formula}} for details.}
@@ -35,15 +33,16 @@ estimated or not.}
 
 \item{control_algorithm}{A list of arguments to be passed for the fitting algorithm. See
 \code{\link[mcglm]{fit_mcglm}} for details.}
-
-\item{check_convergence}{Logical if TRUE provide a convergence check.}
 }
 \value{
 mcglm returns an object of class "mcglm".
 }
 \description{
 \code{mcglm} is used to fit multivariate covariance generalized linear models.
-The models are specified by a set of lists giving a symbolic description of the linear predictor and
-specyfing the link, variance and covariance functions.
+The models are specified by a set of lists giving a symbolic description of the linear predictor.
+The user can choose between a list of link, variance and covariance functions. The models are
+fitted using an estimating function approach, combining quasi-score functions for regression
+parameters and Pearson estimating function for covariance parameters. For details see Bonat and
+Jorgensen (2015).
 }
 

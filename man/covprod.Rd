@@ -14,7 +14,7 @@ covprod(A, res, W)
 \item{W}{A matrix of weights.}
 }
 \description{
-COmpute the cross-covariance matrix between covariance and regression parameters.
+Compute the cross-covariance matrix between covariance and regression parameters.
 Equation (11) of Bonat and Jorgensen (2015).
 }
 

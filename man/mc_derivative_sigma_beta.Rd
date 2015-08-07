@@ -6,6 +6,21 @@
 \usage{
 mc_derivative_sigma_beta(D, D_V_sqrt_mu, Omega, V_sqrt, variance)
 }
+\arguments{
+\item{D}{A matrix.}
+
+\item{D_V_sqrt_mu}{A matrix.}
+
+\item{Omega}{A matrix.}
+
+\item{V_sqrt}{A matrix.}
+
+\item{variance}{A string specifying the variance function name.}
+}
+\value{
+A list of matrices, containg the derivatives of V^{1/2} with respect to the regression
+parameters.
+}
 \description{
 Compute the derivatives of V^{1/2} matrix with respect to the regression
 parameters beta.

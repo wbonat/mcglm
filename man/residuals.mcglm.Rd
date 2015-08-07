@@ -2,15 +2,15 @@
 % Please edit documentation in R/mc_residuals.mcglm.R
 \name{residuals.mcglm}
 \alias{residuals.mcglm}
-\title{Residulas for Multivariate Covariance Generalized Linear Models (McGLM)}
+\title{Residuals for Multivariate Covariance Generalized Linear Models (McGLM)}
 \usage{
-\method{residuals}{mcglm}(object, type = "ordinary")
+\method{residuals}{mcglm}(object, type = "raw")
 }
 \arguments{
 \item{object}{An of class mcglm, typically the result of a call to \code{mcglm}.}
 
-\item{type}{the type of residuals which should be returned. The alternatives are: "ordinary"
-(default) and "standardized".}
+\item{type}{the type of residuals which should be returned. The alternatives are: "raw"
+(default), "pearson" and "standardized".}
 }
 \value{
 Depending on the number of response variable the function \code{residuals.mcglm} returns

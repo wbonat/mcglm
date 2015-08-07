@@ -20,7 +20,7 @@ mc_binomialPQ(mu, power, inverse, Ntrial, derivative_power, derivative_mu)
 \item{mu}{A numeric vector. In general the output from \code{\link{mc_link_function}}.}
 
 \item{power}{A numeric value (\code{power} and \code{binomialP}) or vector
-(\code{binomialPQ}) of the power parameter.}
+(\code{binomialPQ}) of the power parameters.}
 
 \item{Ntrial}{Number of trials, useful only when dealing with binomial response variables.}
 
@@ -29,10 +29,11 @@ the variance function.}
 
 \item{inverse}{Logical.}
 
-\item{derivative_power}{Logical if compute or not the derivatives with respect
+\item{derivative_power}{Logical if compute (TRUE) or not (FALSE) the derivatives with respect
 to the power parameter.}
 
-\item{derivative_mu}{Logical if compute or not the derivative with respect to the mu parameter.}
+\item{derivative_mu}{Logical if compute (TRUE) or not (FALSE) the derivative with respect
+to the mu parameter.}
 }
 \value{
 A list with from one to four elements depends on the arguments.

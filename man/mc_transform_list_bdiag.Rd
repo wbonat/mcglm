@@ -9,7 +9,8 @@ mc_transform_list_bdiag(list_mat, mat_zero, response_number)
 \arguments{
 \item{list_mat}{A list of matrices.}
 
-\item{mat_zero}{A list of zero matrices. In general the output of \code{link[mcglm]{mc_build_bdiag}}.}
+\item{mat_zero}{A list of zero matrices. In general the output of
+\code{link[mcglm]{mc_build_bdiag}}.}
 
 \item{response_number}{A numeric specifying the response variable number.}
 }
