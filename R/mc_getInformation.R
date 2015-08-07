@@ -14,7 +14,8 @@ mc_getInformation <- function(list_initial, list_power_fixed, n_resp) {
   for(i in 1:n_resp) {
     if(list_power_fixed[[i]] == TRUE){n_power[i] = 0 }
   }
-  n_rho <- length(list_initial$rho)
+  if(n_resp == 1){n_rho <- 0}
+  if(n_resp != 1){n_rho <- length(list_initial$rho)}
   n_cov <- sum(do.call(c,n_power))+n_rho+sum(do.call(c,n_taus))
   saida <- list("n_betas" = n_betas, "n_taus" = n_taus, "n_power" = n_power, "n_rho" = n_rho,
                 "n_cov" = n_cov)
