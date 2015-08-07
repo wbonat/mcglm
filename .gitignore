@@ -8,3 +8,4 @@
 #*
 *.Rout
 *.RData
+^.Rd2pdf* 
