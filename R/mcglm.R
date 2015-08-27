@@ -61,6 +61,7 @@ mcglm <- function(linear_pred, matrix_pred,
   model_fit$linear_pred <- linear_pred
   model_fit$con <- con
   model_fit$observed <- Matrix(y_vec, ncol = length(list_Y), nrow = dim(data)[1])
+  model_fit$list_X <- list_X
   class(model_fit) <- "mcglm"
   return(model_fit)
 }

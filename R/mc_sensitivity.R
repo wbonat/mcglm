@@ -8,11 +8,16 @@
 #' @export
 mc_sensitivity <- function(product) {
   n_par <- length(product)
-  Sensitivity <- Matrix(0, n_par, n_par)
+  Sensitivity <- matrix(0, n_par, n_par)
+  Sensitivity_temp <- matrix(0, n_par, n_par)
   for(i in 1:n_par) {
     for(j in 1:n_par) {
-      Sensitivity[i,j] <- -sum(product[[i]]*product[[j]])
+      Sensitivity[i,j] <- -sum(diag(product[[i]]%*%product[[j]]))
+      #Sensitivity[i,j] <- -sum(product[[i]]*product[[j]])
     }
   }
+  #print(forceSymmetric(Sensitivity))
+  #print(forceSymmetric(Sensitivity_temp))
+  #print(all.equal(Sensitivity, Sensitivity_temp))
   return(Sensitivity)
 }

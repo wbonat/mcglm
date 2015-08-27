@@ -25,7 +25,7 @@ mc_build_C <- function(list_mu, list_Ntrial, rho, list_tau, list_power, list_Z, 
   n_obs <- length(list_mu[[1]][[1]])
   n_rho <- n_resp*(n_resp - 1)/2
   if(n_resp != 1){assert_that(n_rho == length(rho))}
-  list_Sigma_within = suppressWarnings(Map(mc_build_sigma, mu =list_mu, Ntrial = list_Ntrial,
+  list_Sigma_within = suppressWarnings(Map(mc_build_sigma, mu = list_mu, Ntrial = list_Ntrial,
                                            tau = list_tau,
                                            power = list_power,Z = list_Z, sparse = list_sparse,
                                            variance = list_variance, covariance = list_covariance,

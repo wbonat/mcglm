@@ -59,7 +59,7 @@ mc_build_sigma <- function(mu, Ntrial = 1, tau, power, Z, sparse, variance,
         if(variance == "power" | variance == "binomialP"){
           D_Sigma_power <- mc_sandwich_power(middle = Omega$Omega,
                                              bord1 = V_sqrt$V_sqrt, bord2 = V_sqrt$D_V_sqrt_p)
-          D_Sigma <- c(D_Sigma_power, D_Sigma)
+          D_Sigma <- c("D_Sigma_power" = D_Sigma_power, "D_Sigma_tau" = D_Sigma)
         }
         if(variance == "binomialPQ"){
           D_Sigma_p <- mc_sandwich_power(middle = Omega$Omega,
@@ -137,7 +137,7 @@ mc_build_sigma <- function(mu, Ntrial = 1, tau, power, Z, sparse, variance,
       if(power_fixed == FALSE){
         D_Sigma_power <- mc_sandwich_power(middle = Omega$Omega,
                                            bord1 = V_sqrt$V_sqrt, bord2 = V_sqrt$D_V_sqrt_p)
-        D_Sigma <- c(D_Sigma_power, D_Sigma)
+        D_Sigma <- c("D_Sigma_power" = D_Sigma_power, "D_Sigma_tau" = D_Sigma)
       }
       output <- list("Sigma_chol" = chol_Sigma, "Sigma_chol_inv" = inv_chol_Sigma,
                      "D_Sigma" = D_Sigma)

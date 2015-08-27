@@ -25,10 +25,15 @@ coef.mcglm <- function(object, std.error = FALSE, response = c(NA,1:length(objec
     cod_beta[[i]] <- paste(paste("beta", i, sep = ""), 0:c(object$Information$n_betas[[i]]-1), sep = "")
     type_beta[[i]] <- rep("beta", length(cod_beta[[i]]))
     resp_beta[[i]] <- rep(response_for[i], length(cod_beta[[i]]))
-    if(object$Information$n_power[[i]] != 0){
+    if(object$Information$n_power[[i]] != 0 | object$power_fixed[[i]] == FALSE){
     cod_power[[i]] <- paste(paste("power", i, sep = ""), 1:object$Information$n_power[[i]], sep = "")
     type_power[[i]] <- rep("power", length(cod_power[[i]]))
     resp_power[[i]] <- rep(response_for[i], length(cod_power[[i]]))
+    }
+    if(object$Information$n_power[[i]] == 0){
+      cod_power[[i]] <- rep(1, 0)
+      type_power[[i]] <- rep(1, 0)
+      resp_power[[i]] <- rep(1,0)
     }
     cod_tau[[i]] <- paste(paste("tau", i, sep = ""), 1:object$Information$n_tau[[i]], sep = "")
     type_tau[[i]] <- rep("tau", length(cod_tau[[i]]))
