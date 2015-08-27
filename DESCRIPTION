@@ -6,8 +6,15 @@ Date: 2015-07-06
 Authors@R: person("Wagner Hugo", "Bonat", email = "wbonat@ufpr.br",
   role = c("aut", "cre"))
 Description: This package fit multivariate covariance generalized linear models (McGLM).
-Depends: R (>= 3.2.1), Matrix, assertthat
+Depends:
+    R (>= 3.2.1),
+    Matrix,
+    assertthat
+Suggests:
+    testthat
+Imports:
+    Matrix
 License: GPL-2
 LazyData: TRUE
-imports: Matrix
-Suggests: testthat
+
+
