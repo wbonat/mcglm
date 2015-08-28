@@ -12,8 +12,8 @@ mc_sensitivity <- function(product) {
   Sensitivity_temp <- matrix(0, n_par, n_par)
   for(i in 1:n_par) {
     for(j in 1:n_par) {
-      Sensitivity[i,j] <- -sum(diag(product[[i]]%*%product[[j]]))
-      #Sensitivity[i,j] <- -sum(product[[i]]*product[[j]])
+      #Sensitivity[i,j] <- -sum(diag(product[[i]]%*%product[[j]]))
+      Sensitivity[i,j] <- -sum(t(product[[i]])*product[[j]])
     }
   }
   #print(forceSymmetric(Sensitivity))

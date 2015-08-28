@@ -129,8 +129,8 @@ mc_build_sigma <- function(mu, Ntrial = 1, tau, power, Z, sparse, variance,
       V_sqrt <- mc_variance_function(mu = mu$mu, power = power, Ntrial = Ntrial, variance = "power",
                                      inverse = FALSE, derivative_power = !power_fixed,
                                      derivative_mu = compute_derivative_beta)
-      Sigma <- forceSymmetric(Diagonal(length(mu$mu), mu$mu) +
-                                V_sqrt$V_sqrt%*%Omega$Omega%*%V_sqrt$V_sqrt)
+      Sigma <- Diagonal(length(mu$mu), mu$mu) +
+                                V_sqrt$V_sqrt%*%Omega$Omega%*%V_sqrt$V_sqrt
       chol_Sigma <- chol(Sigma)
       inv_chol_Sigma <- solve(chol_Sigma)
       D_Sigma <- lapply(Omega$D_Omega, mc_sandwich, bord1 = V_sqrt$V_sqrt, bord2 = V_sqrt$V_sqrt)
