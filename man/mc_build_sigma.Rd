@@ -30,6 +30,8 @@ binomialP or binomialPQ.}
 
 \item{power_fixed}{Logical if the power parameter is fixed at initial value (TRUE). In the case
 power_fixed = FALSE the power parameter will be estimated.}
+
+\item{compute_derivative_beta}{Logical. Compute or not the derivative with respect to regression parameters.}
 }
 \value{
 A list with the Cholesky decomposition of \eqn{\Sigma}, \eqn{\Sigma^{-1}} and the derivative

@@ -14,11 +14,11 @@
 #' dM <- matrix(c(0,1,1,0),2,2)
 #' mc_dexp_gold(M = M, dM = dM)
 #' @export
-mc_dexp_gold <- function(M,dM) {
-  N = dim(M)
-  AM = rbind(cbind(M,matrix(0,N[1],N[2])),cbind(dM,M))
-  PSI = expm(AM)
-  F = PSI[1:N[1],1:N[1]]
-  dF = PSI[c(N[1]+1):c(2*N[1]), 1:N[1]]
-  return(list(F,dF))
-}
+mc_dexp_gold <- function(M, dM) {
+    N = dim(M)
+    AM = rbind(cbind(M, matrix(0, N[1], N[2])), cbind(dM, M))
+    PSI = expm(AM)
+    F = PSI[1:N[1], 1:N[1]]
+    dF = PSI[c(N[1] + 1):c(2 * N[1]), 1:N[1]]
+    return(list(F, dF))
+} 

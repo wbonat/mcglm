@@ -11,6 +11,8 @@ mc_cross_sensitivity(Product_cov, Product_beta,
 \item{Product_cov}{A list of matrices.}
 
 \item{Product_beta}{A list of matrices.}
+
+\item{n_beta_effective}{Numeric. Effective number of regression parameters.}
 }
 \value{
 The cross-sensitivity matrix. Equation (10) of Bonat and Jorgensen (2015).

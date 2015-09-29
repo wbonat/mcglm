@@ -4,19 +4,14 @@
 #'
 #'@param D_Sigmab A matrix.
 #'@param Bdiag_chol_Sigma_within A block-diagonal matrix.
-#'@param t_Bdiag_chol_sigma_within A block-diagonal matrix.
+#'@param t_Bdiag_chol_Sigma_within A block-diagonal matrix.
 #'@param II A diagonal matrix.
 #'@return A matrix.
 #'@details It is an internal function used to build the derivatives of the C matrix.
 #'@export
-mc_derivative_C_rho <- function(D_Sigmab, Bdiag_chol_Sigma_within, t_Bdiag_chol_Sigma_within, II){
-  output <- lapply(D_Sigmab, function(x){
-    t_Bdiag_chol_Sigma_within%*%kronecker(x,II)%*%Bdiag_chol_Sigma_within
-  }
-  )
-  return(output)
+mc_derivative_C_rho <- function(D_Sigmab, Bdiag_chol_Sigma_within, t_Bdiag_chol_Sigma_within, II) {
+    output <- lapply(D_Sigmab, function(x) {
+        t_Bdiag_chol_Sigma_within %*% kronecker(x, II) %*% Bdiag_chol_Sigma_within
+    })
+    return(output)
 }
-
-
-
-

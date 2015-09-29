@@ -7,7 +7,7 @@
 mc_quasi_score(D, inv_C, y_vec, mu_vec)
 }
 \arguments{
-\item{D}{A matrix. In general the output from \code{\link[mcglm]{mc_lnk_function}}.}
+\item{D}{A matrix. In general the output from \code{\link[mcglm]{mc_link_function}}.}
 
 \item{inv_C}{A matrix. In general the output from \code{\link[mcglm]{mc_build_C}}.}
 

@@ -9,7 +9,6 @@
 #' @export
 
 mc_core_pearson <- function(product, inv_C, res) {
-  output <- t(res)%*%product%*%(inv_C%*%res) - sum(diag(product))
-  return(as.numeric(output))
-}
-
+    output <- t(res) %*% product %*% (inv_C %*% res) - sum(diag(product))
+    return(as.numeric(output))
+} 

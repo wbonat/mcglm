@@ -16,8 +16,10 @@
 
 # Matrix linear predictor -------------------------------
 mc_matrix_linear_predictor <- function(tau, Z) {
-  if (length(Z) != length(tau)) {stop("Incorrect number of parameters")}
-  output <- mapply('*', Z, tau, SIMPLIFY = FALSE) ## Multiply each matrix by the parameter tau
-  output <- Reduce("+",output) ## Sum all matrices inside the list
-  return(output)
-}
+    if (length(Z) != length(tau)) {
+        stop("Incorrect number of parameters")
+    }
+    output <- mapply("*", Z, tau, SIMPLIFY = FALSE)  ## Multiply each matrix by the parameter tau
+    output <- Reduce("+", output)  ## Sum all matrices inside the list
+    return(output)
+} 

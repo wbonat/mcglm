@@ -10,7 +10,9 @@
 #' @export
 
 mc_build_bdiag <- function(n_resp, n_obs) {
-  list_zero <- list()
-  for(i in 1:n_resp){list_zero[[i]] <- Matrix(0, n_obs, n_obs, sparse = TRUE)}
-  return(list_zero)
-}
+    list_zero <- list()
+    for (i in 1:n_resp) {
+        list_zero[[i]] <- Matrix(0, n_obs, n_obs, sparse = TRUE)
+    }
+    return(list_zero)
+} 

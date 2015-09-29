@@ -426,7 +426,7 @@ test_that(
     expect1 <- 3
     expect2 <- length(Z) + 1
     actual <- mc_build_sigma(mu = mu, tau = c(2,0.8,0.5), power = c(2), Z = Z, sparse = FALSE,
-                             Ntrial=1, variance = "poisson_tweedie", covariance = "identity",
+                             Ntrial=NULL, variance = "poisson_tweedie", covariance = "identity",
                              power_fixed = FALSE)
     actual2 <- mc_build_sigma(mu = mu, tau = c(2,0.8,0.5), power = c(2), Z = Z, sparse = FALSE,
                               Ntrial = 1, variance = "poisson_tweedie", covariance = "identity",
@@ -527,16 +527,16 @@ test_that(
 #######################################################################################
 ## Computing the derivatives with respect to beta #####################################
 #######################################################################################
-x1 <- seq(0,1,l=10)
-X <- model.matrix(~ x1)
-mu <- mc_link_function(beta = c(1,0.4), X = X, offset = NULL, link = "logit")
-Z0 <- Diagonal(10,1)
-Z1 <- Matrix(tcrossprod(rep(1,10)))
-Z2 <- Matrix(c(rep(0,5),rep(1,5))%*%t(c(rep(0,5),rep(1,5))))
-Z <- list(Z0,Z1,Z2)
+#x1 <- seq(0,1,l=10)
+#X <- model.matrix(~ x1)
+#mu <- mc_link_function(beta = c(1,0.4), X = X, offset = NULL, link = "logit")
+#Z0 <- Diagonal(10,1)
+#Z1 <- Matrix(tcrossprod(rep(1,10)))
+#Z2 <- Matrix(c(rep(0,5),rep(1,5))%*%t(c(rep(0,5),rep(1,5))))
+#Z <- list(Z0,Z1,Z2)
 
-actual2 <- mc_build_sigma(mu = mu, tau = c(2,0.8,0.5), power = c(2,1), Z = Z, sparse = FALSE,
-                          Ntrial = 1, variance = "binomialPQ", covariance = "expm",
-                          power_fixed = FALSE, compute_derivative_beta = TRUE)
-names(actual2)
-length(actual2$D_Sigma_beta)
+#actual2 <- mc_build_sigma(mu = mu, tau = c(2,0.8,0.5), power = c(2,1), Z = Z, sparse = FALSE,
+#                          Ntrial = 1, variance = "binomialPQ", covariance = "expm",
+#                          power_fixed = FALSE, compute_derivative_beta = TRUE)
+#names(actual2)
+#length(actual2$D_Sigma_beta)

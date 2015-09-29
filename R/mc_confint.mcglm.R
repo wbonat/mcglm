@@ -8,12 +8,12 @@
 #' response number and parameters type.
 #' @export
 confint.mcglm <- function(object, level = 0.95) {
-  temp <- coef(object,std.error = TRUE)
-  a <- (1 - level)/2
-  a <- c(a, 1 - a)
-  fac <- qnorm(a)
-  ci <- temp$Estimates + temp$Std.error%o%fac
-  colnames(ci) <- paste(format(a,2),"%", sep = "")
-  rownames(ci) <- temp$Parameters
-  return(ci)
-}
+    temp <- coef(object, std.error = TRUE)
+    a <- (1 - level)/2
+    a <- c(a, 1 - a)
+    fac <- qnorm(a)
+    ci <- temp$Estimates + temp$Std.error %o% fac
+    colnames(ci) <- paste(format(a, 2), "%", sep = "")
+    rownames(ci) <- temp$Parameters
+    return(ci)
+} 

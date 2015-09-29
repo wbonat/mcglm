@@ -13,6 +13,8 @@ mc_build_C(list_mu, list_Ntrial, rho, list_tau, list_power, list_Z, list_sparse,
 
 \item{list_Ntrial}{A list with the number of trials. Usefull only for binomial responses.}
 
+\item{rho}{Vector of correlation parameters.}
+
 \item{list_tau}{A list with values for the tau parameters.}
 
 \item{list_power}{A list with values for the power parameters.}
@@ -26,6 +28,12 @@ mc_build_C(list_mu, list_Ntrial, rho, list_tau, list_power, list_Z, list_sparse,
 \item{list_covariance}{A list specifying the covariance function to be used for each response variable.}
 
 \item{list_power_fixed}{A list of Logical specifying if the power parameters are fixed or not.}
+
+\item{compute_C}{Logical. Compute or not the C matrix.}
+
+\item{compute_derivative_beta}{Logical. Compute or not the derivative of C with respect to regression parameters.}
+
+\item{compute_derivative_cov}{Logical. Compute or not the derivative of C with respect the covariance parameters.}
 }
 \value{
 A list with the inverse of the C matrix and the derivatives of the C matrix with respect to

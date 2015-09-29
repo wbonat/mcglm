@@ -31,7 +31,7 @@ test_that(
       mc_link_function(beta = c(0.1,0.2,0.3), X = X, offset = NULL, link = x)$mu),length)
     nomes <- unlist(list.link)
     output <- which(lapply(actual, function(x) x - expected) != 0)
-    if(length(ouptut) != 0)message(
+    if(length(output) != 0)message(
       paste("Error: Problems on length of mu vector output:",nomes[output]))
 
   }

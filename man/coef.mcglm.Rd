@@ -11,11 +11,13 @@
 \arguments{
 \item{object}{An object of mcglm class.}
 
+\item{std.error}{Logical. Returns or not the standard errors.}
+
 \item{response}{A numeric or vector specyfing for which response variables the coefficients
 should be returned.}
 
 \item{type}{A string or string vector specyfing which coefficients should be returned.
-Options are "beta", "tau", "power", "tau" and "correlation".}
+Options are 'beta', 'tau', 'power', 'tau' and 'correlation'.}
 }
 \value{
 A data.frame with estimates, parameters names, response number and parameters type.

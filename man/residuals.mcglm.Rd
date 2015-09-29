@@ -9,8 +9,8 @@
 \arguments{
 \item{object}{An of class mcglm, typically the result of a call to \code{mcglm}.}
 
-\item{type}{the type of residuals which should be returned. The alternatives are: "raw"
-(default), "pearson" and "standardized".}
+\item{type}{the type of residuals which should be returned. The alternatives are: 'raw'
+(default), 'pearson' and 'standardized'.}
 }
 \value{
 Depending on the number of response variable the function \code{residuals.mcglm} returns

@@ -28,120 +28,150 @@
 #' @examples
 #' x1 <- seq(-1, 1, l = 5)
 #' X <- model.matrix(~ x1)
-#' mc_link_function(beta = c(1,0.5), X = X, offset = NULL, link = "log")
-#' mc_link_function(beta = c(1,0.5), X = X, offset = rep(10,5), link = "identity")
+#' mc_link_function(beta = c(1,0.5), X = X, offset = NULL, link = 'log')
+#' mc_link_function(beta = c(1,0.5), X = X, offset = rep(10,5), link = 'identity')
 #' @export
 # Generic link function ---------------------------
 mc_link_function <- function(beta, X, offset, link) {
-  assert_that(noNA(beta))
-  assert_that(noNA(X))
-  if(!is.null(offset)) assert_that(noNA(offset))
-  switch(link,
-         "logit"    = { output <- mc_logit(beta = beta, X = X, offset = offset) },
-         "probit"   = { output <- mc_probit(beta = beta, X = X, offset = offset) },
-         "cauchit"  = { output <- mc_cauchit(beta = beta, X = X, offset = offset) },
-         "cloglog"  = { output <- mc_cloglog(beta = beta, X = X, offset = offset) },
-         "loglog"   = { output <- mc_loglog(beta = beta, X = X, offset = offset) },
-         "identity" = { output <- mc_identity(beta = beta, X = X, offset = offset) },
-         "log"      = { output <- mc_log(beta = beta, X = X, offset = offset) },
-         "sqrt"     = { output <- mc_sqrt(beta = beta, X = X, offset = offset) },
-         "1/mu^2"   = { output <- mc_invmu2(beta = beta, X = X, offset = offset) },
-         "inverse"  = { output <- mc_inverse(beta = beta, X = X, offset = offset) },
-         stop(gettextf("%s link not recognised", sQuote(link)),domain = NA))
-  return(output)
+    assert_that(noNA(beta))
+    assert_that(noNA(X))
+    if (!is.null(offset)) 
+        assert_that(noNA(offset))
+    switch(link, logit = {
+        output <- mc_logit(beta = beta, X = X, offset = offset)
+    }, probit = {
+        output <- mc_probit(beta = beta, X = X, offset = offset)
+    }, cauchit = {
+        output <- mc_cauchit(beta = beta, X = X, offset = offset)
+    }, cloglog = {
+        output <- mc_cloglog(beta = beta, X = X, offset = offset)
+    }, loglog = {
+        output <- mc_loglog(beta = beta, X = X, offset = offset)
+    }, identity = {
+        output <- mc_identity(beta = beta, X = X, offset = offset)
+    }, log = {
+        output <- mc_log(beta = beta, X = X, offset = offset)
+    }, sqrt = {
+        output <- mc_sqrt(beta = beta, X = X, offset = offset)
+    }, `1/mu^2` = {
+        output <- mc_invmu2(beta = beta, X = X, offset = offset)
+    }, inverse = {
+        output <- mc_inverse(beta = beta, X = X, offset = offset)
+    }, stop(gettextf("%s link not recognised", sQuote(link)), domain = NA))
+    return(output)
 }
 
 #' @rdname mc_link_function
 # Logit link function ---------------------------
 mc_logit <- function(beta, X, offset) {
-  eta <- as.numeric(X%*%beta)
-  if (!is.null(offset)) {eta <- eta + offset}
-  mu <- make.link("logit")$linkinv(eta = eta)
-  return(list("mu" = mu, "D" = X*(mu*(1-mu))))
+    eta <- as.numeric(X %*% beta)
+    if (!is.null(offset)) {
+        eta <- eta + offset
+    }
+    mu <- make.link("logit")$linkinv(eta = eta)
+    return(list(mu = mu, D = X * (mu * (1 - mu))))
 }
 
 #' @rdname mc_link_function
 # Probit link function ---------------------------
 mc_probit <- function(beta, X, offset) {
-  eta <- as.numeric(X%*%beta)
-  if (!is.null(offset)) {eta <- eta + offset}
-  mu <- make.link("probit")$linkinv(eta = eta)
-  Deri <- make.link("probit")$mu.eta(eta = eta)
-  return(list("mu" = mu, "D" = X*Deri))
+    eta <- as.numeric(X %*% beta)
+    if (!is.null(offset)) {
+        eta <- eta + offset
+    }
+    mu <- make.link("probit")$linkinv(eta = eta)
+    Deri <- make.link("probit")$mu.eta(eta = eta)
+    return(list(mu = mu, D = X * Deri))
 }
 
 #' @rdname mc_link_function
 # Cauchit link function ---------------------------
 mc_cauchit <- function(beta, X, offset) {
-  eta <- as.numeric(X%*%beta)
-  if (!is.null(offset)) {eta <- eta + offset}
-  mu = make.link("cauchit")$linkinv(eta = eta)
-  Deri <- make.link("cauchit")$mu.eta(eta = eta)
-  return(list("mu" = mu, "D" = X*Deri))
+    eta <- as.numeric(X %*% beta)
+    if (!is.null(offset)) {
+        eta <- eta + offset
+    }
+    mu = make.link("cauchit")$linkinv(eta = eta)
+    Deri <- make.link("cauchit")$mu.eta(eta = eta)
+    return(list(mu = mu, D = X * Deri))
 }
 
 #' @rdname mc_link_function
 # Complement log-log link function ---------------------------
 mc_cloglog <- function(beta, X, offset) {
-  eta <- as.numeric(X%*%beta)
-  if (!is.null(offset)) {eta <- eta + offset}
-  mu = make.link("cloglog")$linkinv(eta = eta)
-  Deri <- make.link("cloglog")$mu.eta(eta = eta)
-  return(list("mu" = mu, "D" = X*Deri))
+    eta <- as.numeric(X %*% beta)
+    if (!is.null(offset)) {
+        eta <- eta + offset
+    }
+    mu = make.link("cloglog")$linkinv(eta = eta)
+    Deri <- make.link("cloglog")$mu.eta(eta = eta)
+    return(list(mu = mu, D = X * Deri))
 }
 
 #' @rdname mc_link_function
 ## Log-log link function ---------------------------
 mc_loglog <- function(beta, X, offset) {
-  eta <- as.numeric(X%*%beta)
-  if (!is.null(offset)) {eta <- eta + offset}
-  mu <- exp(-exp(-eta))
-  Deri <- exp(-exp(-eta)-eta)
-  return(list("mu" = mu, "D" = X*Deri))
+    eta <- as.numeric(X %*% beta)
+    if (!is.null(offset)) {
+        eta <- eta + offset
+    }
+    mu <- exp(-exp(-eta))
+    Deri <- exp(-exp(-eta) - eta)
+    return(list(mu = mu, D = X * Deri))
 }
 
 #' @rdname mc_link_function
 ## Identity link function ---------------------------
 mc_identity <- function(beta, X, offset) {
-  eta <- X%*%beta
-  if (!is.null(offset)) {eta <- eta + offset}
-  return(list("mu" = as.numeric(eta), "D" = X))
+    eta <- X %*% beta
+    if (!is.null(offset)) {
+        eta <- eta + offset
+    }
+    return(list(mu = as.numeric(eta), D = X))
 }
 
 #' @rdname mc_link_function
 ## Log link function ---------------------------
 mc_log <- function(beta, X, offset) {
-  eta <- as.numeric(X%*%beta)
-  if (!is.null(offset)) {eta <- eta + offset}
-  mu = make.link("log")$linkinv(eta = eta)
-  return(list("mu" = mu, "D" = X*mu))
+    eta <- as.numeric(X %*% beta)
+    if (!is.null(offset)) {
+        eta <- eta + offset
+    }
+    mu = make.link("log")$linkinv(eta = eta)
+    return(list(mu = mu, D = X * mu))
 }
 
 #' @rdname mc_link_function
 ## Square-root link function ---------------------------
 mc_sqrt <- function(beta, X, offset) {
-  eta <- as.numeric(X%*%beta)
-  if (!is.null(offset)) {eta <- eta + offset}
-  mu = make.link("sqrt")$linkinv(eta = eta)
-  return(list("mu" = mu, "D" = X*(2*as.numeric(eta))))
+    eta <- as.numeric(X %*% beta)
+    if (!is.null(offset)) {
+        eta <- eta + offset
+    }
+    mu = make.link("sqrt")$linkinv(eta = eta)
+    return(list(mu = mu, D = X * (2 * as.numeric(eta))))
 }
 
 #' @rdname mc_link_function
 ## Inverse mu square link function ---------------------------
 mc_invmu2 <- function(beta, X, offset) {
-  eta <- as.numeric(X%*%beta)
-  if (!is.null(offset)) {eta <- eta + offset}
-  mu = make.link("1/mu^2")$linkinv(eta = eta)
-  Deri = make.link("1/mu^2")$mu.eta(eta = eta)
-  return(list("mu" = mu, "D" = X*Deri))
+    eta <- as.numeric(X %*% beta)
+    if (!is.null(offset)) {
+        eta <- eta + offset
+    }
+    mu = make.link("1/mu^2")$linkinv(eta = eta)
+    Deri = make.link("1/mu^2")$mu.eta(eta = eta)
+    return(list(mu = mu, D = X * Deri))
 }
 
 #' @rdname mc_link_function
 ## Inverse link function ---------------------------
-mc_inverse <- function(beta, X, offset){
-  eta <- as.numeric(X%*%beta)
-  if (!is.null(offset)) {eta <- eta + offset}
-  mu = make.link("inverse")$linkinv(eta = eta)
-  Deri = make.link("inverse")$mu.eta(eta = eta)
-  return(list("mu" = mu, "D" = X*Deri))
-}
+mc_inverse <- function(beta, X, offset) {
+    eta <- as.numeric(X %*% beta)
+    if (!is.null(offset)) {
+        eta <- eta + offset
+    }
+    mu = make.link("inverse")$linkinv(eta = eta)
+    Deri = make.link("inverse")$mu.eta(eta = eta)
+    return(list(mu = mu, D = X * Deri))
+} 

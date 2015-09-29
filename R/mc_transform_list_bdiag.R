@@ -10,11 +10,10 @@
 #' @return A list of block-diagonal matrices.
 #' @export
 mc_transform_list_bdiag <- function(list_mat, mat_zero, response_number) {
-  aux.f <- function(x, mat_zero, response_number) {
-    mat_zero[[response_number]] <- x
-    return(bdiag(mat_zero))
-  }
-  output <- lapply(list_mat, aux.f, mat_zero = mat_zero, response_number = response_number)
-  return(output)
-}
-
+    aux.f <- function(x, mat_zero, response_number) {
+        mat_zero[[response_number]] <- x
+        return(bdiag(mat_zero))
+    }
+    output <- lapply(list_mat, aux.f, mat_zero = mat_zero, response_number = response_number)
+    return(output)
+} 

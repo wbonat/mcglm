@@ -7,8 +7,8 @@
 #' @export
 
 vcov.mcglm <- function(object) {
-  cod <- coef(object)$Parameters
-  colnames(object$vcov) <- cod
-  rownames(object$vcov) <- cod
-  return(object$vcov)
-}
+    cod <- coef(object)$Parameters
+    colnames(object$vcov) <- cod
+    rownames(object$vcov) <- cod
+    return(object$vcov)
+} 

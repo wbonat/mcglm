@@ -8,14 +8,13 @@
 #' @details It is an internal function.
 #' @export
 mc_derivative_cholesky <- function(derivada, inv_chol_Sigma, chol_Sigma) {
-  faux <- function(derivada,inv_chol_Sigma, chol_Sigma){
-    t1 <- inv_chol_Sigma%*%derivada%*%t(inv_chol_Sigma)
-    t1 <- tril(t1)
-    diag(t1)<- diag(t1)/2
-    output <- chol_Sigma%*%t1
-    return(output)
-  }
-  list_D_chol <- lapply(derivada, faux, inv_chol_Sigma = inv_chol_Sigma, chol_Sigma = chol_Sigma)
-  return(list_D_chol)
-}
-
+    faux <- function(derivada, inv_chol_Sigma, chol_Sigma) {
+        t1 <- inv_chol_Sigma %*% derivada %*% t(inv_chol_Sigma)
+        t1 <- tril(t1)
+        diag(t1) <- diag(t1)/2
+        output <- chol_Sigma %*% t1
+        return(output)
+    }
+    list_D_chol <- lapply(derivada, faux, inv_chol_Sigma = inv_chol_Sigma, chol_Sigma = chol_Sigma)
+    return(list_D_chol)
+} 

@@ -5,7 +5,8 @@
 \title{Fitting Multivariate Covariance Generalized Linear Models (McGLM)}
 \usage{
 mcglm(linear_pred, matrix_pred, link, variance, covariance, offset, Ntrial,
-  power_fixed, data, control_initial, control_algorithm = list())
+  power_fixed, data, control_initial = "automatic", contrasts = NULL,
+  control_algorithm = list())
 }
 \arguments{
 \item{linear_pred}{A list of formula see \code{\link[stats]{formula}} for details.}
@@ -29,13 +30,17 @@ for binomialP and binomialPQ variance functions.}
 \item{power_fixed}{A list of logicals indicating if the values of the power parameter should be
 estimated or not.}
 
+\item{data}{A dta frame.}
+
 \item{control_initial}{A list of initial values for the fitting algorithm. See details below.}
+
+\item{contrasts}{Extra arguments to passed to \code{\link[stats]{model.matrix}}.}
 
 \item{control_algorithm}{A list of arguments to be passed for the fitting algorithm. See
 \code{\link[mcglm]{fit_mcglm}} for details.}
 }
 \value{
-mcglm returns an object of class "mcglm".
+mcglm returns an object of class 'mcglm'.
 }
 \description{
 \code{mcglm} is used to fit multivariate covariance generalized linear models.

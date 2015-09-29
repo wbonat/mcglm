@@ -73,8 +73,8 @@ a list where the first element is mu (n x 1) vector and the second D (n x p) mat
 \examples{
 x1 <- seq(-1, 1, l = 5)
 X <- model.matrix(~ x1)
-mc_link_function(beta = c(1,0.5), X = X, offset = NULL, link = "log")
-mc_link_function(beta = c(1,0.5), X = X, offset = rep(10,5), link = "identity")
+mc_link_function(beta = c(1,0.5), X = X, offset = NULL, link = 'log')
+mc_link_function(beta = c(1,0.5), X = X, offset = rep(10,5), link = 'identity')
 }
 \seealso{
 \code{\link[stats]{model.matrix}}, \code{\link[stats]{make.link}}.

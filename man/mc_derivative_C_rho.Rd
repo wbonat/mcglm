@@ -12,9 +12,9 @@ mc_derivative_C_rho(D_Sigmab, Bdiag_chol_Sigma_within,
 
 \item{Bdiag_chol_Sigma_within}{A block-diagonal matrix.}
 
-\item{II}{A diagonal matrix.}
+\item{t_Bdiag_chol_Sigma_within}{A block-diagonal matrix.}
 
-\item{t_Bdiag_chol_sigma_within}{A block-diagonal matrix.}
+\item{II}{A diagonal matrix.}
 }
 \value{
 A matrix.

@@ -53,8 +53,8 @@ elements: V_sqrt, D_V_sqrt_power and D_V_sqrt_mu.
 \examples{
 x1 <- seq(-1,1,l = 5)
 X <- model.matrix(~ x1)
-mu <- mc_link_function(beta = c(1,0.5), X = X, offset = NULL, link = "logit")
-mc_variance_function(mu = mu$mu, power = c(2,1), Ntrial = 1, variance = "binomialPQ",
+mu <- mc_link_function(beta = c(1,0.5), X = X, offset = NULL, link = 'logit')
+mc_variance_function(mu = mu$mu, power = c(2,1), Ntrial = 1, variance = 'binomialPQ',
 inverse = FALSE, derivative_power = TRUE, derivative_mu = TRUE)
 }
 \seealso{

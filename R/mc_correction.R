@@ -12,7 +12,7 @@
 #' @export
 
 mc_correction <- function(D_C, inv_J_beta, D, inv_C) {
-  term1 <- lapply(D_C, mc_sandwich, bord1 = t(D)%*%inv_C, bord2 = inv_C%*%D)
-  output <- lapply(term1, function(x, inv_J_beta) sum(x*inv_J_beta), inv_J_beta = inv_J_beta)
-  return(unlist(output))
-}
+    term1 <- lapply(D_C, mc_sandwich, bord1 = t(D) %*% inv_C, bord2 = inv_C %*% D)
+    output <- lapply(term1, function(x, inv_J_beta) sum(x * inv_J_beta), inv_J_beta = inv_J_beta)
+    return(unlist(output))
+} 
