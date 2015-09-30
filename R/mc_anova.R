@@ -1,4 +1,5 @@
 #' @title ANOVA method for McGLMs.
+#' @name anova.mcglm
 #'
 #' @description ANOVA method for object of class McGLMS.
 #'
