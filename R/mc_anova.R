@@ -13,6 +13,8 @@
 #'     zero. The Wald test based on the observed covariance matrix of
 #'     the parameters is used.
 #'
+#' @method anova mcglm
+#'
 #' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #' @export
 

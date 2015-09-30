@@ -19,6 +19,8 @@
 #' @return A \code{data.frame} with parameters names, estimates,
 #'     response number and parameters type.
 #'
+#' @method coef mcglm
+#'
 #' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #' @export
 
