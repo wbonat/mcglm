@@ -113,7 +113,7 @@ See [LICENSE](./LICENSE)
 [GNU General Public License (GPL) v3.0]: http://www.gnu.org/licenses/gpl-3.0.html
 [`roxygen2`]: https://github.com/klutometis/roxygen
 [`devtools`]: https://github.com/hadley/devtools
-[mcglm_0.0.1.tar.gz]: http://www.leg.ufpr.br/~fernandomayer/mcglm/mcglm_0.0.1.tar.gz
-[mcglm_0.0.1.zip]: http://www.leg.ufpr.br/~fernandomayer/mcglm/mcglm_0.0.1.zip
+[mcglm_0.0.1.tar.gz]: http://www.leg.ufpr.br/~leg/mcglm/source/mcglm_0.0.1.tar.gz
+[mcglm_0.0.1.zip]: http://www.leg.ufpr.br/~leg/mcglm/source/mcglm_0.0.1.zip
 [mcglm-manual.pdf]: http://www.leg.ufpr.br/~leg/mcglm/source/mcglm-manual.pdf
 [Gitflow worflow]: http://nvie.com/posts/a-successful-git-branching-model/

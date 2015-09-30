@@ -116,9 +116,9 @@ See [LICENSE](./LICENSE)
 <!-- links -->
 
 ```{r, echo=FALSE, include=FALSE}
-pkg.source.link <- paste0("http://www.leg.ufpr.br/~fernandomayer/mcglm/",
+pkg.source.link <- paste0("http://www.leg.ufpr.br/~leg/mcglm/source/",
                           pkg.source)
-pkg.win.link <- paste0("http://www.leg.ufpr.br/~fernandomayer/mcglm/",
+pkg.win.link <- paste0("http://www.leg.ufpr.br/~leg/mcglm/source/",
                        pkg.win)
 ```
 
