@@ -6,3 +6,5 @@
 .Rd2pdf5516
 .Rd2pdf* 
 buildPkg.R
+Examples/
+README.Rmd
