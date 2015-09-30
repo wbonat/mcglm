@@ -2,11 +2,11 @@
 
 # mcglm 0.0.1
 
-<!-- [![build status](http://git.leg.ufpr.br/ci/projects/1/status.png?ref=master)](http://git.leg.ufpr.br/ci/projects/1?ref=master) -->
-<!-- Build status for the stable version (`master` branch) -->
-<!--  -->
-<!-- [![build status](http://git.leg.ufpr.br/ci/projects/1/status.png?ref=devel)](http://git.leg.ufpr.br/ci/projects/1?ref=devel) -->
-<!-- Build status for the development version (`devel` branch) -->
+[![build status](http://git.leg.ufpr.br/ci/projects/3/status.png?ref=master)](http://git.leg.ufpr.br/ci/projects/3?ref=master)
+Build status for the stable version (`master` branch)
+
+[![build status](http://git.leg.ufpr.br/ci/projects/3/status.png?ref=devel)](http://git.leg.ufpr.br/ci/projects/3?ref=devel)
+Build status for the development version (`devel` branch)
 
 The `mcglm` package fit multivariate covariance generalized linear models
 (Bonat and Jorgensen, 2015).
