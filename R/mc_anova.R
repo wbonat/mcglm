@@ -3,9 +3,11 @@
 #' @description ANOVA method for McGLMS.
 #'
 #' @param object an object of class mcglm, usually, a result of a call to \code{mcglm}.
+#' @param ... additional arguments affecting the summary produced. Note that there is no extra options for
+#' mcglm object class.
 #' @export
 
-anova.mcglm <- function(object) {
+anova.mcglm <- function(object, ...) {
     n_resp <- length(object$mu_list)
     n_beta <- lapply(object$list_X, ncol)
     idx.list <- list()

@@ -6,7 +6,7 @@
 \usage{
 \method{coef}{mcglm}(object, std.error = FALSE, response = c(NA,
   1:length(object$beta_names)), type = c("beta", "tau", "power",
-  "correlation"))
+  "correlation"), ...)
 }
 \arguments{
 \item{object}{An object of mcglm class.}
@@ -18,6 +18,9 @@ should be returned.}
 
 \item{type}{A string or string vector specyfing which coefficients should be returned.
 Options are 'beta', 'tau', 'power', 'tau' and 'correlation'.}
+
+\item{...}{additional arguments affecting the summary produced. Note that there is no extra options for
+mcglm object class.}
 }
 \value{
 A data.frame with estimates, parameters names, response number and parameters type.

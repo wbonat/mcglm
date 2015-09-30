@@ -3,11 +3,15 @@
 #' @description takes a fitted mcglm object by \code{mcglm()} and plots, residuals,
 #' influence diagnostic measures and algorithm check.
 #'
-#' @param object a fitted mcglm object as produced by \code{mcglm()}.
+#' @param x a fitted mcglm object as produced by \code{mcglm()}.
 #' @param type Specify which graphical analysis will be performed, options are: residuals, influence
 #' and algorithm.
+#' @param ... additional arguments affecting the plot produced. Note that there is no extra options for
+#' mcglm object class.
 #' @export
-plot.mcglm <- function(object, type = "residuals") {
+
+plot.mcglm <- function(x, type = "residuals", ...) {
+    object = x
     n_resp <- length(object$beta_names)
     if (type == "residuals") {
         par(mar = c(2.6, 2.5, 0.1, 0.1), mgp = c(1.6, 0.6, 0), mfrow = c(2, n_resp))

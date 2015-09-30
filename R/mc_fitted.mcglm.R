@@ -3,10 +3,13 @@
 #' @description Extract fitted values for objects of mcglm class.
 #'
 #' @param object An object of mcglm class.
+#' @param ... additional arguments affecting the summary produced. Note that there is no extra options for
+#' mcglm object class.
 #' @return Depending on the number of response variable the function \code{fitted.mcglm} returns
 #' a vector (univariate models) or a matrix (multivariate models) of fitted values.
 #' @export
-fitted.mcglm <- function(object) {
+
+fitted.mcglm <- function(object, ...) {
     n_resp <- length(object$beta_names)
     output <- Matrix(object$fitted, ncol = n_resp, nrow = object$n_obs)
     return(output)

@@ -7,10 +7,13 @@
 #' should be returned.
 #' @param type A string or string vector specyfing which coefficients should be returned.
 #' Options are 'beta', 'tau', 'power', 'tau' and 'correlation'.
+#' @param ... additional arguments affecting the summary produced. Note that there is no extra options for
+#' mcglm object class.
 #' @return A data.frame with estimates, parameters names, response number and parameters type.
 #' @export
-coef.mcglm <- function(object, std.error = FALSE, response = c(NA, 1:length(object$beta_names)), type = c("beta", "tau",
-    "power", "correlation")) {
+
+coef.mcglm <- function(object, std.error = FALSE, response = c(NA, 1:length(object$beta_names)),
+                       type = c("beta", "tau", "power", "correlation"), ...) {
     n_resp <- length(object$beta_names)
     cod_beta <- list()
     cod_power <- list()

@@ -4,12 +4,19 @@
 \alias{confint.mcglm}
 \title{Confidence Intervals for mcglm}
 \usage{
-\method{confint}{mcglm}(object, level = 0.95)
+\method{confint}{mcglm}(object, parm, level = 0.95, ...)
 }
 \arguments{
 \item{object}{a fitted mcglm object.}
 
+\item{parm}{a specification of which parameters are to be given confidence intervals, either a vector of
+number or a vector of names. If missing, all parameters are considered.}
+
 \item{level}{the confidence level required.}
+
+\item{...}{additional arguments affecting the confidence interval produced.
+Note that there is no extra options for
+mcglm object class.}
 }
 \value{
 A data.frame with confidence intervals, parameters names,
