@@ -31,11 +31,13 @@
 #' mc_link_function(beta = c(1,0.5), X = X, offset = NULL, link = 'log')
 #' mc_link_function(beta = c(1,0.5), X = X, offset = rep(10,5), link = 'identity')
 #' @export
+#' @import assertthat
+
 # Generic link function ---------------------------
 mc_link_function <- function(beta, X, offset, link) {
     assert_that(noNA(beta))
     assert_that(noNA(X))
-    if (!is.null(offset)) 
+    if (!is.null(offset))
         assert_that(noNA(offset))
     switch(link, logit = {
         output <- mc_logit(beta = beta, X = X, offset = offset)
@@ -174,4 +176,4 @@ mc_inverse <- function(beta, X, offset) {
     mu = make.link("inverse")$linkinv(eta = eta)
     Deri = make.link("inverse")$mu.eta(eta = eta)
     return(list(mu = mu, D = X * Deri))
-} 
+}

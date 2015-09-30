@@ -19,10 +19,11 @@
 #'
 #'@return A list with the inverse of the C matrix and the derivatives of the C matrix with respect to
 #'rho, power and tau parameters.
-#'@export
 
-mc_build_C <- function(list_mu, list_Ntrial, rho, list_tau, list_power, list_Z, list_sparse, list_variance,
-                       list_covariance, list_power_fixed, compute_C = FALSE, compute_derivative_beta = FALSE,
+mc_build_C <- function(list_mu, list_Ntrial, rho, list_tau, list_power,
+                       list_Z, list_sparse, list_variance,
+                       list_covariance, list_power_fixed, compute_C = FALSE,
+                       compute_derivative_beta = FALSE,
                        compute_derivative_cov = TRUE) {
     n_resp <- length(list_mu)
     n_obs <- length(list_mu[[1]][[1]])

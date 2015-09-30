@@ -7,13 +7,13 @@
 mc_variability(sensitivity, product, inv_C, C, res)
 }
 \arguments{
-\item{sensitivity}{A matrix. In general the output from \code{[mcglm]{mc_sensitivity}}.}
+\item{sensitivity}{A matrix. In general the output from \code{mc_sensitivity}.}
 
 \item{product}{A list of matrix.}
 
-\item{inv_C}{A matrix. In general the output from \code{[mcglm]{mc_build_C}}.}
+\item{inv_C}{A matrix. In general the output from \code{mc_build_C}.}
 
-\item{C}{A matrix. In general the output from \code{[mcglm]{mc_build_C}}.}
+\item{C}{A matrix. In general the output from \code{mc_build_C}.}
 
 \item{res}{A vector. The residuals vector, i.e. (y_vec - mu_vec).}
 }

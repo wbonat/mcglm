@@ -1,106 +1,67 @@
-#' Fitting Multivariate Covariance Generalized Linear Models (McGLM)
-#'
-#' @description \code{mcglm} is used to fit multivariate covariance generalized linear models.
-#' The models are specified by a set of lists giving a symbolic description of the linear predictor.
-#' The user can choose between a list of link, variance and covariance functions. The models are
-#' fitted using an estimating function approach, combining quasi-score functions for regression
-#' parameters and Pearson estimating function for covariance parameters. For details see Bonat and
-#' Jorgensen (2015).
-#'
-#' @param linear_pred A list of formula see \code{\link[stats]{formula}} for details.
-#' @param matrix_pred A list of known matrices to be used on the matrix linear predictor. Details
-#' can be obtained on \code{\link[mcglm]{mc_matrix_linear_predictor}}.
-#' @param link A list of link functions names, see \code{\link[mcglm]{mc_link_function}} for details.
-#' @param variance A list of variance functions names, see \code{\link[mcglm]{mc_variance_function}}
-#' for details.
-#' @param covariance A list of covariance link functions names, current options are: identity, inverse
-#' and exponential-matrix (expm).
-#' @param offset A list with values of offset values if any.
-#' @param Ntrial A list with values of the number of trials on Bernoulli experiments. It is useful only
-#' for binomialP and binomialPQ variance functions.
-#' @param power_fixed A list of logicals indicating if the values of the power parameter should be
-#' estimated or not.
-#' @param control_initial A list of initial values for the fitting algorithm. See details below.
-#' @param control_algorithm A list of arguments to be passed for the fitting algorithm. See
-#' \code{\link[mcglm]{fit_mcglm}} for details.
-#' @param contrasts Extra arguments to passed to \code{\link[stats]{model.matrix}}.
-#' @param data A dta frame.
-#' @return mcglm returns an object of class 'mcglm'.
-#' @export
-mcglm <- function(linear_pred, matrix_pred, link, variance, covariance, offset, Ntrial,
-                  power_fixed, data, control_initial = "automatic",
-                  contrasts = NULL, control_algorithm = list()) {
-    n_resp <- length(linear_pred)
-    linear_pred <- as.list(linear_pred)
-    matrix_pred <- as.list(matrix_pred)
-    if (missing(link)) {
-        link = rep("identity", n_resp)
-    }
-    if (missing(variance)) {
-        variance = rep("constant", n_resp)
-    }
-    if (missing(covariance)) {
-        covariance = rep("identity", n_resp)
-    }
-    if (missing(offset)) {
-        offset = rep(list(NULL), n_resp)
-    }
-    if (missing(Ntrial)) {
-        Ntrial = rep(list(rep(1, dim(data)[1])),n_resp)
-    }
-    if (missing(power_fixed)) {
-        power_fixed <- rep(TRUE, n_resp)
-    }
-    if (missing(contrasts)) {
-        constrasts = NULL
-    }
-    link <- as.list(link)
-    variance <- as.list(variance)
-    covariance <- as.list(covariance)
-    offset <- as.list(offset)
-    Ntrial <- as.list(Ntrial)
-    power_fixed = as.list(power_fixed)
-    if (class(control_initial) != "list") {
-        control_initial <- mc_initial_values(linear_pred = linear_pred, matrix_pred = matrix_pred, link = link, variance = variance,
-            covariance = covariance, offset = offset, Ntrial = Ntrial, contrasts = contrasts, data = data)
-        cat("Automatic initial values selected.")
-    }
-    con <- list(correct = TRUE, max_iter = 20, tol = 1e-04, method = "chaser", tunning = 1, verbose = FALSE)
-    con[(namc <- names(control_algorithm))] <- control_algorithm
-    if (!is.null(contrasts)) {
-        list_X <- list()
-        for (i in 1:n_resp) {
-            list_X[[i]] <- model.matrix(linear_pred[[i]], contrasts = contrasts[[i]], data = data)
-        }
-    } else {
-        list_X <- lapply(linear_pred, model.matrix, data = data)
-    }
+##' @title Multivariate covariance generalized linear models (McGLMs)
+##'
+##'
+##' @description Fits a multivariate covariance generalized linear models (McGLMs) to data.
+##' McGLM is a general framework for non-normal multivariate data analysis, designed to handle
+##' multivariate response variables, along with a wide range of temporal and spatial correlation
+##' structures defined in terms of a covariance link function combined with a matrix linear predictor
+##' involving known matrices. The models take non-normality into account in the conventional way by means
+##' of a variance function, and the mean structure is modelled by means of a link function and a linear predictor.
+##' The models are fitted using an efficient Newton scoring algorithm based on quasi-likelihood and
+##' Pearson estimating functions, using only second-moment assumptions.
+##' This provides a unified approach to a wide variety of different types of response variables and
+##' covariance structures, including multivariate extensions of repeated measures, time series, longitudinal,
+##' spatial and spatio-temporal structures.
+##'
+##'
+##' @docType package
+##' @name mcglm
+NULL
 
-    list_model_frame <- lapply(linear_pred, model.frame, data = data)
-    list_Y <- lapply(list_model_frame, model.response)
-    y_vec <- as.numeric(do.call(c, list_Y))
-    sparse <- lapply(matrix_pred, function(x) {
-        if (class(x) == "dgeMatrix") {
-            FALSE
-        } else TRUE
-    })
-    model_fit <- try(fit_mcglm(list_initial = control_initial, list_link = link, list_variance = variance, list_covariance = covariance,
-        list_X = list_X, list_Z = matrix_pred, list_offset = offset, list_Ntrial = Ntrial, list_power_fixed = power_fixed,
-        list_sparse = sparse, y_vec = y_vec, correct = con$correct, max_iter = con$max_iter, tol = con$tol, method = con$method,
-        tunning = con$tunning, verbose = con$verbose))
-    if (class(model_fit) != "try-error") {
-        model_fit$beta_names <- lapply(list_X, colnames)
-        model_fit$power_fixed <- power_fixed
-        model_fit$list_initial <- control_initial
-        model_fit$n_obs <- dim(data)[1]
-        model_fit$link <- link
-        model_fit$variance <- variance
-        model_fit$covariance <- covariance
-        model_fit$linear_pred <- linear_pred
-        model_fit$con <- con
-        model_fit$observed <- Matrix(y_vec, ncol = length(list_Y), nrow = dim(data)[1])
-        model_fit$list_X <- list_X
-        class(model_fit) <- "mcglm"
-    }
-    return(model_fit)
-}
+#' @name ahs
+#'
+#' @title Australian health survey
+#'
+#' @description The Australian health survey was used by Bonat and Jorgensen (2015) as an example of multivariate
+#' count regression model. The data consists of five count response variables concerning health system access
+#' measures and nine covariates concerning  social conditions in Australian for 1987-88.
+#'
+#' \itemize{
+#'     \item \code{sex} - Factor, two levels (0-Male; 1-Female).
+#'     \item \code{age} - Respondent's age in years divided by 100.
+#'     \item \code{income} - Respondent's annual income in Australian dollars divided by 1000.
+#'     \item \code{levyplus} - Factor, two levels (1- if respondent is covered by private health
+#'     insurance fund for private patients in public hospital (with doctor of choice); 0 - otherwise).
+#'     \item \code{freepoor} - Factor, two levels (1 - if respondent is covered by government because low income,
+#'     recent immigrant, unemployed; 0 - otherwise).
+#'     \item \code{freerepa} - Factor, two levels (1 - if respondent is covered free by government because of
+#'     old-age or disability pension, or because invalid veteran or family of deceased veteran; 0 - otherwise).
+#'     \item \code{illnes} - Number of illnesses in past 2 weeks, with 5 or more weeks coded as 5.
+#'     \item \code{actdays} - Number of days of reduced activity in the past two weeks due to illness or injury.
+#'     \item \code{hscore} - Respondent's general health questionnaire score using Goldberg's method;
+#'     high score indicates poor health.
+#'     \item \code{chcond1} - Factor, two levels (1 - if respondent has chronic condition(s) but is not limited
+#'     in activity; 0 - otherwise).
+#'     \item \code{chcond2} - Factor, two levels (1 if respondent has chronic condition(s) and is limited in
+#'     activity; 0 - otherwise).
+#'     \item \code{Ndoc} - Number of consultations with a doctor or specialist (response variable).
+#'     \item \code{Nndoc} - Number of consultations with health professionals (response variable).
+#'     \item \code{Nadm} - Number of admissions to a hospital, psychiatric hospital, nursing or
+#'     convalescence home in the past 12 months (response variable).
+#'     \item \code{Nhosp} - Number of nights in a hospital during the most recent admission.
+#'     \item \code{Nmed} - Total number of prescribed and non prescribed medications used in the past two days.
+#'     \item \code{id} - Respondent's index.
+#' }
+#'
+#' @docType data
+#'
+#' @keywords datasets
+#'
+#' @usage data(ahs)
+#'
+#' @format a \code{data.frame} with 5190 records and 17 variables.
+#'
+#' @source Deb, P. and Trivedi, P. K. (1997). Demand for medical care by the elderly: A finite mixture approach,
+#' Journal of Applied Econometrics 12(3):313--336.
+#'
+NULL

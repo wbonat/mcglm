@@ -7,7 +7,7 @@
 #' @param y_vec A vector.
 #' @param mu_vec A vector.
 #' @return The quasi-score vector, the Sensivity and variability matrices.
-#' @export
+
 mc_quasi_score <- function(D, inv_C, y_vec, mu_vec) {
     res <- y_vec - mu_vec
     t_D <- t(D)

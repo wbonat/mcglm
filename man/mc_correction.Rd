@@ -12,9 +12,9 @@ mc_correction(D_C, inv_J_beta, D, inv_C)
 \item{inv_J_beta}{A matrix. In general it is computed based on the output of the
 \code{[mcglm]{mc_quasi_score}}.}
 
-\item{D}{A matrix. In general it is the output of the \code{[mcglm]{mc_link_function}}.}
+\item{D}{A matrix. In general it is the output of the \link{mc_link_function}.}
 
-\item{inv_C}{A matrix. In general the output of the \code{[mcglm]{mc_build_C}}.}
+\item{inv_C}{A matrix. In general the output of the \link{mc_build_C}.}
 }
 \value{
 A vector with the correction terms to be used on the Pearson estimating function.

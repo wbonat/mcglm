@@ -4,10 +4,13 @@
 \alias{fitted.mcglm}
 \title{Extract Model Fitted Values of McGLM}
 \usage{
-\method{fitted}{mcglm}(object)
+\method{fitted}{mcglm}(object, ...)
 }
 \arguments{
 \item{object}{An object of mcglm class.}
+
+\item{...}{additional arguments affecting the summary produced. Note that there is no extra options for
+mcglm object class.}
 }
 \value{
 Depending on the number of response variable the function \code{fitted.mcglm} returns

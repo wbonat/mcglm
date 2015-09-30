@@ -2,14 +2,14 @@
 #'
 #' @description Compute the variability matrix associated with the Pearson estimating function.
 #'
-#' @param sensitivity A matrix. In general the output from \code{[mcglm]{mc_sensitivity}}.
+#' @param sensitivity A matrix. In general the output from \code{mc_sensitivity}.
 #' @param product A list of matrix.
-#' @param inv_C A matrix. In general the output from \code{[mcglm]{mc_build_C}}.
-#' @param C A matrix. In general the output from \code{[mcglm]{mc_build_C}}.
+#' @param inv_C A matrix. In general the output from \code{mc_build_C}.
+#' @param C A matrix. In general the output from \code{mc_build_C}.
 #' @param res A vector. The residuals vector, i.e. (y_vec - mu_vec).
 #' @return The variability matrix associated witht the Pearson estimating function.
 #' @details This function implements the equation 8 of Bonat and Jorgensen (2015).
-#' @export
+
 mc_variability <- function(sensitivity, product, inv_C, C, res) {
     W <- lapply(product, mc_multiply2, bord2 = inv_C)
     n_par <- length(product)
@@ -22,4 +22,4 @@ mc_variability <- function(sensitivity, product, inv_C, C, res) {
         }
     }
     return(Variability)
-} 
+}

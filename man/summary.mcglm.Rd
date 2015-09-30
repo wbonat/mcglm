@@ -4,12 +4,18 @@
 \alias{summary.mcglm}
 \title{Summarizing Multivariate Covariance Generalized Linear Models fits.}
 \usage{
-summary.mcglm(object)
+\method{summary}{mcglm}(object, ...)
 }
 \arguments{
 \item{object}{an object of class mcglm, usually, a result of a call to \code{mcglm}.}
+
+\item{...}{additional arguments affecting the summary produced. Note the there is no extra options for
+mcglm object class.}
+}
+\value{
+Print an mcglm object.
 }
 \description{
-Summary for mcglm objects.
+Summary for McGLMs objects.
 }
 

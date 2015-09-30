@@ -6,7 +6,6 @@
 #' @param Product_beta A list of matrices.
 #' @param n_beta_effective Numeric. Effective number of regression parameters.
 #' @return The cross-sensitivity matrix. Equation (10) of Bonat and Jorgensen (2015).
-#' @export
 
 mc_cross_sensitivity <- function(Product_cov, Product_beta, n_beta_effective = length(Product_beta)) {
     n_beta <- length(Product_beta)

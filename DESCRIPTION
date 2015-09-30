@@ -11,12 +11,13 @@ Authors@R: as.person(c(
 Description: This package fit multivariate covariance generalized linear
     models (McGLM).
 Depends:
-    R (>= 3.2.1),
-    assertthat
-Imports:
-    Matrix
+    R (>= 3.2.1)
 Suggests:
-    testthat
+    testthat,
+    plyr
+Imports:
+    Matrix,
+    asserthat
 License: GPL-2
 LazyData: TRUE
 URL: http://git.leg.ufpr.br/wbonat/mcglm

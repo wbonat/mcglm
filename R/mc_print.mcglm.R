@@ -1,11 +1,14 @@
-#' Print a Multivariate Covariance Generalized Linear Model
+#' Print method for Multivariate Covariance Generalized Linear Model
 #'
 #' @description The default print method for a mcglm object.
-#'
-#' @param object fitted model objects of class mcglm as produced by mcglm().
+#' @method print mcglm
+#' @param x fitted model objects of class mcglm as produced by mcglm().
+#' @param ... further arguments passed to or from other methods.
 #' @export
+#' @rdname print.mcglm
 
-print.mcglm <- function(object) {
+print.mcglm <- function(x, ...) {
+    object <- x
     n_resp <- length(object$beta_names)
     regression <- mc_updateBeta(list_initial = list(), betas = object$Regression, information = object$Information, n_resp = n_resp)
     for (i in 1:n_resp) {

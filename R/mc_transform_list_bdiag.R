@@ -8,7 +8,7 @@
 #' \code{link[mcglm]{mc_build_bdiag}}.
 #' @param response_number A numeric specifying the response variable number.
 #' @return A list of block-diagonal matrices.
-#' @export
+
 mc_transform_list_bdiag <- function(list_mat, mat_zero, response_number) {
     aux.f <- function(x, mat_zero, response_number) {
         mat_zero[[response_number]] <- x
@@ -16,4 +16,4 @@ mc_transform_list_bdiag <- function(list_mat, mat_zero, response_number) {
     }
     output <- lapply(list_mat, aux.f, mat_zero = mat_zero, response_number = response_number)
     return(output)
-} 
+}

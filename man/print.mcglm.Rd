@@ -2,12 +2,14 @@
 % Please edit documentation in R/mc_print.mcglm.R
 \name{print.mcglm}
 \alias{print.mcglm}
-\title{Print a Multivariate Covariance Generalized Linear Model}
+\title{Print method for Multivariate Covariance Generalized Linear Model}
 \usage{
-print.mcglm(object, ...)
+\method{print}{mcglm}(x, ...)
 }
 \arguments{
-\item{object}{fitted model objects of class mcglm as produced by mcglm().}
+\item{x}{fitted model objects of class mcglm as produced by mcglm().}
+
+\item{...}{further arguments passed to or from other methods.}
 }
 \description{
 The default print method for a mcglm object.

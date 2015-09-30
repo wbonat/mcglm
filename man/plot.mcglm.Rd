@@ -4,13 +4,16 @@
 \alias{plot.mcglm}
 \title{Default Multivariate Covariance Generalized Linear models plotting}
 \usage{
-\method{plot}{mcglm}(object, type = "residuals")
+\method{plot}{mcglm}(x, type = "residuals", ...)
 }
 \arguments{
-\item{object}{a fitted mcglm object as produced by \code{mcglm()}.}
+\item{x}{a fitted mcglm object as produced by \code{mcglm()}.}
 
 \item{type}{Specify which graphical analysis will be performed, options are: residuals, influence
 and algorithm.}
+
+\item{...}{additional arguments affecting the plot produced. Note that there is no extra options for
+mcglm object class.}
 }
 \description{
 takes a fitted mcglm object by \code{mcglm()} and plots, residuals,

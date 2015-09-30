@@ -15,7 +15,6 @@
 #'
 #'@seealso \code{\link[Matrix]{expm}}, \code{\link[base]{eigen}},
 #'\code{link[mcglm]{mc_dexp_gold}}.
-#'@export
 
 mc_expm <- function(U, n = dim(U)[1], sparse = FALSE, inverse = FALSE) {
     tt = eigen(U, symmetric = TRUE)

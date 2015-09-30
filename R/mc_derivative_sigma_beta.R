@@ -9,7 +9,7 @@
 #' @param variance A string specifying the variance function name.
 #' @return A list of matrices, containg the derivatives of V^{1/2} with respect to the regression
 #' parameters.
-#' @export
+
 mc_derivative_sigma_beta <- function(D, D_V_sqrt_mu, Omega, V_sqrt, variance) {
     n_beta <- dim(D)[2]
     n_obs <- dim(D)[1]
@@ -27,4 +27,4 @@ mc_derivative_sigma_beta <- function(D, D_V_sqrt_mu, Omega, V_sqrt, variance) {
         }
     }
     return(output)
-} 
+}

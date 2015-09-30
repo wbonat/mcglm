@@ -12,7 +12,7 @@ mc_updateBeta(list_initial, betas, information, n_resp)
 \item{betas}{A vector with actual regression parameters values.}
 
 \item{information}{A list with information about the number of parameters in the model. In general
-the output from \code{[mcglm]{mc_getInformation}}.}
+the output from \link{mc_getInformation}.}
 
 \item{n_resp}{A numeric specyfing the number of response variables.}
 }

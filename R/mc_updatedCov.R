@@ -6,12 +6,12 @@
 #' @param list_initial A list of initial values.
 #' @param covariance A vector with actual covariance parameters values.
 #' @param information A list with information about the number of parameters in the model. In general
-#' the output from \code{[mcglm]{mc_getInformation}}.
+#' the output from \link{mc_getInformation}.
 #' @param list_power_fixed A list of logicals indicating if the power parameter should be
 #' estimated or not.
 #' @param n_resp A numeric specyfing the number of response variables.
 #' @return A list with updated values of the covariance parameters.
-#' @export
+
 mc_updateCov <- function(list_initial, covariance, list_power_fixed, information, n_resp) {
     rho_cod <- rep("rho", information$n_rho)
     tau_cod <- list()
@@ -35,4 +35,4 @@ mc_updateCov <- function(list_initial, covariance, list_power_fixed, information
         list_initial$rho <- temp[which(temp$cod == "rho"), ]$values
     }
     return(list_initial)
-} 
+}

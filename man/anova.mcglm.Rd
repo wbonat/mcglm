@@ -4,10 +4,13 @@
 \alias{anova.mcglm}
 \title{ANOVA method for McGLMs.}
 \usage{
-\method{anova}{mcglm}(object)
+\method{anova}{mcglm}(object, ...)
 }
 \arguments{
 \item{object}{an object of class mcglm, usually, a result of a call to \code{mcglm}.}
+
+\item{...}{additional arguments affecting the summary produced. Note that there is no extra options for
+mcglm object class.}
 }
 \description{
 ANOVA method for McGLMS.

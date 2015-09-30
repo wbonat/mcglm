@@ -6,7 +6,7 @@
 #' @param chol_Sigma A matrix.
 #' @return A list of matrix.
 #' @details It is an internal function.
-#' @export
+
 mc_derivative_cholesky <- function(derivada, inv_chol_Sigma, chol_Sigma) {
     faux <- function(derivada, inv_chol_Sigma, chol_Sigma) {
         t1 <- inv_chol_Sigma %*% derivada %*% t(inv_chol_Sigma)
@@ -17,4 +17,4 @@ mc_derivative_cholesky <- function(derivada, inv_chol_Sigma, chol_Sigma) {
     }
     list_D_chol <- lapply(derivada, faux, inv_chol_Sigma = inv_chol_Sigma, chol_Sigma = chol_Sigma)
     return(list_D_chol)
-} 
+}

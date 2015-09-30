@@ -7,7 +7,7 @@
 #' @param res A vector.
 #' @param D A matrix.
 #' @return The cross-variability matrix between regression and covariance parameters.
-#' @export
+
 mc_cross_variability <- function(Product_cov, inv_C, res, D) {
     Wlist <- lapply(Product_cov, mc_multiply2, bord2 = inv_C)
     A = t(D) %*% inv_C

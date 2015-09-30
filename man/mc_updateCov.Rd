@@ -15,7 +15,7 @@ mc_updateCov(list_initial, covariance, list_power_fixed, information, n_resp)
 estimated or not.}
 
 \item{information}{A list with information about the number of parameters in the model. In general
-the output from \code{[mcglm]{mc_getInformation}}.}
+the output from \link{mc_getInformation}.}
 
 \item{n_resp}{A numeric specyfing the number of response variables.}
 }

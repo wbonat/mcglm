@@ -1,11 +1,14 @@
 #' Summarizing Multivariate Covariance Generalized Linear Models fits.
 #'
-#' @description Summary for mcglm objects.
+#' @description Summary for McGLMs objects.
 #'
 #' @param object an object of class mcglm, usually, a result of a call to \code{mcglm}.
+#' @param ... additional arguments affecting the summary produced. Note the there is no extra options for
+#' mcglm object class.
+#' @return Print an mcglm object.
+#' @method summary mcglm
 #' @export
-
-summary.mcglm <- function(object) {
+summary.mcglm <- function(object, ...) {
     n_resp <- length(object$beta_names)
     output <- list()
     for (i in 1:n_resp) {

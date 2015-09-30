@@ -4,10 +4,13 @@
 \alias{vcov.mcglm}
 \title{Calculate Variance-Covariance matrix for a fitted McGLM object.}
 \usage{
-\method{vcov}{mcglm}(object)
+\method{vcov}{mcglm}(object, ...)
 }
 \arguments{
 \item{object}{a fitted model mcglm object.}
+
+\item{...}{additional arguments affecting the summary produced. Note that there is no extra options for
+mcglm object class.}
 }
 \value{
 A variance-covariance matrix.

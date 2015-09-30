@@ -13,7 +13,7 @@
 #' and (iii) variability matrices associated with the Pearson estimating function.
 #' @details Compute the Pearson estimating function its sensitivity and variability matrices.
 #' For more details see Bonat and Jorgensen (2015) equations 6, 7 and 8.
-#' @export
+
 mc_pearson <- function(y_vec, mu_vec, Cfeatures, inv_J_beta = NULL, D = NULL, correct = FALSE, compute_variability = FALSE) {
     product <- lapply(Cfeatures$D_C, mc_multiply, bord2 = Cfeatures$inv_C)
     res <- y_vec - mu_vec
@@ -25,9 +25,9 @@ mc_pearson <- function(y_vec, mu_vec, Cfeatures, inv_J_beta = NULL, D = NULL, co
         output <- list(Score = pearson_score + correction, Sensitivity = sensitivity, Extra = product)
     }
     if (compute_variability == TRUE) {
-        variability <- mc_variability(sensitivity = sensitivity, product = product, inv_C = Cfeatures$inv_C, C = Cfeatures$C, 
+        variability <- mc_variability(sensitivity = sensitivity, product = product, inv_C = Cfeatures$inv_C, C = Cfeatures$C,
             res = res)
         output$Variability <- variability
     }
     return(output)
-} 
+}

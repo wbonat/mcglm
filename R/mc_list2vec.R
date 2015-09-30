@@ -7,7 +7,7 @@
 #' @return A vector of model parameters.
 #' @details It is an internal function, in general the users never will use this function.
 #' It will be useful, only if the user wants to implement a different variance-covariance matrix.
-#' @export
+
 mc_list2vec <- function(list_initial, list_power_fixed) {
     cov_ini <- do.call(c, Map(c, list_initial$power, list_initial$tau))
     n_resp <- length(list_initial$regression)
@@ -30,4 +30,4 @@ mc_list2vec <- function(list_initial, list_power_fixed) {
     beta_ini <- do.call(c, list_initial$regression)
     cov_ini <- c(rho = list_initial$rho, cov_ini)
     return(list(beta_ini = as.numeric(beta_ini), cov_ini = as.numeric(cov_ini)))
-} 
+}
