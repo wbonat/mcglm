@@ -4,13 +4,16 @@
 \alias{residuals.mcglm}
 \title{Residuals for Multivariate Covariance Generalized Linear Models (McGLM)}
 \usage{
-\method{residuals}{mcglm}(object, type = "raw")
+\method{residuals}{mcglm}(object, type = "raw", ...)
 }
 \arguments{
 \item{object}{An of class mcglm, typically the result of a call to \code{mcglm}.}
 
 \item{type}{the type of residuals which should be returned. The alternatives are: 'raw'
 (default), 'pearson' and 'standardized'.}
+
+\item{...}{additional arguments affecting the residuals produced. Note that there is no extra options for
+mcglm object class.}
 }
 \value{
 Depending on the number of response variable the function \code{residuals.mcglm} returns

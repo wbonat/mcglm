@@ -7,7 +7,7 @@
 #' @param covariance_link String specifing the covariance link function: identity, inverse, expm.
 #' @param sparse Logical force to use sparse matrix representation 'dsCMatrix'.
 #' @return A list with the \eqn{\Omega} matrix its inverse and derivatives with respect to \eqn{\tau}.
-#' @export
+
 mc_build_omega <- function(tau, Z, covariance_link, sparse = FALSE) {
     if (covariance_link == "identity") {
         Omega <- mc_matrix_linear_predictor(tau = tau, Z = Z)
@@ -24,4 +24,4 @@ mc_build_omega <- function(tau, Z, covariance_link, sparse = FALSE) {
         output <- list(inv_Omega = inv_Omega, D_inv_Omega = Z)
     }
     return(output)
-} 
+}

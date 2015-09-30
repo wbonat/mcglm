@@ -72,9 +72,9 @@ mc_influence <- function(object, id) {
     }
     DFBETA <- lapply(DFBETA_clust, as.matrix)
     DFBETA <- lapply(DFBETA, t)
-    DFBETA <- ldply(DFBETA, data.frame)
+    DFBETA <- plyr::ldply(DFBETA, data.frame)
     names(DFBETA) <- object$beta_names[[1]]
-    DFBETAOij <- ldply(DFBETAOij, data.frame)
+    DFBETAOij <- plyr::ldply(DFBETAOij, data.frame)
     names(DFBETAOij) <- object$beta_names[[1]]
     DCLSi <- apply(as.matrix(DFBETA), MARGIN = 1, FUN = padroniza, M = M)
     DCLOij <- apply(as.matrix(DFBETAOij), MARGIN = 1, FUN = padroniza, M = M)

@@ -23,7 +23,7 @@ function to test my own implementation based on eigen values decomposition.
 \examples{
 M <- matrix(c(1,0.8,0.8,1), 2,2)
 dM <- matrix(c(0,1,1,0),2,2)
-mc_dexp_gold(M = M, dM = dM)
+mcglm::mc_dexp_gold(M = M, dM = dM)
 }
 \seealso{
 \code{\link[Matrix]{expm}}, \code{\link[base]{eigen}}.

@@ -28,8 +28,10 @@
 #' @return A list with estimated regression and covariance parameters.
 #' @export
 
-fit_mcglm <- function(list_initial, list_link, list_variance, list_covariance, list_X, list_Z, list_offset, list_Ntrial,
-    list_power_fixed, list_sparse, y_vec, correct = TRUE, max_iter, tol = 0.001, method = "rc", tunning = 0, verbose) {
+fit_mcglm <- function(list_initial, list_link, list_variance, list_covariance, list_X, list_Z,
+                      list_offset, list_Ntrial, list_power_fixed, list_sparse, y_vec,
+                      correct = TRUE, max_iter, tol = 0.001, method = "rc",
+                      tunning = 0, verbose) {
     ## Transformation from list to vector
     parametros <- mc_list2vec(list_initial, list_power_fixed)
     n_resp <- length(list_initial$regression)

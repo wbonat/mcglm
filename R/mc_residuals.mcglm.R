@@ -5,10 +5,13 @@
 #' @param object An of class mcglm, typically the result of a call to \code{mcglm}.
 #' @param type the type of residuals which should be returned. The alternatives are: 'raw'
 #' (default), 'pearson' and 'standardized'.
+#' @param ... additional arguments affecting the residuals produced. Note that there is no extra options for
+#' mcglm object class.
 #' @return Depending on the number of response variable the function \code{residuals.mcglm} returns
 #' a vector (univariate models) or a matrix (multivariate models) of residuals values.
 #' @export
-residuals.mcglm <- function(object, type = "raw") {
+
+residuals.mcglm <- function(object, type = "raw", ...) {
     n_resp <- length(object$beta_names)
     output <- Matrix(object$residuals, ncol = n_resp, nrow = object$n_obs)
     if (type == "standardized") {
@@ -18,4 +21,4 @@ residuals.mcglm <- function(object, type = "raw") {
         output <- Matrix(as.numeric(object$residuals/sqrt(diag(object$C))), ncol = n_resp, nrow = object$n_obs)
     }
     return(output)
-} 
+}

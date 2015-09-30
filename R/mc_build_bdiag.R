@@ -7,7 +7,6 @@
 #' @param n_obs A numeric specifying the number of observations in the data set.
 #' @return A list of zero matrices.
 #' @details It is an internal function.
-#' @export
 
 mc_build_bdiag <- function(n_resp, n_obs) {
     list_zero <- list()
@@ -15,4 +14,4 @@ mc_build_bdiag <- function(n_resp, n_obs) {
         list_zero[[i]] <- Matrix(0, n_obs, n_obs, sparse = TRUE)
     }
     return(list_zero)
-} 
+}

@@ -37,10 +37,4 @@ in the sandwich form bord1*middle*bord2. An special case appears when computing 
 the covariance matrix with respect to the power parameter. Always the bord1 and bord2 should be
 diagonal matrix. If it is not true, this product is too slow.
 }
-\examples{
-X1 <- Diagonal(5, 2)
-M <- Matrix(rep(0.8,5)\%*\%t(rep(0.8,5)))
-mc_sandwich(middle = M, bord1 = X1, bord2 = X1)
-mc_sandwich_negative(middle = M, bord1 = X1, bord2 = X1)
-}
 

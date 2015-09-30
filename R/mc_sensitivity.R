@@ -5,7 +5,7 @@
 #' @param product A list of matrix.
 #' @return The sensitivity matrix associated with the Pearson estimating function.
 #' @details This function implements the equation 7 of Bonat and Jorgensen (2015).
-#' @export
+
 mc_sensitivity <- function(product) {
     n_par <- length(product)
     Sensitivity <- matrix(0, n_par, n_par)
@@ -21,4 +21,4 @@ mc_sensitivity <- function(product) {
     # print(forceSymmetric(Sensitivity)) print(forceSymmetric(Sensitivity_temp)) print(forceSymmetric(Sensitivity1))
     # print(all.equal(Sensitivity1, Sensitivity))
     return(Sensitivity)
-} 
+}
