@@ -40,6 +40,12 @@ build(manual = TRUE, vignettes = FALSE)
 # build_win()
 
 ##----------------------------------------------------------------------
+## Generate the README.md.
+
+library(knitr)
+knit(input="README.Rmd")
+
+##----------------------------------------------------------------------
 ## Examples.
 
 # Run examples from all functions of the package
