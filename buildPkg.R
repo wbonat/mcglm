@@ -10,7 +10,7 @@ if(!grepl(x=getwd(), pattern="/mcglm$")){
 
 library(devtools)
 
-## Load the package (to make functiona available).
+## Load the package (to make functions available).
 load_all()
 search()
 
