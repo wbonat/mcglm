@@ -18,7 +18,7 @@ Suggests:
 Imports:
     Matrix,
     assertthat
-License: GPL-2
+License: GPL-3 | file LICENSE
 LazyData: TRUE
 URL: http://git.leg.ufpr.br/wbonat/mcglm
 BugReports: http://git.leg.ufpr.br/wbonat/mcglm/issues
