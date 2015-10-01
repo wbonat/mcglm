@@ -14,3 +14,4 @@
 .Rd2pdf5516
 .Rd2pdf*
 data-raw/*.txt
+inst/doc

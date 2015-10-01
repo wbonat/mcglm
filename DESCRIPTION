@@ -25,3 +25,4 @@ LazyData: TRUE
 URL: http://git.leg.ufpr.br/wbonat/mcglm
 BugReports: http://git.leg.ufpr.br/wbonat/mcglm/issues
 Encoding: UTF-8
+VignetteBuilder: knitr
