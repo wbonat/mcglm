@@ -1,11 +1,19 @@
-#' Calculate Variance-Covariance matrix for a fitted McGLM object.
+#' @title Calculate Variance-Covariance matrix for a fitted McGLM
+#'     object.
+#' @name vcov.mcglm
 #'
-#' @description Returns the variance-covariance matrix for all parameters of a mcglm fitted model object.
+#' @description Returns the variance-covariance matrix for all
+#'     parameters of a \code{mcglm} fitted model object.
 #'
-#' @param object a fitted model mcglm object.
-#' @param ... additional arguments affecting the summary produced. Note that there is no extra options for
-#' mcglm object class.
+#' @param object a fitted model \code{mcglm} object.
+#' @param ... additional arguments affecting the summary produced. Note
+#'     that there is no extra options for mcglm object class.
+#'
 #' @return A variance-covariance matrix.
+#'
+#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
+#'
+#' @method vcov mcglm
 #' @export
 
 vcov.mcglm <- function(object, ...) {
