@@ -14,7 +14,9 @@ Depends:
     R (>= 3.2.1)
 Suggests:
     testthat,
-    plyr
+    plyr,
+    lattice,
+    latticeExtra
 Imports:
     Matrix,
     assertthat
