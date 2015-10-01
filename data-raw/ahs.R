@@ -6,23 +6,7 @@ setwd("/home/walmes/GitLab/mcglm/data-raw")
 ahs <- read.table("ahs.txt", header=TRUE, sep="\t")
 str(ahs)
 
-ahs$sex <- factor(ahs$sex, labels=c("male", "female"))
-str(ahs)
-
-xtabs(~chcond1+chcond2, data=ahs)
-
-ahs$chcond <- factor(with(ahs, chcond1+2*chcond2),
-                     labels=c("otherwise", "not limited", "limited"))
-xtabs(~chcond, data=ahs)
-ahs$chcond1 <- NULL
-ahs$chcond2 <- NULL
-ahs$id <- NULL
-
-names(ahs)[c(1:9, 15, 10:14)]
-ahs <- ahs[, c(1:9, 15, 10:14)]
-str(ahs)
-
-save(ahs, file="../data/ahs.RData")
+## save(ahs, file="../data/ahs.RData")
 
 ##----------------------------------------------------------------------
 ## Include in the @examples
