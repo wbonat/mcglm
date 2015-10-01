@@ -12,7 +12,6 @@
 #'
 #' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
-#' @method qic mcglm
 #' @export
 
 qic.mcglm <- function(object, object.iid) {
