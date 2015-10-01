@@ -8,3 +8,6 @@
 buildPkg.R
 README.Rmd
 Examples/
+^data-raw$
+\#*\#
+^\.\#*

@@ -239,7 +239,9 @@ fitted.mcglm <- function(object, ...) {
     output <- Matrix(object$fitted, ncol = n_resp, nrow = object$n_obs)
     return(output)
 }
-#' @title Default Multivariate Covariance Generalized Linear models plotting
+
+#' @title Default Multivariate Covariance Generalized Linear models
+#'     plotting
 #' @name plot.mcglm
 #'
 #' @description takes a fitted \code{mcglm} object and do plots based on
@@ -269,8 +271,9 @@ plot.mcglm <- function(x, type = "residuals", ...) {
             plot(res ~ fit_values,
                  ylab = "Pearson residuals",
                  xlab = "Fitted values")
-            temp <- loess.smooth(fitted(object)[, i],
-                                 residuals(object, type = "pearson")[, i])
+            temp <- loess.smooth(
+                fitted(object)[, i],
+                residuals(object, type = "pearson")[, i])
             lines(temp$x, temp$y)
             qqnorm(res)
             qqline(res)
@@ -362,7 +365,8 @@ print.mcglm <- function(x, ...) {
         names(tau_temp) <- rep("", length(tau_temp))
         print(tau_temp)
         cat("\n")
-        power_temp <- coef(object, response = i, type = "power")$Estimate
+        power_temp <- coef(object, response = i,
+                           type = "power")$Estimate
         if (length(power_temp) != 0) {
             names(power_temp) <- ""
             cat("Power:\n")
@@ -445,13 +449,15 @@ summary.mcglm <- function(object, ...) {
         cat("Covariance function:", object$covariance[[i]])
         cat("\n")
         cat("Regression:\n")
-        tab_beta <- coef(object, std.error = TRUE, response = i, type = "beta")[, 1:2]
+        tab_beta <- coef(object, std.error = TRUE,
+                         response = i, type = "beta")[, 1:2]
         tab_beta$"Z value" <- tab_beta[, 1]/tab_beta[, 2]
         rownames(tab_beta) <- object$beta_names[[i]]
         output[i][[1]]$Regression <- tab_beta
         print(tab_beta)
         cat("\n")
-        tab_power <- coef(object, std.error = TRUE, response = i, type = "power")[, 1:2]
+        tab_power <- coef(object, std.error = TRUE,
+                          response = i, type = "power")[, 1:2]
         tab_power$"Z value" <- tab_power[, 1]/tab_power[, 2]
         rownames(tab_power) <- NULL
         if (dim(tab_power)[1] != 0) {
@@ -461,14 +467,16 @@ summary.mcglm <- function(object, ...) {
             cat("\n")
         }
         cat("Dispersion:\n")
-        tab_tau <- coef(object, std.error = TRUE, response = i, type = "tau")[, 1:2]
+        tab_tau <- coef(object, std.error = TRUE,
+                        response = i, type = "tau")[, 1:2]
         tab_tau$"Z value" <- tab_tau[, 1]/tab_tau[, 2]
         rownames(tab_tau) <- NULL
         output[i][[1]]$tau <- tab_tau
         print(tab_tau)
         cat("\n")
     }
-    tab_rho <- coef(object, std.error = TRUE, response = NA, type = "correlation")[, c(3, 1, 2)]
+    tab_rho <- coef(object, std.error = TRUE,
+                    response = NA, type = "correlation")[, c(3, 1, 2)]
     tab_rho$"Z value" <- tab_rho[, 2]/tab_rho[, 3]
     if (dim(tab_rho)[1] != 0) {
         cat("Correlation matrix:\n")

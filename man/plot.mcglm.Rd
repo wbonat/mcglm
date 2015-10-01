@@ -2,7 +2,8 @@
 % Please edit documentation in R/mc_S3_methods.R
 \name{plot.mcglm}
 \alias{plot.mcglm}
-\title{Default Multivariate Covariance Generalized Linear models plotting}
+\title{Default Multivariate Covariance Generalized Linear models
+    plotting}
 \usage{
 \method{plot}{mcglm}(x, type = "residuals", ...)
 }
