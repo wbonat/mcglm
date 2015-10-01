@@ -1,10 +1,18 @@
-#' Compute Quasi Information Criterion (QIC) for McGLMs.
+#' @title Compute Quasi Information Criterion (QIC) for McGLMs.
+#' @name qic.mcglm
 #'
-#' qic.mcglm is a function which computes the QIC for McGLMs.
-#' @param object An object of mcglm class.
-#' @param object.iid An object of mcglm class contained the model fitted using independent
-#' covariance structure.
+#' @description \code{qic.mcglm} is a function which computes the QIC
+#'     for McGLMs.
+#'
+#' @param object An object of \code{mcglm} class.
+#' @param object.iid An object of \code{mcglm} class contained the model
+#'     fitted using independent covariance structure.
+#'
 #' @return The QIC value.
+#'
+#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
+#'
+#' @method qic mcglm
 #' @export
 
 qic.mcglm <- function(object, object.iid) {
@@ -19,7 +27,10 @@ qic.mcglm <- function(object, object.iid) {
         if (object$power_fixed[[i]] == TRUE) {
             power = object$list_initial$power[[i]]
         }
-        Q[, i] <- mc_qll(y = obs[, i], mu = mu[, i], variance = object$variance[[i]], power = power)
+        Q[, i] <- mc_qll(y = obs[, i],
+                         mu = mu[, i],
+                         variance = object$variance[[i]],
+                         power = power)
     }
     Vbeta <- -object$inv_S_beta
     Vnull <- solve(-object.iid$inv_S_beta)
