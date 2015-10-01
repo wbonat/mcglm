@@ -7,15 +7,19 @@
 qic.mcglm(object, object.iid)
 }
 \arguments{
-\item{object}{An object of mcglm class.}
+\item{object}{An object of \code{mcglm} class.}
 
-\item{object.iid}{An object of mcglm class contained the model fitted using independent
-covariance structure.}
+\item{object.iid}{An object of \code{mcglm} class contained the model
+    fitted using independent covariance structure.}
 }
 \value{
 The QIC value.
 }
 \description{
-qic.mcglm is a function which computes the QIC for McGLMs.
+\code{qic.mcglm} is a function which computes the QIC
+    for McGLMs.
+}
+\author{
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
 }
 

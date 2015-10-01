@@ -52,16 +52,22 @@ fitted using an estimating function approach, combining quasi-score functions fo
 parameters and Pearson estimating function for covariance parameters. For details see Bonat and
 Jorgensen (2015).
 
-Fits a multivariate covariance generalized linear models (McGLMs) to data.
-McGLM is a general framework for non-normal multivariate data analysis, designed to handle
-multivariate response variables, along with a wide range of temporal and spatial correlation
-structures defined in terms of a covariance link function combined with a matrix linear predictor
-involving known matrices. The models take non-normality into account in the conventional way by means
-of a variance function, and the mean structure is modelled by means of a link function and a linear predictor.
-The models are fitted using an efficient Newton scoring algorithm based on quasi-likelihood and
-Pearson estimating functions, using only second-moment assumptions.
-This provides a unified approach to a wide variety of different types of response variables and
-covariance structures, including multivariate extensions of repeated measures, time series, longitudinal,
-spatial and spatio-temporal structures.
+Fits a multivariate covariance generalized linear
+    models (McGLMs) to data.  McGLM is a general framework for
+    non-normal multivariate data analysis, designed to handle
+    multivariate response variables, along with a wide range of
+    temporal and spatial correlation structures defined in terms of
+    a covariance link function combined with a matrix linear
+    predictor involving known matrices. The models take
+    non-normality into account in the conventional way by means of a
+    variance function, and the mean structure is modelled by means
+    of a link function and a linear predictor.  The models are
+    fitted using an efficient Newton scoring algorithm based on
+    quasi-likelihood and Pearson estimating functions, using only
+    second-moment assumptions.  This provides a unified approach to
+    a wide variety of different types of response variables and
+    covariance structures, including multivariate extensions of
+    repeated measures, time series, longitudinal, spatial and
+    spatio-temporal structures.
 }
 
