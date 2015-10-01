@@ -9,7 +9,7 @@ str(ahs)
 ## save(ahs, file="../data/ahs.RData")
 
 ##----------------------------------------------------------------------
-## Include in the @examples
+## Include in the @examples.
 
 library(lattice)
 library(latticeExtra)
