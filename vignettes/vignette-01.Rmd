@@ -135,8 +135,8 @@ packageVersion("mcglm")
 ##----------------------------------------------------------------------
 ## Loadin the Australian Health Survey data.
 
-## data(ahs)
-load("data/ahs.RData")
+data(ahs, package="mcglm")
+## load("data/ahs.RData")
 
 ## Object structure.
 str(ahs)
