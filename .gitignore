@@ -7,7 +7,6 @@
 .#*
 #*
 *.Rout
-*.RData
 ^.Rd2pdf* 
 ^\.Rd2pdf*
 .Rd2pdf5504
