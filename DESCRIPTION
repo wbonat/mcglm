@@ -19,7 +19,7 @@ Suggests:
     latticeExtra
 Imports:
     Matrix,
-    asserthat
+    assertthat
 License: GPL-2
 LazyData: TRUE
 URL: http://git.leg.ufpr.br/wbonat/mcglm
