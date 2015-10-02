@@ -2,6 +2,7 @@
 ^\.Rproj\.user$
 ^.Rd2pdf* 
 ^\.Rd2pdf*
+^\.gitlab-ci.yml$
 .Rd2pdf5504
 .Rd2pdf5516
 .Rd2pdf* 
@@ -11,3 +12,5 @@ Examples/
 ^data-raw$
 \#*\#
 ^\.\#*
+Rplots.pdf
+CONTRIBUTING.md
