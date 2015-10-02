@@ -15,6 +15,8 @@ mc_fast_forward(object, scope, interaction = 1, penalty = 2, n_max = 10)
 \item{interaction}{Maximum number of covariates interacting.}
 
 \item{penalty}{penalty term (default = 2).}
+
+\item{n_max}{Maximum number of models to be fitted.}
 }
 \value{
 The selected model.
