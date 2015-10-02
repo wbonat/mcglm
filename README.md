@@ -2,11 +2,11 @@
 
 # mcglm 0.0.1
 
-<!-- [![build status](http://git.leg.ufpr.br/ci/projects/1/status.png?ref=master)](http://git.leg.ufpr.br/ci/projects/1?ref=master) -->
-<!-- Build status for the stable version (`master` branch) -->
-<!--  -->
-<!-- [![build status](http://git.leg.ufpr.br/ci/projects/1/status.png?ref=devel)](http://git.leg.ufpr.br/ci/projects/1?ref=devel) -->
-<!-- Build status for the development version (`devel` branch) -->
+[![build status](http://git.leg.ufpr.br/ci/projects/3/status.png?ref=master)](http://git.leg.ufpr.br/ci/projects/3?ref=master)
+Build status for the stable version (`master` branch)
+
+[![build status](http://git.leg.ufpr.br/ci/projects/3/status.png?ref=devel)](http://git.leg.ufpr.br/ci/projects/3?ref=devel)
+Build status for the development version (`devel` branch)
 
 The `mcglm` package fit multivariate covariance generalized linear models
 (Bonat and Jorgensen, 2015).
@@ -113,7 +113,7 @@ See [LICENSE](./LICENSE)
 [GNU General Public License (GPL) v3.0]: http://www.gnu.org/licenses/gpl-3.0.html
 [`roxygen2`]: https://github.com/klutometis/roxygen
 [`devtools`]: https://github.com/hadley/devtools
-[mcglm_0.0.1.tar.gz]: http://www.leg.ufpr.br/~fernandomayer/mcglm/mcglm_0.0.1.tar.gz
-[mcglm_0.0.1.zip]: http://www.leg.ufpr.br/~fernandomayer/mcglm/mcglm_0.0.1.zip
+[mcglm_0.0.1.tar.gz]: http://www.leg.ufpr.br/~leg/mcglm/source/mcglm_0.0.1.tar.gz
+[mcglm_0.0.1.zip]: http://www.leg.ufpr.br/~leg/mcglm/source/mcglm_0.0.1.zip
 [mcglm-manual.pdf]: http://www.leg.ufpr.br/~leg/mcglm/source/mcglm-manual.pdf
 [Gitflow worflow]: http://nvie.com/posts/a-successful-git-branching-model/
