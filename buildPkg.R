@@ -2,7 +2,11 @@
 ## Script to build and verify the package.
 
 if(!grepl(x=getwd(), pattern="/mcglm$")){
-    stop("Move to /mcglm directory.")
+    if (Sys.info()["user"]=="walmes"){
+        setwd("~/GitLab/mcglm")
+    }
+    ## stop("Move to /mcglm directory.")
+    cat(getwd(), "\n")
 }
 
 ##----------------------------------------------------------------------
@@ -12,7 +16,6 @@ library(devtools)
 
 ## Load the package (to make functions available).
 load_all()
-search()
 
 ## Create/update NAMESPACE, *.Rd files.
 document()
@@ -38,6 +41,18 @@ packageVersion("mcglm")
 build(manual = TRUE, vignettes = FALSE)
 # build the binary version for windows (not used)
 # build_win()
+
+##----------------------------------------------------------------------
+## Package vignette.
+## Based on: http://r-pkgs.had.co.nz/vignettes.html
+
+## Create the vignette template. Do just once.
+## use_vignette("vignette-01")
+
+build_vignettes()
+
+## vignette()
+## vignette("vignette-01", package="mcglm")
 
 ##----------------------------------------------------------------------
 ## Generate the README.md.

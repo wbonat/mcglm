@@ -6,43 +6,111 @@
 \title{Australian health survey}
 \format{a \code{data.frame} with 5190 records and 17 variables.}
 \source{
-Deb, P. and Trivedi, P. K. (1997). Demand for medical care by the elderly: A finite mixture approach,
-Journal of Applied Econometrics 12(3):313--336.
+Deb, P. and Trivedi, P. K. (1997). Demand for medical care by
+    the elderly: A finite mixture approach, Journal of Applied
+    Econometrics 12(3):313--336.
 }
 \usage{
 data(ahs)
 }
 \description{
-The Australian health survey was used by Bonat and Jorgensen (2015) as an example of multivariate
-count regression model. The data consists of five count response variables concerning health system access
-measures and nine covariates concerning  social conditions in Australian for 1987-88.
+The Australian health survey was used by Bonat and
+    Jorgensen (2015) as an example of multivariate count regression
+    model. The data consists of five count response variables
+    concerning health system access measures and nine covariates
+    concerning social conditions in Australian for 1987-88.
 
 \itemize{
-    \item \code{sex} - Factor, two levels (0-Male; 1-Female).
-    \item \code{age} - Respondent's age in years divided by 100.
-    \item \code{income} - Respondent's annual income in Australian dollars divided by 1000.
-    \item \code{levyplus} - Factor, two levels (1- if respondent is covered by private health
-    insurance fund for private patients in public hospital (with doctor of choice); 0 - otherwise).
-    \item \code{freepoor} - Factor, two levels (1 - if respondent is covered by government because low income,
-    recent immigrant, unemployed; 0 - otherwise).
-    \item \code{freerepa} - Factor, two levels (1 - if respondent is covered free by government because of
-    old-age or disability pension, or because invalid veteran or family of deceased veteran; 0 - otherwise).
-    \item \code{illnes} - Number of illnesses in past 2 weeks, with 5 or more weeks coded as 5.
-    \item \code{actdays} - Number of days of reduced activity in the past two weeks due to illness or injury.
-    \item \code{hscore} - Respondent's general health questionnaire score using Goldberg's method;
-    high score indicates poor health.
-    \item \code{chcond1} - Factor, two levels (1 - if respondent has chronic condition(s) but is not limited
-    in activity; 0 - otherwise).
-    \item \code{chcond2} - Factor, two levels (1 if respondent has chronic condition(s) and is limited in
-    activity; 0 - otherwise).
-    \item \code{Ndoc} - Number of consultations with a doctor or specialist (response variable).
-    \item \code{Nndoc} - Number of consultations with health professionals (response variable).
-    \item \code{Nadm} - Number of admissions to a hospital, psychiatric hospital, nursing or
-    convalescence home in the past 12 months (response variable).
-    \item \code{Nhosp} - Number of nights in a hospital during the most recent admission.
-    \item \code{Nmed} - Total number of prescribed and non prescribed medications used in the past two days.
-    \item \code{id} - Respondent's index.
+
+\item \code{sex} - Factor with levels \code{male} and \code{female}.
+
+\item \code{age} - Respondent's age in years divided by 100.
+
+\item \code{income} - Respondent's annual income in Australian
+    dollars divided by 1000.
+
+\item \code{levyplus} - Coded factor. If respondent is covered by
+    private health insurance fund for private patients in public
+    hospital with doctor of choice (1) or otherwise (0).
+
+\item \code{freepoor} - Coded factor. If respondent is covered by
+    government because low income, recent immigrant, unemployed (1)
+    or otherwise (0).
+
+\item \code{freerepa} - Coded factor. If respondent is covered free
+    by government because of old-age or disability pension, or
+    because invalid veteran or family of deceased veteran (1) or
+    otherwise (0).
+
+\item \code{illnes} - Number of illnesses in past 2 weeks, with 5 or
+    illnesses coded as 5.
+
+\item \code{actdays} - Number of days of reduced activity in the past
+    two weeks due to illness or injury.
+
+\item \code{hscore} - Respondent's general health questionnaire score
+    using Goldberg's method. High score indicates poor health.
+
+\item \code{chcond} - Factor with three levels. If respondent has
+    chronic condition(s) and is limited in activity (\code{limited}),
+    or if the respondent has chronic condition(s) but is not limited
+    in activity (\code{nonlimited}) or otherwise (\code{otherwise},
+    reference level).
+
+\item \code{Ndoc} - Number of consultations with a doctor or
+    specialist (response variable).
+
+\item \code{Nndoc} - Number of consultations with health
+    professionals (response variable).
+
+\item \code{Nadm} - Number of admissions to a hospital, psychiatric
+    hospital, nursing or convalescence home in the past 12 months
+    (response variable).
+
+\item \code{Nhosp} - Number of nights in a hospital during the most
+    recent admission.
+
+\item \code{Nmed} - Total number of prescribed and non prescribed
+    medications used in the past two days.
+
 }
+}
+\examples{
+library(lattice)
+library(latticeExtra)
+
+data(ahs, package="mcglm")
+str(ahs)
+
+xt <- xtabs(~age+sex, data=ahs)
+mosaicplot(xt)
+
+xt <- xtabs(~age+chcond, data=ahs)
+mosaicplot(xt)
+
+useOuterStrips(
+    combineLimits(
+        xyplot(Ndoc+Nndoc+Nadm+Nhosp+Nmed~age|sex,
+               outer=TRUE, data=ahs,
+               jitter.x=TRUE, amount=0.01,
+               type=c("p", "a"),
+               scales=list(y=list(relation="free")),
+               ylab="Number or occurences",
+               xlab="Age (years/100)")
+    )
+)
+
+useOuterStrips(
+    combineLimits(
+        xyplot(Ndoc+Nndoc+Nadm+Nhosp+Nmed~income|sex,
+               outer=TRUE, data=ahs,
+               jitter.x=TRUE, amount=0.01,
+               type=c("p", "a"),
+               scales=list(y=list(relation="free")),
+               ylab="Number or occurences",
+               xlab="Age (years/100)")
+    )
+)
 }
 \keyword{datasets}
 
