@@ -132,6 +132,14 @@ packageVersion("mcglm")
 ## The Australian Health Survey
 
 ```{r}
+cat(getwd(), "\n")
+library(mcglm)
+search()
+ls("package:mcglm")
+
+``` 
+
+```{r, eval=FALSE}
 ##----------------------------------------------------------------------
 ## Loadin the Australian Health Survey data.
 
