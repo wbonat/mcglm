@@ -135,7 +135,7 @@ packageVersion("mcglm")
 ##----------------------------------------------------------------------
 ## Loadin the Australian Health Survey data.
 
-data(ahs)
+data(ahs, package="mcglm")
 
 ## Object structure.
 str(ahs)

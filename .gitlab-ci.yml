@@ -2,5 +2,5 @@ job_R:
   script:
     - echo $HOME
     - Rscript -e 'getwd(); .libPaths(); sessionInfo()'
-    - Rscript -e 'library(devtools); check()'
+    - Rscript -e 'library(devtools); load_all(); check()'
     - Rscript -e 'library(devtools); .libPaths(new = path.expand("~/R-tests/legTools")); install(local = FALSE)'
