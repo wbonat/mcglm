@@ -2,22 +2,26 @@
 % Please edit documentation in R/mc_influence.R
 \name{mc_influence}
 \alias{mc_influence}
-\title{Influence measures}
+\title{Influence measures for McGLMs}
 \usage{
 mc_influence(object, id)
 }
 \arguments{
-\item{object}{An object of mcglm class.}
+\item{object}{An object of \code{mcglm} class.}
 
-\item{id}{a vector which identifies the clusters. The length and order of id should be the
-same as the number of observations. Data are assumed to be sorted so that observations on a cluster
-are contiguous rows for all entities in the formula.}
+\item{id}{a vector which identifies the clusters.
+The length and order of id should match with the number of
+observations.}
 }
 \value{
-A matrix. Note that the function assumes that the data are in the correct order.
+A list with influence measures for cluster and observations.
 }
 \description{
-Compute influence measures for multivariate covariance generalized linear models.
-Leverage, DFBETA and Cook's distance for unit sample and observations.
+Compute influence measures for multivariate covariance
+generalized linear models. Leverage, DFBETA and Cook's distance
+for unit sample and observations.
+}
+\author{
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
 }
 

@@ -14,6 +14,7 @@
 
 mc_influence <- function(object, id) {
   temp_data <- data.frame(object$residuals, id)
+  names(temp_data) <- c("res", "id")
   data_id <- split(temp_data, temp_data$id)
   n_id <- length(data_id)
   D <- bdiag(lapply(object$mu_list, function(x) x$D))
@@ -24,7 +25,7 @@ mc_influence <- function(object, id) {
   # Leverage for observations
   inv_M <- -object$inv_S_beta
   M <- solve(inv_M)
-  uni_id <- unique(id)
+  uni_id <- as.character(unique(id))
   Hi <- list()
   Di <- list()
   inv_Ci <- list()
@@ -42,7 +43,7 @@ mc_influence <- function(object, id) {
   # Leverage for observations
   Hobs <- diag(H)
   # Leverage for clusters
-  Hid <- tapply(Hobs, id, sum)
+  Hid <- tapply(Hobs, id, mean)
   # DFBETAs for clusters
   I <- Diagonal(dim(temp_data)[1], 1)
   inv_IH <- solve(I - H)
@@ -60,7 +61,7 @@ mc_influence <- function(object, id) {
     }
     inv_IH_i = inv_IH[idTF,idTF]
     r_i <- object$residuals[idTF]
-        DFBETACi[[i]] <- t(inv_M%*%t(D_i)%*%inv_C_i%*%inv_IH_i%*%r_i)
+    DFBETACi[[i]] <- t(inv_M%*%t(D_i)%*%inv_C_i%*%inv_IH_i%*%r_i)
     DCLSi[i] <- as.numeric(DFBETACi[[i]]%*%M%*%t(DFBETACi[[i]]))/n_beta
     if(dim(inv_C_i)[1] == 1) {DFBETAOij[[i]] <- DFBETACi[[i]]
     } else {
@@ -71,19 +72,21 @@ mc_influence <- function(object, id) {
   }
   DFBETACi <- do.call(rbind, DFBETACi)
   DFBETAOij <- do.call(rbind, DFBETAOij)
-  DCOij = do.call(rbind, apply(DFBETAOij, MARGIN = 1,
-                               function(x,M,n_beta)t(x)%*%M%*%x/n_beta,
-                               M = M, n_beta = n_beta))
-  std.error <- coef(object, std.error = TRUE)$Std.error
+  DCOij <- apply(DFBETAOij, MARGIN = 1,
+                function(x,M,n_beta)as.numeric((t(x)%*%M%*%x)/n_beta),
+                M = M, n_beta = n_beta)
+  std.error <- coef(object, type = "beta", std.error = TRUE)$Std.error
   DFBETACi = data.frame(as.matrix(DFBETACi))/std.error
   DFBETAOij = data.frame(as.matrix(DFBETAOij))/std.error
   names(DFBETACi) <- do.call(c, object$beta_names)
   names(DFBETAOij) <- do.call(c, object$beta_names)
-  output_id <- data.frame(DFBETACi, "Leverage" = as.numeric(Hid),
-                          "Cook" = as.numeric(DCLSi))
-  output_obs <- data.frame(DFBETAOij, "Leverage" = as.numeric(Hobs),
-                          "Cook" = as.numeric(DCOij))
-  output <- list("Id" = output_id, "Obs" = output_obs)
+  DFBETACi$Leverage <- as.numeric(Hid)
+  DFBETACi$Cook <- as.numeric(DCLSi)
+  DFBETAOij$Leverage <- as.numeric(Hobs)
+  DFBETAOij$Cook <- as.numeric(DCOij)
+  DFBETAOij$Id <- rownames(object$data)
+  DFBETACi$Id <- uni_id
+  output <- list("Id" = DFBETACi, "Obs" = DFBETAOij)
   return(output)
 }
 

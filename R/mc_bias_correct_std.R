@@ -34,7 +34,7 @@ mc_bias_corrected_std <- function(object, id) {
     Hi[[i]] <- Di[[i]]%*%inv_M%*%t(Di[[i]])%*%inv_Ci[[i]]
     }
     H <- bdiag(Hi)
-    I <- Diagonal(dim(data)[1], 1)
+    I <- Diagonal(dim(temp_data)[1], 1)
     inv_IH <- solve(I - H)
     Vbeta = inv_M%*%(t(D)%*%object$inv_C%*%inv_IH%*%R%*%inv_IH%*%
                        object$inv_C%*%D)%*%inv_M
