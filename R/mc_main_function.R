@@ -114,6 +114,7 @@ mcglm <- function(linear_pred, matrix_pred, link, variance, covariance, offset,
     model_fit$offset <- offset
     model_fit$power_fixed
     model_fit$sparse <- sparse
+    model_fit$data <- data
     class(model_fit) <- "mcglm"
   }
   return(model_fit)
