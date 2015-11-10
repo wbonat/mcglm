@@ -14,6 +14,9 @@
 mc_sic <- function (object, scope, data, response, penalty = 2) {
   SIC <- c()
   df <- c()
+  df_total <- c()
+  TU <- c()
+  QQ <- c()
   for(i in 1:length(scope)){
   ini_formula <- object$linear_pred[[response]]
   ext_formula <- as.formula(paste("~", paste(ini_formula[3],
@@ -41,9 +44,14 @@ mc_sic <- function (object, scope, data, response, penalty = 2) {
   Tu <- t(score_temp$Score[c(n_ini_beta+1):n_total_beta])%*%
     solve(VB)%*%score_temp$Score[c(n_ini_beta+1):n_total_beta]
   df[i] <- n_beta - n_ini_beta
-  SIC[i] <- as.numeric(sqrt(Tu)) - penalty*df[i]
+  SIC[i] <- -as.numeric(Tu) + penalty*n_beta
+  df_total[i] <- n_beta
+  TU[i] <- as.numeric(Tu)
+  QQ[i] <- qchisq(0.95, df = df[i])
   }
-  output <- data.frame("SIC" = SIC, "Covariance" = scope, "df" = df)
+  output <- data.frame("SIC" = SIC, "Covariance" = scope,
+                       "df" = df, "df_total" = df_total,
+                       "Tu" = TU, "Chisq" = QQ)
   return(output)
 }
 
