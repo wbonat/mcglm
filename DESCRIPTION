@@ -16,7 +16,8 @@ Suggests:
     testthat,
     plyr,
     lattice,
-    latticeExtra
+    latticeExtra,
+    knitr
 Imports:
     Matrix,
     assertthat
