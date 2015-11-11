@@ -1,5 +1,5 @@
 ##----------------------------------------------------------------------
-## Prepare de the data set.
+## Prepare the data set.
 
 setwd("/home/walmes/GitLab/mcglm/data-raw")
 
@@ -20,7 +20,7 @@ str(ahs)
 xt <- xtabs(~age+sex, data=ahs)
 mosaicplot(xt)
 
-xt <- xtabs(~age+chcond, data=ahs)
+xt <- xtabs(~age+chcond1, data=ahs)
 mosaicplot(xt)
 
 useOuterStrips(
