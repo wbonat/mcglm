@@ -30,7 +30,8 @@
 #' mc_variance_function(mu = mu$mu, power = c(2,1), Ntrial = 1, variance = 'binomialPQ',
 #' inverse = FALSE, derivative_power = TRUE, derivative_mu = TRUE)
 # Generic variance function ---------------------------
-mc_variance_function <- function(mu, power, Ntrial, variance, inverse, derivative_power, derivative_mu) {
+mc_variance_function <- function(mu, power, Ntrial, variance, inverse, 
+                                 derivative_power, derivative_mu) {
     assert_that(is.logical(inverse))
     assert_that(is.logical(derivative_power))
     assert_that(is.logical(derivative_mu))
