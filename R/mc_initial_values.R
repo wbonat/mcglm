@@ -84,13 +84,13 @@ mc_initial_values <- function(linear_pred, matrix_pred, link, variance, covarian
     tau_extra <- lapply(matrix_pred, length)
     list_initial$tau <- list()
     for (i in 1:n_resp) {
-        if (covariance == "identity") {
+        if (covariance[i] == "identity") {
             list_initial$tau[[i]] <- as.numeric(c(tau0_initial[[i]], rep(0, c(tau_extra[[i]] - 1))))
         }
-        if (covariance == "inverse") {
+        if (covariance[i] == "inverse") {
             list_initial$tau[[i]] <- as.numeric(c(1/tau0_initial[[i]], rep(0, c(tau_extra[[i]] - 1))))
         }
-        if (covariance == "expm") {
+        if (covariance[i] == "expm") {
             list_initial$tau[[i]] <- as.numeric(c(exp(tau0_initial[[i]]), rep(0.1, c(tau_extra[[i]] - 1))))
         }
     }

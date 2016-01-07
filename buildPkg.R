@@ -1,11 +1,11 @@
 ##----------------------------------------------------------------------
 ## Script to build and verify the package.
 
-if(!grepl(x=getwd(), pattern="/mcglm$")){
-    if (Sys.info()["user"]=="walmes"){
+if (!grepl(x = getwd(), pattern = "/mcglm$")) {
+    if (Sys.info()["user"] == "walmes") {
         setwd("~/GitLab/mcglm")
     }
-    ## stop("Move to /mcglm directory.")
+    ## stop('Move to /mcglm directory.')
     cat(getwd(), "\n")
 }
 
@@ -38,7 +38,7 @@ packageVersion("mcglm")
 ##----------------------------------------------------------------------
 ## Build the package (it will be one directory up).
 
-build(manual = TRUE, vignettes = FALSE)
+build(manual = TRUE, vignettes = TRUE)
 # build the binary version for windows (not used)
 # build_win()
 
@@ -58,7 +58,7 @@ build_vignettes()
 ## Generate the README.md.
 
 library(knitr)
-knit(input="README.Rmd")
+knit(input = "README.Rmd") 
 
 ##----------------------------------------------------------------------
 ## Examples.
@@ -77,11 +77,11 @@ install.packages(pkg, repos = NULL)
 
 ## Test using devtools::install_git().
 libTest <- path.expand("~/R-test/")
-if (file.exists(libTest)){
+if (file.exists(libTest)) {
     file.remove(libTest)
 }
 dir.create(path = libTest)
-
+ 
 .libPaths(new = c(libTest, .libPaths())); .libPaths()
 
 install_git(url = "http://git.leg.ufpr.br/wbonat/mcglm.git",

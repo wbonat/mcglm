@@ -1,5 +1,5 @@
 ##----------------------------------------------------------------------
-## Prepare de the data set.
+## Prepare the data set.
 
 setwd("/home/walmes/GitLab/mcglm/data-raw")
 
@@ -14,7 +14,7 @@ str(ahs)
 library(lattice)
 library(latticeExtra)
 
-data(ahs, package="mcglm")
+## data(ahs, package="mcglm")
 str(ahs)
 
 xt <- xtabs(~age+sex, data=ahs)
@@ -46,5 +46,12 @@ useOuterStrips(
                xlab="Age (years/100)")
     )
 )
+
+## dir.create("../data/")
+save(ahs, file = "../data/ahs.RData")
+rm(list = ls())
+load("../data/ahs.RData")
+ls()
+str(ahs)
 
 ##----------------------------------------------------------------------

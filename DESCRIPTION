@@ -1,8 +1,8 @@
 Package: mcglm
 Type: Package
 Title: Fit multivariate covariance generalized linear models
-Version: 0.0.1
-Date: 2015-07-06
+Version: 0.0.2
+Date: 2016-01-07
 Authors@R: as.person(c(
     "Wagner Hugo Bonat <wbonat@ufpr.br> [aut, cre]",
     "Walmes Marques Zeviani <walmes@ufpr.br> [ctb]",

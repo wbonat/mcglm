@@ -30,7 +30,9 @@ mc_build_sigma <- function(mu, Ntrial = 1, tau, power, Z, sparse, variance,
             Omega <- mc_build_omega(tau = tau, Z = Z, covariance_link = covariance, sparse = sparse)
             chol_Sigma <- chol(Omega$Omega)
             inv_chol_Sigma <- solve(chol_Sigma)
-            output <- list(Sigma_chol = chol_Sigma, Sigma_chol_inv = inv_chol_Sigma, D_Sigma = Omega$D_Omega)
+            output <- list(Sigma_chol = chol_Sigma, 
+                           Sigma_chol_inv = inv_chol_Sigma, 
+                           D_Sigma = Omega$D_Omega)
         }
         if (covariance == "inverse") {
             inv_Sigma <- mc_build_omega(tau = tau, Z = Z, covariance_link = "inverse", sparse = sparse)

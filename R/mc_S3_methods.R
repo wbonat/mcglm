@@ -214,7 +214,7 @@ confint.mcglm <- function(object, parm, level = 0.95, ...) {
     ci <- temp$Estimates + temp$Std.error %o% fac
     colnames(ci) <- paste0(format(a, 2), "%")
     rownames(ci) <- temp$Parameters
-    return(ci[parm])
+    return(ci[parm,])
 }
 #' @title Extract Model Fitted Values of McGLM
 #' @name fitted.mcglm

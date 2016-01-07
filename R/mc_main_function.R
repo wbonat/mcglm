@@ -62,11 +62,19 @@ mcglm <- function(linear_pred, matrix_pred, link, variance, covariance, offset,
   Ntrial <- as.list(Ntrial)
   power_fixed = as.list(power_fixed)
   if (class(control_initial) != "list") {
-    control_initial <- mc_initial_values(linear_pred = linear_pred, matrix_pred = matrix_pred, link = link, variance = variance,
-                                         covariance = covariance, offset = offset, Ntrial = Ntrial, contrasts = contrasts, data = data)
-    cat("Automatic initial values selected.")
+    control_initial <- mc_initial_values(linear_pred = linear_pred,
+                                         matrix_pred = matrix_pred,
+                                         link = link,
+                                         variance = variance,
+                                         covariance = covariance,
+                                         offset = offset,
+                                         Ntrial = Ntrial,
+                                         contrasts = contrasts,
+                                         data = data)
+    cat("Automatic initial values selected.", "\n")
   }
-  con <- list(correct = TRUE, max_iter = 20, tol = 1e-04, method = "chaser", tunning = 1, verbose = FALSE)
+  con <- list(correct = TRUE, max_iter = 20, tol = 1e-04,
+              method = "chaser", tunning = 1, verbose = FALSE)
   con[(namc <- names(control_algorithm))] <- control_algorithm
   if (!is.null(contrasts)) {
     list_X <- list()
@@ -101,6 +109,12 @@ mcglm <- function(linear_pred, matrix_pred, link, variance, covariance, offset,
     model_fit$con <- con
     model_fit$observed <- Matrix(y_vec, ncol = length(list_Y), nrow = dim(data)[1])
     model_fit$list_X <- list_X
+    model_fit$matrix_pred <- matrix_pred
+    model_fit$Ntrial <- Ntrial
+    model_fit$offset <- offset
+    model_fit$power_fixed
+    model_fit$sparse <- sparse
+    model_fit$data <- data
     class(model_fit) <- "mcglm"
   }
   return(model_fit)
