@@ -1,10 +1,14 @@
-#' Build a block-diagonal matrix of zeros.
+#' @title Build a block-diagonal matrix of zeros.
+#' @name mc_build_bdiag
+#' @author Wagner Hugo Bonat
 #'
-#' @description Build a block-diagonal matrix of zeros. Such functions is used when computing
-#' the derivatives of the Cholesky decomposition of C.
+#' @description Build a block-diagonal matrix of zeros. Such functions
+#'     is used when computing the derivatives of the Cholesky
+#'     decomposition of C.
 #'
 #' @param n_resp A numeric specifyng the number of response variables.
-#' @param n_obs A numeric specifying the number of observations in the data set.
+#' @param n_obs A numeric specifying the number of observations in the
+#'     data set.
 #' @return A list of zero matrices.
 #' @details It is an internal function.
 
