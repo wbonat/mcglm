@@ -175,7 +175,7 @@ barplot(prop.table(xtabs(~illness, data=ahs)),
         ylab="Sample proportion",
         xlab="illness")
 
-barplot(prop.table(xtabs(~chcond1, data=ahs)),
+barplot(prop.table(xtabs(~chcond, data=ahs)),
         ylab="Sample proportion",
         xlab="chcond")
 layout(1)
@@ -183,10 +183,10 @@ layout(1)
 xt <- xtabs(~age+sex, data=ahs)
 mosaicplot(xt)
 
-xt <- xtabs(~age+chcond1, data=ahs)
+xt <- xtabs(~age+chcond, data=ahs)
 mosaicplot(xt)
 
-xt <- xtabs(~sex+chcond1, data=ahs)
+xt <- xtabs(~sex+chcond, data=ahs)
 mosaicplot(xt)
 
 ##----------------------------------------------------------------------
@@ -220,7 +220,7 @@ useOuterStrips(
 
 useOuterStrips(
     combineLimits(
-        xyplot(Ndoc+Nndoc+Nadm+Nhosp+Nmed~age|chcond1,
+        xyplot(Ndoc+Nndoc+Nadm+Nhosp+Nmed~age|chcond,
                groups=sex, outer=TRUE, data=ahs,
                jitter.x=TRUE, amount=0.01,
                type=c("p", "a"),
