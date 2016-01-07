@@ -11,7 +11,8 @@ mc_build_C(list_mu, list_Ntrial, rho, list_tau, list_power, list_Z, list_sparse,
 \arguments{
 \item{list_mu}{A list with values of the mean.}
 
-\item{list_Ntrial}{A list with the number of trials. Usefull only for binomial responses.}
+\item{list_Ntrial}{A list with the number of trials. Usefull only for
+binomial responses.}
 
 \item{rho}{Vector of correlation parameters.}
 
@@ -19,28 +20,38 @@ mc_build_C(list_mu, list_Ntrial, rho, list_tau, list_power, list_Z, list_sparse,
 
 \item{list_power}{A list with values for the power parameters.}
 
-\item{list_Z}{A list of matrix to be used in the matrix linear predictor.}
+\item{list_Z}{A list of matrix to be used in the matrix linear
+predictor.}
 
 \item{list_sparse}{A list with Logical.}
 
-\item{list_variance}{A list specifying the variance function to be used for each response variable.}
+\item{list_variance}{A list specifying the variance function to be
+used for each response variable.}
 
-\item{list_covariance}{A list specifying the covariance function to be used for each response variable.}
+\item{list_covariance}{A list specifying the covariance function to be
+used for each response variable.}
 
-\item{list_power_fixed}{A list of Logical specifying if the power parameters are fixed or not.}
+\item{list_power_fixed}{A list of Logical specifying if the power
+parameters are fixed or not.}
 
 \item{compute_C}{Logical. Compute or not the C matrix.}
 
-\item{compute_derivative_beta}{Logical. Compute or not the derivative of C with respect to regression parameters.}
+\item{compute_derivative_beta}{Logical. Compute or not the derivative
+of C with respect to regression parameters.}
 
-\item{compute_derivative_cov}{Logical. Compute or not the derivative of C with respect the covariance parameters.}
+\item{compute_derivative_cov}{Logical. Compute or not the derivative
+    of C with respect the covariance parameters.}
 }
 \value{
-A list with the inverse of the C matrix and the derivatives of the C matrix with respect to
-rho, power and tau parameters.
+A list with the inverse of the C matrix and the derivatives of
+    the C matrix with respect to rho, power and tau parameters.
 }
 \description{
-This function builds the joint variance-covariance matrix using the Generalized
-Kronecker product and its derivatives with respect to rho, power and tau parameters.
+This function builds the joint variance-covariance matrix
+    using the Generalized Kronecker product and its derivatives with
+    respect to rho, power and tau parameters.
+}
+\author{
+Wagner Hugo Bonat
 }
 

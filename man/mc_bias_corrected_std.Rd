@@ -9,15 +9,21 @@ mc_bias_corrected_std(object, id)
 \arguments{
 \item{object}{An object of mcglm class.}
 
-\item{id}{a vector which identifies the clusters. The length and order of id should be the
-same as the number of observations. Data are assumed to be sorted so that observations on a cluster
-are contiguous rows for all entities in the formula.}
+\item{id}{a vector which identifies the clusters. The length and
+order of id should be the same as the number of
+observations. Data are assumed to be sorted so that observations
+on a cluster are contiguous rows for all entities in the formula.}
 }
 \value{
-A matrix. Note that the function assumes that the data are in the correct order.
+A matrix. Note that the function assumes that the data are in
+    the correct order.
 }
 \description{
-Compute bias-corrected standard error for regression parameters in the context
-of clustered observations. It is also robust and has improved finite sample properties.
+Compute bias-corrected standard error for regression
+    parameters in the context of clustered observations. It is also
+    robust and has improved finite sample properties.
+}
+\author{
+Wagner Hugo Bonat
 }
 

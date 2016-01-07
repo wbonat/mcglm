@@ -39,44 +39,57 @@ mc_inverse(beta, X, offset)
 \arguments{
 \item{beta}{A numeric vector of regression parameters.}
 
-\item{X}{A design matrix, see \code{\link[stats]{model.matrix}} for details.}
+\item{X}{A design matrix, see \code{\link[stats]{model.matrix}} for
+details.}
 
-\item{offset}{A numeric vector of offset values. It will be sum up on the linear predictor as a
-covariate with known regression parameter equals one (\eqn{\mu = g^{-1}(X\beta + offset)}).
-If no offset is present in the model, set offset = NULL.}
+\item{offset}{A numeric vector of offset values. It will be sum up on
+the linear predictor as a covariate with known regression
+parameter equals one (\eqn{\mu = g^{-1}(X\beta + offset)}).  If
+no offset is present in the model, set offset = NULL.}
 
-\item{link}{A string specifing the name of the link function. mcglm implements the following
-link functions: logit, probit, cauchit, cloglog, loglog, identity, log, sqrt, 1/mu^2 and inverse.}
+\item{link}{A string specifing the name of the link function. mcglm
+implements the following link functions: logit, probit, cauchit,
+cloglog, loglog, identity, log, sqrt, 1/mu^2 and inverse.}
 }
 \value{
-A list with two elements: mu and  D.
+A list with two elements: mu and D.
 }
 \description{
 The \code{mc_link_function} is a customized call of the
 \code{\link[stats]{make.link}} function.
-Given the name of a link function, it returns a list with two elements.
-The first element is the inverse of the link function applied on the linear predictor
-\eqn{\mu = g^{-1}(X\beta).} The second element is the derivative of mu with respect to the regression
-parameters \eqn{\beta}. It will be useful when computing the quasi-score function.
+
+Given the name of a link function, it returns a list with two
+elements.  The first element is the inverse of the link function
+applied on the linear predictor \eqn{\mu = g^{-1}(X\beta).} The
+second element is the derivative of mu with respect to the regression
+parameters \eqn{\beta}. It will be useful when computing the
+quasi-score function.
 }
 \details{
-The link function is an important component of the multivariate covariance generalized
-linear model, since it link the expectation of the response variable with the covariates.
-Let \eqn{\beta} a \eqn{p x 1} regression parameter vector and \eqn{X} an
-\eqn{n x p} design matrix. The expected value of a response variable \eqn{Y} is given by
-\deqn{E(Y) = g^{-1}(X\beta),} where \eqn{g} is the link function and \eqn{\eta = X\beta}
-is the linear predictor. Let \eqn{D} be a \eqn{n \times p}
-matrix whose entries are given by the derivatives of \eqn{mu} with respect to \eqn{\beta}.
-Such matrix will be required by the fitting algorithm. The function \code{mc_link_function} returns
-a list where the first element is mu (n x 1) vector and the second D (n x p) matrix.
+The link function is an important component of the
+    multivariate covariance generalized linear model, since it link
+    the expectation of the response variable with the covariates.
+    Let \eqn{\beta} a \eqn{p x 1} regression parameter vector and
+    \eqn{X} an \eqn{n x p} design matrix. The expected value of a
+    response variable \eqn{Y} is given by \deqn{E(Y) =
+    g^{-1}(X\beta),} where \eqn{g} is the link function and \eqn{\eta
+    = X\beta} is the linear predictor. Let \eqn{D} be a \eqn{n \times
+    p} matrix whose entries are given by the derivatives of \eqn{mu}
+    with respect to \eqn{\beta}.  Such matrix will be required by the
+    fitting algorithm. The function \code{mc_link_function} returns a
+    list where the first element is mu (n x 1) vector and the second
+    D (n x p) matrix.
 }
 \examples{
 x1 <- seq(-1, 1, l = 5)
 X <- model.matrix(~ x1)
-mc_link_function(beta = c(1,0.5), X = X, offset = NULL, link = 'log')
-mc_link_function(beta = c(1,0.5), X = X, offset = rep(10,5), link = 'identity')
+mc_link_function(beta = c(1,0.5), X = X,
+                 offset = NULL, link = 'log')
+mc_link_function(beta = c(1,0.5), X = X,
+                 offset = rep(10,5), link = 'identity')
 }
 \seealso{
-\code{\link[stats]{model.matrix}}, \code{\link[stats]{make.link}}.
+\code{\link[stats]{model.matrix}},
+    \code{\link[stats]{make.link}}.
 }
 

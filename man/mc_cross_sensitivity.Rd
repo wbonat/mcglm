@@ -12,13 +12,19 @@ mc_cross_sensitivity(Product_cov, Product_beta,
 
 \item{Product_beta}{A list of matrices.}
 
-\item{n_beta_effective}{Numeric. Effective number of regression parameters.}
+\item{n_beta_effective}{Numeric. Effective number of regression
+parameters.}
 }
 \value{
-The cross-sensitivity matrix. Equation (10) of Bonat and Jorgensen (2015).
+The cross-sensitivity matrix. Equation (10) of Bonat and
+    Jorgensen (2015).
 }
 \description{
-Compute the cross-sensitivity matrix between regression and covariance parameters.
-Equation 10 of Bonat and Jorgensen (2015).
+Compute the cross-sensitivity matrix between regression
+    and covariance parameters.  Equation 10 of Bonat and Jorgensen
+    (2015).
+}
+\author{
+Wagner Hugo Bonat
 }
 

@@ -18,11 +18,14 @@ mc_derivative_sigma_beta(D, D_V_sqrt_mu, Omega, V_sqrt, variance)
 \item{variance}{A string specifying the variance function name.}
 }
 \value{
-A list of matrices, containg the derivatives of V^{1/2} with respect to the regression
-parameters.
+A list of matrices, containg the derivatives of \eqn{V^{1/2}}
+    with respect to the regression parameters.
 }
 \description{
-Compute the derivatives of V^{1/2} matrix with respect to the regression
-parameters beta.
+Compute the derivatives of \eqn{V^{1/2}} matrix with
+    respect to the regression parameters beta.
+}
+\author{
+Wagner Hugo Bonat
 }
 

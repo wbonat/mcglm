@@ -9,16 +9,21 @@ mc_build_bdiag(n_resp, n_obs)
 \arguments{
 \item{n_resp}{A numeric specifyng the number of response variables.}
 
-\item{n_obs}{A numeric specifying the number of observations in the data set.}
+\item{n_obs}{A numeric specifying the number of observations in the
+data set.}
 }
 \value{
 A list of zero matrices.
 }
 \description{
-Build a block-diagonal matrix of zeros. Such functions is used when computing
-the derivatives of the Cholesky decomposition of C.
+Build a block-diagonal matrix of zeros. Such functions
+    is used when computing the derivatives of the Cholesky
+    decomposition of C.
 }
 \details{
 It is an internal function.
+}
+\author{
+Wagner Hugo Bonat
 }
 

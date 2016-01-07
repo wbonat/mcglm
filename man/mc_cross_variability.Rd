@@ -16,9 +16,14 @@ mc_cross_variability(Product_cov, inv_C, res, D)
 \item{D}{A matrix.}
 }
 \value{
-The cross-variability matrix between regression and covariance parameters.
+The cross-variability matrix between regression and
+    covariance parameters.
 }
 \description{
-Compute the cross-variability matrix between covariance and regression parameters.
+Compute the cross-variability matrix between covariance
+    and regression parameters.
+}
+\author{
+Wagner Hugo Bonat
 }
 

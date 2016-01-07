@@ -9,14 +9,20 @@ mc_getInformation(list_initial, list_power_fixed, n_resp)
 \arguments{
 \item{list_initial}{A list of initial values.}
 
-\item{list_power_fixed}{A list of logical specyfing if the power parameters should be estimated or not.}
+\item{list_power_fixed}{A list of logical specyfing if the power
+parameters should be estimated or not.}
 
 \item{n_resp}{A number specyfing the nmber of response variables.}
 }
 \value{
-The number of \eqn{\beta}'s, \eqn{\tau}'s, power and correlation parameters.
+The number of \eqn{\beta}'s, \eqn{\tau}'s, power and
+    correlation parameters.
 }
 \description{
-This computes all information required about the number of model parameters.
+This computes all information required about the number
+    of model parameters.
+}
+\author{
+Wagner Hugo Bonat
 }
 

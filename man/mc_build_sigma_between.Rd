@@ -14,13 +14,16 @@ mc_derivative_sigma_between(n_resp)
 
 \item{n_resp}{A numeric.}
 
-\item{inverse}{Logical}
+\item{inverse}{Logical.}
 }
 \value{
 A list with sigmab and its derivatives with respect to rho.
 }
 \description{
-This function builds the correlation matrix between response variable, its inverse and
-derivatives.
+This function builds the correlation matrix between
+    response variable, its inverse and derivatives.
+}
+\author{
+Wagner Hugo Bonat
 }
 
