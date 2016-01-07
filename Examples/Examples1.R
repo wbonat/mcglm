@@ -6,7 +6,9 @@
 rm(list=ls())
 
 # Loading extra package ------------------------------------------------
-require(mcglm)
+
+devtools::load_all("../")
+## require(mcglm)
 require(Matrix)
 require(tweedie)
 require(dplyr)
@@ -31,6 +33,20 @@ fit1.id <- mcglm(linear_pred = c(y1 ~ covariate),
                  control_algorithm = list("correct" = FALSE, 
                                           "verbose" = FALSE))
 summary(fit1.id)
+
+methods(class = "mcglm")
+
+fit1.id
+anova(fit1.id)
+coef(fit1.id)
+confint(fit1.id)
+fitted(fit1.id)
+plot(fit1.id) ## residuals
+plot(fit1.id, type = "algorithm")
+plot(fit1.id, type = "partial")
+residuals(fit1.id)
+summary(fit1.id)
+vcov(fit1.id)
 
 # Using the inverse covariance link function ---------------------------
 fit1.inv <- mcglm(linear_pred = c(y1 ~ covariate), 
