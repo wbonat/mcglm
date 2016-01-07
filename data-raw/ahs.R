@@ -14,13 +14,13 @@ str(ahs)
 library(lattice)
 library(latticeExtra)
 
-data(ahs, package="mcglm")
+## data(ahs, package="mcglm")
 str(ahs)
 
 xt <- xtabs(~age+sex, data=ahs)
 mosaicplot(xt)
 
-xt <- xtabs(~age+chcond1, data=ahs)
+xt <- xtabs(~age+chcond, data=ahs)
 mosaicplot(xt)
 
 useOuterStrips(
@@ -46,5 +46,12 @@ useOuterStrips(
                xlab="Age (years/100)")
     )
 )
+
+## dir.create("../data/")
+save(ahs, file = "../data/ahs.RData")
+rm(list = ls())
+load("../data/ahs.RData")
+ls()
+str(ahs)
 
 ##----------------------------------------------------------------------
