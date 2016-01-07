@@ -2,7 +2,7 @@ R_check_install:
   script:
     - echo $HOME
     - echo $USER
-    - ls -la
+    - ls -la ~/
     - R --version
     - Rscript -e 'getwd(); .libPaths(); sessionInfo()'
     - Rscript -e 'library(devtools); load_all(); check()'
