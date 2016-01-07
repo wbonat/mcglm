@@ -5,7 +5,7 @@ R_check_install:
     - R --version
     - Rscript -e 'getwd(); .libPaths(); sessionInfo()'
     - Rscript -e 'library(devtools); load_all(); check()'
-    - Rscript -e 'library(devtools); install(local = FALSE)'
+    - Rscript -e 'library(devtools); .libPaths(new = path.expand("~/Documents")); install(local = FALSE)'
   tags:
     - r
     - devtools
