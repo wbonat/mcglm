@@ -17,6 +17,10 @@ library(devtools)
 ## Load the package (to make functions available).
 load_all()
 
+## How many objects in each class.
+table(sapply(ls("package:mcglm"),
+             function(x) class(eval(parse(text=x)))))
+
 ## Create/update NAMESPACE, *.Rd files.
 document()
 
