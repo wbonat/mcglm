@@ -53,10 +53,10 @@ mc_link_function <- function(beta, X, offset, link) {
     if (!is.null(offset)) 
         assert_that(noNA(offset))
     link_name <- c("logit", "probit", "cauchit", "cloglog", "loglog",
-                   "identity", "log", "1/mu^2", "inverse")
+                   "identity", "log", "sqrt", "1/mu^2", "inverse")
     link_func <- c("mc_logit", "mc_probit", "mc_cauchit", "mc_cloglog",
-                   "mc_loglog", "mc_identity", "mc_log", "mc_invmu2",
-                   "mc_inverse")
+                   "mc_loglog", "mc_identity", "mc_log", "mc_sqrt",
+                   "mc_invmu2", "mc_inverse")
     names(link_func) <- link_name
     if (!link %in% link_name) {
         stop(gettextf(paste0("%s link not recognised. ",
