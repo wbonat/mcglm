@@ -15,7 +15,7 @@ Options are: \code{"residuals"}, \code{"influence"} and
 \code{"algorithm"}.}
 
 \item{...}{additional arguments affecting the plot produced. Note
-that there is no extra options for mcglm object class.}
+    that there is no extra options for mcglm object class.}
 }
 \description{
 takes a fitted \code{mcglm} object and do plots based on

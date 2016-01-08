@@ -9,17 +9,22 @@ mc_list2vec(list_initial, list_power_fixed)
 \arguments{
 \item{list_initial}{A list specifying initial values.}
 
-\item{list_power_fixed}{A list of logical operators specyfing if the power parameter should be
-estimated or not.}
+\item{list_power_fixed}{A list of logical operators specyfing if the
+power parameter should be estimated or not.}
 }
 \value{
 A vector of model parameters.
 }
 \description{
-This function takes a list of parameters and tranforms to a vector.
+This function takes a list of parameters and tranforms
+    to a vector.
 }
 \details{
-It is an internal function, in general the users never will use this function.
-It will be useful, only if the user wants to implement a different variance-covariance matrix.
+It is an internal function, in general the users never will
+    use this function.  It will be useful, only if the user wants to
+    implement a different variance-covariance matrix.
+}
+\author{
+Wagner Hugo Bonat
 }
 

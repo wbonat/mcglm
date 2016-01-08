@@ -12,13 +12,18 @@ mc_transform_list_bdiag(list_mat, mat_zero, response_number)
 \item{mat_zero}{A list of zero matrices. In general the output of
 \code{link[mcglm]{mc_build_bdiag}}.}
 
-\item{response_number}{A numeric specifying the response variable number.}
+\item{response_number}{A numeric specifying the response variable
+number.}
 }
 \value{
 A list of block-diagonal matrices.
 }
 \description{
-This function take a list of matrices and return a list of block-diagonal matrices,
-where the original matrices are one block non-zero of the matrix.
+This function take a list of matrices and return a list
+    of block-diagonal matrices, where the original matrices are one
+    block non-zero of the matrix.
+}
+\author{
+Wagner Hugo Bonat
 }
 

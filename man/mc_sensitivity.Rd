@@ -10,12 +10,18 @@ mc_sensitivity(product)
 \item{product}{A list of matrix.}
 }
 \value{
-The sensitivity matrix associated with the Pearson estimating function.
+The sensitivity matrix associated with the Pearson estimating
+    function.
 }
 \description{
-Compute the sensitivity matrix associated with the Pearson estimating function.
+Compute the sensitivity matrix associated with the
+    Pearson estimating function.
 }
 \details{
-This function implements the equation 7 of Bonat and Jorgensen (2015).
+This function implements the equation 7 of Bonat and
+    Jorgensen (2015).
+}
+\author{
+Wagner Hugo Bonat
 }
 

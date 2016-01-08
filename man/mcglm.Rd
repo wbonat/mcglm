@@ -11,46 +11,55 @@ mcglm(linear_pred, matrix_pred, link, variance, covariance, offset, Ntrial,
   control_algorithm = list())
 }
 \arguments{
-\item{linear_pred}{A list of formula see \code{\link[stats]{formula}} for details.}
-
-\item{matrix_pred}{A list of known matrices to be used on the matrix linear predictor. Details
-can be obtained on \code{\link[mcglm]{mc_matrix_linear_predictor}}.}
-
-\item{link}{A list of link functions names, see \code{\link[mcglm]{mc_link_function}} for details.}
-
-\item{variance}{A list of variance functions names, see \code{\link[mcglm]{mc_variance_function}}
+\item{linear_pred}{A list of formula see \code{\link[stats]{formula}}
 for details.}
 
-\item{covariance}{A list of covariance link functions names, current options are: identity, inverse
-and exponential-matrix (expm).}
+\item{matrix_pred}{A list of known matrices to be used on the matrix
+linear predictor. Details can be obtained on
+\code{\link[mcglm]{mc_matrix_linear_predictor}}.}
+
+\item{link}{A list of link functions names, see
+\code{\link[mcglm]{mc_link_function}} for details.}
+
+\item{variance}{A list of variance functions names, see
+\code{\link[mcglm]{mc_variance_function}} for details.}
+
+\item{covariance}{A list of covariance link functions names, current
+options are: identity, inverse and exponential-matrix (expm).}
 
 \item{offset}{A list with values of offset values if any.}
 
-\item{Ntrial}{A list with values of the number of trials on Bernoulli experiments. It is useful only
-for binomialP and binomialPQ variance functions.}
+\item{Ntrial}{A list with values of the number of trials on Bernoulli
+experiments. It is useful only for binomialP and binomialPQ
+variance functions.}
 
-\item{power_fixed}{A list of logicals indicating if the values of the power parameter should be
-estimated or not.}
+\item{power_fixed}{A list of logicals indicating if the values of the
+power parameter should be estimated or not.}
 
 \item{data}{A dta frame.}
 
-\item{control_initial}{A list of initial values for the fitting algorithm. See details below.}
+\item{control_initial}{A list of initial values for the fitting
+algorithm. See details below.}
 
-\item{contrasts}{Extra arguments to passed to \code{\link[stats]{model.matrix}}.}
+\item{contrasts}{Extra arguments to passed to
+\code{\link[stats]{model.matrix}}.}
 
-\item{control_algorithm}{A list of arguments to be passed for the fitting algorithm. See
-\code{\link[mcglm]{fit_mcglm}} for details.}
+\item{control_algorithm}{A list of arguments to be passed for the
+fitting algorithm. See \code{\link[mcglm]{fit_mcglm}} for
+details.}
 }
 \value{
 mcglm returns an object of class 'mcglm'.
 }
 \description{
-\code{mcglm} is used to fit multivariate covariance generalized linear models.
-The models are specified by a set of lists giving a symbolic description of the linear predictor.
-The user can choose between a list of link, variance and covariance functions. The models are
-fitted using an estimating function approach, combining quasi-score functions for regression
-parameters and Pearson estimating function for covariance parameters. For details see Bonat and
-Jorgensen (2015).
+\code{mcglm} is used to fit multivariate covariance
+    generalized linear models.  The models are specified by a set of
+    lists giving a symbolic description of the linear predictor.  The
+    user can choose between a list of link, variance and covariance
+    functions. The models are fitted using an estimating function
+    approach, combining quasi-score functions for regression
+    parameters and Pearson estimating function for covariance
+    parameters. For details see Bonat and Jorgensen (2015).
 
 Fits a multivariate covariance generalized linear
     models (McGLMs) to data.  McGLM is a general framework for
@@ -69,5 +78,8 @@ Fits a multivariate covariance generalized linear
     covariance structures, including multivariate extensions of
     repeated measures, time series, longitudinal, spatial and
     spatio-temporal structures.
+}
+\author{
+Wagner Hugo Bonat
 }
 

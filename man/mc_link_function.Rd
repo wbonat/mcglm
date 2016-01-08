@@ -88,6 +88,9 @@ mc_link_function(beta = c(1,0.5), X = X,
 mc_link_function(beta = c(1,0.5), X = X,
                  offset = rep(10,5), link = 'identity')
 }
+\author{
+Wagner Hugo Bonat
+}
 \seealso{
 \code{\link[stats]{model.matrix}},
     \code{\link[stats]{make.link}}.

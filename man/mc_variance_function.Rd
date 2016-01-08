@@ -17,45 +17,55 @@ mc_binomialP(mu, power, inverse, Ntrial, derivative_power, derivative_mu)
 mc_binomialPQ(mu, power, inverse, Ntrial, derivative_power, derivative_mu)
 }
 \arguments{
-\item{mu}{A numeric vector. In general the output from \code{\link{mc_link_function}}.}
+\item{mu}{A numeric vector. In general the output from
+\code{\link{mc_link_function}}.}
 
-\item{power}{A numeric value (\code{power} and \code{binomialP}) or vector
-(\code{binomialPQ}) of the power parameters.}
+\item{power}{A numeric value (\code{power} and \code{binomialP}) or
+vector (\code{binomialPQ}) of the power parameters.}
 
-\item{Ntrial}{Number of trials, useful only when dealing with binomial response variables.}
+\item{Ntrial}{Number of trials, useful only when dealing with
+binomial response variables.}
 
-\item{variance}{A string specifing the name (\code{power, binomialP or binomialPQ}) of
-the variance function.}
+\item{variance}{A string specifing the name (\code{power, binomialP
+or binomialPQ}) of the variance function.}
 
 \item{inverse}{Logical.}
 
-\item{derivative_power}{Logical if compute (TRUE) or not (FALSE) the derivatives with respect
-to the power parameter.}
+\item{derivative_power}{Logical if compute (TRUE) or not (FALSE) the
+derivatives with respect to the power parameter.}
 
-\item{derivative_mu}{Logical if compute (TRUE) or not (FALSE) the derivative with respect
-to the mu parameter.}
+\item{derivative_mu}{Logical if compute (TRUE) or not (FALSE) the
+derivative with respect to the mu parameter.}
 }
 \value{
-A list with from one to four elements depends on the arguments.
+A list with from one to four elements depends on the
+    arguments.
 }
 \description{
 Compute features related with variance functions.
 }
 \details{
-The function \code{mc_variance_function} computing three features related with
-the variance function. Depending on the Logical arguments, the function returns
-\eqn{V^{1/2}} and its derivatives with respect to the parameters power and mu, respectivelly.
-The output is a named list, completely informative about what the function has been computed.
-For example, if \code{inverse = FALSE}, \code{derivative_power = TRUE} and
-\code{derivative_mu = TRUE}. The output will be a list, with three
-elements: V_sqrt, D_V_sqrt_power and D_V_sqrt_mu.
+The function \code{mc_variance_function} computing three
+    features related with the variance function. Depending on the
+    Logical arguments, the function returns \eqn{V^{1/2}} and its
+    derivatives with respect to the parameters power and mu,
+    respectivelly.  The output is a named list, completely
+    informative about what the function has been computed.  For
+    example, if \code{inverse = FALSE}, \code{derivative_power =
+    TRUE} and \code{derivative_mu = TRUE}. The output will be a list,
+    with three elements: V_sqrt, D_V_sqrt_power and D_V_sqrt_mu.
 }
 \examples{
-x1 <- seq(-1,1,l = 5)
-X <- model.matrix(~ x1)
-mu <- mc_link_function(beta = c(1,0.5), X = X, offset = NULL, link = 'logit')
-mc_variance_function(mu = mu$mu, power = c(2,1), Ntrial = 1, variance = 'binomialPQ',
-inverse = FALSE, derivative_power = TRUE, derivative_mu = TRUE)
+x1 <- seq(-1, 1, l = 5)
+X <- model.matrix(~x1)
+mu <- mc_link_function(beta = c(1, 0.5), X = X, offset = NULL,
+                       link = "logit")
+mc_variance_function(mu = mu$mu, power = c(2, 1), Ntrial = 1,
+                     variance = "binomialPQ", inverse = FALSE,
+                     derivative_power = TRUE, derivative_mu = TRUE)
+}
+\author{
+Wagner Hugo Bonat
 }
 \seealso{
 \code{\link{mc_link_function}}.

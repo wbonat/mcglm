@@ -3,7 +3,7 @@
 \name{mc_sic_covariance}
 \alias{mc_sic_covariance}
 \title{Compute the score information criterion (SIC) for multivariate
-covariance generalized linear models.}
+    covariance generalized linear models.}
 \usage{
 mc_sic_covariance(object, scope, idx, data, penalty = 2, response)
 }
@@ -15,7 +15,8 @@ predictor.}
 
 \item{idx}{Indicator of matrices belong to the same effect.}
 
-\item{data}{data frame containing all variables envolved in the model.}
+\item{data}{data frame containing all variables envolved in the
+model.}
 
 \item{penalty}{penalty term (default = 2).}
 
@@ -23,9 +24,12 @@ predictor.}
 }
 \value{
 A data frame with SIC values for each matrix in the scope
-argument.
+    argument.
 }
 \description{
 Compute SIC for covariance parameters in McGLMS.
+}
+\author{
+Wagner Hugo Bonat
 }
 
