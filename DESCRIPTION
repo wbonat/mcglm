@@ -17,7 +17,8 @@ Suggests:
     plyr,
     lattice,
     latticeExtra,
-    knitr
+    knitr,
+    rmarkdown
 Imports:
     Matrix,
     assertthat
