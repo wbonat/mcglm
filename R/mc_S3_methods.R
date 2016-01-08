@@ -1,5 +1,6 @@
 #' @title ANOVA method for McGLMs.
 #' @name anova.mcglm
+#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
 #' @description ANOVA method for object of class McGLMS.
 #'
@@ -15,7 +16,6 @@
 #'
 #' @method anova mcglm
 #'
-#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #' @export
 
 anova.mcglm <- function(object, ...) {
@@ -33,7 +33,7 @@ anova.mcglm <- function(object, ...) {
     temp.vcov <- list()
     temp.beta <- list()
     for (i in 1:n_resp) {
-        idx.id = idx.vec == i
+        idx.id <- idx.vec == i
         temp.vcov[[i]] <- vv[idx.id, idx.id]
         temp.beta[[i]] <-
             coef(object, type = "beta", response = i)$Estimates
@@ -53,16 +53,16 @@ anova.mcglm <- function(object, ...) {
         for (j in 1:n_terms) {
             idx.TF <- idx == j
             temp <- as.numeric(
-                t(temp.beta[[i]][idx.TF]) %*%
-                    solve(as.matrix(temp.vcov[[i]])[idx.TF, idx.TF]) %*%
+                t(temp.beta[[i]][idx.TF]) %*% 
+                    solve(as.matrix(temp.vcov[[i]])[idx.TF, idx.TF]) %*% 
                     temp.beta[[i]][idx.TF])
             nbeta.test <- length(temp.beta[[i]][idx.TF])
-            X2.resp[[j]] <- data.frame(
-                Covariate = names[idx.TF][1],
-                Chi.Square = round(temp, 4),
-                Df = nbeta.test,
-                p.value = round(pchisq(temp, nbeta.test,
-                                       lower.tail = FALSE), 4))
+            X2.resp[[j]] <-
+                data.frame(Covariate = names[idx.TF][1],
+                           Chi.Square = round(temp, 4), Df = nbeta.test,
+                           p.value = round(pchisq(temp, nbeta.test,
+                                                  lower.tail = FALSE), 
+                                           4))
         }
         saida[[i]] <- do.call(rbind, X2.resp)
     }
@@ -72,6 +72,7 @@ anova.mcglm <- function(object, ...) {
 
 #' @title Extract model coefficients for mcglm class
 #' @name coef.mcglm
+#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
 #' @description \code{coef.mcglm} is a function which extracts model
 #'     coefficients from objects of \code{mcglm} class.
@@ -93,7 +94,6 @@ anova.mcglm <- function(object, ...) {
 #'
 #' @method coef mcglm
 #'
-#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #' @export
 
 coef.mcglm <- function(object, std.error = FALSE,
@@ -182,6 +182,7 @@ coef.mcglm <- function(object, std.error = FALSE,
 
 #' @title Confidence Intervals for mcglm
 #' @name confint.mcglm
+#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
 #' @description Computes confidence intervals for parameters in a fitted
 #'     \code{mcglm} model.
@@ -200,7 +201,6 @@ coef.mcglm <- function(object, std.error = FALSE,
 #'
 #' @method confint mcglm
 #'
-#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #' @export
 
 confint.mcglm <- function(object, parm, level = 0.95, ...) {
@@ -214,10 +214,12 @@ confint.mcglm <- function(object, parm, level = 0.95, ...) {
     ci <- temp$Estimates + temp$Std.error %o% fac
     colnames(ci) <- paste0(format(a, 2), "%")
     rownames(ci) <- temp$Parameters
-    return(ci[parm,])
+    return(ci[parm, ])
 }
+
 #' @title Extract Model Fitted Values of McGLM
 #' @name fitted.mcglm
+#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
 #' @description Extract fitted values for objects of \code{mcglm} class.
 #'
@@ -229,7 +231,6 @@ confint.mcglm <- function(object, parm, level = 0.95, ...) {
 #'     \code{fitted.mcglm} returns a vector (univariate models) or a
 #'     matrix (multivariate models) of fitted values.
 #'
-#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
 #' @method fitted mcglm
 #' @export
@@ -243,6 +244,7 @@ fitted.mcglm <- function(object, ...) {
 #' @title Default Multivariate Covariance Generalized Linear models
 #'     plotting
 #' @name plot.mcglm
+#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
 #' @description takes a fitted \code{mcglm} object and do plots based on
 #'     residuals, influence diagnostic measures and algorithm check.
@@ -253,49 +255,46 @@ fitted.mcglm <- function(object, ...) {
 #'     \code{"algorithm"}.
 #' @param ... additional arguments affecting the plot produced. Note
 #'     that there is no extra options for mcglm object class.
-#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
 #' @method plot mcglm
 #' @export
 
 plot.mcglm <- function(x, type = "residuals", ...) {
-    object = x
+    object <- x
     n_resp <- length(object$beta_names)
     if (type == "residuals") {
-        par(mar = c(2.6, 2.5, 0.1, 0.1),
-            mgp = c(1.6, 0.6, 0),
+        par(mar = c(2.6, 2.5, 0.1, 0.1), mgp = c(1.6, 0.6, 0), 
             mfrow = c(2, n_resp))
         for (i in 1:n_resp) {
             res <- residuals(object, type = "pearson")[, i]
             fit_values <- fitted(object)[, i]
-            plot(res ~ fit_values,
-                 ylab = "Pearson residuals",
+            plot(res ~ fit_values, ylab = "Pearson residuals", 
                  xlab = "Fitted values")
-            temp <- loess.smooth(
-                fitted(object)[, i],
-                residuals(object, type = "pearson")[, i])
+            temp <-
+                loess.smooth(fitted(object)[, i],
+                             residuals(object, type = "pearson")[, i])
             lines(temp$x, temp$y)
             qqnorm(res)
             qqline(res)
         }
     }
     if (type == "algorithm") {
-        n_iter <- length(na.exclude(object$IterationCovariance[, 1]))
-        par(mar = c(2.6, 2.5, 0.1, 0.1),
-            mgp = c(1.6, 0.6, 0),
+        n_iter <- length(na.exclude(object$IterationCovariance[, 
+                                                               1]))
+        par(mar = c(2.6, 2.5, 0.1, 0.1), mgp = c(1.6, 0.6, 0), 
             mfrow = c(2, 2))
         matplot(object$IterationRegression[1:c(n_iter + 5), ],
-                type = "l", lty = 2,
-                ylab = "Regression", xlab = "Iterations")
+                type = "l", lty = 2, ylab = "Regression",
+                xlab = "Iterations")
         matplot(object$IterationCovariance[1:c(n_iter + 5), ],
-                type = "l", lty = 2,
-                ylab = "Covariance", xlab = "Iterations")
-        matplot(object$ScoreRegression[1:c(n_iter + 5), ],
-                type = "l", lty = 2,
-                ylab = "Quasi-score Regression", xlab = "Iterations")
-        matplot(object$ScoreCovariance[1:c(n_iter + 5), ],
-                type = "l", lty = 2,
-                ylab = "Quasi-score Covariance", xlab = "Iterations")
+                type = "l", lty = 2, ylab = "Covariance",
+                xlab = "Iterations")
+        matplot(object$ScoreRegression[1:c(n_iter + 5), ], type = "l",
+                lty = 2, ylab = "Quasi-score Regression",
+                xlab = "Iterations")
+        matplot(object$ScoreCovariance[1:c(n_iter + 5), ], type = "l",
+                lty = 2, ylab = "Quasi-score Covariance",
+                xlab = "Iterations")
     }
     if (type == "partial_residuals") {
         list_beta <- mc_updateBeta(list_initial = object$list_initial,
@@ -305,7 +304,7 @@ plot.mcglm <- function(x, type = "residuals", ...) {
         comp_X <- list()
         for (i in 1:n_resp) {
             comp_X[[i]] <- as.matrix(object$list_X[[i]]) *
-                as.numeric(list_beta$regression[[i]])
+                as.numeric(list_beta$regression[[i]]) 
         }
         for (i in 1:n_resp) {
             res <- residuals(object, type = "pearson")[, i]
@@ -327,13 +326,12 @@ plot.mcglm <- function(x, type = "residuals", ...) {
 #' @title Print method for Multivariate Covariance Generalized Linear
 #'     Model
 #' @name print.mcglm
+#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
 #' @description The default print method for a \code{mcglm} object.
 #'
 #' @param x fitted model objects of class mcglm as produced by mcglm().
 #' @param ... further arguments passed to or from other methods.
-#'
-#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
 #' @rdname print.mcglm
 #' @method print mcglm
@@ -361,7 +359,8 @@ print.mcglm <- function(x, ...) {
         print(regression[[1]][[i]])
         cat("\n")
         cat("Dispersion:\n")
-        tau_temp <- coef(object, response = i, type = "tau")$Estimate
+        tau_temp <- coef(object, response = i,
+                         type = "tau")$Estimate
         names(tau_temp) <- rep("", length(tau_temp))
         print(tau_temp)
         cat("\n")
@@ -379,6 +378,7 @@ print.mcglm <- function(x, ...) {
 #' @title Residuals for Multivariate Covariance Generalized Linear
 #'     Models (McGLM)
 #' @name residuals.mcglm
+#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
 #' @description Compute residuals based on fitting \code{mcglm} models.
 #'
@@ -395,15 +395,12 @@ print.mcglm <- function(x, ...) {
 #'     \code{residuals.mcglm} returns a vector (univariate models) or a
 #'     matrix (multivariate models) of residuals values.
 #'
-#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
-#'
 #' @method residuals mcglm
 #' @export
 
 residuals.mcglm <- function(object, type = "raw", ...) {
     n_resp <- length(object$beta_names)
-    output <- Matrix(object$residuals,
-                     ncol = n_resp, nrow = object$n_obs)
+    output <- Matrix(object$residuals, ncol = n_resp, nrow = object$n_obs)
     if (type == "standardized") {
         output <- Matrix(
             as.numeric(object$residuals %*% chol(object$inv_C)),
@@ -411,7 +408,7 @@ residuals.mcglm <- function(object, type = "raw", ...) {
     }
     if (type == "pearson") {
         output <- Matrix(
-            as.numeric(object$residuals/sqrt(diag(object$C))),
+            as.numeric(object$residuals/sqrt(diag(object$C))), 
             ncol = n_resp, nrow = object$n_obs)
     }
     return(output)
@@ -420,6 +417,7 @@ residuals.mcglm <- function(object, type = "raw", ...) {
 #' @title Summarizing Multivariate Covariance Generalized Linear Models
 #'     fits.
 #' @name summary.mcglm
+#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
 #' @description Summary for McGLMs objects.
 #'
@@ -429,8 +427,6 @@ residuals.mcglm <- function(object, type = "raw", ...) {
 #'     the there is no extra options for mcglm object class.
 #'
 #' @return Print an \code{mcglm} object.
-#'
-#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
 #' @method summary mcglm
 #' @export
@@ -497,6 +493,7 @@ summary.mcglm <- function(object, ...) {
 #' @title Calculate Variance-Covariance matrix for a fitted McGLM
 #'     object.
 #' @name vcov.mcglm
+#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
 #' @description Returns the variance-covariance matrix for all
 #'     parameters of a \code{mcglm} fitted model object.
@@ -506,8 +503,6 @@ summary.mcglm <- function(object, ...) {
 #'     that there is no extra options for mcglm object class.
 #'
 #' @return A variance-covariance matrix.
-#'
-#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
 #' @method vcov mcglm
 #' @export

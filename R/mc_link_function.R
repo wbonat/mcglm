@@ -1,4 +1,5 @@
-#' Link functions
+#' @title Link functions
+#' @author Wagner Hugo Bonat
 #'
 #' @description  The \code{mc_link_function} is a customized call of the
 #' \code{\link[stats]{make.link}} function.
