@@ -8,32 +8,41 @@ mc_initial_values(linear_pred, matrix_pred, link, variance, covariance, offset,
   Ntrial, contrasts = NULL, data)
 }
 \arguments{
-\item{linear_pred}{A list of formula see \code{\link[stats]{formula}} for details.}
-
-\item{matrix_pred}{A list of known matrices to be used on the matrix linear predictor. Details
-can be obtained on \code{\link[mcglm]{mc_matrix_linear_predictor}}.}
-
-\item{link}{A list of link functions names, see \code{\link[mcglm]{mc_link_function}} for details.}
-
-\item{variance}{A list of variance functions names, see \code{\link[mcglm]{mc_variance_function}}
+\item{linear_pred}{A list of formula see \code{\link[stats]{formula}}
 for details.}
 
-\item{covariance}{A list of covariance link functions names, current options are: identity, inverse
-and exponential-matrix (expm).}
+\item{matrix_pred}{A list of known matrices to be used on the matrix
+linear predictor. Details can be obtained on
+\code{\link[mcglm]{mc_matrix_linear_predictor}}.}
+
+\item{link}{A list of link functions names, see
+\code{\link[mcglm]{mc_link_function}} for details.}
+
+\item{variance}{A list of variance functions names, see
+\code{\link[mcglm]{mc_variance_function}} for details.}
+
+\item{covariance}{A list of covariance link functions names, current
+options are: identity, inverse and exponential-matrix (expm).}
 
 \item{offset}{A list with values of offset values if any.}
 
-\item{Ntrial}{A list with values of the number of trials on Bernoulli experiments. It is useful only
-for binomialP and binomialPQ variance functions.}
+\item{Ntrial}{A list with values of the number of trials on Bernoulli
+experiments. It is useful only for binomialP and binomialPQ
+variance functions.}
 
-\item{contrasts}{List of contrasts to be used in the \code{\link[stats]{model.matrix}}.}
+\item{contrasts}{List of contrasts to be used in the
+\code{\link[stats]{model.matrix}}.}
 
 \item{data}{A data frame.}
 }
 \value{
-Return a list of initial values to be used while fitting McGLMs.
+Return a list of initial values to be used while fitting
+    McGLMs.
 }
 \description{
-Return a list of initial values for McGLMs.
+Automatic initial values for McGLMs.
+}
+\author{
+Wagner Hugo Bonat
 }
 

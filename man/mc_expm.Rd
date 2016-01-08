@@ -9,25 +9,32 @@ mc_expm(U, n = dim(U)[1], sparse = FALSE, inverse = FALSE)
 \arguments{
 \item{U}{A matrix.}
 
-\item{n}{A number specifing the dimension of the matrix U. Default \code{n = dim(U)[1]}.}
+\item{n}{A number specifing the dimension of the matrix U. Default
+\code{n = dim(U)[1]}.}
 
-\item{sparse}{Logical defining the class of the output matrix. If \code{sparse = TRUE} the output
-class will be 'dgCMatrix' if \code{sparse = FALSE} the class will be 'dgMatrix'.}
+\item{sparse}{Logical defining the class of the output matrix. If
+\code{sparse = TRUE} the output class will be 'dgCMatrix' if
+\code{sparse = FALSE} the class will be 'dgMatrix'.}
 
-\item{inverse}{Logical defining if the inverse will be computed or not.}
+\item{inverse}{Logical defining if the inverse will be computed or
+not.}
 }
 \value{
-A list with \eqn{\Omega = expm(U)} its inverse (if \code{inverse = TRUE}) and
-auxiliares matrices to compute the derivatives.
+A list with \eqn{\Omega = expm(U)} its inverse (if
+    \code{inverse = TRUE}) and auxiliares matrices to compute the
+    derivatives.
 }
 \description{
 Given a matrix \code{U} the function \code{mc_expm}
-returns the exponential-matrix \eqn{expm(U)} and some auxiliares matrices to compute
-its derivatives. This function is based on the eigen-value decomposition it means that it is
-very slow.
+    returns the exponential-matrix \eqn{expm(U)} and some auxiliares
+    matrices to compute its derivatives. This function is based on
+    the eigen-value decomposition it means that it is very slow.
+}
+\author{
+Wagner Hugo Bonat
 }
 \seealso{
 \code{\link[Matrix]{expm}}, \code{\link[base]{eigen}},
-\code{link[mcglm]{mc_dexp_gold}}.
+    \code{link[mcglm]{mc_dexp_gold}}.
 }
 

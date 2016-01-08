@@ -1,4 +1,4 @@
-job_R:
+R_check_install:
   script:
     - echo $HOME
     - Rscript -e 'getwd(); .libPaths(); sessionInfo()'

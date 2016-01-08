@@ -1,6 +1,6 @@
 
 
-# mcglm 0.0.1
+# mcglm 0.0.2
 
 [![build status](http://git.leg.ufpr.br/ci/projects/3/status.png?ref=master)](http://git.leg.ufpr.br/ci/projects/3?ref=master)
 Build status for the stable version (`master` branch)
@@ -37,20 +37,20 @@ library(devtools)
 install_git("http://git.leg.ufpr.br/wbonat/mcglm.git")
 ```
 
-Alternatively, download the package tarball: [mcglm_0.0.1.tar.gz][]
+Alternatively, download the package tarball: [mcglm_0.0.2.tar.gz][]
 and run from a UNIX terminal (make sure you are on the container file
 directory):
 
 
 ```
-R CMD INSTALL -l /path/to/your/R/library mcglm_0.0.1.tar.gz
+R CMD INSTALL -l /path/to/your/R/library mcglm_0.0.2.tar.gz
 ```
 
 Or, inside an `R` session:
 
 
 ```
-install.packages("mcglm_0.0.1.tar.gz", repos = NULL,
+install.packages("mcglm_0.0.2.tar.gz", repos = NULL,
                  lib.loc = "/path/to/your/R/library",
                  dependencies = TRUE)
 ```
@@ -62,13 +62,13 @@ library.
 
 ### Windows
 
-Download Windows binary version: [mcglm_0.0.1.zip][] (**do not unzip
+Download Windows binary version: [mcglm_0.0.2.zip][] (**do not unzip
 it under Windows**), put the file in your working directory, and from
 inside `R`:
 
 
 ```
-install.packages("mcglm_0.0.1.zip", repos = NULL,
+install.packages("mcglm_0.0.2.zip", repos = NULL,
                  dependencies = TRUE)
 ```
 
@@ -113,7 +113,7 @@ See [LICENSE](./LICENSE)
 [GNU General Public License (GPL) v3.0]: http://www.gnu.org/licenses/gpl-3.0.html
 [`roxygen2`]: https://github.com/klutometis/roxygen
 [`devtools`]: https://github.com/hadley/devtools
-[mcglm_0.0.1.tar.gz]: http://www.leg.ufpr.br/~leg/mcglm/source/mcglm_0.0.1.tar.gz
-[mcglm_0.0.1.zip]: http://www.leg.ufpr.br/~leg/mcglm/source/mcglm_0.0.1.zip
+[mcglm_0.0.2.tar.gz]: http://www.leg.ufpr.br/~leg/mcglm/source/mcglm_0.0.2.tar.gz
+[mcglm_0.0.2.zip]: http://www.leg.ufpr.br/~leg/mcglm/source/mcglm_0.0.2.zip
 [mcglm-manual.pdf]: http://www.leg.ufpr.br/~leg/mcglm/source/mcglm-manual.pdf
 [Gitflow worflow]: http://nvie.com/posts/a-successful-git-branching-model/

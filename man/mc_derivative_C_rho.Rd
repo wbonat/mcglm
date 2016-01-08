@@ -20,9 +20,14 @@ mc_derivative_C_rho(D_Sigmab, Bdiag_chol_Sigma_within,
 A matrix.
 }
 \description{
-Compute the derivative of the C matrix with respect to the correlation parameters rho.
+Compute the derivative of the C matrix with respect to
+    the correlation parameters rho.
 }
 \details{
-It is an internal function used to build the derivatives of the C matrix.
+It is an internal function used to build the derivatives of
+    the C matrix.
+}
+\author{
+Wagner Hugo Bonat
 }
 

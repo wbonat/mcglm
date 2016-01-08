@@ -11,11 +11,12 @@ mc_updateCov(list_initial, covariance, list_power_fixed, information, n_resp)
 
 \item{covariance}{A vector with actual covariance parameters values.}
 
-\item{list_power_fixed}{A list of logicals indicating if the power parameter should be
-estimated or not.}
+\item{list_power_fixed}{A list of logicals indicating if the power
+parameter should be estimated or not.}
 
-\item{information}{A list with information about the number of parameters in the model. In general
-the output from \link{mc_getInformation}.}
+\item{information}{A list with information about the number of
+parameters in the model. In general the output from
+\link{mc_getInformation}.}
 
 \item{n_resp}{A numeric specyfing the number of response variables.}
 }
@@ -23,7 +24,10 @@ the output from \link{mc_getInformation}.}
 A list with updated values of the covariance parameters.
 }
 \description{
-This function update a list of covariance parameters. It will be useful only inside
-the fitting algorithm.
+This function update a list of covariance parameters. It
+    will be useful only inside the fitting algorithm.
+}
+\author{
+Wagner Hugo Bonat
 }
 

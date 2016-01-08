@@ -9,20 +9,28 @@ mc_correction(D_C, inv_J_beta, D, inv_C)
 \arguments{
 \item{D_C}{A list of matrices.}
 
-\item{inv_J_beta}{A matrix. In general it is computed based on the output of the
-\code{[mcglm]{mc_quasi_score}}.}
+\item{inv_J_beta}{A matrix. In general it is computed based on the
+output of the \code{[mcglm]{mc_quasi_score}}.}
 
-\item{D}{A matrix. In general it is the output of the \link{mc_link_function}.}
+\item{D}{A matrix. In general it is the output of the
+\link{mc_link_function}.}
 
-\item{inv_C}{A matrix. In general the output of the \link{mc_build_C}.}
+\item{inv_C}{A matrix. In general the output of the
+\link{mc_build_C}.}
 }
 \value{
-A vector with the correction terms to be used on the Pearson estimating function.
+A vector with the correction terms to be used on the Pearson
+    estimating function.
 }
 \description{
-Compute the correction term associated with the Pearson estimating function.
+Compute the correction term associated with the Pearson
+    estimating function.
 }
 \details{
-It is an internal function useful inside the fitting algorithm.
+It is an internal function useful inside the fitting
+    algorithm.
+}
+\author{
+Wagner Hugo Bonat
 }
 

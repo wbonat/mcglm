@@ -23,14 +23,20 @@ mc_pearson(y_vec, mu_vec, Cfeatures, inv_J_beta = NULL, D = NULL,
 \item{compute_variability}{Logical.}
 }
 \value{
-A list with three components: (i) a vector of quasi-score values, (ii) the sensitivity
-and (iii) variability matrices associated with the Pearson estimating function.
+A list with three components: (i) a vector of quasi-score
+    values, (ii) the sensitivity and (iii) variability matrices
+    associated with the Pearson estimating function.
 }
 \description{
-Compute the Pearson estimating function its sensitivity and variability matrices.
+Compute the Pearson estimating function its sensitivity
+    and variability matrices.
 }
 \details{
-Compute the Pearson estimating function its sensitivity and variability matrices.
-For more details see Bonat and Jorgensen (2015) equations 6, 7 and 8.
+Compute the Pearson estimating function its sensitivity and
+    variability matrices.  For more details see Bonat and Jorgensen
+    (2015) equations 6, 7 and 8.
+}
+\author{
+Wagner Hugo Bonat
 }
 

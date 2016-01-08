@@ -7,7 +7,8 @@
 mc_variability(sensitivity, product, inv_C, C, res)
 }
 \arguments{
-\item{sensitivity}{A matrix. In general the output from \code{mc_sensitivity}.}
+\item{sensitivity}{A matrix. In general the output from
+\code{mc_sensitivity}.}
 
 \item{product}{A list of matrix.}
 
@@ -18,12 +19,18 @@ mc_variability(sensitivity, product, inv_C, C, res)
 \item{res}{A vector. The residuals vector, i.e. (y_vec - mu_vec).}
 }
 \value{
-The variability matrix associated witht the Pearson estimating function.
+The variability matrix associated witht the Pearson
+    estimating function.
 }
 \description{
-Compute the variability matrix associated with the Pearson estimating function.
+Compute the variability matrix associated with the
+    Pearson estimating function.
 }
 \details{
-This function implements the equation 8 of Bonat and Jorgensen (2015).
+This function implements the equation 8 of Bonat and
+    Jorgensen (2015).
+}
+\author{
+Wagner Hugo Bonat
 }
 

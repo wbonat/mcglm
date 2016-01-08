@@ -22,4 +22,7 @@ Core of the Pearson estimating function.
 \details{
 It is an internal function.
 }
+\author{
+Wagner Hugo Bonat
+}
 

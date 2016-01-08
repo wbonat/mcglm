@@ -11,8 +11,9 @@ mc_updateBeta(list_initial, betas, information, n_resp)
 
 \item{betas}{A vector with actual regression parameters values.}
 
-\item{information}{A list with information about the number of parameters in the model. In general
-the output from \link{mc_getInformation}.}
+\item{information}{A list with information about the number of
+parameters in the model. In general the output from
+\link{mc_getInformation}.}
 
 \item{n_resp}{A numeric specyfing the number of response variables.}
 }
@@ -20,7 +21,10 @@ the output from \link{mc_getInformation}.}
 A list with updated values of the regression parameters.
 }
 \description{
-This function update a list of regression parameters. It will be useful only inside the
-fitting algorithm.
+This function update a list of regression parameters. It
+    will be useful only inside the fitting algorithm.
+}
+\author{
+Wagner Hugo Bonat
 }
 

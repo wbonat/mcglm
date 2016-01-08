@@ -7,18 +7,25 @@
 mc_quasi_score(D, inv_C, y_vec, mu_vec)
 }
 \arguments{
-\item{D}{A matrix. In general the output from \code{\link[mcglm]{mc_link_function}}.}
+\item{D}{A matrix. In general the output from
+\code{\link[mcglm]{mc_link_function}}.}
 
-\item{inv_C}{A matrix. In general the output from \code{\link[mcglm]{mc_build_C}}.}
+\item{inv_C}{A matrix. In general the output from
+\code{\link[mcglm]{mc_build_C}}.}
 
 \item{y_vec}{A vector.}
 
 \item{mu_vec}{A vector.}
 }
 \value{
-The quasi-score vector, the Sensivity and variability matrices.
+The quasi-score vector, the Sensivity and variability
+    matrices.
 }
 \description{
-Compute the quasi-score function, its sensitivy and variability matrix.
+Compute the quasi-score function, its sensitivy and
+    variability matrix.
+}
+\author{
+Wagner Hugo Bonat
 }
 

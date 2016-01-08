@@ -3,7 +3,7 @@
 \name{mc_sic}
 \alias{mc_sic}
 \title{Compute the score information criterion (SIC) for multivariate
-covariance generalized linear models.}
+    covariance generalized linear models.}
 \usage{
 mc_sic(object, scope, data, response, penalty = 2)
 }
@@ -20,9 +20,12 @@ mc_sic(object, scope, data, response, penalty = 2)
 }
 \value{
 A data frame with SIC values for each covariate in the scope
-argument.
+    argument.
 }
 \description{
 Compute the SIC for McGLMS.
+}
+\author{
+Wagner Hugo Bonat
 }
 

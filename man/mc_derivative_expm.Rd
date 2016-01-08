@@ -23,15 +23,20 @@ mc_derivative_expm(dU, UU, inv_UU, Q, n = dim(UU)[1], sparse = FALSE)
 A matrix.
 }
 \description{
-Compute the derivative of the exponential-matrix covariance link function.
+Compute the derivative of the exponential-matrix
+    covariance link function.
 }
 \details{
-Many arguments required by this function are provide by the \code{link[mcglm]{mc_dexpm}}.
-The argument dU is the derivative of the U matrix with respect to the models parameters. It should
-be computed by the user.
+Many arguments required by this function are provide by the
+    \code{link[mcglm]{mc_dexpm}}.  The argument dU is the derivative
+    of the U matrix with respect to the models parameters. It should
+    be computed by the user.
+}
+\author{
+Wagner Hugo Bonat
 }
 \seealso{
-\code{\link[Matrix]{expm}}, \code{link[mcglm]{mc_dexp_gold}} and
-\code{link[mcglm]{mc_dexpm}}.
+\code{\link[Matrix]{expm}}, \code{link[mcglm]{mc_dexp_gold}}
+    and \code{link[mcglm]{mc_dexpm}}.
 }
 

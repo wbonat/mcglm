@@ -17,9 +17,13 @@ mc_derivative_cholesky(derivada, inv_chol_Sigma, chol_Sigma)
 A list of matrix.
 }
 \description{
-This function compute the derivative of the Cholesky decomposition.
+This function compute the derivative of the Cholesky
+    decomposition.
 }
 \details{
 It is an internal function.
+}
+\author{
+Wagner Hugo Bonat
 }
 

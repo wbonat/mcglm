@@ -11,14 +11,21 @@ mc_build_omega(tau, Z, covariance_link, sparse = FALSE)
 
 \item{Z}{A list of matrices.}
 
-\item{covariance_link}{String specifing the covariance link function: identity, inverse, expm.}
+\item{covariance_link}{String specifing the covariance link function:
+identity, inverse, expm.}
 
-\item{sparse}{Logical force to use sparse matrix representation 'dsCMatrix'.}
+\item{sparse}{Logical force to use sparse matrix representation
+'dsCMatrix'.}
 }
 \value{
-A list with the \eqn{\Omega} matrix its inverse and derivatives with respect to \eqn{\tau}.
+A list with the \eqn{\Omega} matrix its inverse and
+    derivatives with respect to \eqn{\tau}.
 }
 \description{
-This function build \eqn{\Omega} matrix according the covariance link function.
+This function build \eqn{\Omega} matrix according the
+    covariance link function.
+}
+\author{
+Wagner Hugo Bonat
 }
 

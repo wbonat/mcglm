@@ -1,13 +1,22 @@
-##----------------------------------------------------------------------
-## Script to build and verify the package.
+##======================================================================
+## Script to Check, Build and Distribute the `mcglm` Package
+##
+##                                                       mcglm Core Team
+##======================================================================
 
-if (!grepl(x = getwd(), pattern = "/mcglm$")) {
-    if (Sys.info()["user"] == "walmes") {
-        setwd("~/GitLab/mcglm")
-    }
-    ## stop('Move to /mcglm directory.')
-    cat(getwd(), "\n")
-}
+##----------------------------------------------------------------------
+## Check working directory.
+
+switch(Sys.info()["user"],
+       "wagner" = { NULL },
+       "fernandomayer" = { NULL },
+       "walmes" = { setwd("~/GitLab/mcglm") },
+       {
+           if (basename(getwd()) == "mcglm") {
+               stop("The working directory isn't /mcglm.")
+           }
+       })
+cat(getwd(), "\n")
 
 ##----------------------------------------------------------------------
 ## Packages.
@@ -15,6 +24,19 @@ if (!grepl(x = getwd(), pattern = "/mcglm$")) {
 library(devtools)
 
 ## Load the package (to make functions available).
+load_all()
+
+## Show all exported objects.
+ls("package:mcglm")
+packageVersion("mcglm")
+
+## How many objects in each class.
+table(sapply(ls("package:mcglm"),
+             function(x) class(eval(parse(text=x)))))
+
+##----------------------------------------------------------------------
+## Check.
+
 load_all()
 
 ## Create/update NAMESPACE, *.Rd files.
@@ -30,17 +52,22 @@ check(cleanup = FALSE, manual = TRUE, vignettes = FALSE,
       check_dir = "../")
 
 ##----------------------------------------------------------------------
-## Show all exported objects.
-
-ls("package:mcglm")
-packageVersion("mcglm")
-
-##----------------------------------------------------------------------
 ## Build the package (it will be one directory up).
 
+## Create ./inst/doc
+if (!dir.exists("./inst/doc/")) {
+    dir.create(path = "./inst/doc/", recursive = TRUE)
+}
+
+## Includes mcglm_network.html as part of mcglm package.
+ntw <- "./data-raw/mcglm_network.html"
+if (file.exists(ntw)) {
+    file.copy(from = ntw, to = "./inst/doc/")
+}
+
 build(manual = TRUE, vignettes = TRUE)
-# build the binary version for windows (not used)
-# build_win()
+## build the binary version for windows (not used)
+## build_win()
 
 ##----------------------------------------------------------------------
 ## Package vignette.
@@ -50,8 +77,8 @@ build(manual = TRUE, vignettes = TRUE)
 ## use_vignette("vignette-01")
 
 build_vignettes()
+apropos("vig")
 
-## vignette()
 ## vignette("vignette-01", package="mcglm")
 
 ##----------------------------------------------------------------------
@@ -69,39 +96,56 @@ knit(input = "README.Rmd")
 # dev_example("yscale.components.right")
 
 ##----------------------------------------------------------------------
-## Test installation.
+## Test installation 1: Install from the local .tar.gz.
 
-## Test install with install.packages().
-pkg <- paste0("../mcglm_", packageVersion("mcglm"), ".tar.gz")
-install.packages(pkg, repos = NULL)
-
-## Test using devtools::install_git().
 libTest <- path.expand("~/R-test/")
 if (file.exists(libTest)) {
     file.remove(libTest)
 }
 dir.create(path = libTest)
- 
-.libPaths(new = c(libTest, .libPaths())); .libPaths()
 
+## Install with install.packages() from the .tar.gz. created by build().
+pkg <- paste0("../mcglm_", packageVersion("mcglm"), ".tar.gz")
+
+## Install in a temporary directory.
+install.packages(pkg, repos = NULL, lib = libTest)
+library(package = "mcglm", lib.loc = libTest)
+packageVersion("mcglm")
+ls("package:mcglm")
+
+##----------------------------------------------------------------------
+## Test installation 2: Install from GitLab branch devel.
+
+list.files(path = libTest, recursive = TRUE)
+unlink(paste0(libTest, "mcglm"), recursive = TRUE)
+
+## Test using devtools::install_git().
+.libPaths(new = libTest)
 install_git(url = "http://git.leg.ufpr.br/wbonat/mcglm.git",
             branch = "devel")
 
-library(mcglm)
+library(package = "mcglm", lib.loc = libTest)
 packageVersion("mcglm")
 ls("package:mcglm")
 
 ##----------------------------------------------------------------------
 ## Sending package tarballs and manual to remote server to be
 ## downloadable.
+## URL: http://www.leg.ufpr.br/~leg/mcglm/
 
+pkg <- paste0("../mcglm_", packageVersion("mcglm"), ".tar.gz")
 pkg.win <- paste0("../mcglm_", packageVersion("mcglm"), ".zip")
+
+## Build the *.zip.
 cmd.win <- paste("cd ../mcglm.Rcheck && zip -r", pkg.win, "mcglm")
 system(cmd.win)
 
+ntw <- "./data-raw/mcglm_network.html"
 man <- "../mcglm.Rcheck/mcglm-manual.pdf"
-cmd <- paste("scp -P $PATAXOP", pkg, man, pkg.win,
+cmd <- paste("scp -P $PATAXOP", pkg, man, pkg.win, ntw,
              "leg@$PATAXO:~/public_html/mcglm/source")
 system(cmd)
+
+browseURL("http://www.leg.ufpr.br/~leg/mcglm/")
 
 ##----------------------------------------------------------------------

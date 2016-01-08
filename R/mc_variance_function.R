@@ -1,95 +1,154 @@
-#' Variance function
+#' @title Variance function
+#' @author Wagner Hugo Bonat
 #'
 #' @description Compute features related with variance functions.
 #'
-#' @param mu  A numeric vector. In general the output from \code{\link{mc_link_function}}.
-#' @param power  A numeric value (\code{power} and \code{binomialP}) or vector
-#' (\code{binomialPQ}) of the power parameters.
-#' @param Ntrial  Number of trials, useful only when dealing with binomial response variables.
-#' @param variance  A string specifing the name (\code{power, binomialP or binomialPQ}) of
-#' the variance function.
+#' @param mu A numeric vector. In general the output from
+#'     \code{\link{mc_link_function}}.
+#' @param power A numeric value (\code{power} and \code{binomialP}) or
+#'     vector (\code{binomialPQ}) of the power parameters.
+#' @param Ntrial Number of trials, useful only when dealing with
+#'     binomial response variables.
+#' @param variance A string specifing the name (\code{power, binomialP
+#'     or binomialPQ}) of the variance function.
 #' @param inverse Logical.
-#' @param derivative_power  Logical if compute (TRUE) or not (FALSE) the derivatives with respect
-#' to the power parameter.
-#' @param derivative_mu  Logical if compute (TRUE) or not (FALSE) the derivative with respect
-#' to the mu parameter.
-#' @return A list with from one to four elements depends on the arguments.
+#' @param derivative_power Logical if compute (TRUE) or not (FALSE) the
+#'     derivatives with respect to the power parameter.
+#' @param derivative_mu Logical if compute (TRUE) or not (FALSE) the
+#'     derivative with respect to the mu parameter.
+#' @return A list with from one to four elements depends on the
+#'     arguments.
 #' @seealso \code{\link{mc_link_function}}.
-#' @details The function \code{mc_variance_function} computing three features related with
-#' the variance function. Depending on the Logical arguments, the function returns
-#' \eqn{V^{1/2}} and its derivatives with respect to the parameters power and mu, respectivelly.
-#' The output is a named list, completely informative about what the function has been computed.
-#' For example, if \code{inverse = FALSE}, \code{derivative_power = TRUE} and
-#' \code{derivative_mu = TRUE}. The output will be a list, with three
-#' elements: V_sqrt, D_V_sqrt_power and D_V_sqrt_mu.
+#' @details The function \code{mc_variance_function} computing three
+#'     features related with the variance function. Depending on the
+#'     Logical arguments, the function returns \eqn{V^{1/2}} and its
+#'     derivatives with respect to the parameters power and mu,
+#'     respectivelly.  The output is a named list, completely
+#'     informative about what the function has been computed.  For
+#'     example, if \code{inverse = FALSE}, \code{derivative_power =
+#'     TRUE} and \code{derivative_mu = TRUE}. The output will be a list,
+#'     with three elements: V_sqrt, D_V_sqrt_power and D_V_sqrt_mu.
 #' @export
 #' @examples
-#' x1 <- seq(-1,1,l = 5)
-#' X <- model.matrix(~ x1)
-#' mu <- mc_link_function(beta = c(1,0.5), X = X, offset = NULL, link = 'logit')
-#' mc_variance_function(mu = mu$mu, power = c(2,1), Ntrial = 1, variance = 'binomialPQ',
-#' inverse = FALSE, derivative_power = TRUE, derivative_mu = TRUE)
-# Generic variance function ---------------------------
-mc_variance_function <- function(mu, power, Ntrial, variance, inverse, 
+#' x1 <- seq(-1, 1, l = 5)
+#' X <- model.matrix(~x1)
+#' mu <- mc_link_function(beta = c(1, 0.5), X = X, offset = NULL,
+#'                        link = "logit")
+#' mc_variance_function(mu = mu$mu, power = c(2, 1), Ntrial = 1,
+#'                      variance = "binomialPQ", inverse = FALSE,
+#'                      derivative_power = TRUE, derivative_mu = TRUE)
+#' 
+
+## Generic variance function -------------------------------------------
+mc_variance_function <- function(mu, power, Ntrial, variance, inverse,
                                  derivative_power, derivative_mu) {
     assert_that(is.logical(inverse))
     assert_that(is.logical(derivative_power))
     assert_that(is.logical(derivative_mu))
-    switch(variance, power = {
-        output <- mc_power(mu = mu, power = power, inverse = inverse, derivative_power = derivative_power, derivative_mu = derivative_mu)
-    }, binomialP = {
-        output <- mc_binomialP(mu = mu, power = power, Ntrial = Ntrial, inverse = inverse, derivative_power = derivative_power,
-            derivative_mu = derivative_mu)
-    }, binomialPQ = {
-        output <- mc_binomialPQ(mu = mu, power = power, Ntrial = Ntrial, inverse = inverse, derivative_power = derivative_power,
-            derivative_mu = derivative_mu)
-    }, stop(gettextf("%s variance function not recognised", sQuote(variance)), domain = NA))
+    switch(variance,
+           power = {
+               output <- mc_power(mu = mu, power = power,
+                                  inverse = inverse,
+                                  derivative_power = derivative_power,
+                                  derivative_mu = derivative_mu)
+           },
+           binomialP = {
+               output <- mc_binomialP(mu = mu, power = power,
+                                      Ntrial = Ntrial,
+                                      inverse = inverse,
+                                      derivative_power =
+                                          derivative_power,
+                                      derivative_mu = derivative_mu)
+           },
+           binomialPQ = {
+               output <- mc_binomialPQ(mu = mu, power = power,
+                                       Ntrial = Ntrial,
+                                       inverse = inverse,
+                                       derivative_power =
+                                           derivative_power,
+                                       derivative_mu = derivative_mu)
+           },
+           stop(gettextf("%s variance function not recognised",
+                         sQuote(variance)), domain = NA))
     return(output)
 }
 
 #' @rdname mc_variance_function
-# Power variance function ---------------------------
-mc_power <- function(mu, power, inverse, derivative_power, derivative_mu) {
-    assert_that(all(mu > 0))  # The observed value can be zero, but not the expected value.
+## Power variance function ---------------------------------------------
+mc_power <- function(mu, power, inverse, derivative_power,
+                     derivative_mu) {
+    ## The observed value can be zero, but not the expected value.
+    assert_that(all(mu > 0))
     assert_that(is.number(power))
     mu.power <- mu^power
     sqrt.mu.power <- sqrt(mu.power)
     n <- length(mu)
-    if (inverse == TRUE & derivative_power == TRUE & derivative_mu == FALSE) {
-        output <- list(V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu.power), D_V_inv_sqrt_power = Diagonal(n = n, -(mu.power *
-            log(mu))/(2 * (mu.power)^(1.5))))
+    if (inverse == TRUE & derivative_power == TRUE &
+            derivative_mu == FALSE) {
+        output <- list(
+            V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu.power),
+            D_V_inv_sqrt_power =
+                Diagonal(n = n,
+                         -(mu.power * log(mu))/(2 * (mu.power)^(1.5))))
     }
-    if (inverse == TRUE & derivative_power == FALSE & derivative_mu == FALSE) {
+    if (inverse == TRUE & derivative_power == FALSE &
+            derivative_mu == FALSE) {
         output <- list(V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu.power))
     }
-    if (inverse == FALSE & derivative_power == TRUE & derivative_mu == FALSE) {
-        output <- list(V_sqrt = Diagonal(n = n, sqrt.mu.power), D_V_sqrt_power = Diagonal(n = n, (mu.power * log(mu))/(2 *
-            sqrt.mu.power)))
+    if (inverse == FALSE & derivative_power == TRUE &
+            derivative_mu == FALSE) {
+        output <- list(
+            V_sqrt = Diagonal(n = n, sqrt.mu.power), 
+            D_V_sqrt_power =
+                Diagonal(n = n,
+                         +(mu.power * log(mu))/(2 * sqrt.mu.power)))
     }
-    if (inverse == FALSE & derivative_power == FALSE & derivative_mu == FALSE) {
+    if (inverse == FALSE & derivative_power == FALSE &
+            derivative_mu == FALSE) {
         output <- list(V_sqrt = Diagonal(n = n, sqrt.mu.power))
     }
-    if (inverse == TRUE & derivative_power == TRUE & derivative_mu == TRUE) {
-        output <- list(V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu.power), D_V_inv_sqrt_power = Diagonal(n = n, -(mu.power *
-            log(mu))/(2 * (mu.power)^(1.5))), D_V_inv_sqrt_mu = -(mu^(power - 1) * power)/(2 * (mu.power)^(1.5)))
+    if (inverse == TRUE & derivative_power == TRUE &
+            derivative_mu == TRUE) {
+        output <- list(
+            V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu.power), 
+            D_V_inv_sqrt_power =
+                Diagonal(n = n,
+                         -(mu.power * log(mu))/(2 * (mu.power)^(1.5))),
+            D_V_inv_sqrt_mu = -(mu^(power -  1) * power)/
+                                   (2 * (mu.power)^(1.5)))
     }
-    if (inverse == TRUE & derivative_power == FALSE & derivative_mu == TRUE) {
-        output <- list(V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu.power), D_V_inv_sqrt_mu = -(mu^(power - 1) * power)/(2 * (mu.power)^(1.5)))
+    if (inverse == TRUE & derivative_power == FALSE &
+            derivative_mu == TRUE) {
+        output <- list(
+            V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu.power), 
+            D_V_inv_sqrt_mu = -(mu^(power - 1) * power)/
+                                   (2 * (mu.power)^(1.5)))
     }
-    if (inverse == FALSE & derivative_power == TRUE & derivative_mu == TRUE) {
-        output <- list(V_sqrt = Diagonal(n = n, sqrt.mu.power), D_V_sqrt_power = Diagonal(n = n, (mu.power * log(mu))/(2 *
-            sqrt.mu.power)), D_V_sqrt_mu = (mu^(power - 1) * power)/(2 * sqrt.mu.power))
+    if (inverse == FALSE & derivative_power == TRUE &
+            derivative_mu == TRUE) {
+        output <- list(
+            V_sqrt = Diagonal(n = n, sqrt.mu.power), 
+            D_V_sqrt_power =
+                Diagonal(n = n, (mu.power * log(mu))/
+                                    (2 * sqrt.mu.power)),
+            D_V_sqrt_mu = (mu^(power - 1) * power)/(2 * sqrt.mu.power))
     }
-    if (inverse == FALSE & derivative_power == FALSE & derivative_mu == TRUE) {
-        output <- list(V_sqrt = Diagonal(n = n, sqrt.mu.power), D_V_sqrt_mu = (mu^(power - 1) * power)/(2 * sqrt.mu.power))
+    if (inverse == FALSE & derivative_power == FALSE &
+            derivative_mu == TRUE) {
+        output <- list(V_sqrt = Diagonal(n = n, sqrt.mu.power), 
+                       D_V_sqrt_mu = (mu^(power - 1) * power)/
+                                         (2 * sqrt.mu.power))
     }
     return(output)
 }
 
 #' @rdname mc_variance_function
-# BinomialP variance function ---------------------------
-mc_binomialP <- function(mu, power, inverse, Ntrial, derivative_power, derivative_mu) {
-    assert_that(all(mu > 0))  # The observed value can be 0 and 1, but not the expected value
+## BinomialP variance function
+## -----------------------------------------
+mc_binomialP <- function(mu, power, inverse, Ntrial, derivative_power, 
+                         derivative_mu) {
+    ## The observed value can be 0 and 1, but not the expected value
+    assert_that(all(mu > 0))
     assert_that(all(mu < 1))
     assert_that(is.number(power))
     assert_that(all(Ntrial > 0))
@@ -99,45 +158,85 @@ mc_binomialP <- function(mu, power, inverse, Ntrial, derivative_power, derivativ
     mu1mu <- constant * (mu.power * mu.power1)
     sqrt.mu1mu <- sqrt(mu1mu)
     n <- length(mu)
-    if (inverse == TRUE & derivative_power == TRUE & derivative_mu == FALSE) {
-        output <- list(V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu1mu), D_V_inv_sqrt_power = Diagonal(n = n, -(log(1 - mu) *
-            mu1mu + log(mu) * mu1mu)/(2 * (mu1mu^(1.5)))))
+    if (inverse == TRUE & derivative_power == TRUE &
+            derivative_mu == FALSE) {
+        output <- list(
+            V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu1mu), 
+            D_V_inv_sqrt_power =
+                Diagonal(n = n, -(log(1 - mu) * mu1mu +
+                                  log(mu) * mu1mu)/(2 * (mu1mu^(1.5)))))
     }
-    if (inverse == TRUE & derivative_power == FALSE & derivative_mu == FALSE) {
+    if (inverse == TRUE & derivative_power == FALSE &
+            derivative_mu == FALSE) {
         output <- list(V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu1mu))
     }
-    if (inverse == FALSE & derivative_power == TRUE & derivative_mu == FALSE) {
-        output <- list(V_sqrt = Diagonal(n = n, sqrt.mu1mu), D_V_sqrt_power = Diagonal(n = n, (log(1 - mu) * mu1mu + log(mu) *
-            mu1mu)/(2 * sqrt.mu1mu)))
+    if (inverse == FALSE & derivative_power == TRUE &
+            derivative_mu == FALSE) {
+        output <- list(
+            V_sqrt = Diagonal(n = n, sqrt.mu1mu), 
+            D_V_sqrt_power = Diagonal(n = n, (log(1 - mu) * mu1mu +
+                                              log(mu) * mu1mu)/
+                                                 (2 * sqrt.mu1mu)))
     }
-    if (inverse == FALSE & derivative_power == FALSE & derivative_mu == FALSE) {
+    if (inverse == FALSE & derivative_power == FALSE &
+            derivative_mu == FALSE) {
         output <- list(V_sqrt = Diagonal(n = n, sqrt.mu1mu))
     }
-    if (inverse == TRUE & derivative_power == TRUE & derivative_mu == TRUE) {
-        output <- list(V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu1mu), D_V_inv_sqrt_power = Diagonal(n = n, -(log(1 - mu) *
-            mu1mu + log(mu) * mu1mu)/(2 * (mu1mu^(1.5)))), D_V_inv_sqrt_mu = -(constant * (mu.power1 * (mu^(power - 1)) *
-            power) - constant * (((1 - mu)^(power - 1)) * mu.power * power))/(2 * (mu1mu^(1.5))))
+    if (inverse == TRUE & derivative_power == TRUE &
+            derivative_mu == TRUE) {
+        output <- list(
+            V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu1mu), 
+            D_V_inv_sqrt_power =
+                Diagonal(n = n, -(log(1 - mu) * mu1mu + log(mu) *
+                                  mu1mu)/(2 * (mu1mu^(1.5)))), 
+            D_V_inv_sqrt_mu = -(constant * (mu.power1 *
+                                            (mu^(power - 1)) * power) -
+                                constant * (((1 - mu)^(power - 1)) *
+                                            mu.power * power))/
+                                   (2 * (mu1mu^(1.5))))
     }
-    if (inverse == TRUE & derivative_power == FALSE & derivative_mu == TRUE) {
-        output <- list(V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu1mu), D_V_inv_sqrt_mu = -(constant * (mu.power1 * (mu^(power -
-            1)) * power) - constant * (((1 - mu)^(power - 1)) * mu.power * power))/(2 * (mu1mu^(1.5))))
+    if (inverse == TRUE & derivative_power == FALSE &
+            derivative_mu == TRUE) {
+        output <- list(
+            V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu1mu), 
+            D_V_inv_sqrt_mu = -(constant *
+                                (mu.power1 * (mu^(power - 1)) * power) -
+                                constant * (((1 - mu)^(power - 1)) *
+                                            mu.power * power))/
+                                   (2 * (mu1mu^(1.5))))
     }
-    if (inverse == FALSE & derivative_power == TRUE & derivative_mu == TRUE) {
-        output <- list(V_sqrt = Diagonal(n = n, sqrt.mu1mu), D_V_sqrt_power = Diagonal(n = n, (log(1 - mu) * mu1mu + log(mu) *
-            mu1mu)/(2 * sqrt.mu1mu)), D_V_sqrt_mu = (constant * (mu.power1 * (mu^(power - 1)) * power) - constant * (((1 -
-            mu)^(power - 1)) * mu.power * power))/(2 * sqrt.mu1mu))
+    if (inverse == FALSE & derivative_power == TRUE &
+            derivative_mu == TRUE) {
+        output <- list(
+            V_sqrt = Diagonal(n = n, sqrt.mu1mu), 
+            D_V_sqrt_power = Diagonal(n = n, (log(1 - mu) * mu1mu + 
+                                              log(mu) * mu1mu)/
+                                                 (2 * sqrt.mu1mu)),
+            D_V_sqrt_mu = (constant *
+                           (mu.power1 * (mu^(power - 1)) * power) -
+                           constant * (((1 - mu)^(power - 1)) *
+                                       mu.power * power))/
+                              (2 * sqrt.mu1mu))
     }
-    if (inverse == FALSE & derivative_power == FALSE & derivative_mu == TRUE) {
-        output <- list(V_sqrt = Diagonal(n = n, sqrt.mu1mu), D_V_sqrt_mu = (constant * (mu.power1 * (mu^(power - 1)) * power) -
-            constant * (((1 - mu)^(power - 1)) * mu.power * power))/(2 * sqrt.mu1mu))
+    if (inverse == FALSE & derivative_power == FALSE &
+            derivative_mu == TRUE) {
+        output <- list(
+            V_sqrt = Diagonal(n = n, sqrt.mu1mu), 
+            D_V_sqrt_mu = (constant *
+                           (mu.power1 * (mu^(power - 1)) * power) -
+                           constant * (((1 - mu)^(power - 1)) *
+                                       mu.power * power))/
+                              (2 * sqrt.mu1mu))
     }
     return(output)
 }
 
 #' @rdname mc_variance_function
-# BinomialPQ variance function ---------------------------
-mc_binomialPQ <- function(mu, power, inverse, Ntrial, derivative_power, derivative_mu) {
-    assert_that(all(mu > 0))  # The observed value can be 0 and 1, but not the expected value
+## BinomialPQ variance function ----------------------------------------
+mc_binomialPQ <- function(mu, power, inverse, Ntrial, derivative_power,
+                          derivative_mu) {
+    ## The observed value can be 0 and 1, but not the expected value
+    assert_that(all(mu > 0))
     assert_that(all(mu < 1))
     assert_that(length(power) == 2)
     assert_that(all(Ntrial > 0))
@@ -150,42 +249,84 @@ mc_binomialPQ <- function(mu, power, inverse, Ntrial, derivative_power, derivati
     mu1mu <- mu.p.mu.q * constant
     sqrt.mu1mu <- sqrt(mu1mu)
     n <- length(mu)
-    if (inverse == TRUE & derivative_power == TRUE & derivative_mu == FALSE) {
+    if (inverse == TRUE & derivative_power == TRUE &
+            derivative_mu == FALSE) {
         denominator <- (2 * (mu1mu^1.5) * Ntrial)
-        output <- list(V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu1mu), D_V_inv_sqrt_p = Diagonal(n = n, -(mu.p.mu.q * log(mu))/denominator),
-            D_V_inv_sqrt_q = Diagonal(n = n, -mu.p.mu.q * log(1 - mu)/denominator))
+        output <- list(
+            V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu1mu), 
+            D_V_inv_sqrt_p = Diagonal(n = n,
+                                      -(mu.p.mu.q * log(mu))/
+                                           denominator), 
+            D_V_inv_sqrt_q = Diagonal(n = n,
+                                      -mu.p.mu.q * log(1 - mu)/
+                                           denominator))
     }
-    if (inverse == TRUE & derivative_power == FALSE & derivative_mu == FALSE) {
+    if (inverse == TRUE & derivative_power == FALSE &
+            derivative_mu == FALSE) {
         output <- list(V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu1mu))
     }
-    if (inverse == FALSE & derivative_power == TRUE & derivative_mu == FALSE) {
+    if (inverse == FALSE & derivative_power == TRUE &
+            derivative_mu == FALSE) {
         denominator <- 2 * sqrt.mu1mu * Ntrial
-        output <- list(V_sqrt = Diagonal(n = n, sqrt.mu1mu), D_V_sqrt_p = Diagonal(n = n, (mu.p.mu.q * log(mu))/denominator),
-            D_V_sqrt_q = Diagonal(n = n, (mu.p.mu.q * log(1 - mu))/denominator))
+        output <- list(
+            V_sqrt = Diagonal(n = n, sqrt.mu1mu), 
+            D_V_sqrt_p = Diagonal(n = n,
+                                  +(mu.p.mu.q * log(mu))/denominator), 
+            D_V_sqrt_q = Diagonal(n = n,
+                                  +(mu.p.mu.q * log(1 - mu))/
+                                       denominator))
     }
-    if (inverse == FALSE & derivative_power == FALSE & derivative_mu == FALSE) {
+    if (inverse == FALSE & derivative_power == FALSE &
+            derivative_mu == FALSE) {
         output <- list(V_sqrt = Diagonal(n = n, sqrt.mu1mu))
     }
-    if (inverse == TRUE & derivative_power == TRUE & derivative_mu == TRUE) {
+    if (inverse == TRUE & derivative_power == TRUE &
+            derivative_mu == TRUE) {
         denominator <- (2 * (mu1mu^1.5) * Ntrial)
-        output <- list(V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu1mu), D_V_inv_sqrt_p = Diagonal(n = n, -(mu.p.mu.q * log(mu))/denominator),
-            D_V_inv_sqrt_q = Diagonal(n = n, -mu.p.mu.q * log(1 - mu)/denominator), D_V_inv_sqrt_mu = -(constant * (mu1.q *
-                (mu^(p - 1)) * p) - constant * (((1 - mu)^(q - 1)) * mu.p * q))/(2 * (mu1mu^1.5)))
+        output <- list(
+            V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu1mu), 
+            D_V_inv_sqrt_p = Diagonal(n = n,
+                                      -(mu.p.mu.q * log(mu))/
+                                           denominator), 
+            D_V_inv_sqrt_q = Diagonal(n = n,
+                                      -mu.p.mu.q *
+                                           log(1 - mu)/denominator),
+            D_V_inv_sqrt_mu = -(constant *
+                                (mu1.q * (mu^(p - 1)) * p) -
+                                constant * (((1 - mu)^(q - 1)) *
+                                            mu.p * q))/
+                                   (2 * (mu1mu^1.5)))
     }
-    if (inverse == TRUE & derivative_power == FALSE & derivative_mu == TRUE) {
-        output <- list(V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu1mu), D_V_inv_sqrt_mu = -(constant * (mu1.q * (mu^(p - 1)) *
-            p) - constant * (((1 - mu)^(q - 1)) * mu.p * q))/(2 * (mu1mu^1.5)))
+    if (inverse == TRUE & derivative_power == FALSE &
+            derivative_mu == TRUE) {
+        output <- list(
+            V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu1mu), 
+            D_V_inv_sqrt_mu = -(constant * (mu1.q * (mu^(p - 1)) * p) -
+                                constant * (((1 - mu)^(q - 1)) *
+                                            mu.p * q))/
+                                   (2 * (mu1mu^1.5)))
     }
-    if (inverse == FALSE & derivative_power == TRUE & derivative_mu == TRUE) {
+    if (inverse == FALSE & derivative_power == TRUE &
+            derivative_mu == TRUE) {
         denominator1 <- 2 * sqrt.mu1mu
         denominator2 <- denominator1 * Ntrial
-        output <- list(V_sqrt = Diagonal(n = n, sqrt.mu1mu), D_V_sqrt_p = Diagonal(n = n, (mu.p.mu.q * log(mu))/denominator2),
-            D_V_sqrt_q = Diagonal(n = n, (mu.p.mu.q * log(1 - mu))/denominator2), D_V_sqrt_mu = (constant * (mu1.q * (mu^(p -
-                1)) * p) - constant * (((1 - mu)^(q - 1)) * mu.p * q))/denominator1)
+        output <- list(
+            V_sqrt = Diagonal(n = n, sqrt.mu1mu), 
+            D_V_sqrt_p = Diagonal(n = n, (mu.p.mu.q * log(mu))/
+                                             denominator2), 
+            D_V_sqrt_q = Diagonal(n = n, (mu.p.mu.q * log(1 - mu))/
+                                             denominator2),
+            D_V_sqrt_mu = (constant * (mu1.q * (mu^(p - 1)) * p) -
+                           constant * (((1 - mu)^(q - 1)) * mu.p * q))/
+                              denominator1)
     }
-    if (inverse == FALSE & derivative_power == FALSE & derivative_mu == TRUE) {
-        output <- list(V_sqrt = Diagonal(n = n, sqrt.mu1mu), D_V_sqrt_mu = (constant * (mu1.q * (mu^(p - 1)) * p) - constant *
-            (((1 - mu)^(q - 1)) * mu.p * q))/(2 * sqrt.mu1mu))
+    if (inverse == FALSE & derivative_power == FALSE &
+            derivative_mu == TRUE) {
+        output <- list(
+            V_sqrt = Diagonal(n = n, sqrt.mu1mu), 
+            D_V_sqrt_mu = (constant * (mu1.q * (mu^(p - 1)) * p) -
+                           constant * (((1 - mu)^(q - 1)) * mu.p * q))/
+                              (2 * sqrt.mu1mu))
     }
     return(output)
 }
