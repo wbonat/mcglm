@@ -1,15 +1,6 @@
 R_check_install:
   script:
     - echo $HOME
-    - echo $USER
-    - ls -la ~/
-    - R --version
     - Rscript -e 'getwd(); .libPaths(); sessionInfo()'
     - Rscript -e 'library(devtools); load_all(); check()'
-    - Rscript -e 'library(devtools); .libPaths(new = path.expand("~/Documents")); install(local = FALSE)'
-  tags:
-    - r
-    - devtools
-    - knitr
-    - rmarkdown
-    - testthat
+    - Rscript -e 'library(devtools); .libPaths(new = path.expand("~/R-tests/legTools")); install(local = FALSE)'
