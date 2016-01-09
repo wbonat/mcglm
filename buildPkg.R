@@ -52,7 +52,7 @@ build(manual = TRUE, vignettes = TRUE)
 build_vignettes()
 
 ## vignette()
-## vignette("vignette-01", package="mcglm")
+## vignette("UniModels", package="mcglm")
 
 ##----------------------------------------------------------------------
 ## Generate the README.md.
