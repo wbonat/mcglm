@@ -18,7 +18,8 @@ Suggests:
     lattice,
     latticeExtra,
     knitr,
-    rmarkdown
+    rmarkdown,
+    networkD3
 Imports:
     Matrix,
     assertthat
