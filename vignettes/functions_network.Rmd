@@ -1,0 +1,116 @@
+---
+title: "Functions Network"
+author: "Wagner H. Bonat & Walmes M. Zeviani"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Functions Network}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include=FALSE}
+hasPackage <- require(networkD3)
+library(knitr)
+opts_chunk$set(eval = hasPackage)
+
+```
+
+```{r}
+## Load the package (to make functions available).
+devtools::load_all("../")
+
+## Source each file in R/ to know the functions defined in each.
+rm(list=ls())
+L <- lapply(list.files(path = "../R", pattern = "*.R"),
+            function(x) {
+                a <- ls(pos = ".GlobalEnv")
+                source(sprintf("../R/%s", x))
+                b <- setdiff(x = ls(pos = ".GlobalEnv"), y = a)
+                if (length(b) == 0) {
+                    return(NULL)
+                } else {
+                    return(data.frame(file = x, fun = b,
+                                      stringsAsFactors = FALSE))
+                }
+            })
+
+da <- plyr::ldply(L)
+da <- da[, rev(1:ncol(da))]
+
+##----------------------------------------------------------------------
+## Regex to search the function names inside body of another functions.
+
+funs <- unique(da$fun)
+funs <- funs[!funs == "mcglm"]
+regex <- paste0("^.*(", paste(funs, collapse = "|"), ").*$")
+funs <- da$fun
+
+##----------------------------------------------------------------------
+## NetWork.
+
+## https://cran.r-project.org/web/packages/networkD3/index.html
+## https://christophergandrud.github.io/networkD3/
+library(networkD3)
+
+## Search inside a function body the name of the other functions.
+## Return as parent the function inspected and as child those functions
+## inside it.
+funRel <- function(fx) {
+    bdy <- capture.output(body(fx))
+    bdy <- do.call(c, strsplit(bdy, split = ","))
+    funscalled <- gsub(pattern = regex,
+                       x = grep(pattern = regex, x = bdy, value = TRUE),
+                       replacement = "\\1")
+    if (length(funscalled)) {
+        return(data.frame(parent = fx, child = funscalled,
+                          stringsAsFactors = FALSE))
+    } else {
+        return(data.frame(parent = fx, child = NA,
+                          stringsAsFactors = FALSE))
+    }
+}
+
+## This is the relationship data.frame.
+a <- do.call(rbind, lapply(funs, funRel))
+a <- plyr::arrange(a, parent, child)
+a <- transform(a, child = ifelse(is.na(child), parent, child))
+a <- unique(a)
+
+## IMPORTANT: the codification must start in 0.
+fv <- factor(c(a$parent, a$child))
+a$source <- as.integer(factor(a$parent, levels = levels(fv))) - 1
+a$target <- as.integer(factor(a$child, levels = levels(fv))) - 1
+a$value <- 2 ## Line width of link.
+
+## This is the attributes data.frame.
+b <- data.frame(name = levels(fv))
+b$group <- as.integer(factor(
+    da$file[match(x = da$fun, table = as.character(b$name))]))
+
+## Same colors for funtions in the same file.
+b$group <- as.integer(factor(
+    merge(b, da, by.x = "name", by.y = "fun", all.x = TRUE)$file))
+b$size <- 10  ## Size of nodes.
+
+ntw <- forceNetwork(
+    Links = a,
+    Source = "source",
+    Target = "target",
+    Value = "value",
+    Nodes = b,
+    NodeID = "name",
+    Group = "group",
+    charge = -100,
+    linkDistance = 50,
+    linkColour = "black",
+    opacity = 0.9,
+    opacityNoHover = 1,
+    fontSize = 12,
+    height = 700, width = 700,
+    fontFamily = "inconsolata")
+
+## saveNetwork(network = ntw, file = "mcglm_network.html")
+
+ntw
+```
