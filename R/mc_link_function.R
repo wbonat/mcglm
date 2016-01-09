@@ -20,7 +20,8 @@
 #'     no offset is present in the model, set offset = NULL.
 #' @param link A string specifing the name of the link function. mcglm
 #'     implements the following link functions: logit, probit, cauchit,
-#'     cloglog, loglog, identity, log, sqrt, 1/mu^2 and inverse.
+#'     cloglog, loglog, identity, log, sqrt, 1/mu^2 and inverse. A user
+#'     defined link function can be used (see Details).
 #' @return A list with two elements: mu and D.
 #' @seealso \code{\link[stats]{model.matrix}},
 #'     \code{\link[stats]{make.link}}.
@@ -36,7 +37,11 @@
 #'     with respect to \eqn{\beta}.  Such matrix will be required by the
 #'     fitting algorithm. The function \code{mc_link_function} returns a
 #'     list where the first element is mu (n x 1) vector and the second
-#'     D (n x p) matrix.
+#'     D (n x p) matrix. A user defined function can be used. It must be
+#'     a function with arguments \code{beta}, \code{X} and \code{offset}
+#'     (set to \code{NULL} if non needed). The function must return a
+#'     length 2 named list with \code{mu} and \code{D} elements as a
+#'     vector and a matrix of proper dimensions dimensions.
 #' @examples
 #' x1 <- seq(-1, 1, l = 5)
 #' X <- model.matrix(~ x1)
@@ -60,14 +65,58 @@ mc_link_function <- function(beta, X, offset, link) {
                    "mc_invmu2", "mc_inverse")
     names(link_func) <- link_name
     if (!link %in% link_name) {
-        stop(gettextf(paste0("%s link not recognised. ",
-                             "Available links are: ",
-                             paste(link_name, collapse = ", "),
-                             "."),
-                      sQuote(link)), domain = NA)
+        ## Test if link function exists outside.
+        if (!exists(link, envir = -1, mode = "function")) {
+        stop(gettextf(paste0(
+            "%s link function not recognised or found. ",
+            "Available links are: ",
+            paste(link_name, collapse = ", "),
+            "."),
+            sQuote(link)), domain = NA)
+        } else {
+            match_args <- sort(names(formals(link))) %in%
+                sort(c("beta", "X", "offset"))
+            ## Test if provided funtion has correct arguments.
+            if (length(match_args) != 3L || !all(match_args)) {
+                stop(gettextf(paste(
+                    "Provided link function must have %s, %s and %s",
+                    "as arguments to be valid."),
+                    sQuote("beta"), sQuote("X"), sQuote("offset")),
+                    domain = NA)
+            }
+        }
+        output <- do.call(link,
+                          args = list(beta = beta, X = X,
+                                      offset = offset))
+        if (!is.list(output)) {
+            stop("Provided link funtion doesn't return a list.")
+        }
+        if (!identical(sort(names(output)), c("D","mu"))) {
+            stop(paste0("Provided link funtion isn't return ",
+                        "a list with names ", sQuote("mu"),
+                        " and ", sQuote("D"), "."))
+        }
+        if (!(identical(dim(output$D), dim(X)) &&
+              is.matrix(output$D))) {
+            stop(paste0("Returned ", sQuote("D"),
+                        " object by user defined link function ",
+                        "isn't a matrix of correct dimensions."))
+        }
+        print(is.vector(output$mu, mode = "vector"))
+        print(class(output$mu))
+        if (!(length(output$mu) == nrow(X) &&
+                  is.vector(output$mu, mode = "numeric"))) {
+            stop(paste0("Returned ", sQuote("mu"),
+                        " object by user defined link function ",
+                        "isn't a vector of correct length."))
+            is.vector(output$mu, mode = "vector")
+        }
+    } else {
+        link <- link_func[link]
+        output <- do.call(link,
+                          args = list(beta = beta, X = X,
+                                      offset = offset))
     }
-    output <- do.call(link_func[link],
-                      args = list(beta = beta, X = X, offset = offset))
     return(output)
 }
 
