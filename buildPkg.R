@@ -54,17 +54,6 @@ check(cleanup = FALSE, manual = TRUE, vignettes = FALSE,
 ##----------------------------------------------------------------------
 ## Build the package (it will be one directory up).
 
-## Create ./inst/doc
-if (!dir.exists("./inst/doc/")) {
-    dir.create(path = "./inst/doc/", recursive = TRUE)
-}
-
-## Includes mcglm_network.html as part of mcglm package.
-ntw <- "./data-raw/mcglm_network.html"
-if (file.exists(ntw)) {
-    file.copy(from = ntw, to = "./inst/doc/")
-}
-
 build(manual = TRUE, vignettes = TRUE)
 ## build the binary version for windows (not used)
 ## build_win()
@@ -75,9 +64,10 @@ build(manual = TRUE, vignettes = TRUE)
 
 ## Create the vignette template. Do just once.
 ## use_vignette("vignette-01")
+## use_vignette("functions_network")
+## use_package(package = "networkD3", type = "Suggests")
 
 build_vignettes()
-apropos("vig")
 
 ## vignette("vignette-01", package="mcglm")
 

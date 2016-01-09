@@ -49,7 +49,8 @@ no offset is present in the model, set offset = NULL.}
 
 \item{link}{A string specifing the name of the link function. mcglm
 implements the following link functions: logit, probit, cauchit,
-cloglog, loglog, identity, log, sqrt, 1/mu^2 and inverse.}
+cloglog, loglog, identity, log, sqrt, 1/mu^2 and inverse. A user
+defined link function can be used (see Details).}
 }
 \value{
 A list with two elements: mu and D.
@@ -78,7 +79,11 @@ The link function is an important component of the
     with respect to \eqn{\beta}.  Such matrix will be required by the
     fitting algorithm. The function \code{mc_link_function} returns a
     list where the first element is mu (n x 1) vector and the second
-    D (n x p) matrix.
+    D (n x p) matrix. A user defined function can be used. It must be
+    a function with arguments \code{beta}, \code{X} and \code{offset}
+    (set to \code{NULL} if non needed). The function must return a
+    length 2 named list with \code{mu} and \code{D} elements as a
+    vector and a matrix of proper dimensions dimensions.
 }
 \examples{
 x1 <- seq(-1, 1, l = 5)

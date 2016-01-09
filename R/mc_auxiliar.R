@@ -4,15 +4,15 @@
 #'
 #' @description The function \code{mc_sandwich} is just an auxiliar
 #'     function to compute product matrix in the sandwich form
-#'     bord1*middle*bord2. An special case appears when computing the
-#'     derivative of the covariance matrix with respect to the power
-#'     parameter. Always the bord1 and bord2 should be diagonal
-#'     matrix. If it is not true, this product is too slow.
+#'     \code{bord1 * middle * bord2}. An special case appears when
+#'     computing the derivative of the covariance matrix with respect to
+#'     the power parameter. Always the bord1 and bord2 should be
+#'     diagonal matrix. If it is not true, this product is too slow.
 #'
 #' @param middle A matrix.
 #' @param bord1 A matrix.
 #' @param bord2 A matrix.
-#' @return The matrix product bord1*middle*bord2.
+#' @return The matrix product \code{bord1 * middle * bord2}.
 
 ## Auxiliar function to multiply matrices ------------------------------
 mc_sandwich <- function(middle, bord1, bord2) {
