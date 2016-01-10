@@ -63,13 +63,14 @@ build(manual = TRUE, vignettes = TRUE)
 ## Based on: http://r-pkgs.had.co.nz/vignettes.html
 
 ## Create the vignette template. Do just once.
-## use_vignette("vignette-01")
+## use_vignette("UniModels")
 ## use_vignette("functions_network")
 ## use_package(package = "networkD3", type = "Suggests")
 
 build_vignettes()
 
-## vignette("vignette-01", package="mcglm")
+## vignette()
+## vignette("UniModels", package="mcglm")
 
 ##----------------------------------------------------------------------
 ## Generate the README.md.

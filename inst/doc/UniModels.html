@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="author" content="Wagner Hugo Bonat" />
+
+
+<title>Multivariate Covariance Generalized Linear Models</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<link href="data:text/css,body%20%7B%0A%20%20background%2Dcolor%3A%20%23fff%3B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20max%2Dwidth%3A%20700px%3B%0A%20%20overflow%3A%20visible%3B%0A%20%20padding%2Dleft%3A%202em%3B%0A%20%20padding%2Dright%3A%202em%3B%0A%20%20font%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0A%20%20font%2Dsize%3A%2014px%3B%0A%20%20line%2Dheight%3A%201%2E35%3B%0A%7D%0A%0A%23header%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0A%0A%23TOC%20%7B%0A%20%20clear%3A%20both%3B%0A%20%20margin%3A%200%200%2010px%2010px%3B%0A%20%20padding%3A%204px%3B%0A%20%20width%3A%20400px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20border%2Dradius%3A%205px%3B%0A%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20font%2Dsize%3A%2013px%3B%0A%20%20line%2Dheight%3A%201%2E3%3B%0A%7D%0A%20%20%23TOC%20%2Etoctitle%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%20%20font%2Dsize%3A%2015px%3B%0A%20%20%20%20margin%2Dleft%3A%205px%3B%0A%20%20%7D%0A%0A%20%20%23TOC%20ul%20%7B%0A%20%20%20%20padding%2Dleft%3A%2040px%3B%0A%20%20%20%20margin%2Dleft%3A%20%2D1%2E5em%3B%0A%20%20%20%20margin%2Dtop%3A%205px%3B%0A%20%20%20%20margin%2Dbottom%3A%205px%3B%0A%20%20%7D%0A%20%20%23TOC%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dleft%3A%20%2D2em%3B%0A%20%20%7D%0A%20%20%23TOC%20li%20%7B%0A%20%20%20%20line%2Dheight%3A%2016px%3B%0A%20%20%7D%0A%0Atable%20%7B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dcolor%3A%20%23DDDDDD%3B%0A%20%20border%2Dstyle%3A%20outset%3B%0A%20%20border%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0A%20%20border%2Dwidth%3A%202px%3B%0A%20%20padding%3A%205px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%20%20line%2Dheight%3A%2018px%3B%0A%20%20padding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0A%20%20border%2Dleft%2Dstyle%3A%20none%3B%0A%20%20border%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Ap%20%7B%0A%20%20margin%3A%200%2E5em%200%3B%0A%7D%0A%0Ablockquote%20%7B%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20padding%3A%200%2E25em%200%2E75em%3B%0A%7D%0A%0Ahr%20%7B%0A%20%20border%2Dstyle%3A%20solid%3B%0A%20%20border%3A%20none%3B%0A%20%20border%2Dtop%3A%201px%20solid%20%23777%3B%0A%20%20margin%3A%2028px%200%3B%0A%7D%0A%0Adl%20%7B%0A%20%20margin%2Dleft%3A%200%3B%0A%7D%0A%20%20dl%20dd%20%7B%0A%20%20%20%20margin%2Dbottom%3A%2013px%3B%0A%20%20%20%20margin%2Dleft%3A%2013px%3B%0A%20%20%7D%0A%20%20dl%20dt%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%7D%0A%0Aul%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%7D%0A%20%20ul%20li%20%7B%0A%20%20%20%20list%2Dstyle%3A%20circle%20outside%3B%0A%20%20%7D%0A%20%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dbottom%3A%200%3B%0A%20%20%7D%0A%0Apre%2C%20code%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20color%3A%20%23333%3B%0A%7D%0Apre%20%7B%0A%20%20white%2Dspace%3A%20pre%2Dwrap%3B%20%20%20%20%2F%2A%20Wrap%20long%20lines%20%2A%2F%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20margin%3A%205px%200px%2010px%200px%3B%0A%20%20padding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Acode%20%7B%0A%20%20font%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0A%20%20font%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0A%20%20padding%3A%202px%200px%3B%0A%7D%0A%0Adiv%2Efigure%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0A%20%20background%2Dcolor%3A%20%23FFFFFF%3B%0A%20%20padding%3A%202px%3B%0A%20%20border%3A%201px%20solid%20%23DDDDDD%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20margin%3A%200%205px%3B%0A%7D%0A%0Ah1%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%20%20font%2Dsize%3A%2035px%3B%0A%20%20line%2Dheight%3A%2040px%3B%0A%7D%0A%0Ah2%20%7B%0A%20%20border%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20padding%2Dbottom%3A%202px%3B%0A%20%20font%2Dsize%3A%20145%25%3B%0A%7D%0A%0Ah3%20%7B%0A%20%20border%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20font%2Dsize%3A%20120%25%3B%0A%7D%0A%0Ah4%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0A%20%20margin%2Dleft%3A%208px%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Ah5%2C%20h6%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23ccc%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Aa%20%7B%0A%20%20color%3A%20%230033dd%3B%0A%20%20text%2Ddecoration%3A%20none%3B%0A%7D%0A%20%20a%3Ahover%20%7B%0A%20%20%20%20color%3A%20%236666ff%3B%20%7D%0A%20%20a%3Avisited%20%7B%0A%20%20%20%20color%3A%20%23800080%3B%20%7D%0A%20%20a%3Avisited%3Ahover%20%7B%0A%20%20%20%20color%3A%20%23BB00BB%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%0A%2F%2A%20Class%20described%20in%20https%3A%2F%2Fbenjeffrey%2Ecom%2Fposts%2Fpandoc%2Dsyntax%2Dhighlighting%2Dcss%0A%20%20%20Colours%20from%20https%3A%2F%2Fgist%2Egithub%2Ecom%2Frobsimmons%2F1172277%20%2A%2F%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Keyword%20%2A%2F%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%2F%2A%20DataType%20%2A%2F%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%2F%2A%20DecVal%20%28decimal%20values%29%20%2A%2F%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20BaseN%20%2A%2F%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Float%20%2A%2F%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Char%20%2A%2F%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20String%20%2A%2F%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%2F%2A%20Comment%20%2A%2F%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%2F%2A%20OtherToken%20%2A%2F%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20AlertToken%20%2A%2F%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Function%20calls%20%2A%2F%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%2F%2A%20ErrorTok%20%2A%2F%0A%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div id="header">
+<h1 class="title">Multivariate Covariance Generalized Linear Models</h1>
+<h4 class="author"><em>Wagner Hugo Bonat</em></h4>
+<h4 class="date"><em>mcglm 0.0.2 2016-01-10</em></h4>
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#regression-models-for-continuous-data">Regression models for continuous data</a></li>
+<li><a href="#regression-models-for-binomial-and-bounded-data">Regression models for binomial and bounded data</a></li>
+<li><a href="#regression-models-for-count-data">Regression models for count data</a></li>
+</ul>
+</div>
+
+<style type="text/css">
+body, td, caption {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    background-color: white;
+    font-size: 16px;
+}
+
+tt, code, pre {
+    font-family: "Inconsolata", "Andale Mono", monospace;
+}
+
+code {
+    font-size: 16px;
+}
+
+pre code {
+    font-size: 14px;
+}
+
+pre:not([class]) code {
+    background-color: #92BFB1;
+}
+pre, code {
+    background-color: #62BFB1;
+    border-radius: 3px;
+    color: #333;
+}
+
+/* R output */
+pre:not([class]) code {
+    background-color: #D4D4D4;
+}
+pre:not([class]), code {
+    background-color: #D4D4D4;
+}
+
+/* R input */
+pre, code {
+    border-radius: 3px;
+    background-color: #EDEDED;
+    color: #333;
+}
+
+img {
+    max-width: 100% !important;
+    display: block;
+    margin: auto;
+}
+
+.MathJax {
+    font-size: 80% !important;
+}
+
+</style>
+<hr />
+<p>To install the stable version of <a href="http://git.leg.ufpr.br/wbonat/mcglm"><code>mcglm</code></a>, use <code>devtools::install_git()</code>. For more information, visit <a href="http://git.leg.ufpr.br/wbonat/mcglm/blob/master/README.md">mcglm/README</a>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
+<span class="kw">install_git</span>(<span class="st">&quot;http://git.leg.ufpr.br/wbonat/mcglm.git&quot;</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mcglm)
+<span class="kw">packageVersion</span>(<span class="st">&quot;mcglm&quot;</span>)</code></pre>
+<pre><code>## [1] '0.0.2'</code></pre>
+<div id="abstract" class="section level5">
+<h5>Abstract</h5>
+<p>The <code>mcglm</code> package implements the multivariate covariance generalized linear models (McGLMs) proposed by Bonat and J<span class="math">\(\o\)</span>rgensen (2016). The core fit function <code>mcglm</code> is employed for fitting a set of models. In this introductory vignette we restrict ourselves to model independent data, although a simple model for longitudinal data analysis in the Gaussian case is also presented. We present models to deal with continuous, binomial/bounded and count univariate response variables. We explore the specification of different link, variance and covariance functions.</p>
+<hr />
+</div>
+<div id="regression-models-for-continuous-data" class="section level2">
+<h2>Regression models for continuous data</h2>
+<p>Consider a simple regression model, for univariate and independent Gaussian data: <span class="math">\[Y \sim N(X \beta, \tau_0 Z_0).\]</span></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Loading extra packages</span>
+<span class="kw">require</span>(mcglm)
+<span class="kw">require</span>(Matrix)
+<span class="kw">require</span>(mvtnorm)
+<span class="kw">require</span>(tweedie)
+
+<span class="co"># Setting the seed</span>
+<span class="kw">set.seed</span>(<span class="dv">2503</span>)
+
+<span class="co"># Fixed component</span>
+covariate &lt;-<span class="st"> </span><span class="kw">seq</span>(-<span class="dv">1</span>,<span class="dv">1</span>, <span class="dt">l =</span> <span class="dv">100</span>)
+X &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(~<span class="st"> </span>covariate)
+mu1 &lt;-<span class="st"> </span><span class="kw">mc_link_function</span>(<span class="dt">beta =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="fl">0.8</span>), <span class="dt">X =</span> X, <span class="dt">offset =</span> <span class="ot">NULL</span>, 
+                        <span class="dt">link =</span> <span class="st">&quot;identity&quot;</span>)
+<span class="co"># Random component</span>
+y1 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>, mu1$mu, <span class="dt">sd =</span> <span class="fl">0.5</span>)
+
+<span class="co"># Matrix linear predictor</span>
+Z0 &lt;-<span class="st"> </span><span class="kw">Diagonal</span>(<span class="dv">100</span>, <span class="dv">1</span>)
+
+<span class="co"># Data set</span>
+data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="st">&quot;y1&quot;</span> =<span class="st"> </span>y1, <span class="st">&quot;covariate&quot;</span> =<span class="st"> </span>covariate)
+
+<span class="co"># Fit</span>
+fit1.id &lt;-<span class="st"> </span><span class="kw">mcglm</span>(<span class="dt">linear_pred =</span> <span class="kw">c</span>(y1 ~<span class="st"> </span>covariate), 
+                 <span class="dt">matrix_pred =</span> <span class="kw">list</span>(<span class="kw">list</span>(Z0)),
+                 <span class="dt">data =</span> data)</code></pre>
+<pre><code>## Automatic initial values selected.</code></pre>
+<p>The <code>mcglm</code> package offers the following set of <code>S3-methods</code> for model summarize.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">methods</span>(<span class="dt">class =</span> <span class="st">&quot;mcglm&quot;</span>))</code></pre>
+<pre><code>## [1] anova     coef      confint   fitted    plot      print    
+## [7] residuals summary   vcov     
+## see '?methods' for accessing help and source code</code></pre>
+<p>The traditional <code>summary</code> for a fitted model can be obtained by</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(fit1.id)</code></pre>
+<pre><code>## Call: y1 ~ covariate
+## 
+## Link function: identity
+## Variance function: constant
+## Covariance function: identity
+## Regression:
+##             Estimates  Std.error  Z value
+## (Intercept) 1.0029066 0.05277132 19.00477
+## covariate   0.9488496 0.09049311 10.48532
+## 
+## Dispersion:
+##   Estimates  Std.error  Z value
+## 1 0.2784812 0.04214603 6.607532
+## 
+## Algorithm: chaser
+## Correction: TRUE
+## Number iterations: 4</code></pre>
+<p>The function <code>summary.mcglm</code> was designed to be similar the native <code>summary</code> functions for the classes <code>lm</code> and <code>glm</code>. Extra features were included to describe the dispersion structure. The mean formula call, along with the the <code>link</code>, <code>variance</code> and <code>covariance</code> functions are presented. The parameter estimates are presented in two blocks, the first presents the regression estimates while the second presents the dispersion estimates. In both cases the parameter estimates are summarize by point estimates, standard errors and Z-values associated with the Wald test whose null hypothesis is defined as <span class="math">\(\beta = 0\)</span> and <span class="math">\(\tau = 0\)</span> for the mean and dispersion structures, respectively. Finally, the selected algorithm, if the correction term is employed or not and the number of iterations is printed.</p>
+<p>The same linear regresion model can be fitted by using a different covariance link function, for example the inverse covariance link function.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit using inverse covariance link function </span>
+fit1.inv &lt;-<span class="st"> </span><span class="kw">mcglm</span>(<span class="dt">linear_pred =</span> <span class="kw">c</span>(y1 ~<span class="st"> </span>covariate), 
+                  <span class="dt">matrix_pred =</span> <span class="kw">list</span>(<span class="kw">list</span>(Z0)),
+                  <span class="dt">covariance =</span> <span class="st">&quot;inverse&quot;</span>, <span class="dt">data =</span> data)</code></pre>
+<pre><code>## Automatic initial values selected.</code></pre>
+<p>Furthermore, we can use a less conventional covariance link function, as the exponential-matrix.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit using expm covariance link function</span>
+fit1.expm &lt;-<span class="st"> </span><span class="kw">mcglm</span>(<span class="dt">linear_pred =</span> <span class="kw">c</span>(y1 ~<span class="st"> </span>covariate), 
+                   <span class="dt">matrix_pred =</span> <span class="kw">list</span>(<span class="kw">list</span>(Z0)),
+                   <span class="dt">covariance =</span> <span class="st">&quot;expm&quot;</span>, <span class="dt">data =</span> data)</code></pre>
+<pre><code>## Automatic initial values selected.</code></pre>
+<p>The function <code>mcglm</code> returns an object of mcglm class, for which we can use the method <code>coef</code> to extract the parameters estimates.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Comparing estimates using different covariance link functions</span>
+<span class="kw">cbind</span>(<span class="kw">coef</span>(fit1.id)$Estimates,
+      <span class="kw">coef</span>(fit1.inv)$Estimates,
+      <span class="kw">coef</span>(fit1.expm)$Estimates)</code></pre>
+<pre><code>##           [,1]      [,2]       [,3]
+## [1,] 1.0029066 1.0029066  1.0029066
+## [2,] 0.9488496 0.9488496  0.9488496
+## [3,] 0.2784812 3.5909038 -1.2784043</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Applying the inverse transformation</span>
+<span class="kw">c</span>(<span class="kw">coef</span>(fit1.id)$Estimates[<span class="dv">3</span>],
+  <span class="dv">1</span>/<span class="kw">coef</span>(fit1.inv)$Estimates[<span class="dv">3</span>],
+  <span class="kw">exp</span>(<span class="kw">coef</span>(fit1.expm)$Estimates[<span class="dv">3</span>]))</code></pre>
+<pre><code>## [1] 0.2784812 0.2784814 0.2784813</code></pre>
+<p>Consider an extension of the linear regression models to deal with heteroscedasticity:</p>
+<p><span class="math">\[ Y \sim N(X \beta, \tau_0 Z_0 + \tau_1 Z_1),\]</span> where <span class="math">\(Z_0\)</span> is a identity matrix and <span class="math">\(Z_1\)</span> is a diagonal matrix whose elements are given by the values of a known covariate. Such a model, can be fitted easily using the <code>mcglm</code> package.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Mean model</span>
+covariate &lt;-<span class="st"> </span><span class="kw">seq</span>(-<span class="dv">1</span>,<span class="dv">1</span>, <span class="dt">l =</span> <span class="dv">100</span>)
+X &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(~<span class="st"> </span>covariate)
+mu1 &lt;-<span class="st"> </span><span class="kw">mc_link_function</span>(<span class="dt">beta =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="fl">0.8</span>), <span class="dt">X =</span> X, <span class="dt">offset =</span> <span class="ot">NULL</span>, 
+                        <span class="dt">link =</span> <span class="st">&quot;identity&quot;</span>)
+
+<span class="co"># Matrix linear predictor</span>
+Z0 &lt;-<span class="st"> </span><span class="kw">Diagonal</span>(<span class="dv">100</span>, <span class="dv">1</span>)
+Z1 &lt;-<span class="st"> </span><span class="kw">Diagonal</span>(<span class="dv">100</span>, <span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">0</span>,<span class="dv">50</span>),<span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">50</span>)))
+
+<span class="co"># Covariance model</span>
+Sigma &lt;-<span class="st"> </span><span class="kw">mc_matrix_linear_predictor</span>(<span class="dt">tau =</span> <span class="kw">c</span>(<span class="fl">0.2</span>, <span class="fl">0.15</span>), <span class="dt">Z =</span> <span class="kw">list</span>(Z0,Z1))
+y1 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>, mu1$mu, <span class="dt">sd =</span> <span class="kw">sqrt</span>(<span class="kw">diag</span>(Sigma)))
+data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="st">&quot;y1&quot;</span> =<span class="st"> </span>y1, <span class="st">&quot;covariate&quot;</span> =<span class="st"> </span>covariate)
+
+fit2.id &lt;-<span class="st"> </span><span class="kw">mcglm</span>(<span class="dt">linear_pred =</span> <span class="kw">c</span>(y1 ~<span class="st"> </span>covariate), 
+                 <span class="dt">matrix_pred =</span> <span class="kw">list</span>(<span class="kw">list</span>(Z0,Z1)), 
+                 <span class="dt">data =</span> data)</code></pre>
+<pre><code>## Automatic initial values selected.</code></pre>
+<p>We can also extend the linear regression model to deal with longitudinal data analysis. The code below presents an example of such a model.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Mean model</span>
+covariate &lt;-<span class="st"> </span><span class="kw">seq</span>(-<span class="dv">1</span>,<span class="dv">1</span>, <span class="dt">l =</span> <span class="dv">200</span>)
+X &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(~<span class="st"> </span>covariate)
+mu1 &lt;-<span class="st"> </span><span class="kw">mc_link_function</span>(<span class="dt">beta =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="fl">0.8</span>), <span class="dt">X =</span> X, <span class="dt">offset =</span> <span class="ot">NULL</span>, 
+                        <span class="dt">link =</span> <span class="st">&quot;identity&quot;</span>)
+<span class="co"># Covariance model</span>
+Z0 &lt;-<span class="st"> </span><span class="kw">Diagonal</span>(<span class="dv">200</span>, <span class="dv">1</span>)
+Z1.temp &lt;-<span class="st"> </span><span class="kw">Matrix</span>(<span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">10</span>)%*%<span class="kw">t</span>(<span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">10</span>)))
+Z1.list &lt;-<span class="st"> </span><span class="kw">list</span>()
+for(i in <span class="dv">1</span>:<span class="dv">20</span>){Z1.list[[i]] &lt;-<span class="st"> </span>Z1.temp}
+Z1 &lt;-<span class="st"> </span><span class="kw">bdiag</span>(Z1.list)
+Sigma &lt;-<span class="st"> </span><span class="kw">mc_matrix_linear_predictor</span>(<span class="dt">tau =</span> <span class="kw">c</span>(<span class="fl">0.2</span>, <span class="fl">0.15</span>), <span class="dt">Z =</span> <span class="kw">list</span>(Z0,Z1))
+
+<span class="co"># Response variable</span>
+y1 &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">rmvnorm</span>(<span class="dv">1</span>, <span class="dt">mean =</span> mu1$mu, <span class="dt">sigma =</span> <span class="kw">as.matrix</span>(Sigma)))
+data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="st">&quot;y1&quot;</span> =<span class="st"> </span>y1, <span class="st">&quot;covariate&quot;</span> =<span class="st"> </span>covariate)
+
+<span class="co"># Fit</span>
+fit3.id &lt;-<span class="st"> </span><span class="kw">mcglm</span>(<span class="dt">linear_pred =</span> <span class="kw">c</span>(y1 ~<span class="st"> </span>covariate), 
+                 <span class="dt">matrix_pred =</span> <span class="kw">list</span>(<span class="st">&quot;resp1&quot;</span> =<span class="st"> </span><span class="kw">list</span>(Z0,Z1)), <span class="dt">data =</span> data)</code></pre>
+<pre><code>## Automatic initial values selected.</code></pre>
+<p>The model summary</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(fit3.id)</code></pre>
+<pre><code>## Call: y1 ~ covariate
+## 
+## Link function: identity
+## Variance function: constant
+## Covariance function: identity
+## Regression:
+##             Estimates  Std.error   Z value
+## (Intercept) 0.9621971 0.07982881 12.053256
+## covariate   0.9589537 0.13667821  7.016142
+## 
+## Dispersion:
+##   Estimates  Std.error  Z value
+## 1 0.2011307 0.02408285 8.351618
+## 2 0.1073397 0.04035983 2.659568
+## 
+## Algorithm: chaser
+## Correction: TRUE
+## Number iterations: 6</code></pre>
+<p>Note that, the dispersion structure now has two parameters. In that case, the parameter <span class="math">\(\tau_1\)</span> represents the longitudinal structure for which we are assuming a compound symmetry model. This model is an equivalent to a random intercept model in the context of Linear Mixed Models (LMMs).</p>
+</div>
+<div id="regression-models-for-binomial-and-bounded-data" class="section level2">
+<h2>Regression models for binomial and bounded data</h2>
+<p>The <code>mcglm</code> package offers a rich set of models to deal with binomial and bounded response variables. The <code>logit</code>, <code>probit</code>, <code>cauchit</code>, <code>cloglog</code>, and <code>loglog</code> link functions along with the extended binomial variance function combined with the linear covariance structure, provide a flexible class of models for handling binomial and bounded response variables. The extended binomial variance function is given by <span class="math">\(\mu^p (1- \mu)^q\)</span> where the two extra power parameters offer more flexibility to model the relationship between mean and variance. Consider the following simulated dataset.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Mean model</span>
+covariate &lt;-<span class="st"> </span><span class="kw">seq</span>(-<span class="dv">1</span>,<span class="dv">1</span>, <span class="dt">l =</span> <span class="dv">250</span>)
+X &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(~<span class="st"> </span>covariate)
+mu1 &lt;-<span class="st"> </span><span class="kw">mc_link_function</span>(<span class="dt">beta =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="fl">0.8</span>), <span class="dt">X =</span> X, <span class="dt">offset =</span> <span class="ot">NULL</span>, 
+                        <span class="dt">link =</span> <span class="st">&quot;logit&quot;</span>)
+<span class="co"># Covariance model</span>
+Z0 &lt;-<span class="st"> </span><span class="kw">Diagonal</span>(<span class="dv">500</span>, <span class="dv">1</span>)
+
+<span class="co"># Response variable</span>
+<span class="kw">set.seed</span>(<span class="dv">123</span>)
+y1 &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">500</span>, <span class="dt">prob =</span> mu1$mu, <span class="dt">size =</span> <span class="dv">10</span>)/<span class="dv">10</span>
+
+<span class="co"># Data set</span>
+data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="st">&quot;y1&quot;</span> =<span class="st"> </span>y1, <span class="st">&quot;covariate&quot;</span> =<span class="st"> </span>covariate)</code></pre>
+<p>The most traditional regression model to deal with binomial data is the logistic regression model that can be fitted using the <code>mcglm</code> package using the following code:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit</span>
+fit4.logit &lt;-<span class="st"> </span><span class="kw">mcglm</span>(<span class="dt">linear_pred =</span> <span class="kw">c</span>(y1 ~<span class="st"> </span>covariate), 
+                    <span class="dt">matrix_pred =</span> <span class="kw">list</span>(<span class="kw">list</span>(Z0)),
+                    <span class="dt">link =</span> <span class="st">&quot;logit&quot;</span>, <span class="dt">variance =</span> <span class="st">&quot;binomialP&quot;</span>,
+                    <span class="dt">power_fixed =</span> <span class="ot">TRUE</span>,
+                    <span class="dt">Ntrial =</span> <span class="kw">list</span>(<span class="kw">rep</span>(<span class="dv">10</span>,<span class="dv">250</span>)), <span class="dt">data =</span> data)</code></pre>
+<pre><code>## Automatic initial values selected.</code></pre>
+<p>It is important to highlight that the response variable collumns should be between <span class="math">\(0\)</span> and <span class="math">\(1\)</span> and in the case of more than one trial the argument <code>Ntrial</code> should be used for fitting the model. The argument <code>link</code> specifies the link function whereas the argument <code>variance</code> specifies the variance function in that case <code>binomialP</code>. The variance function <code>binomialP</code> represents a simplification of the extended binomial variance function given by <span class="math">\(\mu^p (1- \mu)^p\)</span>. Note that, in this example the argument ‘power_fixed = TRUE’ specifies that the power parameter <span class="math">\(p\)</span> will not be estimated, but fixed at the initial value <span class="math">\(p = 1\)</span> corresponding to the orthodox binomial variance function. We can easily fit the model using a different link function, for example the <code>cauchit</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">fit4.cauchit &lt;-<span class="st"> </span><span class="kw">mcglm</span>(<span class="dt">linear_pred =</span> <span class="kw">c</span>(y1 ~<span class="st"> </span>covariate), 
+                      <span class="dt">matrix_pred =</span> <span class="kw">list</span>(<span class="kw">list</span>(Z0)),
+                      <span class="dt">link =</span> <span class="st">&quot;cauchit&quot;</span>, <span class="dt">variance =</span> <span class="st">&quot;binomialP&quot;</span>, 
+                      <span class="dt">Ntrial =</span> <span class="kw">list</span>(<span class="kw">rep</span>(<span class="dv">10</span>,<span class="dv">250</span>)), <span class="dt">data =</span> data)</code></pre>
+<pre><code>## Automatic initial values selected.</code></pre>
+<p>We can also estimate the extra power parameter <span class="math">\(p\)</span>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">fit4.logitP &lt;-<span class="st"> </span><span class="kw">mcglm</span>(<span class="dt">linear_pred =</span> <span class="kw">c</span>(y1 ~<span class="st"> </span>covariate), 
+                      <span class="dt">matrix_pred =</span> <span class="kw">list</span>(<span class="kw">list</span>(Z0)),
+                      <span class="dt">link =</span> <span class="st">&quot;logit&quot;</span>, <span class="dt">variance =</span> <span class="st">&quot;binomialP&quot;</span>,
+                      <span class="dt">power_fixed =</span> <span class="ot">FALSE</span>,
+                      <span class="dt">Ntrial =</span> <span class="kw">list</span>(<span class="kw">rep</span>(<span class="dv">10</span>,<span class="dv">250</span>)), <span class="dt">data =</span> data)</code></pre>
+<pre><code>## Automatic initial values selected.</code></pre>
+<p>Furthermore, we can estimate the two extra power parameters involved in the extended binomial variance function.</p>
+<pre class="sourceCode r"><code class="sourceCode r">fit4.logitPQ &lt;-<span class="st"> </span><span class="kw">mcglm</span>(<span class="dt">linear_pred =</span> <span class="kw">c</span>(y1 ~<span class="st"> </span>covariate), 
+                      <span class="dt">matrix_pred =</span> <span class="kw">list</span>(<span class="kw">list</span>(Z0)),
+                      <span class="dt">link =</span> <span class="st">&quot;logit&quot;</span>, <span class="dt">variance =</span> <span class="st">&quot;binomialPQ&quot;</span>,
+                      <span class="dt">power_fixed =</span> <span class="ot">FALSE</span>,
+                      <span class="dt">Ntrial =</span> <span class="kw">list</span>(<span class="kw">rep</span>(<span class="dv">10</span>,<span class="dv">250</span>)), 
+                      <span class="dt">control_algorithm =</span> <span class="kw">list</span>(<span class="dt">tunning =</span> <span class="fl">0.5</span>),
+                      <span class="dt">data =</span> data)</code></pre>
+<pre><code>## Automatic initial values selected.</code></pre>
+<p>The estimation of the extra power parameters involved in the extended binomial variance function is challenge mainly for small data sets. Note that, in this simulated example, we have to control the step-length of the <code>chaser</code> algorithm to avoid unrealistic values for the parameters involved in the covariance structure. To do that, we used the extra argument <code>control_algorithm</code> that should be a named list. For a detailed description of the arguments that can be passed to the <code>control_algorithm</code> function see <code>?fit_mcglm</code>.</p>
+</div>
+<div id="regression-models-for-count-data" class="section level2">
+<h2>Regression models for count data</h2>
+<p>The analysis of count data in the <code>mcglm</code> package relies on the structure of the Poisson-Tweedie distribution. Such a distribution is characterized by the following dispersion functions:</p>
+<p><span class="math">\[ \nu(\mu, p) = \mu + \tau_0 \mu^p. \]</span> The power parameter is an index that identify different distributions, examples include the Hermite (<span class="math">\(p = 0\)</span>), Neyman-Type A (<span class="math">\(p = 1\)</span>) and the negative binomial (<span class="math">\(p = 2\)</span>).</p>
+<p>The orthodox Poisson model can be fitted using the <code>mcglm</code> package using the <code>Tweedie</code> variance function <span class="math">\(\nu(\mu, p ) = \mu^p\)</span> where the power parameter <span class="math">\(p\)</span> is fixed at <span class="math">\(1\)</span>. For example,</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Mean model</span>
+covariate &lt;-<span class="st"> </span><span class="kw">seq</span>(-<span class="dv">2</span>,<span class="dv">2</span>, <span class="dt">l =</span> <span class="dv">200</span>)
+X &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(~<span class="st"> </span>covariate)
+mu &lt;-<span class="st"> </span><span class="kw">mc_link_function</span>(<span class="dt">beta =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="fl">0.8</span>), <span class="dt">X =</span> X, <span class="dt">offset =</span> <span class="ot">NULL</span>, 
+                        <span class="dt">link =</span> <span class="st">&quot;log&quot;</span>)
+
+<span class="co"># Covariance model</span>
+Z0 &lt;-<span class="st"> </span><span class="kw">Diagonal</span>(<span class="dv">200</span>, <span class="dv">1</span>)
+
+<span class="co"># Data</span>
+y1 &lt;-<span class="st"> </span><span class="kw">rpois</span>(<span class="dv">200</span>, <span class="dt">lambda =</span> mu$mu)
+data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="st">&quot;y1&quot;</span> =<span class="st"> </span>y1, <span class="st">&quot;covariate&quot;</span> =<span class="st"> </span>covariate)
+
+<span class="co"># Fit</span>
+fit.poisson &lt;-<span class="st"> </span><span class="kw">mcglm</span>(<span class="dt">linear_pred =</span> <span class="kw">c</span>(y1 ~<span class="st"> </span>covariate), 
+                    <span class="dt">matrix_pred =</span> <span class="kw">list</span>(<span class="kw">list</span>(Z0)),
+                    <span class="dt">link =</span> <span class="st">&quot;log&quot;</span>, <span class="dt">variance =</span> <span class="st">&quot;tweedie&quot;</span>,
+                    <span class="dt">power_fixed =</span> <span class="ot">TRUE</span>, <span class="dt">data =</span> data)</code></pre>
+<pre><code>## Automatic initial values selected.</code></pre>
+<p>Another very useful model for count data is the negative binomial.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Simulating negative binomial models</span>
+<span class="kw">require</span>(tweedie)
+<span class="kw">set.seed</span>(<span class="dv">1811</span>)
+y1 &lt;-<span class="st"> </span><span class="kw">rtweedie</span>(<span class="dv">200</span>, <span class="dt">mu =</span> mu$mu, <span class="dt">power =</span> <span class="dv">2</span>, <span class="dt">phi =</span> <span class="fl">0.5</span>)
+y &lt;-<span class="st"> </span><span class="kw">rpois</span>(<span class="dv">200</span>, <span class="dt">lambda =</span> y1)
+data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="st">&quot;y1&quot;</span> =<span class="st"> </span>y, <span class="st">&quot;covariate&quot;</span> =<span class="st"> </span>covariate)
+
+fit.pt &lt;-<span class="st"> </span><span class="kw">mcglm</span>(<span class="dt">linear_pred =</span> <span class="kw">c</span>(y ~<span class="st"> </span>covariate), 
+               <span class="dt">matrix_pred =</span> <span class="kw">list</span>(<span class="kw">list</span>(Z0)),
+               <span class="dt">link =</span> <span class="st">&quot;log&quot;</span>, <span class="dt">variance =</span> <span class="st">&quot;poisson_tweedie&quot;</span>, 
+               <span class="dt">power_fixed =</span> <span class="ot">FALSE</span>, <span class="dt">data =</span> data)</code></pre>
+<pre><code>## Automatic initial values selected.</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(fit.pt)</code></pre>
+<pre><code>## Call: y ~ covariate
+## 
+## Link function: log
+## Variance function: poisson_tweedie
+## Covariance function: identity
+## Regression:
+##             Estimates  Std.error  Z value
+## (Intercept) 0.8552182 0.07044865 12.13960
+## covariate   0.9285782 0.06284414 14.77589
+## 
+## Power:
+##   Estimates Std.error  Z value
+## 1  2.237079 0.3461908 6.461982
+## 
+## Dispersion:
+##   Estimates Std.error  Z value
+## 1 0.2711807 0.1923947 1.409502
+## 
+## Algorithm: chaser
+## Correction: TRUE
+## Number iterations: 11</code></pre>
+<p>Note that, we estimate the power parameter rather than fix it at <span class="math">\(p = 2\)</span>.</p>
+<!---------------------------------------------------------------------- -->
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
