@@ -1,5 +1,5 @@
 ## ----setup, include=FALSE-----------------------------------------
-##----------------------------------------------------------------------
+#-----------------------------------------------------------------------
 
 library(knitr)
 
@@ -8,7 +8,7 @@ opts_chunk$set(
 
 options(width=68)
 
-##----------------------------------------------------------------------
+#-----------------------------------------------------------------------
 
 library(latticeExtra)
 rm(list=ls())
@@ -62,11 +62,11 @@ fit.glm <- glm(counts ~ outcome + treatment, family = poisson)
 require(Matrix)
 # Matrix linear predictor
 Z0 <- Diagonal(dim(d.AD)[1],1)
-fit.qglm <- mcglm(linear_pred = c(counts ~ outcome + treatment), 
+fit.qglm <- mcglm(linear_pred = c(counts ~ outcome + treatment),
                   matrix_pred = list("resp1" = list(Z0)),
                   link = "log", variance = "tweedie", data = d.AD,
-                  control_algorithm = list("verbose" = FALSE, 
-                                           "method" = "chaser", 
+                  control_algorithm = list("verbose" = FALSE,
+                                           "method" = "chaser",
                                            "tunning" = 0.8))
 
 ## ---- warning = FALSE, message = FALSE----------------------------
@@ -83,9 +83,9 @@ anorex.1 <- glm(Postwt ~ Prewt + Treat + offset(Prewt),
 
 # McGLM fit
 Z0 <- Diagonal(dim(anorexia)[1],1)
-fit.anorexia <- mcglm(linear_pred = c(Postwt ~ Prewt + Treat), 
+fit.anorexia <- mcglm(linear_pred = c(Postwt ~ Prewt + Treat),
                       matrix_pred = list(list(Z0)),
-                      link = "identity", variance = "constant", 
+                      link = "identity", variance = "constant",
                       offset = list(anorexia$Prewt),
                       power_fixed = TRUE, data = anorexia,
                       control_algorithm = list("correct" = FALSE))
@@ -106,9 +106,9 @@ clotting <- data.frame(
   lot2 = c(69,35,26,21,18,16,13,12,12))
 
 ## ---- warning = FALSE, message = FALSE----------------------------
-fit.lot1 <- glm(lot1 ~ log(u), data = clotting, 
+fit.lot1 <- glm(lot1 ~ log(u), data = clotting,
                 family = Gamma(link = "inverse"))
-fit.lot2 <- glm(lot2 ~ log(u), data = clotting, 
+fit.lot2 <- glm(lot2 ~ log(u), data = clotting,
                 family = Gamma(link = "inverse"))
 
 ## ---- warning = FALSE, message = FALSE----------------------------
@@ -120,10 +120,10 @@ list_initial$rho = 0
 
 ## ---- warning = FALSE, message = FALSE----------------------------
 Z0 <- Diagonal(dim(clotting)[1], 1)
-fit.lot1.mcglm <- mcglm(linear_pred = c(lot1 ~ log(u)), 
+fit.lot1.mcglm <- mcglm(linear_pred = c(lot1 ~ log(u)),
                         matrix_pred = list(list(Z0)),
                         link = "inverse", variance = "tweedie",
-                        data = clotting, 
+                        data = clotting,
                         control_initial = list_initial)
 
 ## ---- warning = FALSE, message = FALSE----------------------------
@@ -139,9 +139,9 @@ list_initial$regression <- list("resp1" = coef(fit.lot2))
 list_initial$tau <- list("resp1" = c(var(1/clotting$lot2)))
 
 ## ---- warning = FALSE, message = FALSE----------------------------
-fit.lot2.mcglm <- mcglm(linear_pred = c(lot2 ~ log(u)), 
+fit.lot2.mcglm <- mcglm(linear_pred = c(lot2 ~ log(u)),
                         matrix_pred = list(list(Z0)),
-                        link = "inverse", variance = "tweedie", 
+                        link = "inverse", variance = "tweedie",
                         data = clotting,
                         control_initial = list_initial)
 
@@ -165,14 +165,14 @@ list_initial$rho = 0.80
 Z0 <- Diagonal(dim(clotting)[1],1)
 
 # Fit bivariate Gamma model
-fit.joint.mcglm <- mcglm(linear_pred = c(lot1 ~ log(u), lot2 ~ log(u)), 
+fit.joint.mcglm <- mcglm(linear_pred = c(lot1 ~ log(u), lot2 ~ log(u)),
                          matrix_pred = list(list(Z0), list(Z0)),
-                         link = c("inverse", "inverse"), 
+                         link = c("inverse", "inverse"),
                          variance = c("tweedie", "tweedie"),
-                         data = clotting, 
+                         data = clotting,
                          control_initial = list_initial,
-                         control_algorithm = list("correct" = TRUE, 
-                                                 "method" = "rc", 
+                         control_algorithm = list("correct" = TRUE,
+                                                 "method" = "rc",
                                                  "tunning" = 0.001,
                                                  "max_iter" = 100))
 summary(fit.joint.mcglm)
@@ -188,9 +188,9 @@ list_initial$rho = 0
 
 # Fit bivariate Gamma model
 fit.joint.log <- mcglm(linear_pred = c(lot1 ~ log(u), lot2 ~ log(u)),
-                       matrix_pred = list(list(Z0),list(Z0)), 
+                       matrix_pred = list(list(Z0),list(Z0)),
                        link = c("log", "log"),
-                       variance = c("tweedie", "tweedie"), 
+                       variance = c("tweedie", "tweedie"),
                        data = clotting,
                        control_initial = list_initial)
 summary(fit.joint.log)
@@ -198,20 +198,20 @@ summary(fit.joint.log)
 ## ---- warning = FALSE, message = FALSE----------------------------
 require(MASS)
 data(menarche)
-data <- data.frame("resp" = menarche$Menarche/menarche$Total, 
+data <- data.frame("resp" = menarche$Menarche/menarche$Total,
                    "Ntrial" = menarche$Total,
                    "Age" = menarche$Age)
 
 ## ---- warning = FALSE, message = FALSE----------------------------
-glm.out = glm(cbind(Menarche, Total-Menarche) ~ Age, 
+glm.out = glm(cbind(Menarche, Total-Menarche) ~ Age,
               family=binomial(logit), data=menarche)
 
 ## ---- warning = FALSE, message = FALSE----------------------------
 # Matrix linear predictor
 Z0 <- Diagonal(dim(data)[1],1)
-fit.logit <- mcglm(linear_pred = c(resp ~ Age), 
+fit.logit <- mcglm(linear_pred = c(resp ~ Age),
                    matrix_pred = list(list(Z0)),
-                   link = "logit", variance = "binomialP", 
+                   link = "logit", variance = "binomialP",
                    Ntrial = list(data$Ntrial), data = data)
 
 ## ---- warning = FALSE, message = FALSE----------------------------
@@ -223,9 +223,9 @@ cbind("GLM" = c(sqrt(diag(vcov(glm.out))),NA),
       "McGLM" =  sqrt(diag(vcov(fit.logit))))
 
 ## ---- warning = FALSE, message = FALSE----------------------------
-fit.logit.power <- mcglm(linear_pred = c(resp ~ Age), 
+fit.logit.power <- mcglm(linear_pred = c(resp ~ Age),
                          matrix_pred = list(list(Z0)),
-                         link = "logit", variance = "binomialP", 
+                         link = "logit", variance = "binomialP",
                          Ntrial = list(data$Ntrial),
                          power_fixed = FALSE, data = data)
 summary(fit.logit.power)
