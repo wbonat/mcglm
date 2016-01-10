@@ -2,17 +2,19 @@
 title: "Functions Network"
 author: "Wagner H. Bonat & Walmes M. Zeviani"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Functions Network}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
+<!-- css: style.css -->
+
 ```{r, include=FALSE}
 hasPackage <- require(networkD3)
 library(knitr)
 opts_chunk$set(eval = hasPackage)
+# knit_theme$set("edit-vim")
 
 ```
 
@@ -38,7 +40,7 @@ L <- lapply(list.files(path = "../R", pattern = "*.R"),
 da <- plyr::ldply(L)
 da <- da[, rev(1:ncol(da))]
 
-##----------------------------------------------------------------------
+#-----------------------------------------------------------------------
 ## Regex to search the function names inside body of another functions.
 
 funs <- unique(da$fun)
@@ -46,7 +48,7 @@ funs <- funs[!funs == "mcglm"]
 regex <- paste0("^.*(", paste(funs, collapse = "|"), ").*$")
 funs <- da$fun
 
-##----------------------------------------------------------------------
+#-----------------------------------------------------------------------
 ## NetWork.
 
 ## https://cran.r-project.org/web/packages/networkD3/index.html

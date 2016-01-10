@@ -2,72 +2,11 @@
 title: "Multivariate Covariance Generalized Linear Models"
 author: "Wagner Hugo Bonat"
 date: "`r paste('mcglm', packageVersion('mcglm'), Sys.Date())`"
-output:
-  rmarkdown::html_vignette:
-    fig_width: 6
-    fig_height: 6
-    toc: true
-    toc_dep: 3
 vignette: >
   %\VignetteIndexEntry{Multivariate Covariance Generalized Linear Models}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-
-<style type="text/css">
-body, td, caption {
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-    background-color: white;
-    font-size: 16px;
-}
-
-tt, code, pre {
-    font-family: "Inconsolata", "Andale Mono", monospace;
-}
-
-code {
-    font-size: 16px;
-}
-
-pre code {
-    font-size: 14px;
-}
-
-pre:not([class]) code {
-    background-color: #92BFB1;
-}
-pre, code {
-    background-color: #62BFB1;
-    border-radius: 3px;
-    color: #333;
-}
-
-/* R output */
-pre:not([class]) code {
-    background-color: #D4D4D4;
-}
-pre:not([class]), code {
-    background-color: #D4D4D4;
-}
-
-/* R input */
-pre, code {
-    border-radius: 3px;
-    background-color: #EDEDED;
-    color: #333;
-}
-
-img {
-    max-width: 100% !important;
-    display: block;
-    margin: auto;
-}
-
-.MathJax {
-    font-size: 80% !important;
-}
-
-</style>
 
 ```{r setup, include=FALSE}
 ##----------------------------------------------------------------------

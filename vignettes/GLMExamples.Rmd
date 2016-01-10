@@ -2,75 +2,14 @@
 title: "Multivariate Covariance Generalized Linear Models"
 author: "Wagner Hugo Bonat"
 date: "`r paste('mcglm', packageVersion('mcglm'), Sys.Date())`"
-output:
-  rmarkdown::html_vignette:
-    fig_width: 6
-    fig_height: 6
-    toc: true
-    toc_dep: 3
 vignette: >
   %\VignetteIndexEntry{Multivariate Covariance Generalized Linear Models}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-<style type="text/css">
-body, td, caption {
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-    background-color: white;
-    font-size: 16px;
-}
-
-tt, code, pre {
-    font-family: "Inconsolata", "Andale Mono", monospace;
-}
-
-code {
-    font-size: 16px;
-}
-
-pre code {
-    font-size: 14px;
-}
-
-pre:not([class]) code {
-    background-color: #92BFB1;
-}
-pre, code {
-    background-color: #62BFB1;
-    border-radius: 3px;
-    color: #333;
-}
-
-/* R output */
-pre:not([class]) code {
-    background-color: #D4D4D4;
-}
-pre:not([class]), code {
-    background-color: #D4D4D4;
-}
-
-/* R input */
-pre, code {
-    border-radius: 3px;
-    background-color: #EDEDED;
-    color: #333;
-}
-
-img {
-    max-width: 100% !important;
-    display: block;
-    margin: auto;
-}
-
-.MathJax {
-    font-size: 80% !important;
-}
-
-</style>
-
 ```{r setup, include=FALSE}
-##----------------------------------------------------------------------
+#-----------------------------------------------------------------------
 
 library(knitr)
 
@@ -79,7 +18,7 @@ opts_chunk$set(
 
 options(width=68)
 
-##----------------------------------------------------------------------
+#-----------------------------------------------------------------------
 
 library(latticeExtra)
 rm(list=ls())
@@ -131,8 +70,8 @@ packageVersion("mcglm")
 ##### Abstract
 The `mcglm` package implements the multivariate covariance generalized
 linear models (McGLMs) proposed by Bonat and J$\o$rgensen (2016).
-In this introductory vignette we employed the `mcglm` package for 
-fitting a set of generalized linear models and compare our results 
+In this introductory vignette we employed the `mcglm` package for
+fitting a set of generalized linear models and compare our results
 with the ones obtained by ordinary `R` functions like `lm` and `glm`.
 
 ****
@@ -155,7 +94,7 @@ fit.glm <- glm(counts ~ outcome + treatment, family = poisson)
 ```
 
 The orthodox quasi-Poisson model is obtained specifying the variance
-function as `tweedie` and fix the power parameter at $1$. 
+function as `tweedie` and fix the power parameter at $1$.
 Since, we are dealing with independent data, the matrix linear predictor
 is composed of a diagonal matrix.
 
@@ -163,11 +102,11 @@ is composed of a diagonal matrix.
 require(Matrix)
 # Matrix linear predictor
 Z0 <- Diagonal(dim(d.AD)[1],1)
-fit.qglm <- mcglm(linear_pred = c(counts ~ outcome + treatment), 
+fit.qglm <- mcglm(linear_pred = c(counts ~ outcome + treatment),
                   matrix_pred = list("resp1" = list(Z0)),
                   link = "log", variance = "tweedie", data = d.AD,
-                  control_algorithm = list("verbose" = FALSE, 
-                                           "method" = "chaser", 
+                  control_algorithm = list("verbose" = FALSE,
+                                           "method" = "chaser",
                                            "tunning" = 0.8))
 ```
 
@@ -181,8 +120,8 @@ cbind("GLM" = coef(fit.glm),
 ****
 ## Example 2 - Continuous data with offset
 
-Consider the example from Venables & Ripley (2002, p.189). 
-The response variable is continuous for which we can assume the 
+Consider the example from Venables & Ripley (2002, p.189).
+The response variable is continuous for which we can assume the
 Gaussian distribution. In this example, we exemplify the use of the
 `offset` argument.
 
@@ -196,9 +135,9 @@ anorex.1 <- glm(Postwt ~ Prewt + Treat + offset(Prewt),
 
 # McGLM fit
 Z0 <- Diagonal(dim(anorexia)[1],1)
-fit.anorexia <- mcglm(linear_pred = c(Postwt ~ Prewt + Treat), 
+fit.anorexia <- mcglm(linear_pred = c(Postwt ~ Prewt + Treat),
                       matrix_pred = list(list(Z0)),
-                      link = "identity", variance = "constant", 
+                      link = "identity", variance = "constant",
                       offset = list(anorexia$Prewt),
                       power_fixed = TRUE, data = anorexia,
                       control_algorithm = list("correct" = FALSE))
@@ -232,9 +171,9 @@ clotting <- data.frame(
 Analysis using generalized linear models `glm` function in `R`.
 
 ```{r, warning = FALSE, message = FALSE}
-fit.lot1 <- glm(lot1 ~ log(u), data = clotting, 
+fit.lot1 <- glm(lot1 ~ log(u), data = clotting,
                 family = Gamma(link = "inverse"))
-fit.lot2 <- glm(lot2 ~ log(u), data = clotting, 
+fit.lot2 <- glm(lot2 ~ log(u), data = clotting,
                 family = Gamma(link = "inverse"))
 ```
 
@@ -252,16 +191,16 @@ The `control_initial` argument should be a named list with initial
 values for all parameters involved in the model. Note that, in this
 example we used the parameter estimates from the `glm` fit as initial
 values for the regression and dispersion parameters. The power parameter
-was fixed at $p = 2$, since we want to fit Gamma regression models. 
-In that case, we have only one response variable, but the initial value 
+was fixed at $p = 2$, since we want to fit Gamma regression models.
+In that case, we have only one response variable, but the initial value
 for correlation parameter $\rho$ should be specified.
 
 ```{r, warning = FALSE, message = FALSE}
 Z0 <- Diagonal(dim(clotting)[1], 1)
-fit.lot1.mcglm <- mcglm(linear_pred = c(lot1 ~ log(u)), 
+fit.lot1.mcglm <- mcglm(linear_pred = c(lot1 ~ log(u)),
                         matrix_pred = list(list(Z0)),
                         link = "inverse", variance = "tweedie",
-                        data = clotting, 
+                        data = clotting,
                         control_initial = list_initial)
 ```
 Comparing parameter estimates and standard errors.
@@ -285,9 +224,9 @@ Note that, since the `list_initial` object already have all components
 required, we just modify the `entries` regression and tau.
 
 ```{r, warning = FALSE, message = FALSE}
-fit.lot2.mcglm <- mcglm(linear_pred = c(lot2 ~ log(u)), 
+fit.lot2.mcglm <- mcglm(linear_pred = c(lot2 ~ log(u)),
                         matrix_pred = list(list(Z0)),
-                        link = "inverse", variance = "tweedie", 
+                        link = "inverse", variance = "tweedie",
                         data = clotting,
                         control_initial = list_initial)
 ```
@@ -319,20 +258,20 @@ list_initial$rho = 0.80
 Z0 <- Diagonal(dim(clotting)[1],1)
 
 # Fit bivariate Gamma model
-fit.joint.mcglm <- mcglm(linear_pred = c(lot1 ~ log(u), lot2 ~ log(u)), 
+fit.joint.mcglm <- mcglm(linear_pred = c(lot1 ~ log(u), lot2 ~ log(u)),
                          matrix_pred = list(list(Z0), list(Z0)),
-                         link = c("inverse", "inverse"), 
+                         link = c("inverse", "inverse"),
                          variance = c("tweedie", "tweedie"),
-                         data = clotting, 
+                         data = clotting,
                          control_initial = list_initial,
-                         control_algorithm = list("correct" = TRUE, 
-                                                 "method" = "rc", 
+                         control_algorithm = list("correct" = TRUE,
+                                                 "method" = "rc",
                                                  "tunning" = 0.001,
                                                  "max_iter" = 100))
 summary(fit.joint.mcglm)
 ```
 
-We can also easily change the link function. The code below fit a 
+We can also easily change the link function. The code below fit a
 bivariate Gamma model using the `log` link function.
 
 ```{r, warning = FALSE, message = FALSE}
@@ -346,9 +285,9 @@ list_initial$rho = 0
 
 # Fit bivariate Gamma model
 fit.joint.log <- mcglm(linear_pred = c(lot1 ~ log(u), lot2 ~ log(u)),
-                       matrix_pred = list(list(Z0),list(Z0)), 
+                       matrix_pred = list(list(Z0),list(Z0)),
                        link = c("log", "log"),
-                       variance = c("tweedie", "tweedie"), 
+                       variance = c("tweedie", "tweedie"),
                        data = clotting,
                        control_initial = list_initial)
 summary(fit.joint.log)
@@ -361,7 +300,7 @@ Consider the example `menarche` from the MASS `R` package.
 ```{r, warning = FALSE, message = FALSE}
 require(MASS)
 data(menarche)
-data <- data.frame("resp" = menarche$Menarche/menarche$Total, 
+data <- data.frame("resp" = menarche$Menarche/menarche$Total,
                    "Ntrial" = menarche$Total,
                    "Age" = menarche$Age)
 ```
@@ -369,7 +308,7 @@ data <- data.frame("resp" = menarche$Menarche/menarche$Total,
 Logistic regression model.
 
 ```{r, warning = FALSE, message = FALSE}
-glm.out = glm(cbind(Menarche, Total-Menarche) ~ Age, 
+glm.out = glm(cbind(Menarche, Total-Menarche) ~ Age,
               family=binomial(logit), data=menarche)
 ```
 The same fitted by `mcglm` function.
@@ -377,9 +316,9 @@ The same fitted by `mcglm` function.
 ```{r, warning = FALSE, message = FALSE}
 # Matrix linear predictor
 Z0 <- Diagonal(dim(data)[1],1)
-fit.logit <- mcglm(linear_pred = c(resp ~ Age), 
+fit.logit <- mcglm(linear_pred = c(resp ~ Age),
                    matrix_pred = list(list(Z0)),
-                   link = "logit", variance = "binomialP", 
+                   link = "logit", variance = "binomialP",
                    Ntrial = list(data$Ntrial), data = data)
 ```
 Comparing parameter estimates and standard errors.
@@ -397,9 +336,9 @@ We can estimate a more flexible model using the extended binomial
 variance function.
 
 ```{r, warning = FALSE, message = FALSE}
-fit.logit.power <- mcglm(linear_pred = c(resp ~ Age), 
+fit.logit.power <- mcglm(linear_pred = c(resp ~ Age),
                          matrix_pred = list(list(Z0)),
-                         link = "logit", variance = "binomialP", 
+                         link = "logit", variance = "binomialP",
                          Ntrial = list(data$Ntrial),
                          power_fixed = FALSE, data = data)
 summary(fit.logit.power)
