@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="author" content="Wagner Hugo Bonat" />
+
+
+<title>Multivariate Covariance Generalized Linear Models</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<link href="data:text/css,body%20%7B%0A%20%20background%2Dcolor%3A%20%23fff%3B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20max%2Dwidth%3A%20700px%3B%0A%20%20overflow%3A%20visible%3B%0A%20%20padding%2Dleft%3A%202em%3B%0A%20%20padding%2Dright%3A%202em%3B%0A%20%20font%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0A%20%20font%2Dsize%3A%2014px%3B%0A%20%20line%2Dheight%3A%201%2E35%3B%0A%7D%0A%0A%23header%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0A%0A%23TOC%20%7B%0A%20%20clear%3A%20both%3B%0A%20%20margin%3A%200%200%2010px%2010px%3B%0A%20%20padding%3A%204px%3B%0A%20%20width%3A%20400px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20border%2Dradius%3A%205px%3B%0A%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20font%2Dsize%3A%2013px%3B%0A%20%20line%2Dheight%3A%201%2E3%3B%0A%7D%0A%20%20%23TOC%20%2Etoctitle%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%20%20font%2Dsize%3A%2015px%3B%0A%20%20%20%20margin%2Dleft%3A%205px%3B%0A%20%20%7D%0A%0A%20%20%23TOC%20ul%20%7B%0A%20%20%20%20padding%2Dleft%3A%2040px%3B%0A%20%20%20%20margin%2Dleft%3A%20%2D1%2E5em%3B%0A%20%20%20%20margin%2Dtop%3A%205px%3B%0A%20%20%20%20margin%2Dbottom%3A%205px%3B%0A%20%20%7D%0A%20%20%23TOC%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dleft%3A%20%2D2em%3B%0A%20%20%7D%0A%20%20%23TOC%20li%20%7B%0A%20%20%20%20line%2Dheight%3A%2016px%3B%0A%20%20%7D%0A%0Atable%20%7B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dcolor%3A%20%23DDDDDD%3B%0A%20%20border%2Dstyle%3A%20outset%3B%0A%20%20border%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0A%20%20border%2Dwidth%3A%202px%3B%0A%20%20padding%3A%205px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%20%20line%2Dheight%3A%2018px%3B%0A%20%20padding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0A%20%20border%2Dleft%2Dstyle%3A%20none%3B%0A%20%20border%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Ap%20%7B%0A%20%20margin%3A%200%2E5em%200%3B%0A%7D%0A%0Ablockquote%20%7B%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20padding%3A%200%2E25em%200%2E75em%3B%0A%7D%0A%0Ahr%20%7B%0A%20%20border%2Dstyle%3A%20solid%3B%0A%20%20border%3A%20none%3B%0A%20%20border%2Dtop%3A%201px%20solid%20%23777%3B%0A%20%20margin%3A%2028px%200%3B%0A%7D%0A%0Adl%20%7B%0A%20%20margin%2Dleft%3A%200%3B%0A%7D%0A%20%20dl%20dd%20%7B%0A%20%20%20%20margin%2Dbottom%3A%2013px%3B%0A%20%20%20%20margin%2Dleft%3A%2013px%3B%0A%20%20%7D%0A%20%20dl%20dt%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%7D%0A%0Aul%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%7D%0A%20%20ul%20li%20%7B%0A%20%20%20%20list%2Dstyle%3A%20circle%20outside%3B%0A%20%20%7D%0A%20%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dbottom%3A%200%3B%0A%20%20%7D%0A%0Apre%2C%20code%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20color%3A%20%23333%3B%0A%7D%0Apre%20%7B%0A%20%20white%2Dspace%3A%20pre%2Dwrap%3B%20%20%20%20%2F%2A%20Wrap%20long%20lines%20%2A%2F%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20margin%3A%205px%200px%2010px%200px%3B%0A%20%20padding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Acode%20%7B%0A%20%20font%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0A%20%20font%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0A%20%20padding%3A%202px%200px%3B%0A%7D%0A%0Adiv%2Efigure%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0A%20%20background%2Dcolor%3A%20%23FFFFFF%3B%0A%20%20padding%3A%202px%3B%0A%20%20border%3A%201px%20solid%20%23DDDDDD%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20margin%3A%200%205px%3B%0A%7D%0A%0Ah1%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%20%20font%2Dsize%3A%2035px%3B%0A%20%20line%2Dheight%3A%2040px%3B%0A%7D%0A%0Ah2%20%7B%0A%20%20border%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20padding%2Dbottom%3A%202px%3B%0A%20%20font%2Dsize%3A%20145%25%3B%0A%7D%0A%0Ah3%20%7B%0A%20%20border%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20font%2Dsize%3A%20120%25%3B%0A%7D%0A%0Ah4%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0A%20%20margin%2Dleft%3A%208px%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Ah5%2C%20h6%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23ccc%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Aa%20%7B%0A%20%20color%3A%20%230033dd%3B%0A%20%20text%2Ddecoration%3A%20none%3B%0A%7D%0A%20%20a%3Ahover%20%7B%0A%20%20%20%20color%3A%20%236666ff%3B%20%7D%0A%20%20a%3Avisited%20%7B%0A%20%20%20%20color%3A%20%23800080%3B%20%7D%0A%20%20a%3Avisited%3Ahover%20%7B%0A%20%20%20%20color%3A%20%23BB00BB%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%0A%2F%2A%20Class%20described%20in%20https%3A%2F%2Fbenjeffrey%2Ecom%2Fposts%2Fpandoc%2Dsyntax%2Dhighlighting%2Dcss%0A%20%20%20Colours%20from%20https%3A%2F%2Fgist%2Egithub%2Ecom%2Frobsimmons%2F1172277%20%2A%2F%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Keyword%20%2A%2F%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%2F%2A%20DataType%20%2A%2F%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%2F%2A%20DecVal%20%28decimal%20values%29%20%2A%2F%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20BaseN%20%2A%2F%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Float%20%2A%2F%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Char%20%2A%2F%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20String%20%2A%2F%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%2F%2A%20Comment%20%2A%2F%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%2F%2A%20OtherToken%20%2A%2F%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20AlertToken%20%2A%2F%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Function%20calls%20%2A%2F%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%2F%2A%20ErrorTok%20%2A%2F%0A%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div id="header">
+<h1 class="title">Multivariate Covariance Generalized Linear Models</h1>
+<h4 class="author"><em>Wagner Hugo Bonat</em></h4>
+<h4 class="date"><em>mcglm 0.0.2 2016-01-10</em></h4>
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#example-1---count-data">Example 1 - Count data</a></li>
+<li><a href="#example-2---continuous-data-with-offset">Example 2 - Continuous data with offset</a></li>
+<li><a href="#example-3---continuous-positive-data">Example 3 - Continuous positive data</a></li>
+<li><a href="#example-4---binomial-data">Example 4 - Binomial data</a></li>
+</ul>
+</div>
+
+<style type="text/css">
+body, td, caption {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    background-color: white;
+    font-size: 16px;
+}
+
+tt, code, pre {
+    font-family: "Inconsolata", "Andale Mono", monospace;
+}
+
+code {
+    font-size: 16px;
+}
+
+pre code {
+    font-size: 14px;
+}
+
+pre:not([class]) code {
+    background-color: #92BFB1;
+}
+pre, code {
+    background-color: #62BFB1;
+    border-radius: 3px;
+    color: #333;
+}
+
+/* R output */
+pre:not([class]) code {
+    background-color: #D4D4D4;
+}
+pre:not([class]), code {
+    background-color: #D4D4D4;
+}
+
+/* R input */
+pre, code {
+    border-radius: 3px;
+    background-color: #EDEDED;
+    color: #333;
+}
+
+img {
+    max-width: 100% !important;
+    display: block;
+    margin: auto;
+}
+
+.MathJax {
+    font-size: 80% !important;
+}
+
+</style>
+<hr />
+<p>To install the stable version of <a href="http://git.leg.ufpr.br/wbonat/mcglm"><code>mcglm</code></a>, use <code>devtools::install_git()</code>. For more information, visit <a href="http://git.leg.ufpr.br/wbonat/mcglm/blob/master/README.md">mcglm/README</a>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
+<span class="kw">install_git</span>(<span class="st">&quot;http://git.leg.ufpr.br/wbonat/mcglm.git&quot;</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mcglm)
+<span class="kw">packageVersion</span>(<span class="st">&quot;mcglm&quot;</span>)</code></pre>
+<pre><code>## [1] '0.0.2'</code></pre>
+<div id="abstract" class="section level5">
+<h5>Abstract</h5>
+<p>The <code>mcglm</code> package implements the multivariate covariance generalized linear models (McGLMs) proposed by Bonat and J<span class="math">\(\o\)</span>rgensen (2016). In this introductory vignette we employed the <code>mcglm</code> package for fitting a set of generalized linear models and compare our results with the ones obtained by ordinary <code>R</code> functions like <code>lm</code> and <code>glm</code>.</p>
+<hr />
+</div>
+<div id="example-1---count-data" class="section level2">
+<h2>Example 1 - Count data</h2>
+<p>Consider the count data obtained in Dobson (1990).</p>
+<pre class="sourceCode r"><code class="sourceCode r">## Dobson (1990) Page 93: Randomized Controlled Trial :
+counts &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">18</span>,<span class="dv">17</span>,<span class="dv">15</span>,<span class="dv">20</span>,<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">25</span>,<span class="dv">13</span>,<span class="dv">12</span>)
+outcome &lt;-<span class="st"> </span><span class="kw">gl</span>(<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">9</span>)
+treatment &lt;-<span class="st"> </span><span class="kw">gl</span>(<span class="dv">3</span>,<span class="dv">3</span>)
+<span class="kw">print</span>(d.AD &lt;-<span class="st"> </span><span class="kw">data.frame</span>(treatment, outcome, counts))</code></pre>
+<pre><code>##   treatment outcome counts
+## 1         1       1     18
+## 2         1       2     17
+## 3         1       3     15
+## 4         2       1     20
+## 5         2       2     10
+## 6         2       3     20
+## 7         3       1     25
+## 8         3       2     13
+## 9         3       3     12</code></pre>
+<p>Ordinary analysis using Poisson model.</p>
+<pre class="sourceCode r"><code class="sourceCode r">fit.glm &lt;-<span class="st"> </span><span class="kw">glm</span>(counts ~<span class="st"> </span>outcome +<span class="st"> </span>treatment, <span class="dt">family =</span> poisson)</code></pre>
+<p>The orthodox quasi-Poisson model is obtained specifying the variance function as <code>tweedie</code> and fix the power parameter at <span class="math">\(1\)</span>. Since, we are dealing with independent data, the matrix linear predictor is composed of a diagonal matrix.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(Matrix)
+<span class="co"># Matrix linear predictor</span>
+Z0 &lt;-<span class="st"> </span><span class="kw">Diagonal</span>(<span class="kw">dim</span>(d.AD)[<span class="dv">1</span>],<span class="dv">1</span>)
+fit.qglm &lt;-<span class="st"> </span><span class="kw">mcglm</span>(<span class="dt">linear_pred =</span> <span class="kw">c</span>(counts ~<span class="st"> </span>outcome +<span class="st"> </span>treatment), 
+                  <span class="dt">matrix_pred =</span> <span class="kw">list</span>(<span class="st">&quot;resp1&quot;</span> =<span class="st"> </span><span class="kw">list</span>(Z0)),
+                  <span class="dt">link =</span> <span class="st">&quot;log&quot;</span>, <span class="dt">variance =</span> <span class="st">&quot;tweedie&quot;</span>, <span class="dt">data =</span> d.AD,
+                  <span class="dt">control_algorithm =</span> <span class="kw">list</span>(<span class="st">&quot;verbose&quot;</span> =<span class="st"> </span><span class="ot">FALSE</span>, 
+                                           <span class="st">&quot;method&quot;</span> =<span class="st"> &quot;chaser&quot;</span>, 
+                                           <span class="st">&quot;tunning&quot;</span> =<span class="st"> </span><span class="fl">0.8</span>))</code></pre>
+<pre><code>## Automatic initial values selected.</code></pre>
+<p>Comparing regression parameter estimates.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cbind</span>(<span class="st">&quot;GLM&quot;</span> =<span class="st"> </span><span class="kw">coef</span>(fit.glm),
+      <span class="st">&quot;McGLM&quot;</span> =<span class="st"> </span><span class="kw">coef</span>(fit.qglm, <span class="dt">type =</span> <span class="st">&quot;beta&quot;</span>)$Estimates)</code></pre>
+<pre><code>##                       GLM         McGLM
+## (Intercept)  3.044522e+00  3.044522e+00
+## outcome2    -4.542553e-01 -4.542553e-01
+## outcome3    -2.929871e-01 -2.929871e-01
+## treatment2   8.716884e-16  2.689828e-17
+## treatment3   4.557335e-16  3.469699e-17</code></pre>
+<hr />
+</div>
+<div id="example-2---continuous-data-with-offset" class="section level2">
+<h2>Example 2 - Continuous data with offset</h2>
+<p>Consider the example from Venables &amp; Ripley (2002, p.189). The response variable is continuous for which we can assume the Gaussian distribution. In this example, we exemplify the use of the <code>offset</code> argument.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Loading the data set</span>
+utils::<span class="kw">data</span>(anorexia, <span class="dt">package =</span> <span class="st">&quot;MASS&quot;</span>)
+
+<span class="co"># GLM fit</span>
+anorex<span class="fl">.1</span> &lt;-<span class="st"> </span><span class="kw">glm</span>(Postwt ~<span class="st"> </span>Prewt +<span class="st"> </span>Treat +<span class="st"> </span><span class="kw">offset</span>(Prewt),
+               <span class="dt">family =</span> gaussian, <span class="dt">data =</span> anorexia)
+
+<span class="co"># McGLM fit</span>
+Z0 &lt;-<span class="st"> </span><span class="kw">Diagonal</span>(<span class="kw">dim</span>(anorexia)[<span class="dv">1</span>],<span class="dv">1</span>)
+fit.anorexia &lt;-<span class="st"> </span><span class="kw">mcglm</span>(<span class="dt">linear_pred =</span> <span class="kw">c</span>(Postwt ~<span class="st"> </span>Prewt +<span class="st"> </span>Treat), 
+                      <span class="dt">matrix_pred =</span> <span class="kw">list</span>(<span class="kw">list</span>(Z0)),
+                      <span class="dt">link =</span> <span class="st">&quot;identity&quot;</span>, <span class="dt">variance =</span> <span class="st">&quot;constant&quot;</span>, 
+                      <span class="dt">offset =</span> <span class="kw">list</span>(anorexia$Prewt),
+                      <span class="dt">power_fixed =</span> <span class="ot">TRUE</span>, <span class="dt">data =</span> anorexia,
+                      <span class="dt">control_algorithm =</span> <span class="kw">list</span>(<span class="st">&quot;correct&quot;</span> =<span class="st"> </span><span class="ot">FALSE</span>))</code></pre>
+<pre><code>## Automatic initial values selected.</code></pre>
+<p>Comparing parameter estimates and standard errors.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Estimates</span>
+<span class="kw">cbind</span>(<span class="st">&quot;McGLM&quot;</span> =<span class="st"> </span><span class="kw">round</span>(<span class="kw">coef</span>(fit.anorexia, <span class="dt">type =</span> <span class="st">&quot;beta&quot;</span>)$Estimates,<span class="dv">5</span>),
+      <span class="st">&quot;GLM&quot;</span> =<span class="st"> </span><span class="kw">round</span>(<span class="kw">coef</span>(anorex<span class="fl">.1</span>),<span class="dv">5</span>))</code></pre>
+<pre><code>##                McGLM      GLM
+## (Intercept) 49.77111 49.77111
+## Prewt       -0.56554 -0.56554
+## TreatCont   -4.09707 -4.09707
+## TreatFT      4.56306  4.56306</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Standard errors</span>
+<span class="kw">cbind</span>(<span class="st">&quot;McGLM&quot;</span> =<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">diag</span>(<span class="kw">vcov</span>(fit.anorexia))),
+      <span class="st">&quot;GLM&quot;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="kw">sqrt</span>(<span class="kw">diag</span>(<span class="kw">vcov</span>(anorex<span class="fl">.1</span>))),<span class="ot">NA</span>))</code></pre>
+<pre><code>##                  McGLM        GLM
+## (Intercept) 13.0136721 13.3909581
+## Prewt        0.1566411  0.1611824
+## TreatCont    1.8401441  1.8934926
+## TreatFT      2.0732299  2.1333359
+##              6.4645109         NA</code></pre>
+<hr />
+</div>
+<div id="example-3---continuous-positive-data" class="section level2">
+<h2>Example 3 - Continuous positive data</h2>
+<p>Consider the following data set from McCullagh &amp; Nelder (1989, pp.300-2). It is an example of Gamma regression model.</p>
+<pre class="sourceCode r"><code class="sourceCode r">clotting &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+  <span class="dt">u =</span> <span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">15</span>,<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">40</span>,<span class="dv">60</span>,<span class="dv">80</span>,<span class="dv">100</span>),
+  <span class="dt">lot1 =</span> <span class="kw">c</span>(<span class="dv">118</span>,<span class="dv">58</span>,<span class="dv">42</span>,<span class="dv">35</span>,<span class="dv">27</span>,<span class="dv">25</span>,<span class="dv">21</span>,<span class="dv">19</span>,<span class="dv">18</span>),
+  <span class="dt">lot2 =</span> <span class="kw">c</span>(<span class="dv">69</span>,<span class="dv">35</span>,<span class="dv">26</span>,<span class="dv">21</span>,<span class="dv">18</span>,<span class="dv">16</span>,<span class="dv">13</span>,<span class="dv">12</span>,<span class="dv">12</span>))</code></pre>
+<p>Analysis using generalized linear models <code>glm</code> function in <code>R</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">fit.lot1 &lt;-<span class="st"> </span><span class="kw">glm</span>(lot1 ~<span class="st"> </span><span class="kw">log</span>(u), <span class="dt">data =</span> clotting, 
+                <span class="dt">family =</span> <span class="kw">Gamma</span>(<span class="dt">link =</span> <span class="st">&quot;inverse&quot;</span>))
+fit.lot2 &lt;-<span class="st"> </span><span class="kw">glm</span>(lot2 ~<span class="st"> </span><span class="kw">log</span>(u), <span class="dt">data =</span> clotting, 
+                <span class="dt">family =</span> <span class="kw">Gamma</span>(<span class="dt">link =</span> <span class="st">&quot;inverse&quot;</span>))</code></pre>
+<p>The code below exemplify how to use the <code>control_initial</code> argument.</p>
+<pre class="sourceCode r"><code class="sourceCode r">list_initial =<span class="st"> </span><span class="kw">list</span>()
+list_initial$regression &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">coef</span>(fit.lot1))
+list_initial$power &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">c</span>(<span class="dv">2</span>))
+list_initial$tau &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">summary</span>(fit.lot1)$dispersion)
+list_initial$rho =<span class="st"> </span><span class="dv">0</span></code></pre>
+<p>The <code>control_initial</code> argument should be a named list with initial values for all parameters involved in the model. Note that, in this example we used the parameter estimates from the <code>glm</code> fit as initial values for the regression and dispersion parameters. The power parameter was fixed at <span class="math">\(p = 2\)</span>, since we want to fit Gamma regression models. In that case, we have only one response variable, but the initial value for correlation parameter <span class="math">\(\rho\)</span> should be specified.</p>
+<pre class="sourceCode r"><code class="sourceCode r">Z0 &lt;-<span class="st"> </span><span class="kw">Diagonal</span>(<span class="kw">dim</span>(clotting)[<span class="dv">1</span>], <span class="dv">1</span>)
+fit.lot1.mcglm &lt;-<span class="st"> </span><span class="kw">mcglm</span>(<span class="dt">linear_pred =</span> <span class="kw">c</span>(lot1 ~<span class="st"> </span><span class="kw">log</span>(u)), 
+                        <span class="dt">matrix_pred =</span> <span class="kw">list</span>(<span class="kw">list</span>(Z0)),
+                        <span class="dt">link =</span> <span class="st">&quot;inverse&quot;</span>, <span class="dt">variance =</span> <span class="st">&quot;tweedie&quot;</span>,
+                        <span class="dt">data =</span> clotting, 
+                        <span class="dt">control_initial =</span> list_initial)</code></pre>
+<p>Comparing parameter estimates and standard errors.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Estimates</span>
+<span class="kw">cbind</span>(<span class="st">&quot;mcglm&quot;</span> =<span class="st"> </span><span class="kw">round</span>(<span class="kw">coef</span>(fit.lot1.mcglm, <span class="dt">type =</span> <span class="st">&quot;beta&quot;</span>)$Estimates,<span class="dv">5</span>),
+      <span class="st">&quot;glm&quot;</span> =<span class="st"> </span><span class="kw">round</span>(<span class="kw">coef</span>(fit.lot1),<span class="dv">5</span>))</code></pre>
+<pre><code>##                mcglm      glm
+## (Intercept) -0.01655 -0.01655
+## log(u)       0.01534  0.01534</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Standard errors</span>
+<span class="kw">cbind</span>(<span class="st">&quot;mcglm&quot;</span> =<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">diag</span>(<span class="kw">vcov</span>(fit.lot1.mcglm))),
+      <span class="st">&quot;glm&quot;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="kw">sqrt</span>(<span class="kw">diag</span>(<span class="kw">vcov</span>(fit.lot1))),<span class="ot">NA</span>))</code></pre>
+<pre><code>##                    mcglm          glm
+## (Intercept) 0.0007376046 0.0009275466
+## log(u)      0.0003299837 0.0004149596
+##             0.0008271059           NA</code></pre>
+<p>Initial values for the response variable <code>lot2</code></p>
+<pre class="sourceCode r"><code class="sourceCode r">list_initial$regression &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;resp1&quot;</span> =<span class="st"> </span><span class="kw">coef</span>(fit.lot2))
+list_initial$tau &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;resp1&quot;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="kw">var</span>(<span class="dv">1</span>/clotting$lot2)))</code></pre>
+<p>Note that, since the <code>list_initial</code> object already have all components required, we just modify the <code>entries</code> regression and tau.</p>
+<pre class="sourceCode r"><code class="sourceCode r">fit.lot2.mcglm &lt;-<span class="st"> </span><span class="kw">mcglm</span>(<span class="dt">linear_pred =</span> <span class="kw">c</span>(lot2 ~<span class="st"> </span><span class="kw">log</span>(u)), 
+                        <span class="dt">matrix_pred =</span> <span class="kw">list</span>(<span class="kw">list</span>(Z0)),
+                        <span class="dt">link =</span> <span class="st">&quot;inverse&quot;</span>, <span class="dt">variance =</span> <span class="st">&quot;tweedie&quot;</span>, 
+                        <span class="dt">data =</span> clotting,
+                        <span class="dt">control_initial =</span> list_initial)</code></pre>
+<p>Comparing parameter estimates and standard errors.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Estimates</span>
+<span class="kw">cbind</span>(<span class="st">&quot;mcglm&quot;</span> =<span class="st"> </span><span class="kw">round</span>(<span class="kw">coef</span>(fit.lot2.mcglm, <span class="dt">type =</span> <span class="st">&quot;beta&quot;</span>)$Estimates,<span class="dv">5</span>),
+      <span class="st">&quot;glm&quot;</span> =<span class="st"> </span><span class="kw">round</span>(<span class="kw">coef</span>(fit.lot2),<span class="dv">5</span>))</code></pre>
+<pre><code>##                mcglm      glm
+## (Intercept) -0.02391 -0.02391
+## log(u)       0.02360  0.02360</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Standard errors</span>
+<span class="kw">cbind</span>(<span class="st">&quot;mcglm&quot;</span> =<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">diag</span>(<span class="kw">vcov</span>(fit.lot2.mcglm))),
+      <span class="st">&quot;glm&quot;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="kw">sqrt</span>(<span class="kw">diag</span>(<span class="kw">vcov</span>(fit.lot2))),<span class="ot">NA</span>))</code></pre>
+<pre><code>##                    mcglm          glm
+## (Intercept) 0.0010609254 0.0013264571
+## log(u)      0.0004613227 0.0005767841
+##             0.0005297868           NA</code></pre>
+<p>The main contribution of the <code>mcglm</code>package is that it easily fit multivariate regression models. For example, for the <code>clotting</code> data a bivariate Gamma model is a suitable choice.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Initial values</span>
+list_initial =<span class="st"> </span><span class="kw">list</span>()
+list_initial$regression &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">coef</span>(fit.lot1), <span class="kw">coef</span>(fit.lot2))
+list_initial$power &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">c</span>(<span class="dv">2</span>),<span class="kw">c</span>(<span class="dv">2</span>))
+list_initial$tau &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">c</span>(<span class="fl">0.00149</span>), <span class="kw">c</span>(<span class="fl">0.001276</span>))
+list_initial$rho =<span class="st"> </span><span class="fl">0.80</span>
+
+<span class="co"># Matrix linear predictor</span>
+Z0 &lt;-<span class="st"> </span><span class="kw">Diagonal</span>(<span class="kw">dim</span>(clotting)[<span class="dv">1</span>],<span class="dv">1</span>)
+
+<span class="co"># Fit bivariate Gamma model</span>
+fit.joint.mcglm &lt;-<span class="st"> </span><span class="kw">mcglm</span>(<span class="dt">linear_pred =</span> <span class="kw">c</span>(lot1 ~<span class="st"> </span><span class="kw">log</span>(u), lot2 ~<span class="st"> </span><span class="kw">log</span>(u)), 
+                         <span class="dt">matrix_pred =</span> <span class="kw">list</span>(<span class="kw">list</span>(Z0), <span class="kw">list</span>(Z0)),
+                         <span class="dt">link =</span> <span class="kw">c</span>(<span class="st">&quot;inverse&quot;</span>, <span class="st">&quot;inverse&quot;</span>), 
+                         <span class="dt">variance =</span> <span class="kw">c</span>(<span class="st">&quot;tweedie&quot;</span>, <span class="st">&quot;tweedie&quot;</span>),
+                         <span class="dt">data =</span> clotting, 
+                         <span class="dt">control_initial =</span> list_initial,
+                         <span class="dt">control_algorithm =</span> <span class="kw">list</span>(<span class="st">&quot;correct&quot;</span> =<span class="st"> </span><span class="ot">TRUE</span>, 
+                                                 <span class="st">&quot;method&quot;</span> =<span class="st"> &quot;rc&quot;</span>, 
+                                                 <span class="st">&quot;tunning&quot;</span> =<span class="st"> </span><span class="fl">0.001</span>,
+                                                 <span class="st">&quot;max_iter&quot;</span> =<span class="st"> </span><span class="dv">100</span>))
+<span class="kw">summary</span>(fit.joint.mcglm)</code></pre>
+<pre><code>## Call: lot1 ~ log(u)
+## 
+## Link function: inverse
+## Variance function: tweedie
+## Covariance function: identity
+## Regression:
+##               Estimates    Std.error   Z value
+## (Intercept) -0.01655962 0.0007395932 -22.39017
+## log(u)       0.01534506 0.0003309394  46.36818
+## 
+## Dispersion:
+##     Estimates    Std.error  Z value
+## 1 0.001556584 0.0008243904 1.888164
+## 
+## Call: lot2 ~ log(u)
+## 
+## Link function: inverse
+## Variance function: tweedie
+## Covariance function: identity
+## Regression:
+##               Estimates    Std.error   Z value
+## (Intercept) -0.02385489 0.0010587888 -22.53036
+## log(u)       0.02357960 0.0004601744  51.24057
+## 
+## Dispersion:
+##     Estimates   Std.error  Z value
+## 1 0.001154365 0.000537687 2.146909
+## 
+## Correlation matrix:
+##   Parameters Estimates Std.error  Z value
+## 5      rho12 0.7252082 0.1787199 4.057793
+## 
+## Algorithm: rc
+## Correction: TRUE
+## Number iterations: 7</code></pre>
+<p>We can also easily change the link function. The code below fit a bivariate Gamma model using the <code>log</code> link function.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Initial values</span>
+list_initial =<span class="st"> </span><span class="kw">list</span>()
+list_initial$regression &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">c</span>(<span class="kw">log</span>(<span class="kw">mean</span>(clotting$lot1)),<span class="dv">0</span>),
+                                <span class="kw">c</span>(<span class="kw">log</span>(<span class="kw">mean</span>(clotting$lot2)),<span class="dv">0</span>))
+list_initial$power &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">c</span>(<span class="dv">2</span>), <span class="kw">c</span>(<span class="dv">2</span>))
+list_initial$tau &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">c</span>(<span class="fl">0.023</span>), <span class="kw">c</span>(<span class="fl">0.024</span>))
+list_initial$rho =<span class="st"> </span><span class="dv">0</span>
+
+<span class="co"># Fit bivariate Gamma model</span>
+fit.joint.log &lt;-<span class="st"> </span><span class="kw">mcglm</span>(<span class="dt">linear_pred =</span> <span class="kw">c</span>(lot1 ~<span class="st"> </span><span class="kw">log</span>(u), lot2 ~<span class="st"> </span><span class="kw">log</span>(u)),
+                       <span class="dt">matrix_pred =</span> <span class="kw">list</span>(<span class="kw">list</span>(Z0),<span class="kw">list</span>(Z0)), 
+                       <span class="dt">link =</span> <span class="kw">c</span>(<span class="st">&quot;log&quot;</span>, <span class="st">&quot;log&quot;</span>),
+                       <span class="dt">variance =</span> <span class="kw">c</span>(<span class="st">&quot;tweedie&quot;</span>, <span class="st">&quot;tweedie&quot;</span>), 
+                       <span class="dt">data =</span> clotting,
+                       <span class="dt">control_initial =</span> list_initial)
+<span class="kw">summary</span>(fit.joint.log)</code></pre>
+<pre><code>## Call: lot1 ~ log(u)
+## 
+## Link function: log
+## Variance function: tweedie
+## Covariance function: identity
+## Regression:
+##              Estimates  Std.error   Z value
+## (Intercept)  5.5032302 0.15180744  36.25139
+## log(u)      -0.6019177 0.04412031 -13.64264
+## 
+## Dispersion:
+##    Estimates   Std.error Z value
+## 1 0.01549821 0.007775851 1.99312
+## 
+## Call: lot2 ~ log(u)
+## 
+## Link function: log
+## Variance function: tweedie
+## Covariance function: identity
+## Regression:
+##              Estimates  Std.error   Z value
+## (Intercept)  4.9187575 0.14801016  33.23257
+## log(u)      -0.5674356 0.04301669 -13.19106
+## 
+## Dispersion:
+##    Estimates   Std.error  Z value
+## 1 0.01473257 0.007720715 1.908187
+## 
+## Correlation matrix:
+##   Parameters Estimates Std.error  Z value
+## 5      rho12 0.9807098 0.1409252 6.959081
+## 
+## Algorithm: chaser
+## Correction: TRUE
+## Number iterations: 11</code></pre>
+<hr />
+</div>
+<div id="example-4---binomial-data" class="section level2">
+<h2>Example 4 - Binomial data</h2>
+<p>Consider the example <code>menarche</code> from the MASS <code>R</code> package.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(MASS)
+<span class="kw">data</span>(menarche)
+data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="st">&quot;resp&quot;</span> =<span class="st"> </span>menarche$Menarche/menarche$Total, 
+                   <span class="st">&quot;Ntrial&quot;</span> =<span class="st"> </span>menarche$Total,
+                   <span class="st">&quot;Age&quot;</span> =<span class="st"> </span>menarche$Age)</code></pre>
+<p>Logistic regression model.</p>
+<pre class="sourceCode r"><code class="sourceCode r">glm.out =<span class="st"> </span><span class="kw">glm</span>(<span class="kw">cbind</span>(Menarche, Total-Menarche) ~<span class="st"> </span>Age, 
+              <span class="dt">family=</span><span class="kw">binomial</span>(logit), <span class="dt">data=</span>menarche)</code></pre>
+<p>The same fitted by <code>mcglm</code> function.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Matrix linear predictor</span>
+Z0 &lt;-<span class="st"> </span><span class="kw">Diagonal</span>(<span class="kw">dim</span>(data)[<span class="dv">1</span>],<span class="dv">1</span>)
+fit.logit &lt;-<span class="st"> </span><span class="kw">mcglm</span>(<span class="dt">linear_pred =</span> <span class="kw">c</span>(resp ~<span class="st"> </span>Age), 
+                   <span class="dt">matrix_pred =</span> <span class="kw">list</span>(<span class="kw">list</span>(Z0)),
+                   <span class="dt">link =</span> <span class="st">&quot;logit&quot;</span>, <span class="dt">variance =</span> <span class="st">&quot;binomialP&quot;</span>, 
+                   <span class="dt">Ntrial =</span> <span class="kw">list</span>(data$Ntrial), <span class="dt">data =</span> data)</code></pre>
+<pre><code>## Automatic initial values selected.</code></pre>
+<p>Comparing parameter estimates and standard errors.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Estimates</span>
+<span class="kw">cbind</span>(<span class="st">&quot;GLM&quot;</span> =<span class="st"> </span><span class="kw">coef</span>(glm.out),
+      <span class="st">&quot;McGLM&quot;</span> =<span class="st"> </span><span class="kw">coef</span>(fit.logit, <span class="dt">type =</span> <span class="st">&quot;beta&quot;</span>)$Estimates)</code></pre>
+<pre><code>##                    GLM      McGLM
+## (Intercept) -21.226395 -21.226395
+## Age           1.631968   1.631968</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Standard error</span>
+<span class="kw">cbind</span>(<span class="st">&quot;GLM&quot;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="kw">sqrt</span>(<span class="kw">diag</span>(<span class="kw">vcov</span>(glm.out))),<span class="ot">NA</span>),
+      <span class="st">&quot;McGLM&quot;</span> =<span class="st">  </span><span class="kw">sqrt</span>(<span class="kw">diag</span>(<span class="kw">vcov</span>(fit.logit))))</code></pre>
+<pre><code>##                    GLM      McGLM
+## (Intercept) 0.77068466 0.69361807
+## Age         0.05895308 0.05305792
+##                     NA 0.13634349</code></pre>
+<p>We can estimate a more flexible model using the extended binomial variance function.</p>
+<pre class="sourceCode r"><code class="sourceCode r">fit.logit.power &lt;-<span class="st"> </span><span class="kw">mcglm</span>(<span class="dt">linear_pred =</span> <span class="kw">c</span>(resp ~<span class="st"> </span>Age), 
+                         <span class="dt">matrix_pred =</span> <span class="kw">list</span>(<span class="kw">list</span>(Z0)),
+                         <span class="dt">link =</span> <span class="st">&quot;logit&quot;</span>, <span class="dt">variance =</span> <span class="st">&quot;binomialP&quot;</span>, 
+                         <span class="dt">Ntrial =</span> <span class="kw">list</span>(data$Ntrial),
+                         <span class="dt">power_fixed =</span> <span class="ot">FALSE</span>, <span class="dt">data =</span> data)</code></pre>
+<pre><code>## Automatic initial values selected.</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(fit.logit.power)</code></pre>
+<pre><code>## Call: resp ~ Age
+## 
+## Link function: logit
+## Variance function: binomialP
+## Covariance function: identity
+## Regression:
+##             Estimates Std.error   Z value
+## (Intercept) -21.30965 0.6960901 -30.61334
+## Age           1.63802 0.0532248  30.77550
+## 
+## Power:
+##   Estimates Std.error  Z value
+## 1  1.040691 0.1003321 10.37246
+## 
+## Dispersion:
+##   Estimates Std.error  Z value
+## 1 0.9222993 0.3394829 2.716777
+## 
+## Algorithm: chaser
+## Correction: TRUE
+## Number iterations: 8</code></pre>
+<!---------------------------------------------------------------------- -->
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
