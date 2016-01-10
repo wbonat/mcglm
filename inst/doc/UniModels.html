@@ -352,6 +352,7 @@ fit.poisson &lt;-<span class="st"> </span><span class="kw">mcglm</span>(<span cl
 <pre><code>## Automatic initial values selected.</code></pre>
 <p>Another very useful model for count data is the negative binomial.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Simulating negative binomial models</span>
+<span class="kw">require</span>(tweedie)
 <span class="kw">set.seed</span>(<span class="dv">1811</span>)
 y1 &lt;-<span class="st"> </span><span class="kw">rtweedie</span>(<span class="dv">200</span>, <span class="dt">mu =</span> mu$mu, <span class="dt">power =</span> <span class="dv">2</span>, <span class="dt">phi =</span> <span class="fl">0.5</span>)
 y &lt;-<span class="st"> </span><span class="kw">rpois</span>(<span class="dv">200</span>, <span class="dt">lambda =</span> y1)

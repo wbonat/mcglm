@@ -221,6 +221,7 @@ fit.poisson <- mcglm(linear_pred = c(y1 ~ covariate),
 
 ## -----------------------------------------------------------------
 # Simulating negative binomial models
+require(tweedie)
 set.seed(1811)
 y1 <- rtweedie(200, mu = mu$mu, power = 2, phi = 0.5)
 y <- rpois(200, lambda = y1)
