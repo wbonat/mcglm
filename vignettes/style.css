@@ -1,0 +1,98 @@
+/*------------------------------------------- */
+
+body, td, caption {
+    font-family: "Palatino Linotype", Palatino, serif;
+    background-color: white;
+    font-size: 16px;
+}
+
+body {
+    margin: auto;
+    width: 750px;
+}
+
+tt, code, pre {
+    font-family: "Inconsolata", "Andale Mono", monospace;
+}
+
+p {
+    text-indent: 1em;
+    text-align: justify;
+}
+
+img {
+    max-width: 100% !important;
+    display: block;
+    margin: auto;
+}
+
+.MathJax {
+    font-size: 50% !important; /* não tem efeito */
+}
+
+#header {
+    text-align: center;
+    border-bottom: 1px solid black;
+    margin-bottom: 20px;
+}
+
+/*------------------------------------------- */
+
+pre {
+    word-break: keep-all;
+    margin: 1ex 0px 1ex 0px;
+    padding: 2px 1ex 2px 1ex;
+    border: 0px solid #CCC;
+    border-radius: 1px;
+}
+pre code {
+    font-size: 14px;
+}
+/* R input */
+pre, code {
+    background-color: #EDEDED;
+    color: #333;
+}
+/* R output */
+pre:not([class]) code {
+    background-color: #D4D4D4;
+}
+pre:not([class]), code {
+    background-color: #D4D4D4;
+    font-size: 15px;
+}
+
+/*------------------------------------------- */
+
+pre .operator,
+pre .paren {
+    color: rgb(104, 118, 135);
+}
+
+pre .literal {
+    color: #00C202;
+}
+
+pre .number {
+    color: #099;
+}
+
+pre .comment {
+    color: #998;
+    font-style: italic
+}
+
+pre .keyword {
+    color: #1E27ED;
+    font-weight: unset;
+}
+
+pre .identifier {
+    color: rgb(0, 0, 0);
+}
+
+pre .string {
+    color: #d14;
+}
+
+/*------------------------------------------- */
