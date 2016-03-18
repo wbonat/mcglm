@@ -24,6 +24,7 @@ mc_robust_std <- function(object, id) {
     D <- bdiag(lapply(object$mu_list, function(x) x$D))
     p1 <- object$inv_C %*% D
     V_robust <- inv_M %*% (t(p1) %*% r_rT %*% p1) %*% inv_M
-    output <- sqrt(diag(V_robust))
+    output <- list("Std.Error" = sqrt(diag(V_robust)),
+                                      "vcov" = V_robust)
     return(output)
 }

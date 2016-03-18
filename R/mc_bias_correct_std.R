@@ -42,8 +42,8 @@ mc_bias_corrected_std <- function(object, id) {
     H <- bdiag(Hi)
     I <- Diagonal(dim(temp_data)[1], 1)
     inv_IH <- solve(I - H)
-    Vbeta <- inv_M %*% (t(D) %*% object$inv_C %*% inv_IH %*% 
+    Vbeta <- inv_M %*% (t(D) %*% object$inv_C %*% inv_IH %*%
         R %*% inv_IH %*% object$inv_C %*% D) %*% inv_M
-    output <- sqrt(diag(Vbeta))
+    output <- list("Srd.Error" = sqrt(diag(Vbeta)), "vcov" = Vbeta)
     return(output)
 }
