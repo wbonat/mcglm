@@ -136,8 +136,17 @@ fit_mcglm <- function(list_initial, list_link, list_variance, list_covariance, l
     p2 <- rbind(mat0, inv_S_cov)
     joint_inv_sensitivity <- cbind(p1, p2)
     VarCov <- joint_inv_sensitivity %*% joint_variability %*% t(joint_inv_sensitivity)
-    output <- list(IterationRegression = solucao_beta, IterationCovariance = solucao_cov, ScoreRegression = score_beta_temp,
-        ScoreCovariance = score_disp_temp, Regression = beta_ini, Covariance = cov_ini, vcov = VarCov, fitted = mu_vec,
-        residuals = res, inv_C = Cfeatures$inv_C, C = Cfeatures$C, Information = inf, mu_list = mu_list, inv_S_beta = inv_S_beta)
+    output <- list(IterationRegression = solucao_beta,
+                   IterationCovariance = solucao_cov,
+                   ScoreRegression = score_beta_temp,
+                   ScoreCovariance = score_disp_temp,
+                   Regression = beta_ini,
+                   Covariance = cov_ini,
+                   vcov = VarCov, fitted = mu_vec,
+                   residuals = res, inv_C = Cfeatures$inv_C,
+                   C = Cfeatures$C, Information = inf,
+                   mu_list = mu_list, inv_S_beta = inv_S_beta,
+                   joint_inv_sensitivity = joint_inv_sensitivity,
+                   joint_variability = joint_variability)
     return(output)
 }

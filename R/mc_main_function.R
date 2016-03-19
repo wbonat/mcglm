@@ -38,7 +38,7 @@
 #' @return mcglm returns an object of class 'mcglm'.
 #' @export
 #' @import Matrix
- 
+
 mcglm <- function(linear_pred, matrix_pred, link, variance, covariance,
                   offset, Ntrial, power_fixed, data,
                   control_initial = "automatic", contrasts = NULL,
@@ -96,7 +96,7 @@ mcglm <- function(linear_pred, matrix_pred, link, variance, covariance,
     } else {
         list_X <- lapply(linear_pred, model.matrix, data = data)
     }
-    
+
     list_model_frame <- lapply(linear_pred, model.frame, data = data)
     list_Y <- lapply(list_model_frame, model.response)
     y_vec <- as.numeric(do.call(c, list_Y))
