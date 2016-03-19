@@ -24,7 +24,7 @@ plogLik <- function(object, verbose = TRUE) {
                               inv.Sigma = object$inv_C)),2)
     df <- length(coef(object)$Estimates)
     if (verbose) cat("Pseudo log Lik.", ll, sprintf("(df=%d)",df))
-    invisible(list("plogLik" = ll, "df" = df))
+    return(invisible(list("plogLik" = ll, "df" = df)))
     }
     if(class(object) == "list") {
       Y <- do.call(c,lapply(object, function(x)as.numeric(x$observed)))
@@ -39,7 +39,7 @@ plogLik <- function(object, verbose = TRUE) {
                                       inv.Sigma = inv_C)),2)
       df <- sum(unlist(lapply(object, function(x)length(coef(x)$Estimates))))
       if (verbose) cat("Pseudo log Lik.", ll, sprintf("(df=%d)",df))
-      invisible(list("plogLik" = ll, "df" = df))
+      return(invisible(list("plogLik" = ll, "df" = df)))
     }
 }
 

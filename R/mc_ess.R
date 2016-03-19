@@ -17,7 +17,7 @@ ESS <- function(object, verbose = TRUE) {
     df <- length(coef(object)$Estimates)
     ess <- ess/df
     if (verbose) cat("ESS", ess)
-    invisible(list("ESS" = ess))
+    return(invisible(list("ESS" = ess)))
   }
   if(class(object) == "list") {
     Y <- do.call(c,lapply(object, function(x)as.numeric(x$observed)))
@@ -30,6 +30,6 @@ ESS <- function(object, verbose = TRUE) {
     df <- sum(unlist(lapply(object, function(x)length(coef(x)$Estimates))))
     ess <- ess/df
     if (verbose) cat("ESS", ess)
-    invisible(list("ESS" = ess))
+    return(invisible(list("ESS" = ess)))
   }
 }
