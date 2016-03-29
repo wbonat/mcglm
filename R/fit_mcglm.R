@@ -113,9 +113,16 @@ fit_mcglm <- function(list_initial, list_link, list_variance, list_covariance, l
     mu_list <- Map(mc_link_function, beta = list_initial$regression, offset = list_offset, X = list_X, link = list_link)
     mu_vec <- do.call(c, lapply(mu_list, function(x) x$mu))
     D <- bdiag(lapply(mu_list, function(x) x$D))
-    Cfeatures <- mc_build_C(list_mu = mu_list, list_Ntrial = list_Ntrial, rho = list_initial$rho, list_tau = list_initial$tau,
-        list_power = list_initial$power, list_Z = list_Z, list_sparse = list_sparse, list_variance = list_variance, list_covariance = list_covariance,
-        list_power_fixed = list_power_fixed, compute_C = TRUE, compute_derivative_beta = FALSE)
+    Cfeatures <- mc_build_C(list_mu = mu_list, list_Ntrial = list_Ntrial,
+                            rho = list_initial$rho,
+                            list_tau = list_initial$tau,
+                            list_power = list_initial$power,
+                            list_Z = list_Z, list_sparse = list_sparse,
+                            list_variance = list_variance,
+                            list_covariance = list_covariance,
+                            list_power_fixed = list_power_fixed,
+                            compute_C = TRUE,
+                            compute_derivative_beta = FALSE)
     beta_temp2 <- mc_quasi_score(D = D, inv_C = Cfeatures$inv_C, y_vec = y_vec, mu_vec = mu_vec)
     inv_J_beta <- solve(beta_temp2$Sensitivity)
 
