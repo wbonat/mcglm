@@ -10,6 +10,7 @@
 #'     order of id should be the same as the number of
 #'     observations. Data are assumed to be sorted so that observations
 #'     on a cluster are contiguous rows for all entities in the formula.
+#' @param verbose Logical.
 #' @return A matrix. Note that the function assumes that the data are in
 #'     the correct order.
 #' @export
