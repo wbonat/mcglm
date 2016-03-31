@@ -98,7 +98,7 @@ set.seed(2503)
 # Fixed component
 covariate <- seq(-1,1, l = 100)
 X <- model.matrix(~ covariate)
-mu1 <- mc_link_function(beta = c(1,0.8), X = X, offset = NULL, 
+mu1 <- mcglm::mc_link_function(beta = c(1,0.8), X = X, offset = NULL, 
                         link = "identity")
 # Random component
 y1 <- rnorm(100, mu1$mu, sd = 0.5)
@@ -190,7 +190,7 @@ can be fitted easily using the `mcglm` package.
 # Mean model
 covariate <- seq(-1,1, l = 100)
 X <- model.matrix(~ covariate)
-mu1 <- mc_link_function(beta = c(1,0.8), X = X, offset = NULL, 
+mu1 <- mcglm::mc_link_function(beta = c(1,0.8), X = X, offset = NULL, 
                         link = "identity")
 
 # Matrix linear predictor
@@ -198,7 +198,8 @@ Z0 <- Diagonal(100, 1)
 Z1 <- Diagonal(100, c(rep(0,50),rep(1,50)))
 
 # Covariance model
-Sigma <- mc_matrix_linear_predictor(tau = c(0.2, 0.15), Z = list(Z0,Z1))
+Sigma <- mcglm::mc_matrix_linear_predictor(tau = c(0.2, 0.15), 
+                                           Z = list(Z0,Z1))
 y1 <- rnorm(100, mu1$mu, sd = sqrt(diag(Sigma)))
 data <- data.frame("y1" = y1, "covariate" = covariate)
 
@@ -214,7 +215,7 @@ data analysis. The code below presents an example of such a model.
 # Mean model
 covariate <- seq(-1,1, l = 200)
 X <- model.matrix(~ covariate)
-mu1 <- mc_link_function(beta = c(1,0.8), X = X, offset = NULL, 
+mu1 <- mcglm::mc_link_function(beta = c(1,0.8), X = X, offset = NULL, 
                         link = "identity")
 # Covariance model
 Z0 <- Diagonal(200, 1)
@@ -222,7 +223,7 @@ Z1.temp <- Matrix(rep(1,10)%*%t(rep(1,10)))
 Z1.list <- list()
 for(i in 1:20){Z1.list[[i]] <- Z1.temp}
 Z1 <- bdiag(Z1.list)
-Sigma <- mc_matrix_linear_predictor(tau = c(0.2, 0.15), Z = list(Z0,Z1))
+Sigma <- mcglm::mc_matrix_linear_predictor(tau = c(0.2, 0.15), Z = list(Z0,Z1))
 
 # Response variable
 y1 <- as.numeric(rmvnorm(1, mean = mu1$mu, sigma = as.matrix(Sigma)))
@@ -260,7 +261,7 @@ variance. Consider the following simulated dataset.
 # Mean model
 covariate <- seq(-1,1, l = 250)
 X <- model.matrix(~ covariate)
-mu1 <- mc_link_function(beta = c(1,0.8), X = X, offset = NULL, 
+mu1 <- mcglm::mc_link_function(beta = c(1,0.8), X = X, offset = NULL, 
                         link = "logit")
 # Covariance model
 Z0 <- Diagonal(500, 1)
@@ -358,7 +359,7 @@ parameter $p$ is fixed at $1$. For example,
 # Mean model
 covariate <- seq(-2,2, l = 200)
 X <- model.matrix(~ covariate)
-mu <- mc_link_function(beta = c(1,0.8), X = X, offset = NULL, 
+mu <- mcglm::mc_link_function(beta = c(1,0.8), X = X, offset = NULL, 
                         link = "log")
 
 # Covariance model
