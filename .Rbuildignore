@@ -10,6 +10,7 @@
 buildPkg.R
 README.Rmd
 Examples/
+downloads/
 ^data-raw$
 \#*\#
 ^\.\#*
