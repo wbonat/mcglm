@@ -112,8 +112,8 @@ unlink(paste0(libTest, "mcglm"), recursive = TRUE)
 
 # Test using devtools::install_git().
 .libPaths(new = libTest)
-install_git(url = "http://git.leg.ufpr.br/wbonat/mcglm.git",
-            branch = "devel")
+install_github("wbonat/mcglm", ref = "master")
+install_github("wbonat/mcglm", ref = "devel")
 
 library(package = "mcglm", lib.loc = libTest)
 packageVersion("mcglm")
@@ -136,7 +136,10 @@ man <- "../mcglm.Rcheck/mcglm-manual.pdf"
 cmd <- paste("scp -P $PATAXOP", pkg, man, pkg.win, ntw,
              "leg@$PATAXO:~/public_html/mcglm/source")
 system(cmd)
-
 browseURL("http://www.leg.ufpr.br/~leg/mcglm/")
+
+## Send to downloads/ folder, so it stays hosted on GitHub
+dest <- "downloads/"
+file.copy(c(pkg, pkg.win, man), dest, overwrite = TRUE)
 
 #-----------------------------------------------------------------------
