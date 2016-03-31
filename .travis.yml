@@ -3,4 +3,5 @@ cache: packages
 
 cran: http://cran-r.c3sl.ufpr.br/
 
-r_packages: roxygen2
+r_packages:
+ - roxygen2
