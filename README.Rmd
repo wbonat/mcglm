@@ -110,7 +110,7 @@ The reference manual in PDF can be found here: [mcglm-manual.pdf][]
 This R package is develop using [`roxygen2`][] for documentation and
 [`devtools`] to check and build. Also, we adopt the [Gitflow worflow][]
 in this repository. Please, see the
-[instructions for contributing](./contributing.md) to collaborate.
+[instructions for contributing](./CONTRIBUTING.md) to collaborate.
 
 ## License
 
