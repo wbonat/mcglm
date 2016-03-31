@@ -12,7 +12,7 @@ switch(Sys.info()["user"],
        "fernandomayer" = { NULL },
        "walmes" = { setwd("~/GitLab/mcglm") },
        {
-           if (basename(getwd()) == "mcglm") {
+           if (basename(getwd()) != "mcglm") {
                stop("The working directory isn't /mcglm.")
            }
        })
@@ -43,7 +43,7 @@ load_all()
 document()
 
 # Check documentation.
-check_doc()
+check_man()
 
 # Check functions, datasets, run examples, etc. Using cleanup = FALSE
 # and check_dir = "../" will create a directory named mcglm.Rcheck
