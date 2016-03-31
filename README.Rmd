@@ -10,10 +10,10 @@ pkg.win <- paste0(pkg.name, ver, ".zip")
 
 # mcglm `r ver`
 
-[![build status](http://git.leg.ufpr.br/ci/projects/3/status.png?ref=master)](http://git.leg.ufpr.br/ci/projects/3?ref=master)
+[![Build Status](https://travis-ci.org/wbonat/mcglm.svg?branch=master)](https://travis-ci.org/wbonat/mcglm)
 Build status for the stable version (`master` branch)
 
-[![build status](http://git.leg.ufpr.br/ci/projects/3/status.png?ref=devel)](http://git.leg.ufpr.br/ci/projects/3?ref=devel)
+[![Build Status](https://travis-ci.org/wbonat/mcglm.svg?branch=devel)](https://travis-ci.org/wbonat/mcglm)
 Build status for the development version (`devel` branch)
 
 The `mcglm` package fit multivariate covariance generalized linear models
@@ -37,11 +37,11 @@ This package is part of the Thesis of the first author.
 
 Use the `devtools` package (available from
 [CRAN](http://cran-r.c3sl.ufpr.br/web/packages/devtools/index.html)) to
-install automatically from this GitLab repository:
+install automatically from this GitHub repository:
 
 ```{r, eval=FALSE}
 library(devtools)
-install_git("http://git.leg.ufpr.br/wbonat/mcglm.git")
+install_github("wbonat/mcglm")
 ```
 
 Alternatively, download the package tarball: [`r pkg.source`][]
@@ -81,7 +81,7 @@ cat(instw, sep = "\n")
 
 ### Development version
 
-By default, if you use `devtools::install_git()`, or download any of the
+By default, if you use `devtools::install_github()`, or download any of the
 package tarball or Windows binary version, it will install the stable
 version of the package (from the `master` branch of this repository).
 
@@ -89,11 +89,17 @@ If you want to install the development version, you can use
 
 ```r
 library(devtools)
-install_git("http://git.leg.ufpr.br/wbonat/mcglm.git", branch = "devel")
+install_github("wbonat/mcglm", ref = "devel")
 ```
 
 Note that the development version can contain bugs and other unknown
 features, so use it at your own risk!
+
+## Authors
+
+- [Wagner Hugo Bonat][] (author and main developer)
+- [Walmes Marques Zeviani][] (contributor)
+- [Fernando de Pol Mayer][] (contributor)
 
 ## Documentation
 
@@ -104,7 +110,7 @@ The reference manual in PDF can be found here: [mcglm-manual.pdf][]
 This R package is develop using [`roxygen2`][] for documentation and
 [`devtools`] to check and build. Also, we adopt the [Gitflow worflow][]
 in this repository. Please, see the
-[instructions for contributing](./contributing.md) to collaborate.
+[instructions for contributing](./CONTRIBUTING.md) to collaborate.
 
 ## License
 
@@ -116,10 +122,12 @@ See [LICENSE](./LICENSE)
 <!-- links -->
 
 ```{r, echo=FALSE, include=FALSE}
-pkg.source.link <- paste0("http://www.leg.ufpr.br/~leg/mcglm/source/",
-                          pkg.source)
-pkg.win.link <- paste0("http://www.leg.ufpr.br/~leg/mcglm/source/",
-                       pkg.win)
+pkg.source.link <- paste0(
+    "https://github.com/wbonat/mcglm/raw/master/downloads/",
+    pkg.source)
+pkg.win.link <- paste0(
+    "https://github.com/wbonat/mcglm/raw/master/downloads/",
+    pkg.win)
 ```
 
 [GNU General Public License (GPL) v3.0]: http://www.gnu.org/licenses/gpl-3.0.html
@@ -127,5 +135,8 @@ pkg.win.link <- paste0("http://www.leg.ufpr.br/~leg/mcglm/source/",
 [`devtools`]: https://github.com/hadley/devtools
 [`r pkg.source`]: `r pkg.source.link`
 [`r pkg.win`]: `r pkg.win.link`
-[mcglm-manual.pdf]: http://www.leg.ufpr.br/~leg/mcglm/source/mcglm-manual.pdf
+[mcglm-manual.pdf]: https://github.com/wbonat/mcglm/raw/master/downloads/mcglm-manual.pdf
 [Gitflow worflow]: http://nvie.com/posts/a-successful-git-branching-model/
+[Wagner Hugo Bonat]: http://www.leg.ufpr.br/doku.php/pessoais:wbonat
+[Walmes Marques Zeviani]: http://www.leg.ufpr.br/~walmes
+[Fernando de Pol Mayer]: http://www.leg.ufpr.br/~fernandomayer

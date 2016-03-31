@@ -12,7 +12,7 @@ switch(Sys.info()["user"],
        "fernandomayer" = { NULL },
        "walmes" = { setwd("~/GitLab/mcglm") },
        {
-           if (basename(getwd()) == "mcglm") {
+           if (basename(getwd()) != "mcglm") {
                stop("The working directory isn't /mcglm.")
            }
        })
@@ -22,6 +22,8 @@ cat(getwd(), "\n")
 # Packages.
 
 library(devtools)
+library(withr)
+library(knitr)
 
 # Load the package (to make functions available).
 load_all()
@@ -43,7 +45,7 @@ load_all()
 document()
 
 # Check documentation.
-check_doc()
+check_man()
 
 # Check functions, datasets, run examples, etc. Using cleanup = FALSE
 # and check_dir = "../" will create a directory named mcglm.Rcheck
@@ -75,7 +77,6 @@ build_vignettes()
 #-----------------------------------------------------------------------
 # Generate the README.md.
 
-library(knitr)
 knit(input = "README.Rmd")
 
 #-----------------------------------------------------------------------
@@ -91,7 +92,7 @@ knit(input = "README.Rmd")
 
 libTest <- path.expand("~/R-test/")
 if (file.exists(libTest)) {
-    file.remove(libTest)
+    unlink(libTest, recursive = TRUE)
 }
 dir.create(path = libTest)
 
@@ -105,19 +106,38 @@ packageVersion("mcglm")
 ls("package:mcglm")
 
 #-----------------------------------------------------------------------
-# Test installation 2: Install from GitLab branch devel.
+# Test installation 2: Install from GitHub branches
 
 list.files(path = libTest, recursive = TRUE)
 unlink(paste0(libTest, "mcglm"), recursive = TRUE)
 
-# Test using devtools::install_git().
-.libPaths(new = libTest)
-install_git(url = "http://git.leg.ufpr.br/wbonat/mcglm.git",
-            branch = "devel")
+# Test using devtools::install_github().
 
+## In order to make a "clean" test, and not modify a user's .libPaths(),
+## we need to install devtools and all of its dependencies in the new
+## libpath. The function withr::with_libpaths() creates a temporary
+## libpath and install everything there. This is the only way to make
+## install_github() to install a package in another libpath, without
+## modifying the .libPaths().
+## Install devtools in the new path
+with_libpaths(new = libTest,
+              install.packages("devtools", dependencies = TRUE))
+## Install and test mcglm master
+with_libpaths(new = libTest,
+              install_github("wbonat/mcglm", ref = "master"))
 library(package = "mcglm", lib.loc = libTest)
 packageVersion("mcglm")
 ls("package:mcglm")
+
+## Install and test mcglm master
+with_libpaths(new = libTest,
+              install_github("wbonat/mcglm", ref = "devel"))
+library(package = "mcglm", lib.loc = libTest)
+packageVersion("mcglm")
+ls("package:mcglm")
+
+## Remove libTest
+unlink(libTest, recursive = TRUE)
 
 #-----------------------------------------------------------------------
 # Sending package tarballs and manual to remote server to be
@@ -133,10 +153,15 @@ system(cmd.win)
 
 ntw <- "./data-raw/mcglm_network.html"
 man <- "../mcglm.Rcheck/mcglm-manual.pdf"
+
+## Send to LEG server
 cmd <- paste("scp -P $PATAXOP", pkg, man, pkg.win, ntw,
              "leg@$PATAXO:~/public_html/mcglm/source")
 system(cmd)
-
 browseURL("http://www.leg.ufpr.br/~leg/mcglm/")
+
+## Send to downloads/ folder, so it stays hosted on GitHub
+dest <- "downloads/"
+file.copy(c(pkg, pkg.win, man), dest, overwrite = TRUE)
 
 #-----------------------------------------------------------------------

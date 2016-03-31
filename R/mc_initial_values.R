@@ -1,6 +1,9 @@
 #' @title Automatic initial values for McGLMs.
 #' @author Wagner Hugo Bonat
 #'
+#' @description This function provides o list of initial values to be
+#'     used while fitting McGLMs.
+#'
 #' @param linear_pred A list of formula see \code{\link[stats]{formula}}
 #'     for details.
 #' @param matrix_pred A list of known matrices to be used on the matrix
@@ -47,14 +50,14 @@ mc_initial_values <- function(linear_pred, matrix_pred, link, variance,
                 data_temp$offset <- offset[[i]]
                 list_models[[i]] <-
                     glm(linear_pred[[i]],
-                        family = quasi(link = link[[i]], 
+                        family = quasi(link = link[[i]],
                                        variance =
                                            "constant"), offset = offset,
                         data = data_temp)
             } else {
                 list_models[[i]] <-
                     glm(linear_pred[[i]],
-                        family = quasi(link = link[[i]], 
+                        family = quasi(link = link[[i]],
                                        variance = "constant"),
                         data = data)
             }
@@ -67,13 +70,13 @@ mc_initial_values <- function(linear_pred, matrix_pred, link, variance,
                 data_temp$offset <- offset[[i]]
                 list_models[[i]] <-
                     glm(linear_pred[[i]],
-                        family = quasi(link = link[[i]], 
+                        family = quasi(link = link[[i]],
                                        variance = "mu"),
                         offset = offset, data = data_temp)
             } else {
                 list_models[[i]] <-
                     glm(linear_pred[[i]],
-                        family = quasi(link = link[[i]], 
+                        family = quasi(link = link[[i]],
                                        variance = "mu"), data = data)
             }
         }
@@ -103,7 +106,7 @@ mc_initial_values <- function(linear_pred, matrix_pred, link, variance,
                 }
                 list_models[[i]] <-
                     glm(linear_pred[[i]],
-                        family = quasi(link = link_temp, 
+                        family = quasi(link = link_temp,
                                        variance = "mu(1-mu)"),
                         data = data)
             }

@@ -1,0 +1,7 @@
+language: r
+cache: packages
+
+cran: http://cran-r.c3sl.ufpr.br/
+
+r_packages:
+ - roxygen2
