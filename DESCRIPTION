@@ -19,7 +19,11 @@ Suggests:
     latticeExtra,
     knitr,
     rmarkdown,
-    networkD3
+    networkD3,
+    MASS,
+    mvtnorm,
+    tweedie,
+    devtools
 Imports:
     Matrix,
     assertthat
@@ -29,3 +33,4 @@ URL: http://git.leg.ufpr.br/wbonat/mcglm
 BugReports: http://git.leg.ufpr.br/wbonat/mcglm/issues
 Encoding: UTF-8
 VignetteBuilder: knitr
+RoxygenNote: 5.0.1
