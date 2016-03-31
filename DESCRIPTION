@@ -1,7 +1,7 @@
 Package: mcglm
 Type: Package
 Title: Fit multivariate covariance generalized linear models
-Version: 0.0.2
+Version: 0.2.0
 Date: 2016-01-07
 Authors@R: as.person(c(
     "Wagner Hugo Bonat <wbonat@ufpr.br> [aut, cre]",
@@ -29,8 +29,8 @@ Imports:
     assertthat
 License: GPL-3 | file LICENSE
 LazyData: TRUE
-URL: http://git.leg.ufpr.br/wbonat/mcglm
-BugReports: http://git.leg.ufpr.br/wbonat/mcglm/issues
+URL: https://github.com/wbonat/mcglm
+BugReports: https://github.com/wbonat/mcglm/issues
 Encoding: UTF-8
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
