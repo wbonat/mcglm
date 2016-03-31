@@ -19,29 +19,29 @@ mc_sandwich <- function(middle, bord1, bord2) {
     bord1 %*% middle %*% bord2
 }
 
-#' @rdname mc_sandwich -------------------------------------------------
+#' @rdname mc_sandwich
 mc_sandwich_negative <- function(middle, bord1, bord2) {
     -bord1 %*% middle %*% bord2
 }
 
-#' @rdname mc_sandwich -------------------------------------------------
+#' @rdname mc_sandwich
 mc_sandwich_power <- function(middle, bord1, bord2) {
     temp1 <- mc_sandwich(middle = middle, bord1 = bord1, bord2 = bord2)
     return(temp1 + t(temp1))
 }
 
-#' @rdname mc_sandwich -------------------------------------------------
+#' @rdname mc_sandwich
 mc_sandwich_cholesky <- function(bord1, middle, bord2) {
     p1 <- bord1 %*% middle %*% bord2
     return(p1 + t(p1))
 }
 
-#' @rdname mc_sandwich -------------------------------------------------
+#' @rdname mc_sandwich
 mc_multiply <- function(bord1, bord2) {
     return(bord2 %*% bord1)
 }
 
-#' @rdname mc_sandwich -------------------------------------------------
+#' @rdname mc_sandwich
 mc_multiply2 <- function(bord1, bord2) {
     return(bord1 %*% bord2)
 }
