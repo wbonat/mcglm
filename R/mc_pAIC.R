@@ -11,7 +11,7 @@
 
 pAIC <- function(object, verbose = TRUE) {
   Pseudo <- plogLik(object = object, verbose = FALSE)
-  pAIC <- -2*Pseudo$plogLik + 2*Pseudo$df
+  pAIC <- 2*Pseudo$df - 2*Pseudo$plogLik
   if (verbose) cat("pAIC", pAIC)
   return(invisible(list("pAIC" = pAIC)))
 }

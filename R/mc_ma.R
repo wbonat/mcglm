@@ -20,9 +20,9 @@ mc_ma <- function(id, time, data, order = 1) {
   Z1.list <- list()
   data.id <- split(data, data[id])
   for(i in 1:length(data.id)) {
-    n <- dim(data.id[[i]])[1]
+    NN <- dim(data.id[[i]])[1]
     ordem <- as.numeric(data.id[[i]][[time]])
-    Z1.list[[i]] <- mc_ma_aux(n = n, order = order)[ordem,ordem]
+    Z1.list[[i]] <- mc_ma_aux(n = NN, order = order)[ordem,ordem]
   }
   ordem2 <- order(data$id2)
   output <- list("Z1" = bdiag(Z1.list)[ordem2,ordem2])
