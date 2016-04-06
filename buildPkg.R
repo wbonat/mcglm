@@ -10,7 +10,7 @@
 switch(Sys.info()["user"],
        "wagner" = { NULL },
        "fernandomayer" = { NULL },
-       "walmes" = { setwd("~/GitLab/mcglm") },
+       "walmes" = { setwd("~/repos/mcglm/") },
        {
            if (basename(getwd()) != "mcglm") {
                stop("The working directory isn't /mcglm.")
