@@ -205,14 +205,14 @@ NULL
 #' @title Respiratory physiotherapy on premature newborns.
 #' @name NewBorn
 #'
-#' @description The NewBorn dataset consist of a prospective study 
-#' to assess the effect of respiratory physiotherapy on the 
-#' cardiopulmonary function of ventilated preterm newborn infants with 
-#' birth weight lower than 1500 g. The data set was collected and 
-#' kindly made available by the nursing team of the Waldemar Monastier 
+#' @description The NewBorn dataset consist of a prospective study
+#' to assess the effect of respiratory physiotherapy on the
+#' cardiopulmonary function of ventilated preterm newborn infants with
+#' birth weight lower than 1500 g. The data set was collected and
+#' kindly made available by the nursing team of the Waldemar Monastier
 #' hospital, Campo Largo, PR, Brazil. The NewBorn dataset was analysed
 #' in Bonat and Jorgensen (2016) as an example of mixed outcomes
-#' regression model. 
+#' regression model.
 #'
 #' \itemize{
 #'
@@ -235,33 +235,33 @@ NULL
 #' \item \code{JAU} - Factor, two levels (Jaundice, YES; NO).
 #'
 #' \item \code{PNE} - Factor, two levels (Pneumonia, YES; NO).
-#' 
-#' \item \code{PDA} - Factor, two levels (Persistence of ductus 
+#'
+#' \item \code{PDA} - Factor, two levels (Persistence of ductus
 #' arteriosus, YES; NO).
-#' 
-#' \item \code{PPI} - Factor, two levels (Primary pulmonary infection, 
+#'
+#' \item \code{PPI} - Factor, two levels (Primary pulmonary infection,
 #' YES; NO).
-#' 
+#'
 #' \item \code{OTHERS} - Factor, two levels (Other diseases, YES; NO).
-#' 
+#'
 #' \item \code{DAYS} - Age (days).
-#' 
-#' \item \code{AUX} - Factor, two levels (Type of respiratory auxiliary, 
+#'
+#' \item \code{AUX} - Factor, two levels (Type of respiratory auxiliary,
 #' HOOD; OTHERS).
-#' 
+#'
 #' \item \code{RR} - Respiratory rate (continuous).
-#' 
+#'
 #' \item \code{HR} - Heart rate (continuous).
-#' 
+#'
 #' \item \code{SPO2} - Oxygen saturation (bounded).
-#' 
-#' \item \code{TREAT} - Factor, three levels (Respiratory physiotherapy, 
+#'
+#' \item \code{TREAT} - Factor, three levels (Respiratory physiotherapy,
 #' Evaluation 1; Evaluation 2; Evaluation 3).
-#' 
+#'
 #' \item \code{NBI} - Newborn index.
-#' 
+#'
 #' \item \code{TIME} - Days of treatment.
-#' 
+#'
 #' }
 #'
 #' @docType data
@@ -273,7 +273,7 @@ NULL
 #' @format a \code{data.frame} with 270 records and 21 variables.
 #'
 #' @source Bonat, et. al. (2016). Multivariate covariance generalized
-#' linear models. Journal of Royal Statistical Society - Series C, 
+#' linear models. Journal of Royal Statistical Society - Series C,
 #' to appear.
 #'
 #' @examples
@@ -285,9 +285,60 @@ NULL
 #'fit <- mcglm(linear_pred = c(formu), matrix_pred = list(list(Z0)),
 #'             link = c("logit"), variance = c("binomialP"),
 #'             power_fixed = c(TRUE),
-#'             data = NewBorn, 
+#'             data = NewBorn,
 #'             control_algorithm = list(verbose = FALSE, tunning = 0.5))
 #' summary(fit)
 NULL
 
+#' @title Soybeans data set
+#' @name soya
+#'
+#' @description Experiment carried out in a vegetation house with
+#' soybeans. The experiment has two plants by plot with three levels of
+#' the factor amount of water in the soil (\code{water})
+#' and five levels of potassium fertilization (\code{pot}).
+#' The plots were arranged in five blocks (\code{block}).
+#' Three response variables are of the interest, namely, grain yield,
+#' number of seeds and number of viable peas per plant.
+#' The data set has 75 observations of 7 variables.
+#'
+#' \itemize{
+#'
+#' \item \code{pot} - Factor five levels of potassium fertilization.
+#'
+#' \item \code{water} - Factor three levels of amount of water in the soil.
+#'
+#' \item \code{block} - Factor five levels.
+#'
+#' \item \code{grain} - Continuous - Grain yield per plant.
+#'
+#' \item \code{seeds} - Count - Number of seeds per plant.
+#'
+#' \item \code{viablepeas} - Binomial - Number of viable peas per plant.
+#'
+#' \item \code{totalpeas} - Binomial - Total number of peas per plant.
+#' }
+#'
+#' @docType data
+#'
+#' @keywords datasets
+#'
+#' @usage data(soya)
+#'
+#' @format a \code{data.frame} with 75 records and 7 variables.
+#'
+#' @source Bonat, et. al. (2016). Modelling the covariance structure in
+#' marginal multivariate count models: Hunting in Bioko island. The
+#' annals of Applied Statatistics, to appear.
+#'
+#' @examples
+#' library(mcglm)
+#' library(Matrix)
+#' data(soya, package="mcglm")
+#' formu <- grain ~ block + factor(water) * factor(pot)
+#' Z0 <- mc_id(soya)
+#' fit <- mcglm(linear_pred = c(formu), matrix_pred = list(Z0),
+#'           data = soya)
+#'           anova(fit)
+NULL
 
