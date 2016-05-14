@@ -5,6 +5,11 @@
 \alias{mcglm}
 \alias{mcglm-package}
 \title{Fitting Multivariate Covariance Generalized Linear Models (McGLM)}
+\source{
+Bonat, W.H. and Jorgensen, B. (2016). Multivariate
+    covariance generalized linear models. Journal of Royal Statistical
+    Society - Series C. to appear.
+}
 \usage{
 mcglm(linear_pred, matrix_pred, link, variance, covariance, offset, Ntrial,
   power_fixed, data, control_initial = "automatic", contrasts = NULL,
@@ -61,8 +66,8 @@ mcglm returns an object of class 'mcglm'.
     parameters and Pearson estimating function for covariance
     parameters. For details see Bonat and Jorgensen (2015).
 
-Fits a multivariate covariance generalized linear
-    models (McGLMs) to data.  McGLM is a general framework for
+This package fits multivariate covariance generalized
+    linear models (McGLMs) to data.  McGLM is a general framework for
     non-normal multivariate data analysis, designed to handle
     multivariate response variables, along with a wide range of
     temporal and spatial correlation structures defined in terms of
@@ -77,9 +82,12 @@ Fits a multivariate covariance generalized linear
     a wide variety of different types of response variables and
     covariance structures, including multivariate extensions of
     repeated measures, time series, longitudinal, spatial and
-    spatio-temporal structures.
+    spatio-temporal structures. The package offers a user-friendly
+    interface for fitting McGLMS.
 }
 \author{
 Wagner Hugo Bonat
+
+Wagner Hugo Bonat.
 }
 

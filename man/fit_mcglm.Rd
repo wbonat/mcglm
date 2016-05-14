@@ -10,7 +10,8 @@ fit_mcglm(list_initial, list_link, list_variance, list_covariance, list_X,
   verbose)
 }
 \arguments{
-\item{list_initial}{A list of initial values for regression and covariance parameters.}
+\item{list_initial}{A list of initial values for regression and
+covariance parameters.}
 
 \item{list_link}{A list of link function names.}
 
@@ -20,40 +21,55 @@ fit_mcglm(list_initial, list_link, list_variance, list_covariance, list_X,
 
 \item{list_X}{A list of design matrices.}
 
-\item{list_Z}{A list of knowm matrices to used on the matrix linear predictor.}
+\item{list_Z}{A list of knowm matrices to compose matrix linear predictor.}
 
 \item{list_offset}{A list of offset values.}
 
-\item{list_Ntrial}{A list of number of trials, useful only when analysis binomial data.}
+\item{list_Ntrial}{A list of number of trials, useful only when
+analysing binomial data.}
 
-\item{list_power_fixed}{A list of logicals indicating if the power parameters should be estimated
-or not.}
+\item{list_power_fixed}{A list of logicals indicating if the power
+parameters should be estimated or not.}
 
-\item{list_sparse}{A list of logicals indicating if the matrices should be set up as sparse
-matrices. This argument is useful only when using exponential-matrix covariance link function.
-In the other cases the algorithm detects automatically if the matrix should be sparse or not.}
+\item{list_sparse}{A list of logicals indicating if the matrices
+should be set up as sparse matrices. This argument is useful only
+when using exponential-matrix covariance link function.
+In the other cases the algorithm detects automatically if the matrix
+should be sparse or not.}
 
-\item{y_vec}{A vector of the response variables stacked.}
+\item{y_vec}{A vector of the stacked response variables.}
 
-\item{correct}{A logical indicating if the algorithm will use the correction term or not.}
+\item{correct}{A logical indicating if the algorithm will use the
+correction term or not.}
 
 \item{max_iter}{Maximum number of iterations.}
 
-\item{tol}{A numeric spcyfing the tolerance.}
+\item{tol}{A numeric specyfing the tolerance.}
 
-\item{method}{A string specyfing the method used to fit the models (\code{chaser} or \code{rc}).}
+\item{method}{A string specyfing the method used to fit the models
+(\code{chaser} or \code{rc}).}
 
-\item{tunning}{A numeric value in general near zero for the rc method and near 1 for the chaser
-method. This argument control the step-length.}
+\item{tunning}{A numeric value in general close to zero for the rc
+method and close to 1 for the chaser method. This argument control
+the step-length.}
 
-\item{verbose}{A logical if TRUE print the values of the covariance parameters used on each iteration.}
+\item{verbose}{A logical if TRUE print the values of the covariance
+parameters used on each iteration.}
 }
 \value{
 A list with estimated regression and covariance parameters.
+Details about the estimation procedures as iterations, sensitivity,
+variability are also provided. In general the users do not need to
+use this function directly. The \code{\link{mcglm}} provides GLM
+interface for fitting McGLMS.
 }
 \description{
-This function implements the two manin algorithms used to fitting McGLMs. The chaser
-and the reciprocal likelihood algorithms. In general the chaser algorithm is faster than the
-reciprocal likelihood and should be preferred.
+This function implements the two main algorithms used
+for fitting McGLMs. The chaser and the reciprocal likelihood algorithms.
+In general the chaser algorithm is faster than the
+reciprocal likelihood.
+}
+\author{
+Wagner Hugo Bonat
 }
 

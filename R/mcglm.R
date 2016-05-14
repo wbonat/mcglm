@@ -1,7 +1,7 @@
-##' @title Multivariate covariance generalized linear models (McGLMs)
+##' @title Multivariate Covariance Generalized Linear Models (McGLMs).
 ##'
-##' @description Fits a multivariate covariance generalized linear
-##'     models (McGLMs) to data.  McGLM is a general framework for
+##' @description This package fits multivariate covariance generalized
+##'     linear models (McGLMs) to data.  McGLM is a general framework for
 ##'     non-normal multivariate data analysis, designed to handle
 ##'     multivariate response variables, along with a wide range of
 ##'     temporal and spatial correlation structures defined in terms of
@@ -16,7 +16,11 @@
 ##'     a wide variety of different types of response variables and
 ##'     covariance structures, including multivariate extensions of
 ##'     repeated measures, time series, longitudinal, spatial and
-##'     spatio-temporal structures.
+##'     spatio-temporal structures. The package offers a user-friendly
+##'     interface for fitting McGLMS.
+##'@source Bonat, W.H. and Jorgensen, B. (2016). Multivariate
+##'     covariance generalized linear models. Journal of Royal Statistical
+##'     Society - Series C. to appear.
 ##'
 ##' @docType package
 ##' @name mcglm
@@ -188,8 +192,8 @@ NULL
 #' @format a \code{data.frame} with 1216 records and 10 variables.
 #'
 #' @source Bonat, et. al. (2016). Modelling the covariance structure in
-#' marginal multivariate count models: Hunting in Bioko island. The
-#' annals of Applied Statatistics, to appear.
+#' marginal multivariate count models: Hunting in Bioko island.
+#' Environmetrics, to appear.
 #'
 #' @examples
 #' library(mcglm)
@@ -240,9 +244,8 @@ NULL
 #'
 #' @format a \code{data.frame} with 250 records and 9 variables.
 #'
-#' @source Bonat, et. al. (2016). Modelling the covariance structure in
-#' marginal multivariate count models: Hunting in Bioko island. The
-#' annals of Applied Statatistics, to appear.
+#' @source Bonat, W. H. (2016). Multiple Response Variables Regression
+#' Models in R: The mcglm Package. Journal of Statistical Software.
 #'
 #' @examples
 #' library(mcglm)
@@ -321,9 +324,9 @@ NULL
 #'
 #' @format a \code{data.frame} with 270 records and 21 variables.
 #'
-#' @source Bonat, et. al. (2016). Multivariate covariance generalized
-#' linear models. Journal of Royal Statistical Society - Series C,
-#' to appear.
+#' @source Bonat, W. H. and Jorgensen, B. (2016). Multivariate
+#' covariance generalized linear models.
+#' Journal of Royal Statistical Society - Series C, to appear.
 #'
 #' @examples
 #' library(mcglm)
@@ -376,9 +379,8 @@ NULL
 #'
 #' @format a \code{data.frame} with 75 records and 7 variables.
 #'
-#' @source Bonat, et. al. (2016). Modelling the covariance structure in
-#' marginal multivariate count models: Hunting in Bioko island. The
-#' annals of Applied Statatistics, to appear.
+#' @source Bonat, W. H. (2016). Multiple Response Variables Regression
+#' Models in R: The mcglm Package. Journal of Statistical Software.
 #'
 #' @examples
 #' library(mcglm)

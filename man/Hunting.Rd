@@ -7,8 +7,8 @@
 \format{a \code{data.frame} with 1216 records and 10 variables.}
 \source{
 Bonat, et. al. (2016). Modelling the covariance structure in
-marginal multivariate count models: Hunting in Bioko island. The
-annals of Applied Statatistics, to appear.
+marginal multivariate count models: Hunting in Bioko island.
+Environmetrics, to appear.
 }
 \usage{
 data(Hunting)
