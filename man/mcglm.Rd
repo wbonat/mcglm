@@ -87,7 +87,5 @@ This package fits multivariate covariance generalized
 }
 \author{
 Wagner Hugo Bonat
-
-Wagner Hugo Bonat.
 }
 

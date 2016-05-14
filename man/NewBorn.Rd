@@ -6,9 +6,9 @@
 \title{Respiratory physiotherapy on premature newborns.}
 \format{a \code{data.frame} with 270 records and 21 variables.}
 \source{
-Bonat, et. al. (2016). Multivariate covariance generalized
-linear models. Journal of Royal Statistical Society - Series C,
-to appear.
+Bonat, W. H. and Jorgensen, B. (2016). Multivariate
+covariance generalized linear models.
+Journal of Royal Statistical Society - Series C, to appear.
 }
 \usage{
 data(NewBorn)
