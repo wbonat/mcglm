@@ -2,7 +2,7 @@
 % Please edit documentation in R/mc_RJC.R
 \name{RJC}
 \alias{RJC}
-\title{Rotnitzky-Jewell’s information criterion}
+\title{Rotnitzky-Jewell information criterion}
 \usage{
 RJC(object, id, verbose = TRUE)
 }
@@ -21,7 +21,7 @@ A matrix. Note that the function assumes that the data are in
     the correct order.
 }
 \description{
-Compute the Rotnitzky-Jewell’s information criterion
+Compute the Rotnitzky-Jewell information criterion
 for multivariate covariance generalized linear models.
 WARNINGS: This function is limited to models with ONE response variable.
 }

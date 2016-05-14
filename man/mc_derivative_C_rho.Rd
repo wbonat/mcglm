@@ -30,4 +30,5 @@ It is an internal function used to build the derivatives of
 \author{
 Wagner Hugo Bonat
 }
+\keyword{internal}
 

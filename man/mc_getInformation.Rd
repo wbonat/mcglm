@@ -25,4 +25,5 @@ This computes all information required about the number
 \author{
 Wagner Hugo Bonat
 }
+\keyword{internal}
 

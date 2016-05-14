@@ -28,4 +28,5 @@ Compute the quasi-score function, its sensitivy and
 \author{
 Wagner Hugo Bonat
 }
+\keyword{internal}
 

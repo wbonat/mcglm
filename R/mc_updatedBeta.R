@@ -9,6 +9,7 @@
 #' @param information A list with information about the number of
 #'     parameters in the model. In general the output from
 #'     \link{mc_getInformation}.
+#' @keywords internal
 #' @param n_resp A numeric specyfing the number of response variables.
 #' @return A list with updated values of the regression parameters.
 

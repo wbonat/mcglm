@@ -1,6 +1,6 @@
-#' @title Build the joint covariance matrix
-#' @name mc_build_C
-#' @author Wagner Hugo Bonat
+#'@title Build the joint covariance matrix
+#'@name mc_build_C
+#'@author Wagner Hugo Bonat
 #'
 #'@description This function builds the joint variance-covariance matrix
 #'     using the Generalized Kronecker product and its derivatives with
@@ -26,7 +26,7 @@
 #'     of C with respect to regression parameters.
 #'@param compute_derivative_cov Logical. Compute or not the derivative
 #'     of C with respect the covariance parameters.
-#'
+#'@keywords internal
 #'@return A list with the inverse of the C matrix and the derivatives of
 #'     the C matrix with respect to rho, power and tau parameters.
 

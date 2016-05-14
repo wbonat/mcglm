@@ -27,4 +27,5 @@ Compute the cross-sensitivity matrix between regression
 \author{
 Wagner Hugo Bonat
 }
+\keyword{internal}
 

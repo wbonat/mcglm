@@ -28,4 +28,5 @@ This function build \eqn{\Omega} matrix according the
 \author{
 Wagner Hugo Bonat
 }
+\keyword{internal}
 

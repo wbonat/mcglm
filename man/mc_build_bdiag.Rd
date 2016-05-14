@@ -26,4 +26,5 @@ It is an internal function.
 \author{
 Wagner Hugo Bonat
 }
+\keyword{internal}
 

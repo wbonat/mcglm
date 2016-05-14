@@ -10,6 +10,7 @@
 #'     \code{link[mcglm]{mc_build_bdiag}}.
 #' @param response_number A numeric specifying the response variable
 #'     number.
+#' @keywords internal
 #' @return A list of block-diagonal matrices.
 
 mc_transform_list_bdiag <- function(list_mat, mat_zero,

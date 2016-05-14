@@ -21,4 +21,5 @@ Compute the cross-covariance matrix between covariance
 \author{
 Wagner Hugo Bonat
 }
+\keyword{internal}
 

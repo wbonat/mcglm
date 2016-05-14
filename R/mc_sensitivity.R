@@ -7,6 +7,7 @@
 #' @param product A list of matrix.
 #' @return The sensitivity matrix associated with the Pearson estimating
 #'     function.
+#' @keywords internal
 #' @details This function implements the equation 7 of Bonat and
 #'     Jorgensen (2015).
 

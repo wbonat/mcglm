@@ -2,7 +2,7 @@
 % Please edit documentation in R/mc_gosho.R
 \name{GOSHO}
 \alias{GOSHO}
-\title{Gosho’s information criterion}
+\title{Gosho information criterion}
 \usage{
 GOSHO(object, id, verbose = TRUE)
 }
@@ -21,7 +21,7 @@ A matrix. Note that the function assumes that the data are in
     the correct order.
 }
 \description{
-Compute the Gosho’s information criterion
+Compute the Gosho information criterion
 for multivariate covariance generalized linear models.
 WARNINGS: This function is limited to models with ONE response variable.
 }

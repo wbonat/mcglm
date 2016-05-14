@@ -39,4 +39,5 @@ Compute the Pearson estimating function its sensitivity and
 \author{
 Wagner Hugo Bonat
 }
+\keyword{internal}
 

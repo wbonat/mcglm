@@ -7,6 +7,7 @@
 #' @param list_initial A list specifying initial values.
 #' @param list_power_fixed A list of logical operators specyfing if the
 #'     power parameter should be estimated or not.
+#' @keywords internal
 #' @details It is an internal function, in general the users never will
 #'     use this function.  It will be useful, only if the user wants to
 #'     implement a different variance-covariance matrix.

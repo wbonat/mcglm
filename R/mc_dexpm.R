@@ -17,7 +17,7 @@
 #' @return A list with \eqn{\Omega = expm(U)} its inverse (if
 #'     \code{inverse = TRUE}) and auxiliares matrices to compute the
 #'     derivatives.
-#'
+#' @keywords internal
 #' @seealso \code{\link[Matrix]{expm}}, \code{\link[base]{eigen}},
 #'     \code{link[mcglm]{mc_dexp_gold}}.
 
@@ -31,7 +31,7 @@ mc_expm <- function(U, n = dim(U)[1], sparse = FALSE, inverse = FALSE) {
     if (inverse == TRUE) {
         eQr_INV <- Diagonal(n, exp(-tt$values))
         inv_Omega <- Matrix(UU %*% eQr_INV %*% inv_UU, sparse = sparse)
-        saida <- list(Omega = Omega, inv_Omega = inv_Omega, UU = UU, 
+        saida <- list(Omega = Omega, inv_Omega = inv_Omega, UU = UU,
                       Q = Q, inv_UU = inv_UU)
     }
     if (inverse == FALSE) {

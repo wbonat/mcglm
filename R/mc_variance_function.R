@@ -37,11 +37,13 @@
 #' mc_variance_function(mu = mu$mu, power = c(2, 1), Ntrial = 1,
 #'                      variance = "binomialPQ", inverse = FALSE,
 #'                      derivative_power = TRUE, derivative_mu = TRUE)
-#' 
+#'
 
 ## Generic variance function -------------------------------------------
-mc_variance_function <- function(mu, power, Ntrial, variance, inverse,
-                                 derivative_power, derivative_mu) {
+mc_variance_function <- function(mu, power, Ntrial,
+                                 variance, inverse,
+                                 derivative_power,
+                                 derivative_mu) {
     assert_that(is.logical(inverse))
     assert_that(is.logical(derivative_power))
     assert_that(is.logical(derivative_mu))
@@ -75,7 +77,8 @@ mc_variance_function <- function(mu, power, Ntrial, variance, inverse,
 
 #' @rdname mc_variance_function
 ## Power variance function ---------------------------------------------
-mc_power <- function(mu, power, inverse, derivative_power,
+mc_power <- function(mu, power, inverse,
+                     derivative_power,
                      derivative_mu) {
     ## The observed value can be zero, but not the expected value.
     assert_that(all(mu > 0))
@@ -98,7 +101,7 @@ mc_power <- function(mu, power, inverse, derivative_power,
     if (inverse == FALSE & derivative_power == TRUE &
             derivative_mu == FALSE) {
         output <- list(
-            V_sqrt = Diagonal(n = n, sqrt.mu.power), 
+            V_sqrt = Diagonal(n = n, sqrt.mu.power),
             D_V_sqrt_power =
                 Diagonal(n = n,
                          +(mu.power * log(mu))/(2 * sqrt.mu.power)))
@@ -110,7 +113,7 @@ mc_power <- function(mu, power, inverse, derivative_power,
     if (inverse == TRUE & derivative_power == TRUE &
             derivative_mu == TRUE) {
         output <- list(
-            V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu.power), 
+            V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu.power),
             D_V_inv_sqrt_power =
                 Diagonal(n = n,
                          -(mu.power * log(mu))/(2 * (mu.power)^(1.5))),
@@ -120,14 +123,14 @@ mc_power <- function(mu, power, inverse, derivative_power,
     if (inverse == TRUE & derivative_power == FALSE &
             derivative_mu == TRUE) {
         output <- list(
-            V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu.power), 
+            V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu.power),
             D_V_inv_sqrt_mu = -(mu^(power - 1) * power)/
                                    (2 * (mu.power)^(1.5)))
     }
     if (inverse == FALSE & derivative_power == TRUE &
             derivative_mu == TRUE) {
         output <- list(
-            V_sqrt = Diagonal(n = n, sqrt.mu.power), 
+            V_sqrt = Diagonal(n = n, sqrt.mu.power),
             D_V_sqrt_power =
                 Diagonal(n = n, (mu.power * log(mu))/
                                     (2 * sqrt.mu.power)),
@@ -135,7 +138,7 @@ mc_power <- function(mu, power, inverse, derivative_power,
     }
     if (inverse == FALSE & derivative_power == FALSE &
             derivative_mu == TRUE) {
-        output <- list(V_sqrt = Diagonal(n = n, sqrt.mu.power), 
+        output <- list(V_sqrt = Diagonal(n = n, sqrt.mu.power),
                        D_V_sqrt_mu = (mu^(power - 1) * power)/
                                          (2 * sqrt.mu.power))
     }
@@ -145,7 +148,8 @@ mc_power <- function(mu, power, inverse, derivative_power,
 #' @rdname mc_variance_function
 ## BinomialP variance function
 ## -----------------------------------------
-mc_binomialP <- function(mu, power, inverse, Ntrial, derivative_power, 
+mc_binomialP <- function(mu, power, inverse, Ntrial,
+                         derivative_power,
                          derivative_mu) {
     ## The observed value can be 0 and 1, but not the expected value
     assert_that(all(mu > 0))
@@ -161,7 +165,7 @@ mc_binomialP <- function(mu, power, inverse, Ntrial, derivative_power,
     if (inverse == TRUE & derivative_power == TRUE &
             derivative_mu == FALSE) {
         output <- list(
-            V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu1mu), 
+            V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu1mu),
             D_V_inv_sqrt_power =
                 Diagonal(n = n, -(log(1 - mu) * mu1mu +
                                   log(mu) * mu1mu)/(2 * (mu1mu^(1.5)))))
@@ -173,7 +177,7 @@ mc_binomialP <- function(mu, power, inverse, Ntrial, derivative_power,
     if (inverse == FALSE & derivative_power == TRUE &
             derivative_mu == FALSE) {
         output <- list(
-            V_sqrt = Diagonal(n = n, sqrt.mu1mu), 
+            V_sqrt = Diagonal(n = n, sqrt.mu1mu),
             D_V_sqrt_power = Diagonal(n = n, (log(1 - mu) * mu1mu +
                                               log(mu) * mu1mu)/
                                                  (2 * sqrt.mu1mu)))
@@ -185,10 +189,10 @@ mc_binomialP <- function(mu, power, inverse, Ntrial, derivative_power,
     if (inverse == TRUE & derivative_power == TRUE &
             derivative_mu == TRUE) {
         output <- list(
-            V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu1mu), 
+            V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu1mu),
             D_V_inv_sqrt_power =
                 Diagonal(n = n, -(log(1 - mu) * mu1mu + log(mu) *
-                                  mu1mu)/(2 * (mu1mu^(1.5)))), 
+                                  mu1mu)/(2 * (mu1mu^(1.5)))),
             D_V_inv_sqrt_mu = -(constant * (mu.power1 *
                                             (mu^(power - 1)) * power) -
                                 constant * (((1 - mu)^(power - 1)) *
@@ -198,7 +202,7 @@ mc_binomialP <- function(mu, power, inverse, Ntrial, derivative_power,
     if (inverse == TRUE & derivative_power == FALSE &
             derivative_mu == TRUE) {
         output <- list(
-            V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu1mu), 
+            V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu1mu),
             D_V_inv_sqrt_mu = -(constant *
                                 (mu.power1 * (mu^(power - 1)) * power) -
                                 constant * (((1 - mu)^(power - 1)) *
@@ -208,8 +212,8 @@ mc_binomialP <- function(mu, power, inverse, Ntrial, derivative_power,
     if (inverse == FALSE & derivative_power == TRUE &
             derivative_mu == TRUE) {
         output <- list(
-            V_sqrt = Diagonal(n = n, sqrt.mu1mu), 
-            D_V_sqrt_power = Diagonal(n = n, (log(1 - mu) * mu1mu + 
+            V_sqrt = Diagonal(n = n, sqrt.mu1mu),
+            D_V_sqrt_power = Diagonal(n = n, (log(1 - mu) * mu1mu +
                                               log(mu) * mu1mu)/
                                                  (2 * sqrt.mu1mu)),
             D_V_sqrt_mu = (constant *
@@ -221,7 +225,7 @@ mc_binomialP <- function(mu, power, inverse, Ntrial, derivative_power,
     if (inverse == FALSE & derivative_power == FALSE &
             derivative_mu == TRUE) {
         output <- list(
-            V_sqrt = Diagonal(n = n, sqrt.mu1mu), 
+            V_sqrt = Diagonal(n = n, sqrt.mu1mu),
             D_V_sqrt_mu = (constant *
                            (mu.power1 * (mu^(power - 1)) * power) -
                            constant * (((1 - mu)^(power - 1)) *
@@ -233,7 +237,8 @@ mc_binomialP <- function(mu, power, inverse, Ntrial, derivative_power,
 
 #' @rdname mc_variance_function
 ## BinomialPQ variance function ----------------------------------------
-mc_binomialPQ <- function(mu, power, inverse, Ntrial, derivative_power,
+mc_binomialPQ <- function(mu, power, inverse,
+                          Ntrial, derivative_power,
                           derivative_mu) {
     ## The observed value can be 0 and 1, but not the expected value
     assert_that(all(mu > 0))
@@ -253,10 +258,10 @@ mc_binomialPQ <- function(mu, power, inverse, Ntrial, derivative_power,
             derivative_mu == FALSE) {
         denominator <- (2 * (mu1mu^1.5) * Ntrial)
         output <- list(
-            V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu1mu), 
+            V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu1mu),
             D_V_inv_sqrt_p = Diagonal(n = n,
                                       -(mu.p.mu.q * log(mu))/
-                                           denominator), 
+                                           denominator),
             D_V_inv_sqrt_q = Diagonal(n = n,
                                       -mu.p.mu.q * log(1 - mu)/
                                            denominator))
@@ -269,9 +274,9 @@ mc_binomialPQ <- function(mu, power, inverse, Ntrial, derivative_power,
             derivative_mu == FALSE) {
         denominator <- 2 * sqrt.mu1mu * Ntrial
         output <- list(
-            V_sqrt = Diagonal(n = n, sqrt.mu1mu), 
+            V_sqrt = Diagonal(n = n, sqrt.mu1mu),
             D_V_sqrt_p = Diagonal(n = n,
-                                  +(mu.p.mu.q * log(mu))/denominator), 
+                                  +(mu.p.mu.q * log(mu))/denominator),
             D_V_sqrt_q = Diagonal(n = n,
                                   +(mu.p.mu.q * log(1 - mu))/
                                        denominator))
@@ -284,10 +289,10 @@ mc_binomialPQ <- function(mu, power, inverse, Ntrial, derivative_power,
             derivative_mu == TRUE) {
         denominator <- (2 * (mu1mu^1.5) * Ntrial)
         output <- list(
-            V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu1mu), 
+            V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu1mu),
             D_V_inv_sqrt_p = Diagonal(n = n,
                                       -(mu.p.mu.q * log(mu))/
-                                           denominator), 
+                                           denominator),
             D_V_inv_sqrt_q = Diagonal(n = n,
                                       -mu.p.mu.q *
                                            log(1 - mu)/denominator),
@@ -300,7 +305,7 @@ mc_binomialPQ <- function(mu, power, inverse, Ntrial, derivative_power,
     if (inverse == TRUE & derivative_power == FALSE &
             derivative_mu == TRUE) {
         output <- list(
-            V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu1mu), 
+            V_inv_sqrt = Diagonal(n = n, 1/sqrt.mu1mu),
             D_V_inv_sqrt_mu = -(constant * (mu1.q * (mu^(p - 1)) * p) -
                                 constant * (((1 - mu)^(q - 1)) *
                                             mu.p * q))/
@@ -311,9 +316,9 @@ mc_binomialPQ <- function(mu, power, inverse, Ntrial, derivative_power,
         denominator1 <- 2 * sqrt.mu1mu
         denominator2 <- denominator1 * Ntrial
         output <- list(
-            V_sqrt = Diagonal(n = n, sqrt.mu1mu), 
+            V_sqrt = Diagonal(n = n, sqrt.mu1mu),
             D_V_sqrt_p = Diagonal(n = n, (mu.p.mu.q * log(mu))/
-                                             denominator2), 
+                                             denominator2),
             D_V_sqrt_q = Diagonal(n = n, (mu.p.mu.q * log(1 - mu))/
                                              denominator2),
             D_V_sqrt_mu = (constant * (mu1.q * (mu^(p - 1)) * p) -
@@ -323,7 +328,7 @@ mc_binomialPQ <- function(mu, power, inverse, Ntrial, derivative_power,
     if (inverse == FALSE & derivative_power == FALSE &
             derivative_mu == TRUE) {
         output <- list(
-            V_sqrt = Diagonal(n = n, sqrt.mu1mu), 
+            V_sqrt = Diagonal(n = n, sqrt.mu1mu),
             D_V_sqrt_mu = (constant * (mu1.q * (mu^(p - 1)) * p) -
                            constant * (((1 - mu)^(q - 1)) * mu.p * q))/
                               (2 * sqrt.mu1mu))

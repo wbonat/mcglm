@@ -1,5 +1,4 @@
 #' @title ANOVA method for McGLMs.
-#' @name anova.mcglm
 #' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
 #' @description ANOVA method for object of class McGLMS.
@@ -430,6 +429,9 @@ residuals.mcglm <- function(object, type = "raw", ...) {
 #'
 #' @param object an object of class \code{mcglm}, usually, a result of a
 #'     call to \code{mcglm}.
+#' @param verbose Logical print or not the model summary.
+#' @param print Print only part of the model summary, options are
+#' \code{Regression}, \code{power}, \code{Dispersion} and \code{Correlation}.
 #' @param ... additional arguments affecting the summary produced. Note
 #'     the there is no extra options for mcglm object class.
 #'

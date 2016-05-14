@@ -26,9 +26,9 @@
 #'     McGLMs.
 #' @export
 
-mc_initial_values <- function(linear_pred, matrix_pred, link, variance,
-                              covariance, offset, Ntrial,
-                              contrasts = NULL, data) {
+mc_initial_values <- function(linear_pred, matrix_pred, link,
+                              variance, covariance, offset,
+                              Ntrial, contrasts = NULL, data) {
     n_resp <- length(linear_pred)
     if (!is.null(contrasts)) {
         list_X <- list()

@@ -8,6 +8,7 @@
 #' @param A A matrix.
 #' @param res A vector of residuals.
 #' @param W A matrix of weights.
+#' @keywords internal
 
 covprod <- function(A, res, W) {
     res <- as.numeric(res)

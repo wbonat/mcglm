@@ -9,6 +9,7 @@
 #'@param t_Bdiag_chol_Sigma_within A block-diagonal matrix.
 #'@param II A diagonal matrix.
 #'@return A matrix.
+#'@keywords internal
 #'@details It is an internal function used to build the derivatives of
 #'     the C matrix.
 

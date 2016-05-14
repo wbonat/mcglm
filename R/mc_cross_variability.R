@@ -8,6 +8,7 @@
 #' @param inv_C A matrix.
 #' @param res A vector.
 #' @param D A matrix.
+#' @keywords internal
 #' @return The cross-variability matrix between regression and
 #'     covariance parameters.
 

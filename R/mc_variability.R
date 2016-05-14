@@ -12,8 +12,9 @@
 #' @param res A vector. The residuals vector, i.e. (y_vec - mu_vec).
 #' @return The variability matrix associated witht the Pearson
 #'     estimating function.
+#' @keywords internal
 #' @details This function implements the equation 8 of Bonat and
-#'     Jorgensen (2015).
+#'     Jorgensen (2016).
 
 mc_variability <- function(sensitivity, product, inv_C, C, res) {
     W <- lapply(product, mc_multiply2, bord2 = inv_C)

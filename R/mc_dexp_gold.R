@@ -10,6 +10,7 @@
 #'
 #' @param M A matrix.
 #' @param dM A matrix.
+#' @keywords internal
 #' @return A list with two elements: \eqn{expm(M)} and its derivatives.
 #' @seealso \code{\link[Matrix]{expm}}, \code{\link[base]{eigen}}.
 #' @examples

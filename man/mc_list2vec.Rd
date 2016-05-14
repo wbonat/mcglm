@@ -27,4 +27,5 @@ It is an internal function, in general the users never will
 \author{
 Wagner Hugo Bonat
 }
+\keyword{internal}
 

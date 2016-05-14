@@ -30,4 +30,5 @@ This function update a list of covariance parameters. It
 \author{
 Wagner Hugo Bonat
 }
+\keyword{internal}
 

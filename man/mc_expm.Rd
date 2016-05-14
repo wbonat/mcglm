@@ -37,4 +37,5 @@ Wagner Hugo Bonat
 \code{\link[Matrix]{expm}}, \code{\link[base]{eigen}},
     \code{link[mcglm]{mc_dexp_gold}}.
 }
+\keyword{internal}
 

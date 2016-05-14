@@ -12,6 +12,7 @@
 #' @param middle A matrix.
 #' @param bord1 A matrix.
 #' @param bord2 A matrix.
+#' @keywords internal
 #' @return The matrix product \code{bord1 * middle * bord2}.
 
 ## Auxiliar function to multiply matrices ------------------------------

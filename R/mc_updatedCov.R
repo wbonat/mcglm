@@ -12,9 +12,10 @@
 #' @param list_power_fixed A list of logicals indicating if the power
 #'     parameter should be estimated or not.
 #' @param n_resp A numeric specyfing the number of response variables.
+#' @keywords internal
 #' @return A list with updated values of the covariance parameters.
 
-mc_updateCov <- function(list_initial, covariance, list_power_fixed, 
+mc_updateCov <- function(list_initial, covariance, list_power_fixed,
                          information, n_resp) {
     rho_cod <- rep("rho", information$n_rho)
     tau_cod <- list()

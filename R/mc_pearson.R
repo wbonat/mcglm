@@ -14,6 +14,7 @@
 #' @return A list with three components: (i) a vector of quasi-score
 #'     values, (ii) the sensitivity and (iii) variability matrices
 #'     associated with the Pearson estimating function.
+#' @keywords internal
 #' @details Compute the Pearson estimating function its sensitivity and
 #'     variability matrices.  For more details see Bonat and Jorgensen
 #'     (2015) equations 6, 7 and 8.

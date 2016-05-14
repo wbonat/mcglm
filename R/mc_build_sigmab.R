@@ -7,6 +7,7 @@
 #' @param rho A numeric vector.
 #' @param n_resp A numeric.
 #' @param inverse Logical.
+#' @keywords internal
 #' @return A list with sigmab and its derivatives with respect to rho.
 
 mc_build_sigma_between <- function(rho, n_resp, inverse = FALSE) {

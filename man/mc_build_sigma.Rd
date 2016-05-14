@@ -55,4 +55,5 @@ Wagner Hugo Bonat
 \code{\link{mc_link_function}},
     \code{\link{mc_variance_function}}, \code{\link{mc_build_omega}}.
 }
+\keyword{internal}
 

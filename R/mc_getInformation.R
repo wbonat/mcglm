@@ -8,6 +8,7 @@
 #' @param list_power_fixed A list of logical specyfing if the power
 #'     parameters should be estimated or not.
 #' @param n_resp A number specyfing the nmber of response variables.
+#' @keywords internal
 #' @return The number of \eqn{\beta}'s, \eqn{\tau}'s, power and
 #'     correlation parameters.
 

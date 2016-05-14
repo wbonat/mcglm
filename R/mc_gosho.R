@@ -1,7 +1,7 @@
-#' @title Gosho’s information criterion
+#' @title Gosho information criterion
 #' @author Wagner Hugo Bonat
 #'
-#' @description Compute the Gosho’s information criterion
+#' @description Compute the Gosho information criterion
 #' for multivariate covariance generalized linear models.
 #' WARNINGS: This function is limited to models with ONE response variable.
 #'

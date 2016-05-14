@@ -28,9 +28,10 @@ Compute the variability matrix associated with the
 }
 \details{
 This function implements the equation 8 of Bonat and
-    Jorgensen (2015).
+    Jorgensen (2016).
 }
 \author{
 Wagner Hugo Bonat
 }
+\keyword{internal}
 

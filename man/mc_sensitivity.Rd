@@ -24,4 +24,5 @@ This function implements the equation 7 of Bonat and
 \author{
 Wagner Hugo Bonat
 }
+\keyword{internal}
 

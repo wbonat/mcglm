@@ -42,4 +42,5 @@ The function \code{mc_sandwich} is just an auxiliar
 \author{
 Wagner Hugo Bonat
 }
+\keyword{internal}
 

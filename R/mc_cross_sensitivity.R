@@ -9,6 +9,7 @@
 #' @param Product_beta A list of matrices.
 #' @param n_beta_effective Numeric. Effective number of regression
 #'     parameters.
+#' @keywords internal
 #' @return The cross-sensitivity matrix. Equation (10) of Bonat and
 #'     Jorgensen (2015).
 

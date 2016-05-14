@@ -13,6 +13,7 @@
 #'     \link{mc_build_C}.
 #' @return A vector with the correction terms to be used on the Pearson
 #'     estimating function.
+#' @keywords internal
 #' @details It is an internal function useful inside the fitting
 #'     algorithm.
 

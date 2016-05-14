@@ -26,4 +26,5 @@ This function builds the correlation matrix between
 \author{
 Wagner Hugo Bonat
 }
+\keyword{internal}
 

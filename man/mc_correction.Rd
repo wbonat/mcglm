@@ -33,4 +33,5 @@ It is an internal function useful inside the fitting
 \author{
 Wagner Hugo Bonat
 }
+\keyword{internal}
 

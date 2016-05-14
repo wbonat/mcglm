@@ -25,6 +25,7 @@
 #'     will be estimated.
 #'@param compute_derivative_beta Logical. Compute or not the derivative
 #'     with respect to regression parameters.
+#'@keywords internal
 #'@return A list with the Cholesky decomposition of \eqn{\Sigma},
 #'     \eqn{\Sigma^{-1}} and the derivative of \eqn{\Sigma} with respect
 #'     to the power and tau parameters.
@@ -61,7 +62,7 @@ mc_build_sigma <- function(mu, Ntrial = 1, tau, power, Z, sparse,
                            D_Sigma = D_Sigma)
         }
     }
-    
+
     if (variance == "tweedie" | variance == "binomialP" |
             variance == "binomialPQ") {
         if (variance == "tweedie") {
@@ -78,7 +79,7 @@ mc_build_sigma <- function(mu, Ntrial = 1, tau, power, Z, sparse,
                 inverse = FALSE,
                 derivative_power = !power_fixed,
                 derivative_mu = compute_derivative_beta)
-            Sigma <- forceSymmetric(V_sqrt$V_sqrt %*% Omega$Omega %*% 
+            Sigma <- forceSymmetric(V_sqrt$V_sqrt %*% Omega$Omega %*%
                                         V_sqrt$V_sqrt)
             chol_Sigma <- chol(Sigma)
             inv_chol_Sigma <- solve(chol_Sigma)
@@ -88,18 +89,18 @@ mc_build_sigma <- function(mu, Ntrial = 1, tau, power, Z, sparse,
             if (power_fixed == FALSE) {
                 if (variance == "power" | variance == "binomialP") {
                     D_Sigma_power <- mc_sandwich_power(
-                        middle = Omega$Omega, bord1 = V_sqrt$V_sqrt, 
+                        middle = Omega$Omega, bord1 = V_sqrt$V_sqrt,
                         bord2 = V_sqrt$D_V_sqrt_p)
-                    D_Sigma <- c(D_Sigma_power = D_Sigma_power, 
+                    D_Sigma <- c(D_Sigma_power = D_Sigma_power,
                                  D_Sigma_tau = D_Sigma)
                 }
                 if (variance == "binomialPQ") {
                     D_Sigma_p <- mc_sandwich_power(
-                        middle = Omega$Omega, 
+                        middle = Omega$Omega,
                         bord1 = V_sqrt$V_sqrt,
                         bord2 = V_sqrt$D_V_sqrt_p)
                     D_Sigma_q <- mc_sandwich_power(
-                        middle = Omega$Omega, 
+                        middle = Omega$Omega,
                         bord1 = V_sqrt$V_sqrt,
                         bord2 = V_sqrt$D_V_sqrt_q)
                     D_Sigma <- c(D_Sigma_p, D_Sigma_q, D_Sigma)
@@ -112,7 +113,7 @@ mc_build_sigma <- function(mu, Ntrial = 1, tau, power, Z, sparse,
                 D_Sigma_beta <- mc_derivative_sigma_beta(
                     D = mu$D, D_V_sqrt_mu = V_sqrt$D_V_sqrt_mu,
                     Omega = Omega$Omega, V_sqrt = V_sqrt$V_sqrt,
-                    variance = variance) 
+                    variance = variance)
                 output$D_Sigma_beta <- D_Sigma_beta
             }
         }
@@ -125,7 +126,7 @@ mc_build_sigma <- function(mu, Ntrial = 1, tau, power, Z, sparse,
                 variance = variance, inverse = TRUE,
                 derivative_power = !power_fixed,
                 derivative_mu = compute_derivative_beta)
-            inv_Sigma <- forceSymmetric(V_inv_sqrt$V_inv_sqrt %*% 
+            inv_Sigma <- forceSymmetric(V_inv_sqrt$V_inv_sqrt %*%
                                             inv_Omega$inv_Omega %*%
                                             V_inv_sqrt$V_inv_sqrt)
             inv_chol_Sigma <- chol(inv_Sigma)
@@ -134,33 +135,33 @@ mc_build_sigma <- function(mu, Ntrial = 1, tau, power, Z, sparse,
             D_inv_Sigma <- lapply(inv_Omega$D_inv_Omega, mc_sandwich,
                                   bord1 = V_inv_sqrt$V_inv_sqrt,
                                   bord2 = V_inv_sqrt$V_inv_sqrt)
-            D_Sigma <- lapply(D_inv_Sigma, mc_sandwich_negative, 
+            D_Sigma <- lapply(D_inv_Sigma, mc_sandwich_negative,
                               bord1 = Sigma, bord2 = Sigma)
             if (power_fixed == FALSE) {
                 if (variance == "power" | variance == "binomialP") {
                     D_Omega_p <- mc_sandwich_power(
-                        middle = inv_Omega$inv_Omega, 
+                        middle = inv_Omega$inv_Omega,
                         bord1 = V_inv_sqrt$V_inv_sqrt,
                         bord2 = V_inv_sqrt$D_V_inv_sqrt_power)
                     D_Sigma_p <- mc_sandwich_negative(
-                        middle = D_Omega_p, 
+                        middle = D_Omega_p,
                         bord1 = Sigma, bord2 = Sigma)
                     D_Sigma <- c(D_Sigma_p, D_Sigma)
                 }
                 if (variance == "binomialPQ") {
                     D_Omega_p <- mc_sandwich_power(
-                        middle = inv_Omega$inv_Omega, 
+                        middle = inv_Omega$inv_Omega,
                         bord1 = V_inv_sqrt$V_inv_sqrt,
                         bord2 = V_inv_sqrt$D_V_inv_sqrt_p)
                     D_Sigma_p <- mc_sandwich_negative(
-                        middle = D_Omega_p, 
+                        middle = D_Omega_p,
                         bord1 = Sigma, bord2 = Sigma)
                     D_Omega_q <- mc_sandwich_power(
-                        middle = inv_Omega$inv_Omega, 
+                        middle = inv_Omega$inv_Omega,
                         bord1 = V_inv_sqrt$V_inv_sqrt,
                         bord2 = V_inv_sqrt$D_V_inv_sqrt_q)
                     D_Sigma_q <- mc_sandwich_negative(
-                        middle = D_Omega_q, 
+                        middle = D_Omega_q,
                         bord1 = Sigma, bord2 = Sigma)
                     D_Sigma <- c(D_Sigma_p, D_Sigma_q, D_Sigma)
                 }
@@ -170,9 +171,9 @@ mc_build_sigma <- function(mu, Ntrial = 1, tau, power, Z, sparse,
                            D_Sigma = D_Sigma)
             if (compute_derivative_beta == TRUE) {
                 D_inv_Sigma_beta <- mc_derivative_sigma_beta(
-                    D = mu$D, 
+                    D = mu$D,
                     D_V_sqrt_mu = V_inv_sqrt$D_V_inv_sqrt_mu,
-                    Omega = inv_Omega$inv_Omega, 
+                    Omega = inv_Omega$inv_Omega,
                     V_sqrt = V_inv_sqrt$V_inv_sqrt, variance = variance)
                 D_Sigma_beta <- lapply(D_inv_Sigma_beta,
                                        mc_sandwich_negative,
@@ -181,18 +182,18 @@ mc_build_sigma <- function(mu, Ntrial = 1, tau, power, Z, sparse,
             }
         }
     }
-    
+
     if (variance == "poisson_tweedie") {
         if (covariance == "identity" | covariance == "expm") {
             Omega <- mc_build_omega(tau = tau, Z = Z,
                                     covariance_link = covariance,
                                     sparse = sparse)
             V_sqrt <- mc_variance_function(
-                mu = mu$mu, power = power, 
-                Ntrial = Ntrial, variance = "power", inverse = FALSE, 
+                mu = mu$mu, power = power,
+                Ntrial = Ntrial, variance = "power", inverse = FALSE,
                 derivative_power = !power_fixed,
                 derivative_mu = compute_derivative_beta)
-            Sigma <- forceSymmetric(Diagonal(length(mu$mu), mu$mu) + 
+            Sigma <- forceSymmetric(Diagonal(length(mu$mu), mu$mu) +
                                         V_sqrt$V_sqrt %*%
                                         Omega$Omega %*% V_sqrt$V_sqrt)
             chol_Sigma <- chol(Sigma)
@@ -202,7 +203,7 @@ mc_build_sigma <- function(mu, Ntrial = 1, tau, power, Z, sparse,
                               bord2 = V_sqrt$V_sqrt)
             if (power_fixed == FALSE) {
                 D_Sigma_power <- mc_sandwich_power(
-                    middle = Omega$Omega, 
+                    middle = Omega$Omega,
                     bord1 = V_sqrt$V_sqrt, bord2 = V_sqrt$D_V_sqrt_p)
                 D_Sigma <- c(D_Sigma_power = D_Sigma_power,
                              D_Sigma_tau = D_Sigma)
@@ -212,8 +213,8 @@ mc_build_sigma <- function(mu, Ntrial = 1, tau, power, Z, sparse,
                            D_Sigma = D_Sigma)
             if (compute_derivative_beta == TRUE) {
                 D_Sigma_beta <- mc_derivative_sigma_beta(
-                    D = mu$D, 
-                    D_V_sqrt_mu = V_sqrt$D_V_sqrt_mu, Omega$Omega, 
+                    D = mu$D,
+                    D_V_sqrt_mu = V_sqrt$D_V_sqrt_mu, Omega$Omega,
                     V_sqrt = V_sqrt$V_sqrt, variance = variance)
                 output$D_Sigma_beta <- D_Sigma_beta
             }
@@ -224,8 +225,8 @@ mc_build_sigma <- function(mu, Ntrial = 1, tau, power, Z, sparse,
                                         sparse = sparse)
             Omega <- chol2inv(chol(inv_Omega$inv_Omega))
             V_sqrt <- mc_variance_function(
-                mu = mu$mu, power = power, 
-                Ntrial = Ntrial, variance = "power", inverse = FALSE, 
+                mu = mu$mu, power = power,
+                Ntrial = Ntrial, variance = "power", inverse = FALSE,
                 derivative_power = !power_fixed,
                 derivative_mu = compute_derivative_beta)
             D_Omega <- lapply(inv_Omega$D_inv_Omega,
@@ -234,14 +235,14 @@ mc_build_sigma <- function(mu, Ntrial = 1, tau, power, Z, sparse,
             D_Sigma <- lapply(D_Omega, mc_sandwich,
                               bord1 = V_sqrt$V_sqrt,
                               bord2 = V_sqrt$V_sqrt)
-            Sigma <- forceSymmetric(Diagonal(length(mu$mu), mu$mu) + 
+            Sigma <- forceSymmetric(Diagonal(length(mu$mu), mu$mu) +
                                         V_sqrt$V_sqrt %*% Omega %*%
                                         V_sqrt$V_sqrt)
             chol_Sigma <- chol(Sigma)
             inv_chol_Sigma <- solve(chol_Sigma)
             if (power_fixed == FALSE) {
                 D_Sigma_p <- mc_sandwich_power(
-                    middle = Omega, 
+                    middle = Omega,
                     bord1 = V_sqrt$V_sqrt,
                     bord2 = V_sqrt$D_V_sqrt_power)
                 D_Sigma <- c(D_Sigma_p, D_Sigma)
@@ -251,8 +252,8 @@ mc_build_sigma <- function(mu, Ntrial = 1, tau, power, Z, sparse,
                            D_Sigma = D_Sigma)
             if (compute_derivative_beta == TRUE) {
                 D_Sigma_beta <- mc_derivative_sigma_beta(
-                    D = mu$D, 
-                    D_V_sqrt_mu = V_sqrt$D_V_sqrt_mu, Omega = Omega, 
+                    D = mu$D,
+                    D_V_sqrt_mu = V_sqrt$D_V_sqrt_mu, Omega = Omega,
                     V_sqrt = V_sqrt$V_sqrt, variance = variance)
                 output$D_Sigma_beta <- D_Sigma_beta
             }

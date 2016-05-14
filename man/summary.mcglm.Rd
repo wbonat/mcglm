@@ -12,6 +12,11 @@
 \item{object}{an object of class \code{mcglm}, usually, a result of a
 call to \code{mcglm}.}
 
+\item{verbose}{Logical print or not the model summary.}
+
+\item{print}{Print only part of the model summary, options are
+\code{Regression}, \code{power}, \code{Dispersion} and \code{Correlation}.}
+
 \item{...}{additional arguments affecting the summary produced. Note
     the there is no extra options for mcglm object class.}
 }

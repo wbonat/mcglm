@@ -10,6 +10,7 @@
 #'     \code{\link[mcglm]{mc_build_C}}.
 #' @param y_vec A vector.
 #' @param mu_vec A vector.
+#' @keywords internal
 #' @return The quasi-score vector, the Sensivity and variability
 #'     matrices.
 #' @export

@@ -40,7 +40,7 @@ parameters are fixed or not.}
 of C with respect to regression parameters.}
 
 \item{compute_derivative_cov}{Logical. Compute or not the derivative
-    of C with respect the covariance parameters.}
+of C with respect the covariance parameters.}
 }
 \value{
 A list with the inverse of the C matrix and the derivatives of
@@ -54,4 +54,5 @@ This function builds the joint variance-covariance matrix
 \author{
 Wagner Hugo Bonat
 }
+\keyword{internal}
 

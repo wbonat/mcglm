@@ -27,4 +27,5 @@ This function update a list of regression parameters. It
 \author{
 Wagner Hugo Bonat
 }
+\keyword{internal}
 

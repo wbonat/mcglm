@@ -7,6 +7,7 @@
 #' @param inv_C A matrix.
 #' @param res A vector of residuals.
 #' @return A vector
+#' @keywords internal
 #' @details It is an internal function.
 
 mc_core_pearson <- function(product, inv_C, res) {

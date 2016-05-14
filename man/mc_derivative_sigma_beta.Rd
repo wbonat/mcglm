@@ -28,4 +28,5 @@ Compute the derivatives of \eqn{V^{1/2}} matrix with
 \author{
 Wagner Hugo Bonat
 }
+\keyword{internal}
 

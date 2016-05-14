@@ -26,4 +26,5 @@ This function take a list of matrices and return a list
 \author{
 Wagner Hugo Bonat
 }
+\keyword{internal}
 

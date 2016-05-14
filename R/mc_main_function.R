@@ -1,14 +1,15 @@
-#' @title Fitting Multivariate Covariance Generalized Linear Models (McGLM)
+#' @title Fitting Multivariate Covariance Generalized Linear Models.
 #' @author Wagner Hugo Bonat
 #'
-#' @description \code{mcglm} is used to fit multivariate covariance
-#'     generalized linear models.  The models are specified by a set of
-#'     lists giving a symbolic description of the linear predictor.  The
-#'     user can choose between a list of link, variance and covariance
+#' @description The function \code{mcglm} is used to fit multivariate
+#'     covariance generalized linear models.
+#'     The models are specified by a set of lists giving a symbolic
+#'     description of the linear predictor.
+#'     The user can choose between a list of link, variance and covariance
 #'     functions. The models are fitted using an estimating function
 #'     approach, combining quasi-score functions for regression
 #'     parameters and Pearson estimating function for covariance
-#'     parameters. For details see Bonat and Jorgensen (2015).
+#'     parameters. For details see Bonat and Jorgensen (2016).
 #'
 #' @param linear_pred A list of formula see \code{\link[stats]{formula}}
 #'     for details.
@@ -39,9 +40,10 @@
 #' @export
 #' @import Matrix
 
-mcglm <- function(linear_pred, matrix_pred, link, variance, covariance,
-                  offset, Ntrial, power_fixed, data,
-                  control_initial = "automatic", contrasts = NULL,
+mcglm <- function(linear_pred, matrix_pred, link, variance,
+                  covariance, offset, Ntrial, power_fixed,
+                  data, control_initial = "automatic",
+                  contrasts = NULL,
                   control_algorithm = list()) {
     n_resp <- length(linear_pred)
     linear_pred <- as.list(linear_pred)

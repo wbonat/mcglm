@@ -103,43 +103,16 @@ NULL
 #'     Econometrics 12(3):313--336.
 #'
 #' @examples
-#'
-#' library(lattice)
-#' library(latticeExtra)
-#'
+#'require(mcglm)
 #' data(ahs, package="mcglm")
-#' str(ahs)
-#'
-#' xt <- xtabs(~age+sex, data=ahs)
-#' mosaicplot(xt)
-#'
-#' xt <- xtabs(~age+chcond, data=ahs)
-#' mosaicplot(xt)
-#'
-#' useOuterStrips(
-#'     combineLimits(
-#'         xyplot(Ndoc+Nndoc+Nadm+Nhosp+Nmed~age|sex,
-#'                outer=TRUE, data=ahs,
-#'                jitter.x=TRUE, amount=0.01,
-#'                type=c("p", "a"),
-#'                scales=list(y=list(relation="free")),
-#'                ylab="Number or occurences",
-#'                xlab="Age (years/100)")
-#'     )
-#' )
-#'
-#' useOuterStrips(
-#'     combineLimits(
-#'         xyplot(Ndoc+Nndoc+Nadm+Nhosp+Nmed~income|sex,
-#'                outer=TRUE, data=ahs,
-#'                jitter.x=TRUE, amount=0.01,
-#'                type=c("p", "a"),
-#'                scales=list(y=list(relation="free")),
-#'                ylab="Number or occurences",
-#'                xlab="Age (years/100)")
-#'     )
-#' )
-#'
+#' form1 <- Ndoc ~ income + age
+#' form2 <- Nndoc ~ income + age
+#' Z0 <- mc_id(ahs)
+#' fit.ahs <- mcglm(linear_pred = c(form1, form2),
+#'                  matrix_pred = list(Z0, Z0), link = c("log","log"),
+#'                  variance = c("poisson_tweedie","poisson_tweedie"),
+#'                  data = ahs)
+#' summary(fit.ahs)
 NULL
 
 #' @title Hunting in Pico Basile, Bioko Island, Equatorial Guinea.

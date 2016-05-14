@@ -33,4 +33,5 @@ Wagner Hugo Bonat
 \seealso{
 \code{\link[Matrix]{expm}}, \code{\link[base]{eigen}}.
 }
+\keyword{internal}
 

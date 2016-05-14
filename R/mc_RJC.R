@@ -1,7 +1,7 @@
-#' @title Rotnitzky-Jewell’s information criterion
+#' @title Rotnitzky-Jewell information criterion
 #' @author Wagner Hugo Bonat
 #'
-#' @description Compute the Rotnitzky-Jewell’s information criterion
+#' @description Compute the Rotnitzky-Jewell information criterion
 #' for multivariate covariance generalized linear models.
 #' WARNINGS: This function is limited to models with ONE response variable.
 #'

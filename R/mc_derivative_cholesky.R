@@ -1,6 +1,6 @@
 #' @title Derivatives of the Cholesky decomposition
 #' @author Wagner Hugo Bonat
-#' 
+#'
 #' @description This function compute the derivative of the Cholesky
 #'     decomposition.
 #'
@@ -8,6 +8,7 @@
 #' @param inv_chol_Sigma A matrix.
 #' @param chol_Sigma A matrix.
 #' @return A list of matrix.
+#' @keywords internal
 #' @details It is an internal function.
 
 mc_derivative_cholesky <- function(derivada, inv_chol_Sigma,
