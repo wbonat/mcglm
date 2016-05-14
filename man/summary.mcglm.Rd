@@ -5,7 +5,8 @@
 \title{Summarizing Multivariate Covariance Generalized Linear Models
     fits.}
 \usage{
-\method{summary}{mcglm}(object, ...)
+\method{summary}{mcglm}(object, verbose = TRUE, print = c("Regression",
+  "power", "Dispersion", "Correlation"), ...)
 }
 \arguments{
 \item{object}{an object of class \code{mcglm}, usually, a result of a

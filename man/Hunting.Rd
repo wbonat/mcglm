@@ -25,40 +25,43 @@ altitude were documented. The data set has 1216 observations.
 
 \itemize{
 
-\item \code{Alt} - Factor five levels indicating the Altitude where
+\item \code{ALT} - Factor five levels indicating the Altitude where
 the animal was caught.
 
-\item \code{Sex} - Factor two levels \code{Female} and \code{Male}.
+\item \code{SEX} - Factor two levels \code{Female} and \code{Male}.
 
-\item \code{Method} - Factor two levels \code{Escopeta} and
+\item \code{METHOD} - Factor two levels \code{Escopeta} and
 \code{Trampa}.
 
 \item \code{OT} - Monthly number of other small animals hunted.
 
 \item \code{BD} - Monthly number of blue duikers hunted.
 
-\item \code{Offset} - Monthly number of hunter days.
+\item \code{OFFSET} - Monthly number of hunter days.
 
-\item \code{Hunter} - Hunter index.
+\item \code{HUNTER} - Hunter index.
 
-\item \code{Month} - Month index.
+\item \code{MONTH} - Month index.
 
-\item \code{MonthCalendar} - Month using calendar numbers
+\item \code{MONTHCALENDAR} - Month using calendar numbers
 (1-January, ..., 12-December).
 
-\item \code{Year} - Year calendar (2010--2013).
+\item \code{YEAR} - Year calendar (2010--2013).
+
+\item \code{HUNTER.MONTH} - Index indicating observations taken at
+the same HUNTER and MONTH.
 }
 }
 \examples{
 library(mcglm)
 library(Matrix)
 data(Hunting, package="mcglm")
-formu <- OT ~ Method*Alt + Sex + Alt*poly(Month, 4)
+formu <- OT ~ METHOD*ALT + SEX + ALT*poly(MONTH, 4)
 Z0 <- Diagonal(dim(Hunting)[1],1)
 fit <- mcglm(linear_pred = c(formu), matrix_pred = list(list(Z0)),
              link = c("log"), variance = c("poisson_tweedie"),
              power_fixed = c(FALSE),
-             offset = list(log(Hunting$Offset)), data = Hunting)
+             offset = list(log(Hunting$OFFSET)), data = Hunting)
 summary(fit)
 }
 \keyword{datasets}

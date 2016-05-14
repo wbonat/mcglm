@@ -3,7 +3,7 @@
 #' @author Wagner Hugo Bonat
 #'
 #' @description Compute SIC for covariance parameters in McGLMS.
-#' 
+#'
 #' @param object an object representing a model of \code{mcglm} class.
 #' @param scope a list of matrices to be tested in the matrix linear
 #'     predictor.
@@ -16,7 +16,7 @@
 #'     argument.
 #' @export
 
-mc_sic_covariance <- function(object, scope, idx, data, penalty = 2, 
+mc_sic_covariance <- function(object, scope, idx, data, penalty = 2,
                               response) {
     SIC <- c()
     df <- c()
@@ -38,7 +38,7 @@ mc_sic_covariance <- function(object, scope, idx, data, penalty = 2,
             n_tau_total <- n_tau_total + 1
             n_tau <- n_tau + 1
         }
-        list_Z_new <- list(c(object$matrix_pred[[response]], 
+        list_Z_new <- list(c(object$matrix_pred[[response]],
                              scope[idx == j]))
         if (length(object$mu_list) == 1) {
             rho <- 0
@@ -59,7 +59,7 @@ mc_sic_covariance <- function(object, scope, idx, data, penalty = 2,
                                  mu_vec = object$mu_list[[response]]$mu,
                                  Cfeatures = Cfeatures, correct = FALSE,
                                  compute_variability = TRUE)
-        
+
         J <- temp_score$Sensitivity
         Sigma <- temp_score$Variability
         Sigma22 <- Sigma[c(n_tau + 1):n_tau_total,
@@ -70,18 +70,18 @@ mc_sic_covariance <- function(object, scope, idx, data, penalty = 2,
         Sigma21 <- Sigma[c(n_tau + 1):n_tau_total, 1:n_tau]
         J12 <- J[1:n_tau, c(n_tau + 1):n_tau_total]
         Sigma11 <- Sigma[1:n_tau, 1:n_tau]
-        
-        V2 <- Sigma22 - J21 %*% J11 %*% Sigma12 - Sigma21 %*% 
-            J11 %*% J12 + J21 %*% J11 %*% Sigma11 %*% J11 %*% 
+
+        V2 <- Sigma22 - J21 %*% J11 %*% Sigma12 - Sigma21 %*%
+            J11 %*% J12 + J21 %*% J11 %*% Sigma11 %*% J11 %*%
             J12
-        TU[j] <- t(temp_score$Score[c(n_tau + 1):n_tau_total] %*% 
+        TU[j] <- t(temp_score$Score[c(n_tau + 1):n_tau_total] %*%
                    solve(V2) %*%
                    temp_score$Score[c(n_tau + 1):n_tau_total])
         df[j] <- n_tau_new
         SIC[j] <- -as.numeric(TU[j]) + penalty * n_tau_total
         QQ[j] <- qchisq(0.95, df = n_tau_new)
         df_total[j] <- n_tau_total
-        print(j)
+        #print(j)
     }
     output <- data.frame(SIC = SIC, df = df, df_total = df_total,
                          Tu = TU, Chisq = QQ)

@@ -53,21 +53,28 @@ anova.mcglm <- function(object, ...) {
         for (j in 1:n_terms) {
             idx.TF <- idx == j
             temp <- as.numeric(
-                t(temp.beta[[i]][idx.TF]) %*% 
-                    solve(as.matrix(temp.vcov[[i]])[idx.TF, idx.TF]) %*% 
+                t(temp.beta[[i]][idx.TF]) %*%
+                    solve(as.matrix(temp.vcov[[i]])[idx.TF, idx.TF]) %*%
                     temp.beta[[i]][idx.TF])
             nbeta.test <- length(temp.beta[[i]][idx.TF])
             X2.resp[[j]] <-
                 data.frame(Covariate = names[idx.TF][1],
                            Chi.Square = round(temp, 4), Df = nbeta.test,
                            p.value = round(pchisq(temp, nbeta.test,
-                                                  lower.tail = FALSE), 
+                                                  lower.tail = FALSE),
                                            4))
         }
         saida[[i]] <- do.call(rbind, X2.resp)
     }
     cat("Wald test for fixed effects\n")
-    return(saida)
+    for(i in 1:n_resp) {
+      cat("Call: ")
+      print(object$linear_pred[[i]])
+      cat("\n")
+      print(saida[[i]])
+      cat("\n")
+    }
+    return(invisible(saida))
 }
 
 #' @title Extract model coefficients for mcglm class
@@ -263,12 +270,12 @@ plot.mcglm <- function(x, type = "residuals", ...) {
     object <- x
     n_resp <- length(object$beta_names)
     if (type == "residuals") {
-        par(mar = c(2.6, 2.5, 0.1, 0.1), mgp = c(1.6, 0.6, 0), 
+        par(mar = c(2.6, 2.5, 0.1, 0.1), mgp = c(1.6, 0.6, 0),
             mfrow = c(2, n_resp))
         for (i in 1:n_resp) {
             res <- residuals(object, type = "pearson")[, i]
             fit_values <- fitted(object)[, i]
-            plot(res ~ fit_values, ylab = "Pearson residuals", 
+            plot(res ~ fit_values, ylab = "Pearson residuals",
                  xlab = "Fitted values")
             temp <-
                 loess.smooth(fitted(object)[, i],
@@ -279,9 +286,9 @@ plot.mcglm <- function(x, type = "residuals", ...) {
         }
     }
     if (type == "algorithm") {
-        n_iter <- length(na.exclude(object$IterationCovariance[, 
+        n_iter <- length(na.exclude(object$IterationCovariance[,
                                                                1]))
-        par(mar = c(2.6, 2.5, 0.1, 0.1), mgp = c(1.6, 0.6, 0), 
+        par(mar = c(2.6, 2.5, 0.1, 0.1), mgp = c(1.6, 0.6, 0),
             mfrow = c(2, 2))
         matplot(object$IterationRegression[1:c(n_iter + 5), ],
                 type = "l", lty = 2, ylab = "Regression",
@@ -304,7 +311,7 @@ plot.mcglm <- function(x, type = "residuals", ...) {
         comp_X <- list()
         for (i in 1:n_resp) {
             comp_X[[i]] <- as.matrix(object$list_X[[i]]) *
-                as.numeric(list_beta$regression[[i]]) 
+                as.numeric(list_beta$regression[[i]])
         }
         for (i in 1:n_resp) {
             res <- residuals(object, type = "pearson")[, i]
@@ -408,7 +415,7 @@ residuals.mcglm <- function(object, type = "raw", ...) {
     }
     if (type == "pearson") {
         output <- Matrix(
-            as.numeric(object$residuals/sqrt(diag(object$C))), 
+            as.numeric(object$residuals/sqrt(diag(object$C))),
             ncol = n_resp, nrow = object$n_obs)
     }
     return(output)
@@ -431,10 +438,40 @@ residuals.mcglm <- function(object, type = "raw", ...) {
 #' @method summary mcglm
 #' @export
 
-summary.mcglm <- function(object, ...) {
+summary.mcglm <- function(object, verbose = TRUE,
+                          print = c("Regression","power","Dispersion","Correlation"),
+                          ...) {
     n_resp <- length(object$beta_names)
     output <- list()
+    for(i in 1:n_resp) {
+    tab_beta <- coef(object, std.error = TRUE,
+                     response = i, type = "beta")[, 1:2]
+    tab_beta$"Z value" <- tab_beta[, 1]/tab_beta[, 2]
+    rownames(tab_beta) <- object$beta_names[[i]]
+    output[i][[1]]$Regression <- tab_beta
+    tab_power <- coef(object, std.error = TRUE,
+                      response = i, type = "power")[, 1:2]
+    tab_power$"Z value" <- tab_power[, 1]/tab_power[, 2]
+    rownames(tab_power) <- NULL
+    if (dim(tab_power)[1] != 0) {
+      output[i][[1]]$Power <- tab_power
+    }
+    tab_tau <- coef(object, std.error = TRUE,
+                    response = i, type = "tau")[, 1:2]
+    tab_tau$"Z value" <- tab_tau[, 1]/tab_tau[, 2]
+    rownames(tab_tau) <- NULL
+    output[i][[1]]$tau <- tab_tau
+    }
+    tab_rho <- coef(object, std.error = TRUE,
+                    response = NA, type = "correlation")[, c(3, 1, 2)]
+    tab_rho$"Z value" <- tab_rho[, 2]/tab_rho[, 3]
+    if (dim(tab_rho)[1] != 0) {
+      rownames(tab_rho) <- NULL
+      output$Correlation <- tab_rho
+    }
+    if(verbose == TRUE) {
     for (i in 1:n_resp) {
+      if("Regression" %in% print) {
         cat("Call: ")
         print(object$linear_pred[[i]])
         cat("\n")
@@ -445,39 +482,28 @@ summary.mcglm <- function(object, ...) {
         cat("Covariance function:", object$covariance[[i]])
         cat("\n")
         cat("Regression:\n")
-        tab_beta <- coef(object, std.error = TRUE,
-                         response = i, type = "beta")[, 1:2]
-        tab_beta$"Z value" <- tab_beta[, 1]/tab_beta[, 2]
-        rownames(tab_beta) <- object$beta_names[[i]]
-        output[i][[1]]$Regression <- tab_beta
-        print(tab_beta)
+        print(output[i][[1]]$Regression)
         cat("\n")
-        tab_power <- coef(object, std.error = TRUE,
-                          response = i, type = "power")[, 1:2]
-        tab_power$"Z value" <- tab_power[, 1]/tab_power[, 2]
-        rownames(tab_power) <- NULL
+      }
         if (dim(tab_power)[1] != 0) {
+          if("power" %in% print) {
             cat("Power:\n")
-            print(tab_power)
-            output[i][[1]]$Power <- tab_power
-            cat("\n")
+            print(output[i][[1]]$Power)
+           cat("\n")
+          }
         }
+      if("Dispersion" %in% print) {
         cat("Dispersion:\n")
-        tab_tau <- coef(object, std.error = TRUE,
-                        response = i, type = "tau")[, 1:2]
-        tab_tau$"Z value" <- tab_tau[, 1]/tab_tau[, 2]
-        rownames(tab_tau) <- NULL
-        output[i][[1]]$tau <- tab_tau
-        print(tab_tau)
+        print(output[i][[1]]$tau)
         cat("\n")
+      }
     }
-    tab_rho <- coef(object, std.error = TRUE,
-                    response = NA, type = "correlation")[, c(3, 1, 2)]
-    tab_rho$"Z value" <- tab_rho[, 2]/tab_rho[, 3]
     if (dim(tab_rho)[1] != 0) {
+      if("Correlation" %in% print) {
         cat("Correlation matrix:\n")
         print(tab_rho)
         cat("\n")
+      }
     }
     names(object$con$correct) <- ""
     iteration_cov <- length(na.exclude(object$IterationCovariance[, 1]))
@@ -488,6 +514,14 @@ summary.mcglm <- function(object, ...) {
     cat("Correction:", object$con$correct)
     cat("\n")
     cat("Number iterations:", iteration_cov)
+    }
+    if (dim(tab_rho)[1] != 0) {
+    names(output) <- c(paste("Resp.Variable", 1:n_resp),"Correlation")
+    }
+    if (dim(tab_rho)[1] == 0) {
+      names(output) <- paste("Resp.Variable", 1:n_resp)
+    }
+    return(invisible(output))
 }
 
 #' @title Calculate Variance-Covariance matrix for a fitted McGLM

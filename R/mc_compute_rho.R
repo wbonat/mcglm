@@ -15,7 +15,7 @@ mc_compute_rho <- function(object, level = 0.975) {
   rho <- tau[2]/tau[1]
   derivada <- Matrix(c(-tau[2]/tau[1]^2, 1/tau[1]), 1, 2)
   std <- as.numeric(sqrt(derivada%*%vcov(object)[c("tau11", "tau12"), c("tau11", "tau12")]%*%t(derivada)))
-  output <- data.frame("rho" = rho, "std" = std, "Conf.Min" = rho + -1*qnorm(level)*std,
-                       "Conf.Max" = rho + -1*qnorm(level)*std)
+  output <- data.frame("rho" = rho, "std" = std, "Conf.Min" = rho -1*qnorm(level)*std,
+                       "Conf.Max" = rho + 1*qnorm(level)*std)
   return(output)
 }

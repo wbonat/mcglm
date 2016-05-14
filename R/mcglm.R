@@ -152,28 +152,31 @@ NULL
 #'
 #' \itemize{
 #'
-#' \item \code{Alt} - Factor five levels indicating the Altitude where
+#' \item \code{ALT} - Factor five levels indicating the Altitude where
 #' the animal was caught.
 #'
-#' \item \code{Sex} - Factor two levels \code{Female} and \code{Male}.
+#' \item \code{SEX} - Factor two levels \code{Female} and \code{Male}.
 #'
-#' \item \code{Method} - Factor two levels \code{Escopeta} and
+#' \item \code{METHOD} - Factor two levels \code{Escopeta} and
 #' \code{Trampa}.
 #'
 #' \item \code{OT} - Monthly number of other small animals hunted.
 #'
 #' \item \code{BD} - Monthly number of blue duikers hunted.
 #'
-#' \item \code{Offset} - Monthly number of hunter days.
+#' \item \code{OFFSET} - Monthly number of hunter days.
 #'
-#' \item \code{Hunter} - Hunter index.
+#' \item \code{HUNTER} - Hunter index.
 #'
-#' \item \code{Month} - Month index.
+#' \item \code{MONTH} - Month index.
 #'
-#' \item \code{MonthCalendar} - Month using calendar numbers
+#' \item \code{MONTHCALENDAR} - Month using calendar numbers
 #' (1-January, ..., 12-December).
 #'
-#' \item \code{Year} - Year calendar (2010--2013).
+#' \item \code{YEAR} - Year calendar (2010--2013).
+#'
+#' \item \code{HUNTER.MONTH} - Index indicating observations taken at
+#' the same HUNTER and MONTH.
 #' }
 #'
 #' @docType data
@@ -192,14 +195,60 @@ NULL
 #' library(mcglm)
 #' library(Matrix)
 #' data(Hunting, package="mcglm")
-#' formu <- OT ~ Method*Alt + Sex + Alt*poly(Month, 4)
+#' formu <- OT ~ METHOD*ALT + SEX + ALT*poly(MONTH, 4)
 #' Z0 <- Diagonal(dim(Hunting)[1],1)
 #' fit <- mcglm(linear_pred = c(formu), matrix_pred = list(list(Z0)),
 #'              link = c("log"), variance = c("poisson_tweedie"),
 #'              power_fixed = c(FALSE),
-#'              offset = list(log(Hunting$Offset)), data = Hunting)
+#'              offset = list(log(Hunting$OFFSET)), data = Hunting)
 #' summary(fit)
 #'
+NULL
+
+#' @title Soil chemistry properties data
+#' @name soil
+#'
+#' @description Soil chemistry properties measured on a regular grid with
+#' 10 x 25 points spaced by 5 meters.
+#'
+#' \itemize{
+#'
+#' \item \code{COORD.X} - X coordinate.
+#'
+#' \item \code{COORD.Y} - Y coordinate.
+#'
+#' \item \code{SAND} - Sand portion of the sample.
+#'
+#' \item \code{SILT} - Silt portion of the sample.
+#'
+#' \item \code{CLAY} - Clay portion of the sample.
+#'
+#' \item \code{PHWATER} - Soil pH at water.
+#'
+#' \item \code{CA} - Calcium content.
+#'
+#' \item \code{MG} - Magnesium content.
+#'
+#' \item \code{K} - Potassio content.
+#' }
+#'
+#' @docType data
+#'
+#' @keywords datasets
+#'
+#' @usage data(soil)
+#'
+#' @format a \code{data.frame} with 250 records and 9 variables.
+#'
+#' @source Bonat, et. al. (2016). Modelling the covariance structure in
+#' marginal multivariate count models: Hunting in Bioko island. The
+#' annals of Applied Statatistics, to appear.
+#'
+#' @examples
+#' library(mcglm)
+#' library(Matrix)
+#' data(soil, package="mcglm")
+#' head(data)
 NULL
 
 #' @title Respiratory physiotherapy on premature newborns.
@@ -341,4 +390,3 @@ NULL
 #'           data = soya)
 #'           anova(fit)
 NULL
-

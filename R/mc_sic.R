@@ -39,14 +39,14 @@ mc_sic <- function(object, scope, data, response, penalty = 2) {
                                      inv_C = object$inv_C, y_vec = Y,
                                      mu_vec = mu_temp$mu)
         S11 <- score_temp$Variability[1:n_ini_beta, 1:n_ini_beta]
-        S22 <- score_temp$Variability[c(n_ini_beta + 1):n_total_beta, 
+        S22 <- score_temp$Variability[c(n_ini_beta + 1):n_total_beta,
                                       c(n_ini_beta + 1):n_total_beta]
         S12 <- score_temp$Variability[1:n_ini_beta,
                                       c(n_ini_beta + 1):n_total_beta]
-        S21 <- score_temp$Variability[c(n_ini_beta + 1):n_total_beta, 
+        S21 <- score_temp$Variability[c(n_ini_beta + 1):n_total_beta,
                                       1:n_ini_beta]
         VB <- S22 - S21 %*% solve(S11) %*% S12
-        Tu <- t(score_temp$Score[c(n_ini_beta + 1):n_total_beta]) %*% 
+        Tu <- t(score_temp$Score[c(n_ini_beta + 1):n_total_beta]) %*%
             solve(VB) %*%
             score_temp$Score[c(n_ini_beta + 1):n_total_beta]
         df[i] <- n_beta - n_ini_beta
@@ -55,7 +55,7 @@ mc_sic <- function(object, scope, data, response, penalty = 2) {
         TU[i] <- as.numeric(Tu)
         QQ[i] <- qchisq(0.95, df = df[i])
     }
-    output <- data.frame(SIC = SIC, Covariance = scope, df = df,
+    output <- data.frame(SIC = SIC, Covariates = scope, df = df,
                          df_total = df_total, Tu = TU, Chisq = QQ)
     return(output)
 }
