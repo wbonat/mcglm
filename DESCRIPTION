@@ -8,7 +8,7 @@ Authors@R: as.person(c(
     "Walmes Marques Zeviani <walmes@ufpr.br> [ctb]",
     "Fernando de Pol Mayer <fernando.mayer@ufpr.br> [ctb]"
     ))
-Description: This package fit multivariate covariance generalized linear
+Description: This package fits multivariate covariance generalized linear
     models (McGLM).
 Depends:
     R (>= 3.2.1)
