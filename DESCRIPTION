@@ -39,9 +39,9 @@ Suggests:
     tweedie,
     devtools
 Imports:
+    stats,
     Matrix,
     assertthat,
-    stats,
     graphics
 License: GPL-3 | file LICENSE
 LazyData: TRUE
