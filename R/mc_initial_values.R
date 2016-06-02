@@ -24,6 +24,8 @@
 #' @param data A data frame.
 #' @return Return a list of initial values to be used while fitting
 #'     McGLMs.
+#' @usage mc_initial_values(linear_pred, matrix_pred, link, variance,
+#'                   covariance, offset, Ntrial, contrasts, data)
 #' @export
 
 mc_initial_values <- function(linear_pred, matrix_pred, link,

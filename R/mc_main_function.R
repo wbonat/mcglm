@@ -1,5 +1,4 @@
 #' @title Fitting Multivariate Covariance Generalized Linear Models.
-#' @author Wagner Hugo Bonat
 #'
 #' @description The function \code{mcglm} is used to fit multivariate
 #'     covariance generalized linear models.
@@ -36,6 +35,9 @@
 #' @param contrasts Extra arguments to passed to
 #'     \code{\link[stats]{model.matrix}}.
 #' @param data A dta frame.
+#' @usage mcglm(linear_pred, matrix_pred, link, variance, covariance,
+#'        offset, Ntrial, power_fixed, data, control_initial,
+#'        contrasts, control_algorithm)
 #' @return mcglm returns an object of class 'mcglm'.
 #' @export
 #' @import Matrix

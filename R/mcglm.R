@@ -1,36 +1,8 @@
-##' @title Multivariate Covariance Generalized Linear Models (McGLMs).
-##'
-##' @description This package fits multivariate covariance generalized
-##'     linear models (McGLMs) to data.  McGLM is a general framework for
-##'     non-normal multivariate data analysis, designed to handle
-##'     multivariate response variables, along with a wide range of
-##'     temporal and spatial correlation structures defined in terms of
-##'     a covariance link function combined with a matrix linear
-##'     predictor involving known matrices. The models take
-##'     non-normality into account in the conventional way by means of a
-##'     variance function, and the mean structure is modelled by means
-##'     of a link function and a linear predictor.  The models are
-##'     fitted using an efficient Newton scoring algorithm based on
-##'     quasi-likelihood and Pearson estimating functions, using only
-##'     second-moment assumptions.  This provides a unified approach to
-##'     a wide variety of different types of response variables and
-##'     covariance structures, including multivariate extensions of
-##'     repeated measures, time series, longitudinal, spatial and
-##'     spatio-temporal structures. The package offers a user-friendly
-##'     interface for fitting McGLMS.
-##'@source Bonat, W.H. and Jorgensen, B. (2016). Multivariate
-##'     covariance generalized linear models. Journal of Royal Statistical
-##'     Society - Series C. to appear.
-##'
-##' @docType package
-##' @name mcglm
-NULL
-
-#' @title Australian health survey
+#' @title Australian Health Survey
 #' @name ahs
 #'
 #' @description The Australian health survey was used by Bonat and
-#'     Jorgensen (2015) as an example of multivariate count regression
+#'     Jorgensen (2016) as an example of multivariate count regression
 #'     model. The data consists of five count response variables
 #'     concerning health system access measures and nine covariates
 #'     concerning social conditions in Australian for 1987-88.
@@ -102,6 +74,10 @@ NULL
 #'     the elderly: A finite mixture approach, Journal of Applied
 #'     Econometrics 12(3):313--336.
 #'
+#' @source Bonat, W. H. and Jorgensen, B. (2016). Multivariate
+#'     covariance generalized linear models.
+#'     Journal of Royal Statistical Society - Series C, to appear.
+#'
 #' @examples
 #'require(mcglm)
 #' data(ahs, package="mcglm")
@@ -166,7 +142,7 @@ NULL
 #'
 #' @source Bonat, et. al. (2016). Modelling the covariance structure in
 #' marginal multivariate count models: Hunting in Bioko island.
-#' Environmetrics, to appear.
+#' Environmetrics, submitted.
 #'
 #' @examples
 #' library(mcglm)
@@ -182,7 +158,7 @@ NULL
 #'
 NULL
 
-#' @title Soil chemistry properties data
+#' @title Soil Chemistry Properties Data
 #' @name soil
 #'
 #' @description Soil chemistry properties measured on a regular grid with
@@ -218,7 +194,7 @@ NULL
 #' @format a \code{data.frame} with 250 records and 9 variables.
 #'
 #' @source Bonat, W. H. (2016). Multiple Response Variables Regression
-#' Models in R: The mcglm Package. Journal of Statistical Software.
+#' Models in R: The mcglm Package. Journal of Statistical Software, submitted.
 #'
 #' @examples
 #' library(mcglm)
@@ -227,7 +203,7 @@ NULL
 #' head(data)
 NULL
 
-#' @title Respiratory physiotherapy on premature newborns.
+#' @title Respiratory Physiotherapy on Premature Newborns.
 #' @name NewBorn
 #'
 #' @description The NewBorn dataset consist of a prospective study
@@ -315,7 +291,7 @@ NULL
 #' summary(fit)
 NULL
 
-#' @title Soybeans data set
+#' @title Soybeans
 #' @name soya
 #'
 #' @description Experiment carried out in a vegetation house with
@@ -353,7 +329,7 @@ NULL
 #' @format a \code{data.frame} with 75 records and 7 variables.
 #'
 #' @source Bonat, W. H. (2016). Multiple Response Variables Regression
-#' Models in R: The mcglm Package. Journal of Statistical Software.
+#' Models in R: The mcglm Package. Journal of Statistical Software, submitted.
 #'
 #' @examples
 #' library(mcglm)

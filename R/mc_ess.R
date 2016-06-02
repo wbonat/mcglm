@@ -1,13 +1,22 @@
-#' @title Extract generalized error sum of squares (ESS) for multivariate
-#'     covariance generalized linear models.
-#' @author Wagner Hugo Bonat
+#' @title Extract Generalized Error Sum of Squares (ESS)
+#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
-#' @description Extract the generalized error sum of squares for a fitted
-#' McGLM.
+#' @description Extract the generalized error sum of squares for objects of
+#' \code{mcglm} class.
+#'
 #' @param object an object or a list of objects representing a model
 #' of \code{mcglm} class.
-#' @param verbose Logical
-#' @return Returns the value of the Gaussian pseudo-loglikelihood.
+#' @param verbose logical. Print or not the ESS value.
+#'
+#' @return Returns the value of generalized error sum of squares(ESS).
+#' @seealso \code{plogLik}, \code{pAIC} and \code{pKLIC}.
+#'
+#' @source Bonat, W. H. (2016). Multiple Response Variables Regression
+#' Models in R: The mcglm Package. Journal of Statistical Software, submitted.
+#'
+#' @source Wang, M. (2014). Generalized Estimating Equations in Longitudinal Data
+#' Analysis: A Review and Recent Developments. Advances in Statistics, 1(1)1--13.
+#'
 #' @export
 
 ESS <- function(object, verbose = TRUE) {

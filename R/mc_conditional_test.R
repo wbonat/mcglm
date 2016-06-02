@@ -1,17 +1,22 @@
-#' @title Compute conditional hypotheses test for multivariate covariance
-#' generalized linear models
-#' @author Wagner Hugo Bonat
+#' @title Conditional Hypotheses Tests
+#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
+#' @description Compute conditional hypotheses tests for fitted \code{mcglm}.
+#' When fitting model with extra power parameters, the standard errors
+#' associated with the dispersion parameters can be large. In that cases,
+#' we suggest to conduct conditional hypotheses test instead of the
+#' orthodox marginal test for the dispersion parameters. The function
+#' \code{mc_conditional_test} offers an ease way to conduction such
+#' conditional test. Furthermore, the function is quite flexible
+#' and can be used for any other conditional hypotheses test.
 #'
-#' @description Compute conditional hypotheses test for fitted McGLMs.
-#' It is useful in general when estimating the power parameter.
 #' @param object an object representing a model of \code{mcglm} class.
-#' @param parameters Which parameters have been included in the
+#' @param parameters which parameters have been included in the
 #' conditional test.
-#' @param test Index indicating which parameters will be tested given
+#' @param test index indicating which parameters will be tested given
 #' the values of the other parameters.
-#' @param fixed Index indicating which parameters should be fixed on
+#' @param fixed index indicating which parameters should be fixed on
 #' the conditional test.
-#' @return Returns estimates, conditional standard errors and Z statistics.
+#' @return Returns estimates, conditional standard errors and Z-statistics.
 #' @export
 
 mc_conditional_test <- function(object, parameters, test, fixed) {

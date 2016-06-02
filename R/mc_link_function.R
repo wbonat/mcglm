@@ -1,15 +1,15 @@
-#' @title Link functions
-#' @author Wagner Hugo Bonat
+#' @title Link Functions
+#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
 #' @description  The \code{mc_link_function} is a customized call of the
 #' \code{\link[stats]{make.link}} function.
-#' 
+#'
 #' Given the name of a link function, it returns a list with two
 #' elements.  The first element is the inverse of the link function
 #' applied on the linear predictor \eqn{\mu = g^{-1}(X\beta).} The
-#' second element is the derivative of mu with respect to the regression
-#' parameters \eqn{\beta}. It will be useful when computing the
-#' quasi-score function.
+#' second element is the derivative of \eqn{\mu} with respect to the
+#' regression parameters \eqn{\beta}.
+#' It will be useful when computing the quasi-score function.
 #'
 #' @param beta A numeric vector of regression parameters.
 #' @param X A design matrix, see \code{\link[stats]{model.matrix}} for
@@ -56,7 +56,7 @@
 mc_link_function <- function(beta, X, offset, link) {
     assert_that(noNA(beta))
     assert_that(noNA(X))
-    if (!is.null(offset)) 
+    if (!is.null(offset))
         assert_that(noNA(offset))
     link_name <- c("logit", "probit", "cauchit", "cloglog", "loglog",
                    "identity", "log", "sqrt", "1/mu^2", "inverse")
@@ -221,7 +221,7 @@ mc_invmu2 <- function(beta, X, offset) {
     mu <- make.link("1/mu^2")$linkinv(eta = eta)
     Deri <- make.link("1/mu^2")$mu.eta(eta = eta)
     return(list(mu = mu, D = X * Deri))
-} 
+}
 
 #' @rdname mc_link_function
 ## Inverse link function -----------------------------------------------

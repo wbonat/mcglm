@@ -28,6 +28,8 @@
 #'     example, if \code{inverse = FALSE}, \code{derivative_power =
 #'     TRUE} and \code{derivative_mu = TRUE}. The output will be a list,
 #'     with three elements: V_sqrt, D_V_sqrt_power and D_V_sqrt_mu.
+#' @usage mc_variance_function(mu, power, Ntrial, variance, inverse,
+#'                            derivative_power, derivative_mu)
 #' @export
 #' @examples
 #' x1 <- seq(-1, 1, l = 5)
@@ -146,6 +148,8 @@ mc_power <- function(mu, power, inverse,
 }
 
 #' @rdname mc_variance_function
+#' @usage mc_binomialP(mu, power, inverse, Ntrial,
+#'                     derivative_power, derivative_mu)
 ## BinomialP variance function
 ## -----------------------------------------
 mc_binomialP <- function(mu, power, inverse, Ntrial,
@@ -236,6 +240,8 @@ mc_binomialP <- function(mu, power, inverse, Ntrial,
 }
 
 #' @rdname mc_variance_function
+#' @usage mc_binomialPQ(mu, power, inverse, Ntrial,
+#'                      derivative_power, derivative_mu)
 ## BinomialPQ variance function ----------------------------------------
 mc_binomialPQ <- function(mu, power, inverse,
                           Ntrial, derivative_power,

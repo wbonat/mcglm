@@ -1,17 +1,32 @@
-#' @title ANOVA method for McGLMs.
+#' @title Anova Tables for \code{mcglm}
 #' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
-#' @description ANOVA method for object of class McGLMS.
+#' @description Performs Wald tests of the significance for the linear
+#' predictor components by response variables. This function is useful
+#' for joint hypothesis tests of regression coefficients associated with
+#' categorical covariates with more than two levels. It is not designed
+#' for model comparison.
 #'
 #' @param object an object of class \code{mcglm}, usually, a result of a
-#'     call to \code{mcglm()}.
+#'     call to \code{mcglm()} function.
 #' @param ... additional arguments affecting the summary produced. Note
 #'     that there is no extra options for mcglm object class.
 #'
 #' @return A \code{data.frame} with Chi-square statistic to test the
 #'     null hypothesis of a parameter, or a set of parameters, be
-#'     zero. The Wald test based on the observed covariance matrix of
+#'     zero. Degree of freedom (Df) and p-values.
+#'     The Wald test based on the observed covariance matrix of
 #'     the parameters is used.
+#' @examples
+#' x1 <- seq(-1, 1, l = 100)
+#' x2 <- gl(5, 20)
+#' beta <- c(5, 0, -2, -1, 1, 2)
+#' X <- model.matrix(~ x1 + x2)
+#' set.seed(123)
+#' y <- rnorm(100, mean = X%*%beta, sd = 1)
+#' data = data.frame("y" = y, "x1" = x1, "x2" = x2)
+#' fit.anova <- mcglm(c(y ~ x1 + x2), list(mc_id(data)), data = data)
+#' anova(fit.anova)
 #'
 #' @method anova mcglm
 #'
@@ -76,27 +91,27 @@ anova.mcglm <- function(object, ...) {
     return(invisible(saida))
 }
 
-#' @title Extract model coefficients for mcglm class
+#' @title Extract Model Coefficients
 #' @name coef.mcglm
 #' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
-#' @description \code{coef.mcglm} is a function which extracts model
-#'     coefficients from objects of \code{mcglm} class.
+#' @description Extract model coefficients for objects
+#'              of \code{mcglm} class.
 #'
-#' @param object An object of \code{mcglm} class.
-#' @param std.error Logical. If \code{TRUE} returns the standard errors
-#'     of the estimates. Default is \code{FALSE}.
-#' @param response A numeric vector specyfing for which response
-#'     variables the coefficients should be returned.
-#' @param type A string vector (can be 1 element length) specyfing which
+#' @param object an object of \code{mcglm} class.
+#' @param std.error logical. If \code{TRUE} returns the standard errors
+#'     for the estimates. Default is \code{FALSE}.
+#' @param response a numeric vector specyfing for which response
+#'     variable the coefficients should be returned.
+#' @param type a string vector (can be 1 element length) specyfing which
 #'     coefficients should be returned. Options are \code{"beta"},
 #'     \code{"tau"}, \code{"power"}, \code{"tau"} and
 #'     \code{"correlation"}.
 #' @param ... additional arguments affecting the summary produced. Note
-#'     that there is no extra options for mcglm object class.
+#'     that there is no extra options for \code{mcglm} object class.
 #'
 #' @return A \code{data.frame} with parameters names, estimates,
-#'     response number and parameters type.
+#'     response variable number and parameters type.
 #'
 #' @method coef mcglm
 #'
@@ -186,7 +201,8 @@ coef.mcglm <- function(object, std.error = FALSE,
     return(output)
 }
 
-#' @title Confidence Intervals for mcglm
+#' @title Confidence Intervals for Model Parameters
+#'
 #' @name confint.mcglm
 #' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
@@ -194,8 +210,8 @@ coef.mcglm <- function(object, std.error = FALSE,
 #'     \code{mcglm} model.
 #'
 #' @param object a fitted \code{mcglm} object.
-#' @param parm a specification of which parameters are to be given
-#'     confidence intervals, either a vector of number or a vector of
+#' @param parm specification for which parameters are to be given
+#'     confidence intervals, either a vector of numbers or a vector of
 #'     strings. If missing, all parameters are considered.
 #' @param level the nominal confidence level.
 #' @param ... additional arguments affecting the confidence interval
@@ -203,10 +219,8 @@ coef.mcglm <- function(object, std.error = FALSE,
 #'     object class.
 #'
 #' @return A \code{data.frame} with confidence intervals, parameters
-#'     names, response number and parameters type.
-#'
+#'     names, response variable number and parameters type.
 #' @method confint mcglm
-#'
 #' @export
 
 confint.mcglm <- function(object, parm, level = 0.95, ...) {
@@ -216,27 +230,26 @@ confint.mcglm <- function(object, parm, level = 0.95, ...) {
     }
     a <- (1 - level)/2
     a <- c(a, 1 - a)
-    fac <- qnorm(a)
+    fac <- stats::qnorm(a)
     ci <- temp$Estimates + temp$Std.error %o% fac
     colnames(ci) <- paste0(format(a, 2), "%")
     rownames(ci) <- temp$Parameters
     return(ci[parm, ])
 }
 
-#' @title Extract Model Fitted Values of McGLM
+#' @title Extract Model Fitted Values
 #' @name fitted.mcglm
 #' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
 #' @description Extract fitted values for objects of \code{mcglm} class.
 #'
-#' @param object An object of \code{mcglm} class.
+#' @param object an object of \code{mcglm} class.
 #' @param ... additional arguments affecting the summary produced. Note
 #'     that there is no extra options for \code{mcglm} object class.
 #'
-#' @return Depending on the number of response variable, the function
+#' @return Depending on the number of response variables, the function
 #'     \code{fitted.mcglm} returns a vector (univariate models) or a
 #'     matrix (multivariate models) of fitted values.
-#'
 #'
 #' @method fitted mcglm
 #' @export
@@ -247,21 +260,28 @@ fitted.mcglm <- function(object, ...) {
     return(output)
 }
 
-#' @title Default Multivariate Covariance Generalized Linear models
+#' @title Default Multivariate Covariance Generalized Linear Models
 #'     plotting
 #' @name plot.mcglm
 #' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
-#' @description takes a fitted \code{mcglm} object and do plots based on
-#'     residuals, influence diagnostic measures and algorithm check.
+#' @description Takes a fitted \code{mcglm} object and do plots based on
+#'     residuals and algorithm check.
 #'
 #' @param x a fitted \code{mcglm} object.
-#' @param type Specify which graphical analysis will be performed.
-#'     Options are: \code{"residuals"}, \code{"influence"} and
-#'     \code{"algorithm"}.
+#' @param type specify which graphical analysis will be performed.
+#'     Options are: \code{"residuals"} and \code{"algorithm"}.
 #' @param ... additional arguments affecting the plot produced. Note
 #'     that there is no extra options for mcglm object class.
-#'
+#' @return The function \code{plot.mcglm} was designed to offer a fast
+#' residuals analysis based on the Pearson residuals. Current version
+#' offers a simple Pearson residuals versus fitted values and a quantile
+#' plot. When using \code{algorithm = TRUE} the will plot a summary of
+#' the fitting algorithm show the trajectory or iterations of the fitting
+#' algorithm. The iteractions are shown in terms of values for the model
+#' parameters and also the actually value of the quasi-score and Pearson
+#' estimating functions. Hence, a quickly check of the algorithm
+#' convergence is obtained.
 #' @method plot mcglm
 #' @export
 
@@ -269,36 +289,36 @@ plot.mcglm <- function(x, type = "residuals", ...) {
     object <- x
     n_resp <- length(object$beta_names)
     if (type == "residuals") {
-        par(mar = c(2.6, 2.5, 0.1, 0.1), mgp = c(1.6, 0.6, 0),
+        graphics::par(mar = c(2.6, 2.5, 0.1, 0.1), mgp = c(1.6, 0.6, 0),
             mfrow = c(2, n_resp))
         for (i in 1:n_resp) {
             res <- residuals(object, type = "pearson")[, i]
             fit_values <- fitted(object)[, i]
-            plot(res ~ fit_values, ylab = "Pearson residuals",
+            graphics::plot(res ~ fit_values, ylab = "Pearson residuals",
                  xlab = "Fitted values")
             temp <-
-                loess.smooth(fitted(object)[, i],
+                stats::loess.smooth(fitted(object)[, i],
                              residuals(object, type = "pearson")[, i])
-            lines(temp$x, temp$y)
-            qqnorm(res)
-            qqline(res)
+            graphics::lines(temp$x, temp$y)
+            stats::qqnorm(res)
+            stats::qqline(res)
         }
     }
     if (type == "algorithm") {
         n_iter <- length(na.exclude(object$IterationCovariance[,
                                                                1]))
-        par(mar = c(2.6, 2.5, 0.1, 0.1), mgp = c(1.6, 0.6, 0),
+        graphics::par(mar = c(2.6, 2.5, 0.1, 0.1), mgp = c(1.6, 0.6, 0),
             mfrow = c(2, 2))
-        matplot(object$IterationRegression[1:c(n_iter + 5), ],
+        graphics::matplot(object$IterationRegression[1:c(n_iter + 5), ],
                 type = "l", lty = 2, ylab = "Regression",
                 xlab = "Iterations")
-        matplot(object$IterationCovariance[1:c(n_iter + 5), ],
+        graphics::matplot(object$IterationCovariance[1:c(n_iter + 5), ],
                 type = "l", lty = 2, ylab = "Covariance",
                 xlab = "Iterations")
-        matplot(object$ScoreRegression[1:c(n_iter + 5), ], type = "l",
+        graphics::matplot(object$ScoreRegression[1:c(n_iter + 5), ], type = "l",
                 lty = 2, ylab = "Quasi-score Regression",
                 xlab = "Iterations")
-        matplot(object$ScoreCovariance[1:c(n_iter + 5), ], type = "l",
+        graphics::matplot(object$ScoreCovariance[1:c(n_iter + 5), ], type = "l",
                 lty = 2, ylab = "Quasi-score Covariance",
                 xlab = "Iterations")
     }
@@ -316,12 +336,12 @@ plot.mcglm <- function(x, type = "residuals", ...) {
             res <- residuals(object, type = "pearson")[, i]
             dev.new()
             n_cov <- dim(comp_X[[i]])[2]
-            par(mar = c(2.6, 2.5, 0.5, 0.5),
+            graphics::par(mar = c(2.6, 2.5, 0.5, 0.5),
                 mgp = c(1.6, 0.6, 0),
                 mfrow = c(1, c(n_cov - 1)))
             for (j in 2:n_cov) {
                 p1 <- comp_X[[i]][, j] + res
-                plot(p1 ~ object$list_X[[i]][, j],
+                graphics::plot(p1 ~ object$list_X[[i]][, j],
                      xlab = object$beta_names[[i]][j],
                      ylab = "Partial residuals ")
             }
@@ -329,8 +349,7 @@ plot.mcglm <- function(x, type = "residuals", ...) {
     }
 }
 
-#' @title Print method for Multivariate Covariance Generalized Linear
-#'     Model
+#' @title Print a Multivariate Covariance Generalized Linear Model
 #' @name print.mcglm
 #' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
@@ -381,8 +400,7 @@ print.mcglm <- function(x, ...) {
     }
 }
 
-#' @title Residuals for Multivariate Covariance Generalized Linear
-#'     Models (McGLM)
+#' @title Residuals for Multivariate Covariance Generalized Linear Models
 #' @name residuals.mcglm
 #' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
@@ -420,22 +438,21 @@ residuals.mcglm <- function(object, type = "raw", ...) {
     return(output)
 }
 
-#' @title Summarizing Multivariate Covariance Generalized Linear Models
-#'     fits.
+#' @title Summarizing Multivariate Covariance Generalized Linear Models Fit.
 #' @name summary.mcglm
 #' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
-#' @description Summary for McGLMs objects.
+#' @description Summary for objects of \code{mcglm} class.
 #'
 #' @param object an object of class \code{mcglm}, usually, a result of a
 #'     call to \code{mcglm}.
-#' @param verbose Logical print or not the model summary.
-#' @param print Print only part of the model summary, options are
+#' @param verbose logical print or not the model summary.
+#' @param print print only part of the model summary, options are
 #' \code{Regression}, \code{power}, \code{Dispersion} and \code{Correlation}.
 #' @param ... additional arguments affecting the summary produced. Note
 #'     the there is no extra options for mcglm object class.
 #'
-#' @return Print an \code{mcglm} object.
+#' @return Print a \code{mcglm} object.
 #'
 #' @method summary mcglm
 #' @export
@@ -526,8 +543,7 @@ summary.mcglm <- function(object, verbose = TRUE,
     return(invisible(output))
 }
 
-#' @title Calculate Variance-Covariance matrix for a fitted McGLM
-#'     object.
+#' @title Variance-Covariance Matrix for a Fitted \code{mcglm} Model
 #' @name vcov.mcglm
 #' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'

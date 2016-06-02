@@ -1,11 +1,20 @@
-#' Moving average models
+#' Moving Average Models Structure
 #'
 #' @description Builds moving average model matrix of order k.
 #'
-#' @param id Subject index. Note that this structure was designed to deal with longitudinal data.
-#' @param time Index indicating the time.
-#' @param data Data set.
-#' @param order Order of the random walk model.
+#' @param id subject index. Note that this structure was designed to deal with longitudinal data.
+#' @param time index indicating the time.
+#' @param data data set.
+#' @param order order of the random walk model.
+#' @details This function was designed mainly to deal with longitudinal
+#' data, but can also be used for times series analysis. In that case,
+#' the \code{id} argument should contain only one index. It pretends a
+#' longitudinal data taken just for one individual or unit sample. This
+#' function is a simple call of the \code{\link[Matrix]{bandSparse}}.
+#'
+#' @source Bonat, W. H. (2016). Multiple Response Variables Regression
+#' Models in R: The mcglm Package. Journal of Statistical Software, submitted.
+#'
 #' @return A matrix of dgCMatrix class.
 #' @export
 

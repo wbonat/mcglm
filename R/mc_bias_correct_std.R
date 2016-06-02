@@ -1,6 +1,6 @@
-#' @title Bias-corrected standard error for regression parameters
+#' @title Bias-corrected Standard Error for Regression Parameters
 #' @name mc_bias_corrected_std
-#' @author Wagner Hugo Bonat
+#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
 #' @description Compute bias-corrected standard error for regression
 #'     parameters in the context of clustered observations. It is also
@@ -13,6 +13,11 @@
 #'     on a cluster are contiguous rows for all entities in the formula.
 #' @return A matrix. Note that the function assumes that the data are in
 #'     the correct order.
+#'
+#' @source Nuamah, I. F. and Qu, Y. and Aminu, S. B. (1996). A SAS macro
+#' for stepwise correlated binary regression. Computer Methods
+#' and Programs in Biomedicine 49, 199--210.
+#'
 #' @export
 
 mc_bias_corrected_std <- function(object, id) {

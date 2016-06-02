@@ -1,11 +1,11 @@
-#' @title Extract measures of goodness-of-fit for
-#' multivariate covariance generalized linear models.
-#' @author Wagner Hugo Bonat
-#'
-#' @description Extract the plogLik, pAIC, pKLIC and ESS for a fitted McGLM.
+#' @title Extract Measures of Goodness-of-Fit
+#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
+#' @description Extract the plogLik, pAIC, pKLIC and ESS for an object
+#' of \code{mcglm} class.
 #' @param object an object or a list of objects representing a model
 #' of \code{mcglm} class.
 #' @return Returns a data frame contains gof's.
+#' @seealso \code{plogLik}, \code{pAIC}, \code{pKLIC}, \code{ESS}.
 #' @export
 
 gof <- function(object) {

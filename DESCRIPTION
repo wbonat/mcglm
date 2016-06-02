@@ -1,6 +1,6 @@
 Package: mcglm
 Type: Package
-Title: Fit multivariate covariance generalized linear models
+Title: Multivariate Covariance Generalized Linear Models
 Version: 0.2.0
 Date: 2016-01-07
 Authors@R: as.person(c(
@@ -9,7 +9,7 @@ Authors@R: as.person(c(
     "Fernando de Pol Mayer <fernando.mayer@ufpr.br> [ctb]"
     ))
 Description: This package fits multivariate covariance generalized linear
-    models (McGLM).
+    models (McGLMs).
 Depends:
     R (>= 3.2.1)
 Suggests:
@@ -28,8 +28,7 @@ Imports:
     Matrix,
     assertthat,
     stats,
-    graphics,
-    grDevices
+    graphics
 License: GPL-3 | file LICENSE
 LazyData: TRUE
 URL: https://github.com/wbonat/mcglm

@@ -1,5 +1,5 @@
-#' @title Chaser and reciprocal likelihood algorithms.
-#' @author Wagner Hugo Bonat
+#' @title Chaser and Reciprocal Likelihood Algorithms.
+#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
 #' @description This function implements the two main algorithms used
 #' for fitting McGLMs. The chaser and the reciprocal likelihood algorithms.
@@ -35,6 +35,11 @@
 #' the step-length.
 #' @param verbose A logical if TRUE print the values of the covariance
 #' parameters used on each iteration.
+#' @usage fit_mcglm(list_initial, list_link, list_variance,
+#'          list_covariance, list_X, list_Z, list_offset,
+#'          list_Ntrial, list_power_fixed, list_sparse,
+#'          y_vec, correct, max_iter, tol, method,
+#'          tunning, verbose)
 #' @return A list with estimated regression and covariance parameters.
 #' Details about the estimation procedures as iterations, sensitivity,
 #' variability are also provided. In general the users do not need to
