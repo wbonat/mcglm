@@ -29,7 +29,7 @@
 #' anova(fit.anova)
 #'
 #' @method anova mcglm
-#'
+#' @import stats
 #' @export
 
 anova.mcglm <- function(object, ...) {
@@ -283,6 +283,7 @@ fitted.mcglm <- function(object, ...) {
 #' estimating functions. Hence, a quickly check of the algorithm
 #' convergence is obtained.
 #' @method plot mcglm
+#' @import graphics
 #' @export
 
 plot.mcglm <- function(x, type = "residuals", ...) {
