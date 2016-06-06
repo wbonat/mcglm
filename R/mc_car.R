@@ -7,7 +7,7 @@
 #' spatial areal data using the well known conditional autoregressive
 #' models (CAR). This function depends on a list of neighboors, such a
 #' list can be constructed, for example using the
-#' \code{\link[spdep]{tri2nb}} function from the \code{spdep} package
+#' \code{tri2nb} function from the \code{spdep} package
 #' based on spatial coordinates. This way to specify the matrix linear
 #' predictor can also be applied for spatial continuous data,
 #' as an approximation.
