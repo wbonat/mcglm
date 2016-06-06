@@ -3,6 +3,10 @@ Type: Package
 Title: Multivariate Covariance Generalized Linear Models
 Version: 0.2.0
 Date: 2016-06-06
+Author: Wagner Hugo Bonat [aut, cre],
+  Walmes Marques Zeviani [ctb],
+  Fernado de Pol Mayer [ctb]
+Maintainer: Wagner Hugo Bonat <wbonat@ufpr.br>
 Authors@R: as.person(c(
     "Wagner Hugo Bonat <wbonat@ufpr.br> [aut, cre]",
     "Walmes Marques Zeviani <walmes@ufpr.br> [ctb]",
@@ -48,7 +52,5 @@ LazyData: TRUE
 URL: https://github.com/wbonat/mcglm
 BugReports: https://github.com/wbonat/mcglm/issues
 Encoding: UTF-8
-Author: Wagner Hugo Bonat [aut, cre]
-Maintainer: Wagner Hugo Bonat <wbonat@ufpr.br>
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
