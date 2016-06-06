@@ -2,14 +2,14 @@ Package: mcglm
 Type: Package
 Title: Multivariate Covariance Generalized Linear Models
 Version: 0.2.0
-Date: 2016-01-07
+Date: 2016-06-06
 Authors@R: as.person(c(
     "Wagner Hugo Bonat <wbonat@ufpr.br> [aut, cre]",
     "Walmes Marques Zeviani <walmes@ufpr.br> [ctb]",
     "Fernando de Pol Mayer <fernando.mayer@ufpr.br> [ctb]"
     ))
-Description: This package fits multivariate covariance generalized linear
-     models (McGLMs) to data.  McGLM is a general framework for non-normal
+Description: Fitting multivariate covariance generalized linear
+     models (McGLMs) to data.  McGLMs is a general framework for non-normal
      multivariate data analysis, designed to handle multivariate response
      variables, along with a wide range of temporal and spatial correlation
      structures defined in terms of a covariance link function combined
@@ -34,7 +34,6 @@ Suggests:
     latticeExtra,
     knitr,
     rmarkdown,
-    networkD3,
     MASS,
     mvtnorm,
     tweedie,
@@ -49,5 +48,7 @@ LazyData: TRUE
 URL: https://github.com/wbonat/mcglm
 BugReports: https://github.com/wbonat/mcglm/issues
 Encoding: UTF-8
+Author: Wagner Hugo Bonat [aut, cre]
+Maintainer: Wagner Hugo Bonat <wbonat@ufpr.br>
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
