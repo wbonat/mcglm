@@ -2,25 +2,54 @@
 % Please edit documentation in R/mc_rw.R
 \name{mc_rw}
 \alias{mc_rw}
-\title{Random walk models}
+\title{Random Walk Models Structure}
+\source{
+Bonat, W. H. (2016). Multiple Response Variables Regression
+Models in R: The mcglm Package. Journal of Statistical Software, submitted.
+}
 \usage{
 mc_rw(id, time, data, order = 1, proper = FALSE)
 }
 \arguments{
-\item{id}{Subject index. Note that this structure was designed to deal with longitudinal data.}
+\item{id}{name of the column (string) containing the subject index.
+Note that this structure was designed to deal with
+longitudinal data. For times series data use the same
+\code{id} for all observations (one unit sample).}
 
-\item{time}{Index indicating the time.}
+\item{time}{name of the column (string) containing the index
+indicating the time.}
 
-\item{data}{Data set.}
+\item{data}{data set.}
 
-\item{order}{Order of the random walk model.}
+\item{order}{order of the random walk model.}
 
-\item{proper}{Logical.}
+\item{proper}{logical.}
 }
 \value{
-A matrix of dgCMatrix class.
+If \code{proper = FALSE} a matrix of \code{dgCMatrix} class.
+        If \code{proper = TRUE} a list with two matrices of
+        \code{dgCMatrix} class.
 }
 \description{
-Builds a random walk model matrix of order k.
+The function \code{mc_rw} builds the components of the
+   matrix linear predictor associated with random walk models.
+   This function is generaly used for the analysis of longitudinal
+   and times series data. The user can specify the order of the random
+   walk process.
+}
+\examples{
+id <- rep(1:2, each = 4)
+time <- rep(1:4, 2)
+data <- data.frame("id" = id, "time" = time)
+mc_rw(id = "id", time = "time", data = data, order = 1, proper = FALSE)
+mc_rw(id = "id", time = "time", data = data, order = 1, proper = TRUE)
+mc_rw(id = "id", time = "time", data = data, order = 2, proper = TRUE)
+}
+\author{
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}
+\seealso{
+\code{mc_id}, \code{mc_dist}, \code{mc_car},
+\code{mc_ma}, \code{mc_mixed} and \code{mc_compute_rho}.
 }
 

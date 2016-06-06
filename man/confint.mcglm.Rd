@@ -9,7 +9,7 @@
 \arguments{
 \item{object}{a fitted \code{mcglm} object.}
 
-\item{parm}{specification for which parameters are to be given
+\item{parm}{specifies for which parameters are to be given
 confidence intervals, either a vector of numbers or a vector of
 strings. If missing, all parameters are considered.}
 

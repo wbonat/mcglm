@@ -2,19 +2,22 @@
 % Please edit documentation in R/mc_S3_methods.R
 \name{print.mcglm}
 \alias{print.mcglm}
-\title{Print a Multivariate Covariance Generalized Linear Model}
+\title{Print}
 \usage{
 \method{print}{mcglm}(x, ...)
 }
 \arguments{
-\item{x}{fitted model objects of class mcglm as produced by mcglm().}
+\item{x}{fitted model objects of class \code{mcglm} as produced by \code{mcglm()}.}
 
 \item{...}{further arguments passed to or from other methods.}
 }
 \description{
-The default print method for a \code{mcglm} object.
+The default print method for an object of \code{mcglm} class.
 }
 \author{
 Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}
+\seealso{
+\code{summary}.
 }
 

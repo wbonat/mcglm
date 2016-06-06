@@ -3,13 +3,17 @@
 \name{mc_conditional_test}
 \alias{mc_conditional_test}
 \title{Conditional Hypotheses Tests}
+\source{
+Bonat, W. H. (2016). Multiple Response Variables Regression
+Models in R: The mcglm Package. Journal of Statistical Software, submitted.
+}
 \usage{
 mc_conditional_test(object, parameters, test, fixed)
 }
 \arguments{
 \item{object}{an object representing a model of \code{mcglm} class.}
 
-\item{parameters}{which parameters have been included in the
+\item{parameters}{which parameters will be included in the
 conditional test.}
 
 \item{test}{index indicating which parameters will be tested given
@@ -22,14 +26,15 @@ the conditional test.}
 Returns estimates, conditional standard errors and Z-statistics.
 }
 \description{
-Compute conditional hypotheses tests for fitted \code{mcglm}.
-When fitting model with extra power parameters, the standard errors
+Compute conditional hypotheses tests for fitted
+\code{mcglm} model class.
+When fitting models with extra power parameters, the standard errors
 associated with the dispersion parameters can be large. In that cases,
 we suggest to conduct conditional hypotheses test instead of the
-orthodox marginal test for the dispersion parameters. The function
-\code{mc_conditional_test} offers an ease way to conduction such
-conditional test. Furthermore, the function is quite flexible
-and can be used for any other conditional hypotheses test.
+orthodox marginal test for the dispersion parameters.
+The function \code{mc_conditional_test} offers an ease way to
+conduct such conditional test. Furthermore, the function is quite
+flexible and can be used for any other conditional hypotheses test.
 }
 \author{
 Wagner Hugo Bonat, \email{wbonat@ufpr.br}

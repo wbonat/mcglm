@@ -2,30 +2,38 @@
 % Please edit documentation in R/mc_RJC.R
 \name{RJC}
 \alias{RJC}
-\title{Rotnitzky-Jewell information criterion}
+\title{Rotnitzky-Jewell Information Criterion}
+\source{
+Wang, M. (2014). Generalized Estimating Equations in Longitudinal Data
+Analysis: A Review and Recent Developments. Advances in Statistics, 1(1)1--13.
+}
 \usage{
 RJC(object, id, verbose = TRUE)
 }
 \arguments{
-\item{object}{An object of mcglm class.}
+\item{object}{an object of \code{mcglm} class.}
 
 \item{id}{a vector which identifies the clusters. The length and
-order of id should be the same as the number of
+order of \code{id} should be the same as the number of
 observations. Data are assumed to be sorted so that observations
 on a cluster are contiguous rows for all entities in the formula.}
 
-\item{verbose}{Logical.}
+\item{verbose}{logical. Print or not the RJC value.}
 }
 \value{
-A matrix. Note that the function assumes that the data are in
-    the correct order.
+The value of the Rotnitzky-Jewell information criterion.
+Note that the function assumes that the data are in the correct order.
 }
 \description{
 Compute the Rotnitzky-Jewell information criterion
-for multivariate covariance generalized linear models.
+for an object of \code{mcglm} class.
 WARNINGS: This function is limited to models with ONE response variable.
 }
 \author{
-Wagner Hugo Bonat
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}
+\seealso{
+\code{gof}, \code{plogLik}, \code{pAIC}, \code{pKLIC},
+\code{ESS} and \code{GOSHO}.
 }
 

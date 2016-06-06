@@ -5,7 +5,12 @@
 \alias{mc_binomialPQ}
 \alias{mc_power}
 \alias{mc_variance_function}
-\title{Variance function}
+\title{Variance Functions}
+\source{
+Bonat, W. H. and Jorgensen, B. (2016) Multivariate
+    covariance generalized linear models.
+    Journal of Royal Statistical Society - Series C X(X):XX--XX.
+}
 \usage{
 mc_variance_function(mu, power, Ntrial, variance, inverse,
                            derivative_power, derivative_mu)
@@ -19,24 +24,24 @@ mc_binomialPQ(mu, power, inverse, Ntrial,
                      derivative_power, derivative_mu)
 }
 \arguments{
-\item{mu}{A numeric vector. In general the output from
+\item{mu}{a numeric vector. In general the output from
 \code{\link{mc_link_function}}.}
 
-\item{power}{A numeric value (\code{power} and \code{binomialP}) or
-vector (\code{binomialPQ}) of the power parameters.}
+\item{power}{a numeric value (\code{power} and \code{binomialP}) or
+a vector (\code{binomialPQ}) of the power parameters.}
 
-\item{Ntrial}{Number of trials, useful only when dealing with
+\item{Ntrial}{number of trials, useful only when dealing with
 binomial response variables.}
 
-\item{variance}{A string specifing the name (\code{power, binomialP
+\item{variance}{a string specifying the name (\code{power, binomialP
 or binomialPQ}) of the variance function.}
 
-\item{inverse}{Logical.}
+\item{inverse}{logical. Compute the inverse or not.}
 
-\item{derivative_power}{Logical if compute (TRUE) or not (FALSE) the
+\item{derivative_power}{logical if compute (TRUE) or not (FALSE) the
 derivatives with respect to the power parameter.}
 
-\item{derivative_mu}{Logical if compute (TRUE) or not (FALSE) the
+\item{derivative_mu}{logical if compute (TRUE) or not (FALSE) the
 derivative with respect to the mu parameter.}
 }
 \value{
@@ -44,12 +49,13 @@ A list with from one to four elements depends on the
     arguments.
 }
 \description{
-Compute features related with variance functions.
+Compute the variance function and its derivatives with
+respect to regression, dispersion and power parameters.
 }
 \details{
-The function \code{mc_variance_function} computing three
+The function \code{mc_variance_function} computes three
     features related with the variance function. Depending on the
-    Logical arguments, the function returns \eqn{V^{1/2}} and its
+    logical arguments, the function returns \eqn{V^{1/2}} and its
     derivatives with respect to the parameters power and mu,
     respectivelly.  The output is a named list, completely
     informative about what the function has been computed.  For
@@ -68,7 +74,7 @@ mc_variance_function(mu = mu$mu, power = c(2, 1), Ntrial = 1,
 
 }
 \author{
-Wagner Hugo Bonat
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
 }
 \seealso{
 \code{\link{mc_link_function}}.

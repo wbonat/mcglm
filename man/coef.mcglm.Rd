@@ -2,7 +2,7 @@
 % Please edit documentation in R/mc_S3_methods.R
 \name{coef.mcglm}
 \alias{coef.mcglm}
-\title{Extract Model Coefficients}
+\title{Model Coefficients}
 \usage{
 \method{coef}{mcglm}(object, std.error = FALSE, response = c(NA,
   1:length(object$beta_names)), type = c("beta", "tau", "power",
@@ -14,12 +14,12 @@
 \item{std.error}{logical. If \code{TRUE} returns the standard errors
 for the estimates. Default is \code{FALSE}.}
 
-\item{response}{a numeric vector specyfing for which response
+\item{response}{a numeric vector specifyng for which response
 variable the coefficients should be returned.}
 
-\item{type}{a string vector (can be 1 element length) specyfing which
-coefficients should be returned. Options are \code{"beta"},
-\code{"tau"}, \code{"power"}, \code{"tau"} and
+\item{type}{a string vector (can be 1 element length) specifying which
+coefficients should be returned. \cr
+Options are \code{"beta"}, \code{"tau"}, \code{"power"}, \code{"tau"} and
 \code{"correlation"}.}
 
 \item{...}{additional arguments affecting the summary produced. Note

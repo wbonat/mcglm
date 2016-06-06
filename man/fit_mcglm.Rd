@@ -2,7 +2,16 @@
 % Please edit documentation in R/fit_mcglm.R
 \name{fit_mcglm}
 \alias{fit_mcglm}
-\title{Chaser and Reciprocal Likelihood Algorithms.}
+\title{Chaser and Reciprocal Likelihood Algorithms}
+\source{
+Bonat, W. H. and Jorgensen, B. (2016) Multivariate
+    covariance generalized linear models.
+    Journal of Royal Statistical Society - Series C X(X):XX--XX.
+
+Bonat, W. H. (2016). Multiple Response Variables Regression
+    Models in R: The mcglm Package.
+    Journal of Statistical Software, submitted.
+}
 \usage{
 fit_mcglm(list_initial, list_link, list_variance,
          list_covariance, list_X, list_Z, list_offset,
@@ -11,50 +20,60 @@ fit_mcglm(list_initial, list_link, list_variance,
          tunning, verbose)
 }
 \arguments{
-\item{list_initial}{A list of initial values for regression and
+\item{list_initial}{a list of initial values for regression and
 covariance parameters.}
 
-\item{list_link}{A list of link function names.}
+\item{list_link}{a list specifying the link function names. \cr
+Options are: \code{"logit"}, \code{"probit"}, \code{"cauchit"},
+\code{"cloglog"}, \code{"loglog"}, \code{"identity"}, \code{"log"},
+\code{"sqrt"}, \code{"1/mu^2"} and \code{"inverse"}. \cr
+See \code{\link{mc_link_function}} for details.}
 
-\item{list_variance}{A list of variance function names.}
+\item{list_variance}{a list specifying the variance function names.
+Options are: \code{"constant"}, \code{"tweedie"},
+\code{"poisson_tweedie"}, \code{"binomialP"} and \code{"binomialPQ"}.
+See \code{\link{mc_variance_function}} for details.}
 
-\item{list_covariance}{A list of covariance function names.}
+\item{list_covariance}{a list of covariance function names. Options
+are: \code{"identity"}, \code{"inverse"} and \code{"expm"}.}
 
-\item{list_X}{A list of design matrices.}
+\item{list_X}{a list of design matrices.
+See \code{\link[stats]{model.matrix}} for details.}
 
-\item{list_Z}{A list of knowm matrices to compose matrix linear predictor.}
+\item{list_Z}{a list of knowm matrices to compose the matrix linear
+predictor.}
 
-\item{list_offset}{A list of offset values.}
+\item{list_offset}{a list of offset values.}
 
-\item{list_Ntrial}{A list of number of trials, useful only when
+\item{list_Ntrial}{a list of number of trials, useful only when
 analysing binomial data.}
 
-\item{list_power_fixed}{A list of logicals indicating if the power
+\item{list_power_fixed}{a list of logicals indicating if the power
 parameters should be estimated or not.}
 
-\item{list_sparse}{A list of logicals indicating if the matrices
+\item{list_sparse}{a list of logicals indicating if the matrices
 should be set up as sparse matrices. This argument is useful only
 when using exponential-matrix covariance link function.
 In the other cases the algorithm detects automatically if the matrix
 should be sparse or not.}
 
-\item{y_vec}{A vector of the stacked response variables.}
+\item{y_vec}{a vector of the stacked response variables.}
 
-\item{correct}{A logical indicating if the algorithm will use the
+\item{correct}{a logical indicating if the algorithm will use the
 correction term or not.}
 
-\item{max_iter}{Maximum number of iterations.}
+\item{max_iter}{maximum number of iterations.}
 
-\item{tol}{A numeric specyfing the tolerance.}
+\item{tol}{a numeric specyfing the tolerance.}
 
-\item{method}{A string specyfing the method used to fit the models
-(\code{chaser} or \code{rc}).}
+\item{method}{a string specyfing the method used to fit the models
+(\code{"chaser"} or \code{"rc"}).}
 
-\item{tunning}{A numeric value in general close to zero for the rc
+\item{tunning}{a numeric value in general close to zero for the rc
 method and close to 1 for the chaser method. This argument control
 the step-length.}
 
-\item{verbose}{A logical if TRUE print the values of the covariance
+\item{verbose}{a logical if TRUE print the values of the covariance
 parameters used on each iteration.}
 }
 \value{
@@ -62,15 +81,18 @@ A list with estimated regression and covariance parameters.
 Details about the estimation procedures as iterations, sensitivity,
 variability are also provided. In general the users do not need to
 use this function directly. The \code{\link{mcglm}} provides GLM
-interface for fitting McGLMS.
+interface for fitting \code{mcglm} .
 }
 \description{
 This function implements the two main algorithms used
-for fitting McGLMs. The chaser and the reciprocal likelihood algorithms.
-In general the chaser algorithm is faster than the
-reciprocal likelihood.
+for fitting multivariate covariance generalized linear models.
+The chaser and the reciprocal likelihood algorithms.
 }
 \author{
 Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}
+\seealso{
+\code{mcglm}, \code{mc_matrix_linear_predictor},
+ \code{mc_link_function} and \cr \code{mc_variance_function}.
 }
 

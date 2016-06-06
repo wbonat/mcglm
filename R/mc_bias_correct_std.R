@@ -3,20 +3,25 @@
 #' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
 #' @description Compute bias-corrected standard error for regression
-#'     parameters in the context of clustered observations. It is also
-#'     robust and has improved finite sample properties.
+#'     parameters in the context of clustered observations for an
+#'     object of \code{mcglm} class. It is also robust and has improved
+#'     finite sample properties.
 #'
-#' @param object An object of mcglm class.
+#' @param object an object of \code{mcglm} class.
 #' @param id a vector which identifies the clusters. The length and
-#'     order of id should be the same as the number of
-#'     observations. Data are assumed to be sorted so that observations
-#'     on a cluster are contiguous rows for all entities in the formula.
-#' @return A matrix. Note that the function assumes that the data are in
-#'     the correct order.
+#'     order of \code{id} should be the same as the number of
+#'     observations. The data set are assumed to be sorted so that
+#'     observations on a cluster are contiguous rows for all entities.
+#'
+#' @return A variance-covariance matrix.
+#'    Note that the function assumes that the data are in the correct
+#'    order.
 #'
 #' @source Nuamah, I. F. and Qu, Y. and Aminu, S. B. (1996). A SAS macro
 #' for stepwise correlated binary regression. Computer Methods
 #' and Programs in Biomedicine 49, 199--210.
+#'
+#' @seealso \code{mc_robust_std}.
 #'
 #' @export
 

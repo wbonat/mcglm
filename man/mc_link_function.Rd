@@ -37,23 +37,24 @@ mc_invmu2(beta, X, offset)
 mc_inverse(beta, X, offset)
 }
 \arguments{
-\item{beta}{A numeric vector of regression parameters.}
+\item{beta}{a numeric vector of regression parameters.}
 
-\item{X}{A design matrix, see \code{\link[stats]{model.matrix}} for
+\item{X}{a design matrix, see \code{\link[stats]{model.matrix}} for
 details.}
 
-\item{offset}{A numeric vector of offset values. It will be sum up on
+\item{offset}{a numeric vector of offset values. It will be sum up on
 the linear predictor as a covariate with known regression
 parameter equals one (\eqn{\mu = g^{-1}(X\beta + offset)}).  If
 no offset is present in the model, set offset = NULL.}
 
-\item{link}{A string specifing the name of the link function. mcglm
-implements the following link functions: logit, probit, cauchit,
-cloglog, loglog, identity, log, sqrt, 1/mu^2 and inverse. A user
-defined link function can be used (see Details).}
+\item{link}{a string specifying the name of the link function.
+Options are: \code{"logit"}, \code{"probit"}, \code{"cauchit"},
+\code{"cloglog"}, \code{"loglog"}, \code{"identity"}, \code{"log"},
+\code{"sqrt"}, \code{"1/mu^2"} and \code{inverse}.
+A user defined link function can be used (see Details).}
 }
 \value{
-A list with two elements: mu and D.
+A list with two elements: mu and D (see Details).
 }
 \description{
 The \code{mc_link_function} is a customized call of the
@@ -68,22 +69,23 @@ It will be useful when computing the quasi-score function.
 }
 \details{
 The link function is an important component of the
-    multivariate covariance generalized linear model, since it link
+    multivariate covariance generalized linear models, since it links
     the expectation of the response variable with the covariates.
-    Let \eqn{\beta} a \eqn{p x 1} regression parameter vector and
-    \eqn{X} an \eqn{n x p} design matrix. The expected value of a
-    response variable \eqn{Y} is given by \deqn{E(Y) =
+    Let \eqn{\beta} be a (p x 1) regression parameter vector and
+    \eqn{X} be an (n x p) design matrix. The expected value of
+    the response variable \eqn{Y} is given by \deqn{E(Y) =
     g^{-1}(X\beta),} where \eqn{g} is the link function and \eqn{\eta
-    = X\beta} is the linear predictor. Let \eqn{D} be a \eqn{n \times
-    p} matrix whose entries are given by the derivatives of \eqn{mu}
-    with respect to \eqn{\beta}.  Such matrix will be required by the
+    = X\beta} is the linear predictor. Let \eqn{D} be a (n x p)
+    matrix whose entries are given by the derivatives of \eqn{\mu}
+    with respect to \eqn{\beta}.  Such a matrix will be required for the
     fitting algorithm. The function \code{mc_link_function} returns a
-    list where the first element is mu (n x 1) vector and the second
-    D (n x p) matrix. A user defined function can be used. It must be
-    a function with arguments \code{beta}, \code{X} and \code{offset}
+    list where the first element is \eqn{\mu} (n x 1) vector
+    and the second is the D (n x p) matrix.
+    A user defined function can also be used. It must be a function
+    with arguments \code{beta}, \code{X} and \code{offset}
     (set to \code{NULL} if non needed). The function must return a
     length 2 named list with \code{mu} and \code{D} elements as a
-    vector and a matrix of proper dimensions dimensions.
+    vector and a matrix of proper dimensions.
 }
 \examples{
 x1 <- seq(-1, 1, l = 5)

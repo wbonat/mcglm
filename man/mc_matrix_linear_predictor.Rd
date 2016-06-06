@@ -2,24 +2,35 @@
 % Please edit documentation in R/mc_matrix_linear_predictor.R
 \name{mc_matrix_linear_predictor}
 \alias{mc_matrix_linear_predictor}
-\title{Matrix linear predictor}
+\title{Matrix Linear Predictor}
+\source{
+Bonat, W. H. and Jorgensen, B. (2016) Multivariate
+    covariance generalized linear models.
+    Journal of Royal Statistical Society - Series C X(X):XX--XX.
+
+Bonat, W. H. (2016). Multiple Response Variables Regression
+Models in R: The mcglm Package. Journal of Statistical Software, submitted.
+}
 \usage{
 mc_matrix_linear_predictor(tau, Z)
 }
 \arguments{
-\item{tau}{A numeric vector.}
+\item{tau}{a numeric vector of dispersion parameters.}
 
-\item{Z}{A list of known matrices.}
+\item{Z}{a list of known matrices.}
 }
 \value{
 A matrix.
 }
 \description{
-Compute the matrix linear predictor.
+Compute the matrix linear predictor. It is an internal
+function, however, since the concept of matrix linear predictor
+was proposed recently. I decided let this function visible to the
+interested reader gets some feeling about how it works.
 }
 \details{
 Given a list with a set of known matrices
-    (\eqn{Z_0,...,Z_D}) the function
+    (\eqn{Z_0,...,Z_D}) the function \cr
     \code{mc_matrix_linear_predictor} returns \eqn{U = \tau_0 Z_0 +
     ... + \tau_D Z_D}.
 }
@@ -31,6 +42,10 @@ Z <- list(Z0, Z1)
 mc_matrix_linear_predictor(tau = c(1,0.8), Z = Z)
 }
 \author{
-Wagner Hugo Bonat
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}
+\seealso{
+\code{mc_id}, \code{mc_dist}, \code{mc_ma}, \code{mc_rw},
+\code{mc_mixed} and \code{mc_car}.
 }
 

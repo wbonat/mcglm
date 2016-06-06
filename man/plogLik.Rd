@@ -2,8 +2,7 @@
 % Please edit documentation in R/mc_plogLik.R
 \name{plogLik}
 \alias{plogLik}
-\title{Extract Gaussian pseudo-loglikelihood (plogLik) for multivariate
-    covariance generalized linear models.}
+\title{Gaussian Pseudo-loglikelihood}
 \usage{
 plogLik(object, verbose = TRUE)
 }
@@ -11,16 +10,16 @@ plogLik(object, verbose = TRUE)
 \item{object}{an object or a list of objects representing a model
 of \code{mcglm} class.}
 
-\item{verbose}{Logical}
+\item{verbose}{logical. Print or not the plogLik value.}
 }
 \value{
 Returns the value of the Gaussian pseudo-loglikelihood.
 }
 \description{
-Extract the Gaussian pseudo-loglikelihood for a fitted
-McGLM.
+Extract the Gaussian pseudo-loglikelihood (plogLik)
+value for objects of \code{mcglm} class.
 }
 \author{
-Wagner Hugo Bonat
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
 }
 

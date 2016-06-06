@@ -11,15 +11,15 @@ Models in R: The mcglm Package. Journal of Statistical Software, submitted.
 mc_dist(id, time, data, method = "euclidean")
 }
 \arguments{
-\item{id}{subject index. For spatial data use the same id for all
-observations (one unit sample).}
+\item{id}{name of the column (string) containing the subject index.
+For spatial data use the same \code{id} for all observations (one unit sample).}
 
-\item{time}{index indicating the time. For spatial data use the same
-index for all observations.}
+\item{time}{name of the column (string) containing the index
+indicating the time. For spatial data use the same index for all observations.}
 
-\item{data}{the data set.}
+\item{data}{data set.}
 
-\item{method}{the distance measure to be used.}
+\item{method}{distance measure to be used.}
 }
 \value{
 A matrix of dgCMatrix class.
@@ -36,8 +36,8 @@ distance squared or high order power.
 \details{
 The distance measure must be one of \code{"euclidean"},
 \code{"maximum"}, \code{"manhattan"}, \code{"canberra"},
-\code{"binary"} or \code{"minkowski"}. This function is just a call
-of the \code{\link[stats]{dist}} function.
+\code{"binary"} or \code{"minkowski"}. This function is a customize
+call of the \code{\link[stats]{dist}} function.
 }
 \examples{
 id <- rep(1:2, each = 4)
@@ -50,7 +50,8 @@ mc_dist(id = "id", time = "time", data = data, method = "canberra")
 Wagner Hugo Bonat, \email{wbonat@ufpr.br}
 }
 \seealso{
-\code{\link[stats]{dist}}, \code{mc_id}, \code{mc_conditional_test},
-\code{mc_car}, \code{mc_ma}, \code{mc_rw} and \code{mc_mixed}.
+\code{\link[stats]{dist}}, \code{mc_id},
+\code{mc_conditional_test}, \code{mc_car}, \code{mc_ma},
+\code{mc_rw} and \code{mc_mixed}.
 }
 

@@ -2,34 +2,65 @@
 % Please edit documentation in R/mc_sic_covariance.R
 \name{mc_sic_covariance}
 \alias{mc_sic_covariance}
-\title{Compute the score information criterion (SIC) for multivariate
-    covariance generalized linear models.}
+\title{Score Information Criterion - Covariance}
+\source{
+Bonat, W. H. (2016). Multiple Response Variables Regression
+Models in R: The mcglm Package. Journal of Statistical Software, submitted.
+
+Bonat, et. al. (2016). Modelling the covariance structure in
+marginal multivariate count models: Hunting in Bioko Island.
+Environmetrics, submitted.
+}
 \usage{
 mc_sic_covariance(object, scope, idx, data, penalty = 2, response)
 }
 \arguments{
-\item{object}{an object representing a model of \code{mcglm} class.}
+\item{object}{an object of \code{mcglm} class.}
 
-\item{scope}{a list of matrices to be tested in the matrix linear
-predictor.}
+\item{scope}{a list of matrices to be tested.}
 
-\item{idx}{Indicator of matrices belong to the same effect.}
+\item{idx}{indicator of matrices belong to the same effect.
+It is useful for the case where more than one matrix represents
+the same effect.}
 
-\item{data}{data frame containing all variables envolved in the
+\item{data}{data set containing all variables involved in the
 model.}
 
 \item{penalty}{penalty term (default = 2).}
 
-\item{response}{Indicate for which response variable SIC is computed.}
+\item{response}{index indicating for which response variable
+SIC-covariance should be computed.}
 }
 \value{
-A data frame with SIC values for each matrix in the scope
-    argument.
+A data frame containing SIC-covariance values,
+degree of freedom, Tu-statistics and chi-squared reference values
+for each matrix in the scope argument.
 }
 \description{
-Compute SIC for covariance parameters in McGLMS.
+Compute the score information criterion (SIC) for an
+object of \code{mcglm} class. The SIC-covariance is useful for
+selecting the components of the matrix linear predictor. It can be
+used to construct an stepwise procedure to select the components of
+the matrix linear predictor.
+}
+\examples{
+set.seed(123)
+SUBJECT <- gl(10, 10)
+y <- rnorm(100)
+data <- data.frame(y, SUBJECT)
+Z0 <- mc_id(data)
+Z1 <- mc_mixed(~0+SUBJECT, data = data)
+# Reference model
+fit0 <- mcglm(c(y ~ 1), list(Z0), data = data)
+# Testing the effect of the matrix Z1
+mc_sic_covariance(fit0, scope = Z1, idx = 1,
+data = data, response = 1)
+# As expected Tu < Chisq indicating non-significance of Z1 matrix
 }
 \author{
-Wagner Hugo Bonat
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}
+\seealso{
+\code{mc_sic}.
 }
 

@@ -2,48 +2,75 @@
 % Please edit documentation in R/mc_initial_values.R
 \name{mc_initial_values}
 \alias{mc_initial_values}
-\title{Automatic initial values for McGLMs.}
+\title{Automatic Initial Values}
 \usage{
 mc_initial_values(linear_pred, matrix_pred, link, variance,
                   covariance, offset, Ntrial, contrasts, data)
 }
 \arguments{
-\item{linear_pred}{A list of formula see \code{\link[stats]{formula}}
+\item{linear_pred}{a list of formula see \code{\link[stats]{formula}}
 for details.}
 
-\item{matrix_pred}{A list of known matrices to be used on the matrix
-linear predictor. Details can be obtained on
-\code{\link[mcglm]{mc_matrix_linear_predictor}}.}
+\item{matrix_pred}{a list of known matrices to be used on the matrix
+linear predictor. \cr
+See \code{\link[mcglm]{mc_matrix_linear_predictor}} for details.}
 
-\item{link}{A list of link functions names, see
-\code{\link[mcglm]{mc_link_function}} for details.}
+\item{link}{a list of link functions names, see
+\code{\link[mcglm]{mcglm}} for details.}
 
-\item{variance}{A list of variance functions names, see
-\code{\link[mcglm]{mc_variance_function}} for details.}
+\item{variance}{a list of variance functions names, see
+\code{\link[mcglm]{mcglm}} for details.}
 
-\item{covariance}{A list of covariance link functions names, current
-options are: identity, inverse and exponential-matrix (expm).}
+\item{covariance}{a list of covariance link functions names, see
+\code{\link[mcglm]{mcglm}} for details.}
 
-\item{offset}{A list with values of offset values if any.}
+\item{offset}{a list of offset values if any.}
 
-\item{Ntrial}{A list with values of the number of trials on Bernoulli
-experiments. It is useful only for binomialP and binomialPQ
-variance functions.}
+\item{Ntrial}{a list of the number of trials on Bernoulli
+experiments. It is useful only for \code{"binomialP"} and
+\code{"binomialPQ"} variance functions.}
 
-\item{contrasts}{List of contrasts to be used in the
+\item{contrasts}{list of contrasts to be used in the
 \code{\link[stats]{model.matrix}}.}
 
-\item{data}{A data frame.}
+\item{data}{data frame.}
 }
 \value{
 Return a list of initial values to be used while fitting
-    McGLMs.
+    in the \code{mcglm} function.
 }
 \description{
-This function provides o list of initial values to be
-    used while fitting McGLMs.
+This function provides initial values to be used when
+fitting multivariate covariance generalized linear models by using
+the function \code{mcglm}. In general the users do not need to use
+this function, since it is already employed when setting the argument
+\code{control_initial = "automatic"} in the \code{mcglm} function.
+However, if the users want to change some of the initial values,
+this function can be useful.
+}
+\details{
+To obtain initial values for multivariate covariance
+generalized linear models the function \cr \code{mc_initial_values} fits
+a generalized linear model (GLM) using the function \code{glm} with
+the specified linear predictor and link function for each response
+variables considering independent observations. The \code{family}
+argument is always specified as \code{quasi}. The link function depends
+on the specification of the argument \code{link}.
+The variance function is always specified as \code{"mu"} the only
+excession appears when using \code{variance = "constant"} then the
+family argument in the \code{glm} function is specified as
+\code{quasi(link = link, variance = "constant")}. The estimated value
+of the dispersion parameter from the \code{glm} function is used as
+initial value for the first component of the matrix linear predictor,
+for all other components the value zero is used. \cr For the
+cases \code{covariance = "inverse"} and \code{covariance = "expm"}
+the inverse and the logarithm of the estimated dispersion parameter
+is used as initial value for the first component of the matrix linear
+predictor. The value of the power parameter is always started at 1.
+In the cases of multivariate models the correlation between response
+variables is always started at 0.
 }
 \author{
-Wagner Hugo Bonat
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
 }
 

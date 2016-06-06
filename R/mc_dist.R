@@ -9,19 +9,21 @@
 #' within response variables. The model can also use the inverse of
 #' distance squared or high order power.
 #'
-#' @param id subject index. For spatial data use the same id for all
-#'           observations (one unit sample).
-#' @param time index indicating the time. For spatial data use the same
-#'              index for all observations.
-#' @param data the data set.
-#' @param method the distance measure to be used.
+#' @param id name of the column (string) containing the subject index.
+#' For spatial data use the same \code{id} for all observations (one unit sample).
+#' @param time name of the column (string) containing the index
+#' indicating the time. For spatial data use the same index for all observations.
+#' @param data data set.
+#' @param method distance measure to be used.
+#'
 #' @details The distance measure must be one of \code{"euclidean"},
 #' \code{"maximum"}, \code{"manhattan"}, \code{"canberra"},
-#' \code{"binary"} or \code{"minkowski"}. This function is just a call
-#' of the \code{\link[stats]{dist}} function.
+#' \code{"binary"} or \code{"minkowski"}. This function is a customize
+#' call of the \code{\link[stats]{dist}} function.
 #'
-#' @seealso \code{\link[stats]{dist}}, \code{mc_id}, \code{mc_conditional_test},
-#' \code{mc_car}, \code{mc_ma}, \code{mc_rw} and \code{mc_mixed}.
+#' @seealso \code{\link[stats]{dist}}, \code{mc_id},
+#' \code{mc_conditional_test}, \code{mc_car}, \code{mc_ma},
+#' \code{mc_rw} and \code{mc_mixed}.
 #'
 #' @source Bonat, W. H. (2016). Multiple Response Variables Regression
 #' Models in R: The mcglm Package. Journal of Statistical Software, submitted.

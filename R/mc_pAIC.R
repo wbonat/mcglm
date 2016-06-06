@@ -1,12 +1,20 @@
-#' @title Extract pseudo Akaike Information Criterion (pAIC) for
-#' multivariate covariance generalized linear models.
-#' @author Wagner Hugo Bonat
+#' @title Pseudo Akaike Information Criterion
+#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
-#' @description Extract the pAIC for a fitted McGLM.
+#' @description Extract the pseudo Akaike information criterion (pAIC)
+#' for objects of \code{mcglm} class.
+#'
 #' @param object an object or a list of objects representing a model
 #' of \code{mcglm} class.
-#' @param verbose Logical
-#' @return Returns the value of the pAIC.
+#' @param verbose logical. Print or not the pAIC value.
+#' @return Returns the value of the pseudo Akaike information criterion (pAIC).
+#'
+#' @seealso \code{gof}, \code{plogLik}, \code{ESS}, \code{pKLIC},
+#' \code{GOSHO} and \code{RJC}.
+#'
+#' @source Bonat, W. H. (2016). Multiple Response Variables Regression
+#' Models in R: The mcglm Package. Journal of Statistical Software, submitted.
+#'
 #' @export
 
 pAIC <- function(object, verbose = TRUE) {

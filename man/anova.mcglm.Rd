@@ -2,7 +2,7 @@
 % Please edit documentation in R/mc_S3_methods.R
 \name{anova.mcglm}
 \alias{anova.mcglm}
-\title{Anova Tables for \code{mcglm}}
+\title{Anova Tables}
 \usage{
 \method{anova}{mcglm}(object, ...)
 }

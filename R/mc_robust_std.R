@@ -1,16 +1,26 @@
-#' @title Robust standard error for regression parameters
-#' @author Wagner Hugo Bonat
+#' @title Robust Standard Error for Regression Parameters
+#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
 #' @description Compute robust standard error for regression parameters
-#'     in the context of clustered observations.
+#'     in the context of clustered observations for an object of
+#'     \code{mcglm} class.
 #'
-#' @param object An object of mcglm class.
-#' @param id a vector which identifies the clusters. The length and
-#'     order of id should be the same as the number of
+#' @param object an object of \code{mcglm} class.
+#' @param id a vector which identifies the clusters or subject indexes.
+#'     The length and order of \code{id} should be the same as the number of
 #'     observations. Data are assumed to be sorted so that observations
 #'     on a cluster are contiguous rows for all entities in the formula.
-#' @return A matrix. Note that the function assumes that the data are in
-#'     the correct order.
+#'
+#' @return A variance-covariance matrix.
+#'     Note that the function assumes that the data are in the correct
+#'     order.
+#'
+#' @source Nuamah, I. F. and Qu, Y. and Aminu, S. B. (1996). A SAS macro
+#' for stepwise correlated binary regression. Computer Methods
+#' and Programs in Biomedicine 49, 199--210.
+#'
+#' @seealso \code{mc_bias_correct_std}.
+#'
 #' @export
 
 mc_robust_std <- function(object, id) {

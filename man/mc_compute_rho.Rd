@@ -2,7 +2,7 @@
 % Please edit documentation in R/mc_compute_rho.R
 \name{mc_compute_rho}
 \alias{mc_compute_rho}
-\title{Compute Autocorrelation Estimates}
+\title{Autocorrelation Estimates}
 \source{
 Bonat, W. H. (2016). Multiple Response Variables Regression
 Models in R: The mcglm Package. Journal of Statistical Software, submitted.
@@ -22,13 +22,17 @@ the spatial autocorrelation parameter.
 }
 \description{
 Compute autocorrelation estimates based on a fitted model
-using the \code{mc_car} structure. The mcglm approach fits models using
-a linear covariance structure, but in general in this parametrization
-for spatial models the parameters have no simple interpretation in
-terms of spatial autocorrelation. The function \code{mc_compute_rho}
-computes the autocorrelation based on a fitted model.
+using the \code{mc_car} structure. The \code{mcglm} approach fits
+models using a linear covariance structure, but in general in this
+parametrization for spatial models the parameters have no simple
+interpretation in terms of spatial autocorrelation.
+The function \code{mc_compute_rho} computes the autocorrelation
+based on a fitted model.
 }
 \author{
 Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}
+\seealso{
+\code{mc_car} and \code{mc_conditional_test}.
 }
 

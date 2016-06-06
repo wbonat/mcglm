@@ -23,7 +23,8 @@ Description: This package fits multivariate covariance generalized linear
      a wide variety of different types of response variables and covariance
      structures, including multivariate extensions of repeated measures,
      time series, longitudinal, spatial and spatio-temporal structures.
-     The package offers a user-friendly interface for fitting McGLMS.
+     The package offers a user-friendly interface for fitting mcglm
+     similar to the glm R function.
 Depends:
     R (>= 3.2.1)
 Suggests:

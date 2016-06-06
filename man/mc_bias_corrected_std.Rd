@@ -12,23 +12,28 @@ and Programs in Biomedicine 49, 199--210.
 mc_bias_corrected_std(object, id)
 }
 \arguments{
-\item{object}{An object of mcglm class.}
+\item{object}{an object of \code{mcglm} class.}
 
 \item{id}{a vector which identifies the clusters. The length and
-order of id should be the same as the number of
-observations. Data are assumed to be sorted so that observations
-on a cluster are contiguous rows for all entities in the formula.}
+order of \code{id} should be the same as the number of
+observations. The data set are assumed to be sorted so that
+observations on a cluster are contiguous rows for all entities.}
 }
 \value{
-A matrix. Note that the function assumes that the data are in
-    the correct order.
+A variance-covariance matrix.
+   Note that the function assumes that the data are in the correct
+   order.
 }
 \description{
 Compute bias-corrected standard error for regression
-    parameters in the context of clustered observations. It is also
-    robust and has improved finite sample properties.
+    parameters in the context of clustered observations for an
+    object of \code{mcglm} class. It is also robust and has improved
+    finite sample properties.
 }
 \author{
 Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}
+\seealso{
+\code{mc_robust_std}.
 }
 

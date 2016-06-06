@@ -2,12 +2,12 @@
 % Please edit documentation in R/mc_S3_methods.R
 \name{vcov.mcglm}
 \alias{vcov.mcglm}
-\title{Variance-Covariance Matrix for a Fitted \code{mcglm} Model}
+\title{Variance-Covariance Matrix}
 \usage{
 \method{vcov}{mcglm}(object, ...)
 }
 \arguments{
-\item{object}{a fitted model \code{mcglm} object.}
+\item{object}{an object of \code{mcglm} class.}
 
 \item{...}{additional arguments affecting the summary produced. Note
 that there is no extra options for mcglm object class.}
@@ -16,8 +16,8 @@ that there is no extra options for mcglm object class.}
 A variance-covariance matrix.
 }
 \description{
-Returns the variance-covariance matrix for all
-    parameters of a \code{mcglm} fitted model object.
+Returns the variance-covariance matrix for an object
+of \code{mcglm} class.
 }
 \author{
 Wagner Hugo Bonat, \email{wbonat@ufpr.br}

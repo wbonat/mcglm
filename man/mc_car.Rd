@@ -11,7 +11,7 @@ Models in R: The mcglm Package. Journal of Statistical Software, submitted.
 mc_car(list_neigh, intrinsic = FALSE)
 }
 \arguments{
-\item{list_neigh}{List of neighboors.}
+\item{list_neigh}{list of neighboors.}
 
 \item{intrinsic}{logical.}
 }
@@ -22,19 +22,20 @@ A list of a matrix (\code{intrinsic = TRUE}) or two matrices
 \description{
 The function \code{mc_car} helps to build the components
 of the matrix linear predictor used for fitting conditional
-autoregressive models. This function is
-used in general for fitting spatial areal data using the well known
-conditional autoregressive models (CAR). This function depends on a list
-of neighboors, such a list can be constructed, for example using the
-\code{\link[spdep]{tri2nb}} function based on spatial coordinates.
-This way to specify the matrix linear predictor can also be applied
-for spatial continuous data, as an approximation.
+autoregressive models. This function is used in general for fitting
+spatial areal data using the well known conditional autoregressive
+models (CAR). This function depends on a list of neighboors, such a
+list can be constructed, for example using the
+\code{\link[spdep]{tri2nb}} function from the \code{spdep} package
+based on spatial coordinates. This way to specify the matrix linear
+predictor can also be applied for spatial continuous data,
+as an approximation.
 }
 \author{
 Wagner Hugo Bonat, \email{wbonat@ufpr.br}
 }
 \seealso{
 \code{mc_id}, \code{mc_compute_rho}, \code{mc_conditional_test},
- \code{mc_dist}, \code{mc_ma}, \code{mc_rw}, \code{mc_mixed}.
+ \code{mc_dist}, \code{mc_ma}, \code{mc_rw} \cr and \code{mc_mixed}.
 }
 

@@ -2,19 +2,72 @@
 % Please edit documentation in R/mc_mixed.R
 \name{mc_mixed}
 \alias{mc_mixed}
-\title{Mixed model structure}
+\title{Mixed Models Structure}
+\source{
+Bonat, W. H. (2016). Multiple Response Variables Regression
+Models in R: The mcglm Package. Journal of Statistical Software, submitted.
+
+Bonat, et. al. (2016). Modelling the covariance structure in
+marginal multivariate count models: Hunting in Bioko Island.
+Environmetrics, submitted.
+}
 \usage{
 mc_mixed(formula, data)
 }
 \arguments{
-\item{formula}{A formula model to build the matrix linear predictor (see Details).}
+\item{formula}{a formula model to build the matrix linear predictor.
+See details.}
 
-\item{data}{The data set to be used.}
+\item{data}{data set.}
 }
 \value{
-A list matrices.
+A list of matrices.
 }
 \description{
-Builds a mixed model structure
+The function \code{mc_mixed} helps to build the components
+of the matrix linear predictor associated with mixed models. It is
+useful to model the covariance structure as a function of known
+covariates in a linear mixed model fashion (Bonat, et. al. 2016).
+The \code{mc_mixed} function was designed to analyse repeated measures
+and longitudinal data, where in general the observations are taken
+at a fixed number of groups, subjects or unit samples.
+}
+\details{
+The \code{formula} argument should be specified similar to
+the linear predictor for the mean structure, however the first
+component should be 0 and the second component should always
+indicate the name of the column containing the subject
+or unit sample index. It should be a \code{factor}. The other covariates
+are specified after a slash "\" in the usual way. For example,
+\code{~0 + SUBJECT/(x1 + x2)} means that the column SUBJECT contains the
+subject or unit sample index, while the covariates that can be continuous
+or factors are given in the columns x1 and x2. Be careful the parenthesis
+after the "\" are mandatory, when including more than one covariate.
+The special case where only the SUBJECT effect is requested the formula
+takes the form \code{~ 0 + SUBJECT} without any extra covariate.
+This structure corresponds to the well known compound symmetry structure.
+By default the function \code{mc_mixed} include all interaction terms,
+the users can ignore the interactions terms removing them from the
+matrix linear predictor.
+}
+\examples{
+SUBJECT <- gl(2, 6)
+x1 <- rep(1:6, 2)
+x2 <- rep(gl(2,3),2)
+data <- data.frame(SUBJECT, x1 , x2)
+# Compound symmetry structure
+mc_mixed(~0 + SUBJECT, data = data)
+# Compound symmetry + random slope for x1 and interaction or correlation
+mc_mixed(~0 + SUBJECT/x1, data = data)
+# Compound symmetry + random slope for x1 and x2 plus interactions
+mc_mixed(~0 + SUBJECT/(x1 + x2), data = data)
+
+}
+\author{
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}
+\seealso{
+\code{mc_id}, \code{mc_conditional_test},
+ \code{mc_dist}, \code{mc_ma}, \code{mc_rw} and \code{mc_car}.
 }
 

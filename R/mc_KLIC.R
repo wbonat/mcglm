@@ -1,12 +1,20 @@
-#' @title Extract pseudo Kullback-Leibler Information Criterion for
-#' multivariate covariance generalized linear models.
-#' @author Wagner Hugo Bonat
+#' @title Pseudo Kullback-Leibler Information Criterion
+#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
-#' @description Extract the pKLIC for a fitted McGLM.
+#' @description Extract the pseudo Kullback-Leibler information criterion
+#' (pKLIC) for objects of \code{mcglm} class.
 #' @param object an object or a list of objects representing a model
 #' of \code{mcglm} class.
-#' @param verbose Logical
-#' @return Returns the value of the pKLIC.
+#' @param verbose logical. Print or not the pKLIC value.
+#' @return Returns the value of the pseudo Kullback-Leibler information
+#' criterion.
+#'
+#' @seealso \code{gof}, \code{plogLik}, \code{ESS}, \code{pAIC},
+#' \code{GOSHO} and \code{RJC}.
+#'
+#' @source Bonat, W. H. (2016). Multiple Response Variables Regression
+#' Models in R: The mcglm Package. Journal of Statistical Software, submitted.
+#'
 #' @export
 
 pKLIC <- function(object, verbose = TRUE) {

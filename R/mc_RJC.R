@@ -1,18 +1,25 @@
-#' @title Rotnitzky-Jewell information criterion
-#' @author Wagner Hugo Bonat
+#' @title Rotnitzky-Jewell Information Criterion
+#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
 #' @description Compute the Rotnitzky-Jewell information criterion
-#' for multivariate covariance generalized linear models.
+#' for an object of \code{mcglm} class.
 #' WARNINGS: This function is limited to models with ONE response variable.
 #'
-#' @param object An object of mcglm class.
+#' @param object an object of \code{mcglm} class.
 #' @param id a vector which identifies the clusters. The length and
-#'     order of id should be the same as the number of
+#'     order of \code{id} should be the same as the number of
 #'     observations. Data are assumed to be sorted so that observations
 #'     on a cluster are contiguous rows for all entities in the formula.
-#' @param verbose Logical.
-#' @return A matrix. Note that the function assumes that the data are in
-#'     the correct order.
+#' @param verbose logical. Print or not the RJC value.
+#' @return The value of the Rotnitzky-Jewell information criterion.
+#' Note that the function assumes that the data are in the correct order.
+#'
+#' @source Wang, M. (2014). Generalized Estimating Equations in Longitudinal Data
+#' Analysis: A Review and Recent Developments. Advances in Statistics, 1(1)1--13.
+#'
+#' @seealso \code{gof}, \code{plogLik}, \code{pAIC}, \code{pKLIC},
+#' \code{ESS} and \code{GOSHO}.
+#'
 #' @export
 
 RJC <- function(object, id, verbose = TRUE) {

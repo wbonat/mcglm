@@ -2,8 +2,7 @@
 % Please edit documentation in R/mc_S3_methods.R
 \name{plot.mcglm}
 \alias{plot.mcglm}
-\title{Default Multivariate Covariance Generalized Linear Models
-    plotting}
+\title{Residuals and algorithm check plots}
 \usage{
 \method{plot}{mcglm}(x, type = "residuals", ...)
 }
@@ -20,18 +19,21 @@ that there is no extra options for mcglm object class.}
 The function \code{plot.mcglm} was designed to offer a fast
 residuals analysis based on the Pearson residuals. Current version
 offers a simple Pearson residuals versus fitted values and a quantile
-plot. When using \code{algorithm = TRUE} the will plot a summary of
-the fitting algorithm show the trajectory or iterations of the fitting
-algorithm. The iteractions are shown in terms of values for the model
+plot. When using \code{algorithm = TRUE} the function will plot a summary of
+the fitting algorithm shows the trajectory or iterations of the fitting
+algorithm. The iterations are shown in terms of values of the model
 parameters and also the actually value of the quasi-score and Pearson
 estimating functions. Hence, a quickly check of the algorithm
 convergence is obtained.
 }
 \description{
-Takes a fitted \code{mcglm} object and do plots based on
-    residuals and algorithm check.
+Residual and algorithm check analysis for objects of
+\code{mcglm} class.
 }
 \author{
 Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}
+\seealso{
+\code{residuals} and \code{fitted}.
 }
 

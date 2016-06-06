@@ -68,15 +68,15 @@
 #'
 #' @usage data(ahs)
 #'
-#' @format a \code{data.frame} with 5190 records and 17 variables.
+#' @format a \code{data.frame} with 5190 records and 15 variables.
 #'
-#' @source Deb, P. and Trivedi, P. K. (1997). Demand for medical care by
-#'     the elderly: A finite mixture approach, Journal of Applied
+#' @source Deb, P. and Trivedi, P. K. (1997) Demand for medical care by
+#'     the elderly: A finite mixture approach. Journal of Applied
 #'     Econometrics 12(3):313--336.
 #'
-#' @source Bonat, W. H. and Jorgensen, B. (2016). Multivariate
+#' @source Bonat, W. H. and Jorgensen, B. (2016) Multivariate
 #'     covariance generalized linear models.
-#'     Journal of Royal Statistical Society - Series C, to appear.
+#'     Journal of Royal Statistical Society - Series C X(X):XX--XX.
 #'
 #' @examples
 #'require(mcglm)
@@ -138,24 +138,32 @@ NULL
 #'
 #' @usage data(Hunting)
 #'
-#' @format a \code{data.frame} with 1216 records and 10 variables.
+#' @format a \code{data.frame} with 1216 records and 11 variables.
 #'
 #' @source Bonat, et. al. (2016). Modelling the covariance structure in
-#' marginal multivariate count models: Hunting in Bioko island.
+#' marginal multivariate count models: Hunting in Bioko Island.
 #' Environmetrics, submitted.
 #'
+#' @source Bonat, W. H. (2016). Multiple Response Variables Regression
+#' Models in R: The mcglm Package.
+#' Journal of Statistical Software, submitted.
+#'
 #' @examples
+#' \donttest{
 #' library(mcglm)
 #' library(Matrix)
 #' data(Hunting, package="mcglm")
 #' formu <- OT ~ METHOD*ALT + SEX + ALT*poly(MONTH, 4)
-#' Z0 <- Diagonal(dim(Hunting)[1],1)
-#' fit <- mcglm(linear_pred = c(formu), matrix_pred = list(list(Z0)),
-#'              link = c("log"), variance = c("poisson_tweedie"),
-#'              power_fixed = c(FALSE),
-#'              offset = list(log(Hunting$OFFSET)), data = Hunting)
+#' Z0 <- mc_id(Hunting)
+#' Z1 <- mc_mixed(~0 + HUNTER.MONTH, data = Hunting)
+#' fit <- mcglm(linear_pred = c(formu), matrix_pred = list(c(Z0, Z1)),
+#'             link = c("log"), variance = c("poisson_tweedie"),
+#'             power_fixed = c(FALSE),
+#'             control_algorithm = list(max_iter = 100),
+#'             offset = list(log(Hunting$OFFSET)), data = Hunting)
 #' summary(fit)
-#'
+#' anova(fit)
+#' }
 NULL
 
 #' @title Soil Chemistry Properties Data
@@ -197,16 +205,31 @@ NULL
 #' Models in R: The mcglm Package. Journal of Statistical Software, submitted.
 #'
 #' @examples
-#' library(mcglm)
-#' library(Matrix)
+#' \donttest{
 #' data(soil, package="mcglm")
-#' head(data)
+#' neigh <- tri2nb(soil[,1:2])
+#' Z1 <- mc_car(neigh)
+#' # Linear predictor
+#' form.ca <- CA ~ COORD.X*COORD.Y + SAND + SILT + CLAY + PHWATER
+#' fit.ca <- mcglm(linear_pred = c(form.ca), matrix_pred = list(Z1),
+#'                link = "log", variance = "tweedie", covariance = "inverse",
+#'                power_fixed = FALSE, data = soil,
+#'                control_algorith = list(max_iter = 500, tunning = 0.1))
+#' summary(fit.ca)
+#' # Conditional hypothesis test
+#' mc_conditional_test(fit.ca, parameters = c("power11","tau11","tau12"),
+#'                    test = 2:3, fixed = 1)
+#' # Spatial autocorrelation
+#' mc_compute_rho(fit.ca)
+#' }
+#'
+
 NULL
 
 #' @title Respiratory Physiotherapy on Premature Newborns.
 #' @name NewBorn
 #'
-#' @description The NewBorn dataset consist of a prospective study
+#' @description The NewBorn dataset consists of a prospective study
 #' to assess the effect of respiratory physiotherapy on the
 #' cardiopulmonary function of ventilated preterm newborn infants with
 #' birth weight lower than 1500 g. The data set was collected and
@@ -273,17 +296,17 @@ NULL
 #'
 #' @format a \code{data.frame} with 270 records and 21 variables.
 #'
-#' @source Bonat, W. H. and Jorgensen, B. (2016). Multivariate
-#' covariance generalized linear models.
-#' Journal of Royal Statistical Society - Series C, to appear.
+#' @source Bonat, W. H. and Jorgensen, B. (2016) Multivariate
+#'     covariance generalized linear models.
+#'     Journal of Royal Statistical Society - Series C X(X):XX--XX.
 #'
 #' @examples
 #' library(mcglm)
 #' library(Matrix)
 #' data(NewBorn, package="mcglm")
 #' formu <- SPO2 ~ Sex + APGAR1M + APGAR5M + PRE + HD + SUR
-#' Z0 <- Diagonal(dim(NewBorn)[1],1)
-#'fit <- mcglm(linear_pred = c(formu), matrix_pred = list(list(Z0)),
+#' Z0 <- mc_id(NewBorn)
+#' fit <- mcglm(linear_pred = c(formu), matrix_pred = list(Z0),
 #'             link = c("logit"), variance = c("binomialP"),
 #'             power_fixed = c(TRUE),
 #'             data = NewBorn,

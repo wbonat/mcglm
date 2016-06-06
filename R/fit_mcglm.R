@@ -1,39 +1,48 @@
-#' @title Chaser and Reciprocal Likelihood Algorithms.
+#' @title Chaser and Reciprocal Likelihood Algorithms
 #' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
 #' @description This function implements the two main algorithms used
-#' for fitting McGLMs. The chaser and the reciprocal likelihood algorithms.
-#' In general the chaser algorithm is faster than the
-#' reciprocal likelihood.
+#' for fitting multivariate covariance generalized linear models.
+#' The chaser and the reciprocal likelihood algorithms.
 #'
-#' @param list_initial A list of initial values for regression and
+#' @param list_initial a list of initial values for regression and
 #' covariance parameters.
-#' @param list_link A list of link function names.
-#' @param list_variance A list of variance function names.
-#' @param list_covariance A list of covariance function names.
-#' @param list_X A list of design matrices.
-#' @param list_Z A list of knowm matrices to compose matrix linear predictor.
-#' @param list_offset A list of offset values.
-#' @param list_Ntrial A list of number of trials, useful only when
+#' @param list_link a list specifying the link function names. \cr
+#' Options are: \code{"logit"}, \code{"probit"}, \code{"cauchit"},
+#' \code{"cloglog"}, \code{"loglog"}, \code{"identity"}, \code{"log"},
+#' \code{"sqrt"}, \code{"1/mu^2"} and \code{"inverse"}. \cr
+#' See \code{\link{mc_link_function}} for details.
+#' @param list_variance a list specifying the variance function names.
+#' Options are: \code{"constant"}, \code{"tweedie"},
+#' \code{"poisson_tweedie"}, \code{"binomialP"} and \code{"binomialPQ"}.
+#' See \code{\link{mc_variance_function}} for details.
+#' @param list_covariance a list of covariance function names. Options
+#' are: \code{"identity"}, \code{"inverse"} and \code{"expm"}.
+#' @param list_X a list of design matrices.
+#' See \code{\link[stats]{model.matrix}} for details.
+#' @param list_Z a list of knowm matrices to compose the matrix linear
+#' predictor.
+#' @param list_offset a list of offset values.
+#' @param list_Ntrial a list of number of trials, useful only when
 #' analysing binomial data.
-#' @param list_power_fixed A list of logicals indicating if the power
+#' @param list_power_fixed a list of logicals indicating if the power
 #' parameters should be estimated or not.
-#' @param list_sparse A list of logicals indicating if the matrices
+#' @param list_sparse a list of logicals indicating if the matrices
 #' should be set up as sparse matrices. This argument is useful only
 #' when using exponential-matrix covariance link function.
 #' In the other cases the algorithm detects automatically if the matrix
 #' should be sparse or not.
-#' @param y_vec A vector of the stacked response variables.
-#' @param correct A logical indicating if the algorithm will use the
+#' @param y_vec a vector of the stacked response variables.
+#' @param correct a logical indicating if the algorithm will use the
 #' correction term or not.
-#' @param max_iter Maximum number of iterations.
-#' @param tol A numeric specyfing the tolerance.
-#' @param method A string specyfing the method used to fit the models
-#' (\code{chaser} or \code{rc}).
-#' @param tunning A numeric value in general close to zero for the rc
+#' @param max_iter maximum number of iterations.
+#' @param tol a numeric specyfing the tolerance.
+#' @param method a string specyfing the method used to fit the models
+#' (\code{"chaser"} or \code{"rc"}).
+#' @param tunning a numeric value in general close to zero for the rc
 #' method and close to 1 for the chaser method. This argument control
 #' the step-length.
-#' @param verbose A logical if TRUE print the values of the covariance
+#' @param verbose a logical if TRUE print the values of the covariance
 #' parameters used on each iteration.
 #' @usage fit_mcglm(list_initial, list_link, list_variance,
 #'          list_covariance, list_X, list_Z, list_offset,
@@ -44,7 +53,22 @@
 #' Details about the estimation procedures as iterations, sensitivity,
 #' variability are also provided. In general the users do not need to
 #' use this function directly. The \code{\link{mcglm}} provides GLM
-#' interface for fitting McGLMS.
+#' interface for fitting \code{mcglm} .
+#' @seealso \code{mcglm}, \code{mc_matrix_linear_predictor},
+#'  \code{mc_link_function} and \cr \code{mc_variance_function}.
+#'
+#' @source Bonat, W. H. and Jorgensen, B. (2016) Multivariate
+#'     covariance generalized linear models.
+#'     Journal of Royal Statistical Society - Series C X(X):XX--XX.
+#'
+#' @source Bonat, W. H. (2016). Multiple Response Variables Regression
+#'     Models in R: The mcglm Package.
+#'     Journal of Statistical Software, submitted.
+#'
+#' @importFrom stats as.formula binomial coef dist fitted glm make.link
+#' model.frame model.matrix na.exclude pchisq qchisq qnorm quasi residuals vcov
+#' @importFrom utils combn
+#' @importFrom grDevices dev.new
 #' @export
 
 fit_mcglm <- function(list_initial, list_link, list_variance,

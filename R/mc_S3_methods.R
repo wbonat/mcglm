@@ -1,4 +1,4 @@
-#' @title Anova Tables for \code{mcglm}
+#' @title Anova Tables
 #' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
 #' @description Performs Wald tests of the significance for the linear
@@ -90,7 +90,7 @@ anova.mcglm <- function(object, ...) {
     return(invisible(saida))
 }
 
-#' @title Extract Model Coefficients
+#' @title Model Coefficients
 #' @name coef.mcglm
 #' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
@@ -100,11 +100,11 @@ anova.mcglm <- function(object, ...) {
 #' @param object an object of \code{mcglm} class.
 #' @param std.error logical. If \code{TRUE} returns the standard errors
 #'     for the estimates. Default is \code{FALSE}.
-#' @param response a numeric vector specyfing for which response
+#' @param response a numeric vector specifyng for which response
 #'     variable the coefficients should be returned.
-#' @param type a string vector (can be 1 element length) specyfing which
-#'     coefficients should be returned. Options are \code{"beta"},
-#'     \code{"tau"}, \code{"power"}, \code{"tau"} and
+#' @param type a string vector (can be 1 element length) specifying which
+#'     coefficients should be returned. \cr
+#'     Options are \code{"beta"}, \code{"tau"}, \code{"power"}, \code{"tau"} and
 #'     \code{"correlation"}.
 #' @param ... additional arguments affecting the summary produced. Note
 #'     that there is no extra options for \code{mcglm} object class.
@@ -113,7 +113,6 @@ anova.mcglm <- function(object, ...) {
 #'     response variable number and parameters type.
 #'
 #' @method coef mcglm
-#'
 #' @export
 
 coef.mcglm <- function(object, std.error = FALSE,
@@ -201,7 +200,6 @@ coef.mcglm <- function(object, std.error = FALSE,
 }
 
 #' @title Confidence Intervals for Model Parameters
-#'
 #' @name confint.mcglm
 #' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
@@ -209,7 +207,7 @@ coef.mcglm <- function(object, std.error = FALSE,
 #'     \code{mcglm} model.
 #'
 #' @param object a fitted \code{mcglm} object.
-#' @param parm specification for which parameters are to be given
+#' @param parm specifies for which parameters are to be given
 #'     confidence intervals, either a vector of numbers or a vector of
 #'     strings. If missing, all parameters are considered.
 #' @param level the nominal confidence level.
@@ -236,7 +234,7 @@ confint.mcglm <- function(object, parm, level = 0.95, ...) {
     return(ci[parm, ])
 }
 
-#' @title Extract Model Fitted Values
+#' @title Fitted Values
 #' @name fitted.mcglm
 #' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
@@ -246,9 +244,7 @@ confint.mcglm <- function(object, parm, level = 0.95, ...) {
 #' @param ... additional arguments affecting the summary produced. Note
 #'     that there is no extra options for \code{mcglm} object class.
 #'
-#' @return Depending on the number of response variables, the function
-#'     \code{fitted.mcglm} returns a vector (univariate models) or a
-#'     matrix (multivariate models) of fitted values.
+#' @return A matrix with fitted values.
 #'
 #' @method fitted mcglm
 #' @export
@@ -259,28 +255,28 @@ fitted.mcglm <- function(object, ...) {
     return(output)
 }
 
-#' @title Default Multivariate Covariance Generalized Linear Models
-#'     plotting
-#' @name plot.mcglm
+#' @title Residuals and algorithm check plots
 #' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
-#' @description Takes a fitted \code{mcglm} object and do plots based on
-#'     residuals and algorithm check.
+#' @description Residual and algorithm check analysis for objects of
+#' \code{mcglm} class.
 #'
 #' @param x a fitted \code{mcglm} object.
 #' @param type specify which graphical analysis will be performed.
 #'     Options are: \code{"residuals"} and \code{"algorithm"}.
 #' @param ... additional arguments affecting the plot produced. Note
 #'     that there is no extra options for mcglm object class.
+#'
 #' @return The function \code{plot.mcglm} was designed to offer a fast
 #' residuals analysis based on the Pearson residuals. Current version
 #' offers a simple Pearson residuals versus fitted values and a quantile
-#' plot. When using \code{algorithm = TRUE} the will plot a summary of
-#' the fitting algorithm show the trajectory or iterations of the fitting
-#' algorithm. The iteractions are shown in terms of values for the model
+#' plot. When using \code{algorithm = TRUE} the function will plot a summary of
+#' the fitting algorithm shows the trajectory or iterations of the fitting
+#' algorithm. The iterations are shown in terms of values of the model
 #' parameters and also the actually value of the quasi-score and Pearson
 #' estimating functions. Hence, a quickly check of the algorithm
 #' convergence is obtained.
+#' @seealso \code{residuals} and \code{fitted}.
 #' @method plot mcglm
 #' @export
 
@@ -348,15 +344,16 @@ plot.mcglm <- function(x, type = "residuals", ...) {
     }
 }
 
-#' @title Print a Multivariate Covariance Generalized Linear Model
+#' @title Print
 #' @name print.mcglm
 #' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
-#' @description The default print method for a \code{mcglm} object.
+#' @description The default print method for an object of \code{mcglm} class.
 #'
-#' @param x fitted model objects of class mcglm as produced by mcglm().
+#' @param x fitted model objects of class \code{mcglm} as produced by \code{mcglm()}.
 #' @param ... further arguments passed to or from other methods.
 #'
+#' @seealso \code{summary}.
 #' @rdname print.mcglm
 #' @method print mcglm
 #' @export
@@ -399,25 +396,23 @@ print.mcglm <- function(x, ...) {
     }
 }
 
-#' @title Residuals for Multivariate Covariance Generalized Linear Models
+#' @title Residuals
 #' @name residuals.mcglm
 #' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
-#' @description Compute residuals based on fitting \code{mcglm} models.
+#' @description Compute residuals for an object of \code{mcglm} class.
 #'
-#' @param object An of class \code{mcglm}, typically the result of a
-#'     call to \code{mcglm}.
-#' @param type the type of residuals which should be returned. The
-#'     alternatives are: \code{"raw"} (default), \code{"pearson"} and
+#' @param object an object of \code{mcglm} class.
+#' @param type the type of residuals which should be returned.
+#'     Options are: \code{"raw"} (default), \code{"pearson"} and
 #'     \code{"standardized"}.
 #' @param ... additional arguments affecting the residuals
 #'     produced. Note that there is no extra options for mcglm object
 #'     class.
 #'
-#' @return Depending on the number of response variable the function
-#'     \code{residuals.mcglm} returns a vector (univariate models) or a
-#'     matrix (multivariate models) of residuals values.
-#'
+#' @return The function \code{residuals.mcglm} returns a matrix of
+#' residuals values.
+#' @seealso \code{fitted}.
 #' @method residuals mcglm
 #' @export
 
@@ -437,22 +432,21 @@ residuals.mcglm <- function(object, type = "raw", ...) {
     return(output)
 }
 
-#' @title Summarizing Multivariate Covariance Generalized Linear Models Fit.
+#' @title Summarizing
 #' @name summary.mcglm
 #' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
-#' @description Summary for objects of \code{mcglm} class.
+#' @description The default summary method for an object of \code{mcglm} class.
 #'
-#' @param object an object of class \code{mcglm}, usually, a result of a
-#'     call to \code{mcglm}.
-#' @param verbose logical print or not the model summary.
+#' @param object an object of \code{mcglm} class.
+#' @param verbose logical. Print or not the model summary.
 #' @param print print only part of the model summary, options are
 #' \code{Regression}, \code{power}, \code{Dispersion} and \code{Correlation}.
 #' @param ... additional arguments affecting the summary produced. Note
 #'     the there is no extra options for mcglm object class.
 #'
 #' @return Print a \code{mcglm} object.
-#'
+#' @seealso \code{print}.
 #' @method summary mcglm
 #' @export
 
@@ -542,14 +536,14 @@ summary.mcglm <- function(object, verbose = TRUE,
     return(invisible(output))
 }
 
-#' @title Variance-Covariance Matrix for a Fitted \code{mcglm} Model
+#' @title Variance-Covariance Matrix
 #' @name vcov.mcglm
 #' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
-#' @description Returns the variance-covariance matrix for all
-#'     parameters of a \code{mcglm} fitted model object.
+#' @description Returns the variance-covariance matrix for an object
+#' of \code{mcglm} class.
 #'
-#' @param object a fitted model \code{mcglm} object.
+#' @param object an object of \code{mcglm} class.
 #' @param ... additional arguments affecting the summary produced. Note
 #'     that there is no extra options for mcglm object class.
 #'

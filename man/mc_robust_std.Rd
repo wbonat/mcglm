@@ -2,27 +2,37 @@
 % Please edit documentation in R/mc_robust_std.R
 \name{mc_robust_std}
 \alias{mc_robust_std}
-\title{Robust standard error for regression parameters}
+\title{Robust Standard Error for Regression Parameters}
+\source{
+Nuamah, I. F. and Qu, Y. and Aminu, S. B. (1996). A SAS macro
+for stepwise correlated binary regression. Computer Methods
+and Programs in Biomedicine 49, 199--210.
+}
 \usage{
 mc_robust_std(object, id)
 }
 \arguments{
-\item{object}{An object of mcglm class.}
+\item{object}{an object of \code{mcglm} class.}
 
-\item{id}{a vector which identifies the clusters. The length and
-order of id should be the same as the number of
+\item{id}{a vector which identifies the clusters or subject indexes.
+The length and order of \code{id} should be the same as the number of
 observations. Data are assumed to be sorted so that observations
 on a cluster are contiguous rows for all entities in the formula.}
 }
 \value{
-A matrix. Note that the function assumes that the data are in
-    the correct order.
+A variance-covariance matrix.
+    Note that the function assumes that the data are in the correct
+    order.
 }
 \description{
 Compute robust standard error for regression parameters
-    in the context of clustered observations.
+    in the context of clustered observations for an object of
+    \code{mcglm} class.
 }
 \author{
-Wagner Hugo Bonat
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}
+\seealso{
+\code{mc_bias_correct_std}.
 }
 

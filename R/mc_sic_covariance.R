@@ -1,19 +1,47 @@
-#' @title Compute the score information criterion (SIC) for multivariate
-#'     covariance generalized linear models.
-#' @author Wagner Hugo Bonat
+#' @title Score Information Criterion - Covariance
+#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
-#' @description Compute SIC for covariance parameters in McGLMS.
+#' @description Compute the score information criterion (SIC) for an
+#' object of \code{mcglm} class. The SIC-covariance is useful for
+#' selecting the components of the matrix linear predictor. It can be
+#' used to construct an stepwise procedure to select the components of
+#' the matrix linear predictor.
 #'
-#' @param object an object representing a model of \code{mcglm} class.
-#' @param scope a list of matrices to be tested in the matrix linear
-#'     predictor.
-#' @param idx Indicator of matrices belong to the same effect.
-#' @param data data frame containing all variables envolved in the
+#' @param object an object of \code{mcglm} class.
+#' @param scope a list of matrices to be tested.
+#' @param idx indicator of matrices belong to the same effect.
+#'    It is useful for the case where more than one matrix represents
+#'    the same effect.
+#' @param data data set containing all variables involved in the
 #'     model.
 #' @param penalty penalty term (default = 2).
-#' @param response Indicate for which response variable SIC is computed.
-#' @return A data frame with SIC values for each matrix in the scope
-#'     argument.
+#' @param response index indicating for which response variable
+#'    SIC-covariance should be computed.
+#' @return A data frame containing SIC-covariance values,
+#' degree of freedom, Tu-statistics and chi-squared reference values
+#' for each matrix in the scope argument.
+#'
+#' @source Bonat, W. H. (2016). Multiple Response Variables Regression
+#' Models in R: The mcglm Package. Journal of Statistical Software, submitted.
+#'
+#' @source Bonat, et. al. (2016). Modelling the covariance structure in
+#' marginal multivariate count models: Hunting in Bioko Island.
+#' Environmetrics, submitted.
+#'
+#' @seealso \code{mc_sic}.
+#' @examples
+#' set.seed(123)
+#' SUBJECT <- gl(10, 10)
+#' y <- rnorm(100)
+#' data <- data.frame(y, SUBJECT)
+#' Z0 <- mc_id(data)
+#' Z1 <- mc_mixed(~0+SUBJECT, data = data)
+#' # Reference model
+#' fit0 <- mcglm(c(y ~ 1), list(Z0), data = data)
+#' # Testing the effect of the matrix Z1
+#' mc_sic_covariance(fit0, scope = Z1, idx = 1,
+#' data = data, response = 1)
+#' # As expected Tu < Chisq indicating non-significance of Z1 matrix
 #' @export
 
 mc_sic_covariance <- function(object, scope, idx, data, penalty = 2,

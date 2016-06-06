@@ -4,15 +4,15 @@
 \name{ahs}
 \alias{ahs}
 \title{Australian Health Survey}
-\format{a \code{data.frame} with 5190 records and 17 variables.}
+\format{a \code{data.frame} with 5190 records and 15 variables.}
 \source{
-Deb, P. and Trivedi, P. K. (1997). Demand for medical care by
-    the elderly: A finite mixture approach, Journal of Applied
+Deb, P. and Trivedi, P. K. (1997) Demand for medical care by
+    the elderly: A finite mixture approach. Journal of Applied
     Econometrics 12(3):313--336.
 
-Bonat, W. H. and Jorgensen, B. (2016). Multivariate
+Bonat, W. H. and Jorgensen, B. (2016) Multivariate
     covariance generalized linear models.
-    Journal of Royal Statistical Society - Series C, to appear.
+    Journal of Royal Statistical Society - Series C X(X):XX--XX.
 }
 \usage{
 data(ahs)

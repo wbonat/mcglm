@@ -2,8 +2,11 @@
 % Please edit documentation in R/mc_pAIC.R
 \name{pAIC}
 \alias{pAIC}
-\title{Extract pseudo Akaike Information Criterion (pAIC) for
-multivariate covariance generalized linear models.}
+\title{Pseudo Akaike Information Criterion}
+\source{
+Bonat, W. H. (2016). Multiple Response Variables Regression
+Models in R: The mcglm Package. Journal of Statistical Software, submitted.
+}
 \usage{
 pAIC(object, verbose = TRUE)
 }
@@ -11,15 +14,20 @@ pAIC(object, verbose = TRUE)
 \item{object}{an object or a list of objects representing a model
 of \code{mcglm} class.}
 
-\item{verbose}{Logical}
+\item{verbose}{logical. Print or not the pAIC value.}
 }
 \value{
-Returns the value of the pAIC.
+Returns the value of the pseudo Akaike information criterion (pAIC).
 }
 \description{
-Extract the pAIC for a fitted McGLM.
+Extract the pseudo Akaike information criterion (pAIC)
+for objects of \code{mcglm} class.
 }
 \author{
-Wagner Hugo Bonat
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}
+\seealso{
+\code{gof}, \code{plogLik}, \code{ESS}, \code{pKLIC},
+\code{GOSHO} and \code{RJC}.
 }
 

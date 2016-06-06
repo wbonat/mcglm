@@ -1,36 +1,46 @@
-#' @title Variance function
-#' @author Wagner Hugo Bonat
+#' @title Variance Functions
+#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
-#' @description Compute features related with variance functions.
+#' @description Compute the variance function and its derivatives with
+#' respect to regression, dispersion and power parameters.
 #'
-#' @param mu A numeric vector. In general the output from
+#' @param mu a numeric vector. In general the output from
 #'     \code{\link{mc_link_function}}.
-#' @param power A numeric value (\code{power} and \code{binomialP}) or
-#'     vector (\code{binomialPQ}) of the power parameters.
-#' @param Ntrial Number of trials, useful only when dealing with
+#' @param power a numeric value (\code{power} and \code{binomialP}) or
+#'     a vector (\code{binomialPQ}) of the power parameters.
+#' @param Ntrial number of trials, useful only when dealing with
 #'     binomial response variables.
-#' @param variance A string specifing the name (\code{power, binomialP
+#' @param variance a string specifying the name (\code{power, binomialP
 #'     or binomialPQ}) of the variance function.
-#' @param inverse Logical.
-#' @param derivative_power Logical if compute (TRUE) or not (FALSE) the
+#' @param inverse logical. Compute the inverse or not.
+#' @param derivative_power logical if compute (TRUE) or not (FALSE) the
 #'     derivatives with respect to the power parameter.
-#' @param derivative_mu Logical if compute (TRUE) or not (FALSE) the
+#' @param derivative_mu logical if compute (TRUE) or not (FALSE) the
 #'     derivative with respect to the mu parameter.
 #' @return A list with from one to four elements depends on the
 #'     arguments.
+#'
 #' @seealso \code{\link{mc_link_function}}.
-#' @details The function \code{mc_variance_function} computing three
+#'
+#' @details The function \code{mc_variance_function} computes three
 #'     features related with the variance function. Depending on the
-#'     Logical arguments, the function returns \eqn{V^{1/2}} and its
+#'     logical arguments, the function returns \eqn{V^{1/2}} and its
 #'     derivatives with respect to the parameters power and mu,
 #'     respectivelly.  The output is a named list, completely
 #'     informative about what the function has been computed.  For
 #'     example, if \code{inverse = FALSE}, \code{derivative_power =
 #'     TRUE} and \code{derivative_mu = TRUE}. The output will be a list,
 #'     with three elements: V_sqrt, D_V_sqrt_power and D_V_sqrt_mu.
+#'
 #' @usage mc_variance_function(mu, power, Ntrial, variance, inverse,
 #'                            derivative_power, derivative_mu)
+#'
+#' @source Bonat, W. H. and Jorgensen, B. (2016) Multivariate
+#'     covariance generalized linear models.
+#'     Journal of Royal Statistical Society - Series C X(X):XX--XX.
+#'
 #' @export
+#'
 #' @examples
 #' x1 <- seq(-1, 1, l = 5)
 #' X <- model.matrix(~x1)

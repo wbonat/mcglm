@@ -2,7 +2,7 @@
 % Please edit documentation in R/mc_ess.R
 \name{ESS}
 \alias{ESS}
-\title{Extract Generalized Error Sum of Squares (ESS)}
+\title{Generalized Error Sum of Squares}
 \source{
 Bonat, W. H. (2016). Multiple Response Variables Regression
 Models in R: The mcglm Package. Journal of Statistical Software, submitted.
@@ -20,16 +20,17 @@ of \code{mcglm} class.}
 \item{verbose}{logical. Print or not the ESS value.}
 }
 \value{
-Returns the value of generalized error sum of squares(ESS).
+Returns the value of the generalized error sum of squares (ESS).
 }
 \description{
-Extract the generalized error sum of squares for objects of
-\code{mcglm} class.
+Extract the generalized error sum of squares (ESS) for
+objects of \code{mcglm} class.
 }
 \author{
 Wagner Hugo Bonat, \email{wbonat@ufpr.br}
 }
 \seealso{
-\code{plogLik}, \code{pAIC} and \code{pKLIC}.
+\code{gof}, \code{plogLik}, \code{pAIC}, \code{pKLIC},
+\code{GOSHO} and \code{RJC}.
 }
 

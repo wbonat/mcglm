@@ -6,15 +6,15 @@
 \title{Respiratory Physiotherapy on Premature Newborns.}
 \format{a \code{data.frame} with 270 records and 21 variables.}
 \source{
-Bonat, W. H. and Jorgensen, B. (2016). Multivariate
-covariance generalized linear models.
-Journal of Royal Statistical Society - Series C, to appear.
+Bonat, W. H. and Jorgensen, B. (2016) Multivariate
+    covariance generalized linear models.
+    Journal of Royal Statistical Society - Series C X(X):XX--XX.
 }
 \usage{
 data(NewBorn)
 }
 \description{
-The NewBorn dataset consist of a prospective study
+The NewBorn dataset consists of a prospective study
 to assess the effect of respiratory physiotherapy on the
 cardiopulmonary function of ventilated preterm newborn infants with
 birth weight lower than 1500 g. The data set was collected and
@@ -78,8 +78,8 @@ library(mcglm)
 library(Matrix)
 data(NewBorn, package="mcglm")
 formu <- SPO2 ~ Sex + APGAR1M + APGAR5M + PRE + HD + SUR
-Z0 <- Diagonal(dim(NewBorn)[1],1)
-fit <- mcglm(linear_pred = c(formu), matrix_pred = list(list(Z0)),
+Z0 <- mc_id(NewBorn)
+fit <- mcglm(linear_pred = c(formu), matrix_pred = list(Z0),
             link = c("logit"), variance = c("binomialP"),
             power_fixed = c(TRUE),
             data = NewBorn,

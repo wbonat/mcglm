@@ -2,8 +2,11 @@
 % Please edit documentation in R/mc_KLIC.R
 \name{pKLIC}
 \alias{pKLIC}
-\title{Extract pseudo Kullback-Leibler Information Criterion for
-multivariate covariance generalized linear models.}
+\title{Pseudo Kullback-Leibler Information Criterion}
+\source{
+Bonat, W. H. (2016). Multiple Response Variables Regression
+Models in R: The mcglm Package. Journal of Statistical Software, submitted.
+}
 \usage{
 pKLIC(object, verbose = TRUE)
 }
@@ -11,15 +14,21 @@ pKLIC(object, verbose = TRUE)
 \item{object}{an object or a list of objects representing a model
 of \code{mcglm} class.}
 
-\item{verbose}{Logical}
+\item{verbose}{logical. Print or not the pKLIC value.}
 }
 \value{
-Returns the value of the pKLIC.
+Returns the value of the pseudo Kullback-Leibler information
+criterion.
 }
 \description{
-Extract the pKLIC for a fitted McGLM.
+Extract the pseudo Kullback-Leibler information criterion
+(pKLIC) for objects of \code{mcglm} class.
 }
 \author{
-Wagner Hugo Bonat
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}
+\seealso{
+\code{gof}, \code{plogLik}, \code{ESS}, \code{pAIC},
+\code{GOSHO} and \code{RJC}.
 }
 

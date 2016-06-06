@@ -2,7 +2,7 @@
 % Please edit documentation in R/mc_S3_methods.R
 \name{fitted.mcglm}
 \alias{fitted.mcglm}
-\title{Extract Model Fitted Values}
+\title{Fitted Values}
 \usage{
 \method{fitted}{mcglm}(object, ...)
 }
@@ -13,9 +13,7 @@
 that there is no extra options for \code{mcglm} object class.}
 }
 \value{
-Depending on the number of response variables, the function
-    \code{fitted.mcglm} returns a vector (univariate models) or a
-    matrix (multivariate models) of fitted values.
+A matrix with fitted values.
 }
 \description{
 Extract fitted values for objects of \code{mcglm} class.

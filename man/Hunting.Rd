@@ -4,11 +4,15 @@
 \name{Hunting}
 \alias{Hunting}
 \title{Hunting in Pico Basile, Bioko Island, Equatorial Guinea.}
-\format{a \code{data.frame} with 1216 records and 10 variables.}
+\format{a \code{data.frame} with 1216 records and 11 variables.}
 \source{
 Bonat, et. al. (2016). Modelling the covariance structure in
-marginal multivariate count models: Hunting in Bioko island.
+marginal multivariate count models: Hunting in Bioko Island.
 Environmetrics, submitted.
+
+Bonat, W. H. (2016). Multiple Response Variables Regression
+Models in R: The mcglm Package.
+Journal of Statistical Software, submitted.
 }
 \usage{
 data(Hunting)
@@ -53,17 +57,21 @@ the same HUNTER and MONTH.
 }
 }
 \examples{
+\donttest{
 library(mcglm)
 library(Matrix)
 data(Hunting, package="mcglm")
 formu <- OT ~ METHOD*ALT + SEX + ALT*poly(MONTH, 4)
-Z0 <- Diagonal(dim(Hunting)[1],1)
-fit <- mcglm(linear_pred = c(formu), matrix_pred = list(list(Z0)),
-             link = c("log"), variance = c("poisson_tweedie"),
-             power_fixed = c(FALSE),
-             offset = list(log(Hunting$OFFSET)), data = Hunting)
+Z0 <- mc_id(Hunting)
+Z1 <- mc_mixed(~0 + HUNTER.MONTH, data = Hunting)
+fit <- mcglm(linear_pred = c(formu), matrix_pred = list(c(Z0, Z1)),
+            link = c("log"), variance = c("poisson_tweedie"),
+            power_fixed = c(FALSE),
+            control_algorithm = list(max_iter = 100),
+            offset = list(log(Hunting$OFFSET)), data = Hunting)
 summary(fit)
-
+anova(fit)
+}
 }
 \keyword{datasets}
 

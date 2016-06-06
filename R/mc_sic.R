@@ -1,16 +1,43 @@
-#' @title Compute the score information criterion (SIC) for multivariate
-#'     covariance generalized linear models.
-#' @author Wagner Hugo Bonat
+#' @title Score Information Criterion - Regression
+#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
-#' @description Compute the SIC for McGLMS.
+#' @description Compute the score information criterion (SIC) for an
+#' object of \code{mcglm} class.
+#' The SIC is useful for selecting the components of the linear predictor.
+#' It can be used to construct an stepwise covariate selection.
 #'
-#' @param object an object representing a model of \code{mcglm} class.
-#' @param scope a vector containing all covariate names to be tested.
-#' @param data data frame containing the all variables envolved
+#' @param object an object of \code{mcglm} class.
+#' @param scope a vector of covariate names to be tested.
+#' @param data data set containing all variables involved in the model.
 #' @param penalty penalty term (default = 2).
-#' @param response Indicate for which response variable SIC is computed.
-#' @return A data frame with SIC values for each covariate in the scope
-#'     argument.
+#' @param response index indicating for which response variable the
+#' SIC should be computed.
+#'
+#' @source Bonat, W. H. (2016). Multiple Response Variables Regression
+#' Models in R: The mcglm Package. Journal of Statistical Software, submitted.
+#'
+#' @source Bonat, et. al. (2016). Modelling the covariance structure in
+#' marginal multivariate count models: Hunting in Bioko Island.
+#' Environmetrics, submitted.
+#'
+#' @seealso \code{mc_sic_covariance}.
+#'
+#' @return A data frame containing SIC values, degree of freedom,
+#' Tu-statistics and chi-squared reference values.
+#'
+#' @examples
+#' set.seed(123)
+#' x1 <- runif(100, -1, 1)
+#' x2 <- gl(2,50)
+#' beta = c(5, 0, 3)
+#' X <- model.matrix(~ x1 + x2)
+#' y <- rnorm(100, mean = X%*%beta , sd = 1)
+#' data <- data.frame(y, x1, x2)
+#' # Reference model
+#' fit0 <- mcglm(c(y ~ 1), list(mc_id(data)), data = data)
+#' # Computing SIC
+#' mc_sic(fit0, scope = c("x1","x2"), data = data, response = 1)
+#'
 #' @export
 
 mc_sic <- function(object, scope, data, response, penalty = 2) {

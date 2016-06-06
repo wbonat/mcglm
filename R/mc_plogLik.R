@@ -1,12 +1,12 @@
-#' @title Extract Gaussian pseudo-loglikelihood (plogLik) for multivariate
-#'     covariance generalized linear models.
-#' @author Wagner Hugo Bonat
+#' @title Gaussian Pseudo-loglikelihood
+#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
-#' @description Extract the Gaussian pseudo-loglikelihood for a fitted
-#' McGLM.
+#' @description Extract the Gaussian pseudo-loglikelihood (plogLik)
+#' value for objects of \code{mcglm} class.
+#'
 #' @param object an object or a list of objects representing a model
 #' of \code{mcglm} class.
-#' @param verbose Logical
+#' @param verbose logical. Print or not the plogLik value.
 #' @return Returns the value of the Gaussian pseudo-loglikelihood.
 #' @export
 

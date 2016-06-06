@@ -1,44 +1,64 @@
-#' @title Fitting Multivariate Covariance Generalized Linear Models.
+#' @title Fitting Multivariate Covariance Generalized Linear Models
+#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
 #'
 #' @description The function \code{mcglm} is used to fit multivariate
 #'     covariance generalized linear models.
 #'     The models are specified by a set of lists giving a symbolic
-#'     description of the linear predictor.
+#'     description of the linear and matrix linear predictors.
 #'     The user can choose between a list of link, variance and covariance
 #'     functions. The models are fitted using an estimating function
 #'     approach, combining quasi-score functions for regression
 #'     parameters and Pearson estimating function for covariance
 #'     parameters. For details see Bonat and Jorgensen (2016).
 #'
-#' @param linear_pred A list of formula see \code{\link[stats]{formula}}
+#' @param linear_pred a list of formula see \code{\link[stats]{formula}}
 #'     for details.
-#' @param matrix_pred A list of known matrices to be used on the matrix
-#'     linear predictor. Details can be obtained on
+#' @param matrix_pred a list of known matrices to be used on the matrix
+#'     linear predictor. For details see
 #'     \code{\link[mcglm]{mc_matrix_linear_predictor}}.
-#' @param link A list of link functions names, see
-#'     \code{\link[mcglm]{mc_link_function}} for details.
-#' @param variance A list of variance functions names, see
-#'     \code{\link[mcglm]{mc_variance_function}} for details.
-#' @param covariance A list of covariance link functions names, current
-#'     options are: identity, inverse and exponential-matrix (expm).
-#' @param offset A list with values of offset values if any.
-#' @param Ntrial A list with values of the number of trials on Bernoulli
-#'     experiments. It is useful only for binomialP and binomialPQ
-#'     variance functions.
-#' @param power_fixed A list of logicals indicating if the values of the
+#' @param link a list of link functions names. Options are:
+#'     \code{"logit"}, \code{"probit"}, \code{"cauchit"}, \code{"cloglog"},
+#'     \code{"loglog"}, \code{"identity"}, \code{"log"}, \code{"sqrt"},
+#'     \code{"1/mu^2"} and \code{"inverse"}.
+#'     See \code{\link{mc_link_function}} for details.
+#' @param variance a list of variance functions names.
+#'     Options are: \code{"constant"}, \code{"tweedie"},
+#'     \code{"poisson_tweedie"}, \code{"binomialP"} and \code{"binomialPQ"}. \cr
+#'     See \code{\link{mc_variance_function}} for details.
+#' @param covariance a list of covariance link functions names.
+#'     Options are: \code{"identity"}, \code{"inverse"} and
+#'     exponential-matrix \code{"expm"}.
+#' @param offset a list of offset values if any.
+#' @param Ntrial a list of number of trials on Bernoulli
+#'     experiments. It is useful only for \code{binomialP} and
+#'     \code{binomialPQ} variance functions.
+#' @param power_fixed a list of logicals indicating if the values of the
 #'     power parameter should be estimated or not.
-#' @param control_initial A list of initial values for the fitting
-#'     algorithm. See details below.
-#' @param control_algorithm A list of arguments to be passed for the
+#' @param control_initial a list of initial values for the fitting
+#'     algorithm. If no values are supplied automatic initial values
+#'     will be provided by the function \code{\link{mc_initial_values}}.
+#' @param control_algorithm a list of arguments to be passed for the
 #'     fitting algorithm. See \code{\link[mcglm]{fit_mcglm}} for
 #'     details.
-#' @param contrasts Extra arguments to passed to
+#' @param contrasts extra arguments to passed to
 #'     \code{\link[stats]{model.matrix}}.
-#' @param data A dta frame.
+#' @param data a data frame.
 #' @usage mcglm(linear_pred, matrix_pred, link, variance, covariance,
 #'        offset, Ntrial, power_fixed, data, control_initial,
 #'        contrasts, control_algorithm)
 #' @return mcglm returns an object of class 'mcglm'.
+#'
+#' @seealso \code{fit_mcglm}, \code{mc_link_function} and
+#' \code{mc_variance_function}.
+#'
+#' @source Bonat, W. H. and Jorgensen, B. (2016) Multivariate
+#'     covariance generalized linear models.
+#'     Journal of Royal Statistical Society - Series C X(X):XX--XX.
+#'
+#' @source Bonat, W. H. (2016). Multiple Response Variables Regression
+#'     Models in R: The mcglm Package.
+#'     Journal of Statistical Software, submitted.
+#'
 #' @export
 #' @import Matrix
 

@@ -11,28 +11,30 @@ Analysis: A Review and Recent Developments. Advances in Statistics, 1(1)1--13.
 GOSHO(object, id, verbose = TRUE)
 }
 \arguments{
-\item{object}{an object of mcglm class.}
+\item{object}{an object of \code{mcglm} class.}
 
-\item{id}{a vector which identifies the clusters. The length and
-order of id should be the same as the number of
+\item{id}{a vector which identifies the clusters or groups.
+The length and order of id should be the same as the number of
 observations. Data are assumed to be sorted so that observations
 on a cluster are contiguous rows for all entities in the formula.}
 
-\item{verbose}{logical.}
+\item{verbose}{logical. Print or not the GOSHO value.}
 }
 \value{
-A matrix. Note that the function assumes that the data are in
-    the correct order.
+The value of the GOSHO criterion.
+Note that the function assumes that the data are in the correct order.
 }
 \description{
-Compute the Gosho information criterion
-for multivariate covariance generalized linear models.
-WARNINGS: This function is limited to models with ONE response variable.
+Extract the Gosho Information Criterion (GOSHO)
+for an object of \code{mcglm} class.
+WARNING: This function is limited to models with ONE response variable.
+This function is general useful only for longitudinal data analysis.
 }
 \author{
 Wagner Hugo Bonat, \email{wbonat@ufpr.br}
 }
 \seealso{
-\code{plogLik}, \code{pAIC}, \code{pKLIC}, \code{ESS}.
+\code{gof}, \code{plogLik}, \code{pAIC}, \code{pKLIC},
+\code{ESS} and \code{RJC}.
 }
 

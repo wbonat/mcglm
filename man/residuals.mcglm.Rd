@@ -2,16 +2,15 @@
 % Please edit documentation in R/mc_S3_methods.R
 \name{residuals.mcglm}
 \alias{residuals.mcglm}
-\title{Residuals for Multivariate Covariance Generalized Linear Models}
+\title{Residuals}
 \usage{
 \method{residuals}{mcglm}(object, type = "raw", ...)
 }
 \arguments{
-\item{object}{An of class \code{mcglm}, typically the result of a
-call to \code{mcglm}.}
+\item{object}{an object of \code{mcglm} class.}
 
-\item{type}{the type of residuals which should be returned. The
-alternatives are: \code{"raw"} (default), \code{"pearson"} and
+\item{type}{the type of residuals which should be returned.
+Options are: \code{"raw"} (default), \code{"pearson"} and
 \code{"standardized"}.}
 
 \item{...}{additional arguments affecting the residuals
@@ -19,14 +18,16 @@ produced. Note that there is no extra options for mcglm object
 class.}
 }
 \value{
-Depending on the number of response variable the function
-    \code{residuals.mcglm} returns a vector (univariate models) or a
-    matrix (multivariate models) of residuals values.
+The function \code{residuals.mcglm} returns a matrix of
+residuals values.
 }
 \description{
-Compute residuals based on fitting \code{mcglm} models.
+Compute residuals for an object of \code{mcglm} class.
 }
 \author{
 Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}
+\seealso{
+\code{fitted}.
 }
 
