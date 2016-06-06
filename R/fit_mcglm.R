@@ -66,7 +66,8 @@
 #'     Journal of Statistical Software, submitted.
 #'
 #' @importFrom stats as.formula binomial coef dist fitted glm make.link
-#' model.frame model.matrix na.exclude pchisq qchisq qnorm quasi residuals vcov
+#' model.frame model.matrix na.exclude pchisq qchisq qnorm quasi
+#' residuals vcov model.response
 #' @importFrom utils combn
 #' @importFrom grDevices dev.new
 #' @export
