@@ -126,13 +126,6 @@ unlink(paste0(libTest, "mcglm"), recursive = TRUE)
 with_libpaths(new = libTest,
               install.packages("devtools", dependencies = TRUE))
 
-## Get package names to be able to detach them later
-dev.deps <- list.files(libTest)
-
-pkg.dev.deps <- paste("package", dev.deps, sep = ":")
-pos <- pkg.dev.deps[which(search() %in% pkg.dev.deps)]
-detach(pos = pos)
-
 ## Install and test mcglm master
 with_libpaths(new = libTest,
               install_github("wbonat/mcglm", ref = "master"))
