@@ -25,7 +25,7 @@ ESS <- function(object, verbose = TRUE) {
     b <- c(as.matrix(object$observed)) - c(as.matrix(object$fitted))
     ess <- as.numeric(t(b)%*%object$inv_C%*%b)
     df <- length(coef(object)$Estimates)
-    df2 <- length(object$observed)
+    df2 <- length(object$observed) - df
     ess <- ess/df2
     if (verbose) cat("ESS", ess)
     return(invisible(list("ESS" = ess)))
