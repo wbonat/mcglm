@@ -11,12 +11,12 @@ Models in R: The mcglm Package. Journal of Statistical Software, submitted.
 mc_ns(id, data)
 }
 \arguments{
-\item{data}{data set.}
-
-\item{name}{of the column (string) containing the subject index.
+\item{id}{name of the column (string) containing the subject index.
 Note this structure was designed to deal with longitudinal data.
 For times series or spatial data use the same id for all observations
 (one unit sample).}
+
+\item{data}{data set.}
 }
 \value{
 A list of a n*(n-1)/2 matrices.

@@ -6,7 +6,7 @@
 #' covariance matrix. In general this model is hard to fit due to the
 #' large number of parameters.
 #'
-#' @param name of the column (string) containing the subject index.
+#' @param id name of the column (string) containing the subject index.
 #' Note this structure was designed to deal with longitudinal data.
 #' For times series or spatial data use the same id for all observations
 #' (one unit sample).

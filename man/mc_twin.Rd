@@ -14,8 +14,17 @@ mc_twin(id, twin.id, type, replicate = NULL, structure, data)
 \item{id}{name of the column (string) containing the twin index.
 It should be the same index (number) for both twins.}
 
+\item{twin.id}{name of the column (string) containing the twin index
+inside the pair. In general 1 for the first twin and 2 for the second
+twin.}
+
 \item{type}{name of the column (string) containing the indication of
 the twin as mz or dz. It should be a factor with only two levels mz and dz.}
+
+\item{replicate}{name of the column (string) containing the index
+for more than one observation taken at the same twin pair. It is used
+for example in twin longitudinal studies. In that case, the replication
+column should contain the time index.}
 
 \item{structure}{model type options are A, C and D. In general, one
 model will use more than one component like AC or AD models. The user
@@ -23,15 +32,6 @@ should also use the \code{mc_id} function to create the E component
 of the twin model. See example for details.}
 
 \item{data}{data set.}
-
-\item{id.twin}{name of the column (string) containing the twin index
-inside the pair. In general 1 for the first twin and 2 for the second
-twin.}
-
-\item{replication}{name of the column (string) containing the index
-for more than one observation taken at the same twin pair. It is used
-for example in twin longitudinal studies. In that case, the replication
-column should contain the time index.}
 }
 \value{
 A matrix of \code{dgCMatrix} class.
@@ -50,7 +50,7 @@ data <- data.frame(id, id.twin, type,replication)
 mc_twin(twin.id = "id.twin", id = "id", type = "type",
 structure = "A", replicate = "replication", data = data)
 data2 <- data[order(data$id.twin),]
-mc_twin(twin.id = "id.twin", id = "id", type = "type",
+mc_twin(id = "id", twin.id = "id.twin", type = "type",
 structure = "A", replicate = "replication", data = data2)
 }
 \author{

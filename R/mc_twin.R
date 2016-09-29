@@ -7,12 +7,12 @@
 #'
 #' @param id name of the column (string) containing the twin index.
 #' It should be the same index (number) for both twins.
-#' @param id.twin name of the column (string) containing the twin index
+#' @param twin.id name of the column (string) containing the twin index
 #' inside the pair. In general 1 for the first twin and 2 for the second
 #' twin.
 #' @param type name of the column (string) containing the indication of
 #' the twin as mz or dz. It should be a factor with only two levels mz and dz.
-#' @param replication name of the column (string) containing the index
+#' @param replicate name of the column (string) containing the index
 #' for more than one observation taken at the same twin pair. It is used
 #' for example in twin longitudinal studies. In that case, the replication
 #' column should contain the time index.
@@ -39,7 +39,7 @@
 #' mc_twin(twin.id = "id.twin", id = "id", type = "type",
 #' structure = "A", replicate = "replication", data = data)
 #' data2 <- data[order(data$id.twin),]
-#' mc_twin(twin.id = "id.twin", id = "id", type = "type",
+#' mc_twin(id = "id", twin.id = "id.twin", type = "type",
 #' structure = "A", replicate = "replication", data = data2)
 #' @export
 
