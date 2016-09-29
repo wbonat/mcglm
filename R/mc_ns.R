@@ -1,0 +1,51 @@
+#' @title Non-structure Model Structure
+#' @author Wagner Hugo Bonat, \email{wbonat@@ufpr.br}
+#'
+#' @description The function \code{mc_non} builds the components
+#' of the matrix linear predictor used for fitting non-structured
+#' covariance matrix. In general this model is hard to fit due to the
+#' large number of parameters.
+#'
+#' @param name of the column (string) containing the subject index.
+#' Note this structure was designed to deal with longitudinal data.
+#' For times series or spatial data use the same id for all observations
+#' (one unit sample).
+#' @param data data set.
+#' @return A list of a n*(n-1)/2 matrices.
+#'
+#' @source Bonat, W. H. (2016). Multiple Response Variables Regression
+#' Models in R: The mcglm Package. Journal of Statistical Software, submitted.
+#'
+#' @seealso \code{mc_id}, \code{mc_dglm}, \code{mc_dist}, \code{mc_ma},
+#' \code{mc_rw} \cr and \code{mc_mixed}.
+#' @export
+
+mc_ns <- function(id, data) {
+  mc_non_aux <- function(n.resp){
+    position <- combn(n.resp,2)
+    list.Derivative <- list()
+    n.par <- n.resp*(n.resp-1)/2
+    for(i in 1:n.par){
+      Derivative <- matrix(0, ncol = n.resp, nrow = n.resp)
+      Derivative[position[1,i],position[2,i]] <- Derivative[position[2,i],position[1,i]] <- 1
+      list.Derivative[i][[1]] <- Derivative}
+    return(list.Derivative)
+  }
+  data.id <- split(data, data[id])
+  DD <- sum(abs(diff(do.call(c,lapply(data.id, function(x)dim(x)[1])))))
+  if(DD != 0) {
+    cat("Model requires equal number of observations by id. \n")
+    stop
+  }
+  if(DD == 0) {
+  mat.list <- list()
+  for(i in 1:length(data.id)) {
+    mat.list[[i]] <- mc_non_aux(dim(data.id[[i]])[1])
+  }
+  non_list <- list()
+  for(i in 1:length(mat.list[[1]])) {
+    non_list[[i]] <- bdiag(lapply(mat.list, function(x)x[[i]]))
+  }
+  return(non_list)
+  }
+}
