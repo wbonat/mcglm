@@ -31,13 +31,21 @@ mc_dglm <- function(formula, id, data) {
     return(ZZ)
     }
     data.id <- split(data, data[id])
+    DD <- sum(abs(diff(do.call(c,lapply(data.id, function(x)dim(x)[1])))))
+    if( DD != 0) {
+      stop("Model requires equal number of observations by id. \n")
+    }
     mat.list <- list()
     for(i in 1:length(data.id)) {
         mat.list[[i]] <- mc_dglm_aux(formula = formula, data = data.id[[i]])
     }
+    if( DD == 0 ) {
     dglm_list <- list()
     for(i in 1:length(mat.list[[1]])) {
         dglm_list[[i]] <- forceSymmetric(bdiag(lapply(mat.list, function(x)x[[i]])))
     }
     return(dglm_list)
+    }
 }
+
+
