@@ -33,11 +33,9 @@ mc_ns <- function(id, data) {
   }
   data.id <- split(data, data[id])
   DD <- sum(abs(diff(do.call(c,lapply(data.id, function(x)dim(x)[1])))))
-  if(DD != 0) {
-    cat("Model requires equal number of observations by id. \n")
-    stop
+  if( DD != 0) {
+    stop("Model requires equal number of observations by id. \n")
   }
-  if(DD == 0) {
   mat.list <- list()
   for(i in 1:length(data.id)) {
     mat.list[[i]] <- mc_non_aux(dim(data.id[[i]])[1])
@@ -47,5 +45,4 @@ mc_ns <- function(id, data) {
     non_list[[i]] <- bdiag(lapply(mat.list, function(x)x[[i]]))
   }
   return(non_list)
-  }
 }

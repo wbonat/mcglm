@@ -37,6 +37,6 @@ mc_complete_data <- function(data, id, index, id.exp) {
   data_complete <- do.call(rbind, temp_list)
   names(data_complete) <- names(data)
   data_complete[index] <- rep(id.exp, n.id)
-  data_complete[id] <- rep(id.exp, each = n.id)
+  data_complete[id] <- rep(1:n.id, each = length(id.exp))
   return(data_complete)
 }
