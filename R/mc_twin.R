@@ -91,6 +91,6 @@ mc_twin <- function(id, twin.id, type, replicate = NULL,
     }
     M_list[[i]] <- M_temp
   }
-  output <- bdiag(M_list)
-  return(output)
+  output <- forceSymmetric(bdiag(M_list))
+  return(list(output))
 }
