@@ -2,6 +2,8 @@
 % Please edit documentation in R/mc_twin.R
 \name{mc_twin}
 \alias{mc_twin}
+\alias{mc_twin_bio}
+\alias{mc_twin_full}
 \title{Twin Models Structure}
 \source{
 Bonat, W. H. (2016). Multiple Response Variables Regression
@@ -9,6 +11,10 @@ Models in R: The mcglm Package. Journal of Statistical Software, submitted.
 }
 \usage{
 mc_twin(id, twin.id, type, replicate = NULL, structure, data)
+
+mc_twin_bio(id, twin.id, type, replicate = NULL, structure, data)
+
+mc_twin_full(id, twin.id, type, replicate, formula, data)
 }
 \arguments{
 \item{id}{name of the column (string) containing the twin index.
@@ -19,22 +25,21 @@ inside the pair. In general 1 for the first twin and 2 for the second
 twin.}
 
 \item{type}{name of the column (string) containing the indication of
-the twin as mz or dz. It should be a factor with only two levels mz and dz.}
+the twin as mz or dz. It should be a factor with only two levels mz and dz.
+Be sure that the reference level is mz.}
 
 \item{replicate}{name of the column (string) containing the index
 for more than one observation taken at the same twin pair. It is used
 for example in twin longitudinal studies. In that case, the replication
 column should contain the time index.}
 
-\item{structure}{model type options are A, C and D. In general, one
-model will use more than one component like AC or AD models. The user
-should also use the \code{mc_id} function to create the E component
-of the twin model. See example for details.}
+\item{structure}{model type options are full, flex, uns, ACE, ADE,
+AE, CE and E. See example for details.}
 
 \item{data}{data set.}
 }
 \value{
-A matrix of \code{dgCMatrix} class.
+A list of matrices of \code{dgCMatrix} class.
 }
 \description{
 The function \code{mc_twin} helps to build the components
@@ -44,14 +49,6 @@ analysis of twin data.
 \examples{
 id <- rep(1:5, each = 4)
 id.twin <- rep(1:2, 10)
-type <- c(rep("mz",12),rep("dz",8))
-replication <- rep(rep(1:2, each = 2),5)
-data <- data.frame(id, id.twin, type,replication)
-mc_twin(twin.id = "id.twin", id = "id", type = "type",
-structure = "A", replicate = "replication", data = data)
-data2 <- data[order(data$id.twin),]
-mc_twin(id = "id", twin.id = "id.twin", type = "type",
-structure = "A", replicate = "replication", data = data2)
 }
 \author{
 Wagner Hugo Bonat, \email{wbonat@ufpr.br}
