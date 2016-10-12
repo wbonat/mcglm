@@ -8,7 +8,7 @@ Bonat, W. H. (2016). Multiple Response Variables Regression
 Models in R: The mcglm Package. Journal of Statistical Software, submitted.
 }
 \usage{
-mc_ns(id, data)
+mc_ns(id, data, group = NULL, marca = NULL)
 }
 \arguments{
 \item{id}{name of the column (string) containing the subject index.
@@ -17,6 +17,12 @@ For times series or spatial data use the same id for all observations
 (one unit sample).}
 
 \item{data}{data set.}
+
+\item{group}{name of the column (string) containing a group specific
+for which the covariance should change.}
+
+\item{marca}{level (string) of the column group for which the
+covariance should change.}
 }
 \value{
 A list of a n*(n-1)/2 matrices.

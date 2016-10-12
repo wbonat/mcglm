@@ -40,8 +40,19 @@ mc_twin <- function(id, twin.id, type, replicate = NULL, structure, data) {
   if(n_levels != 2) {
     stop("Levels of type column should be mz and dz.")
   }
+  classe_twin_id <- class(data[[twin.id]])
+  if(classe_twin_id != "factor") {
+    data[[twin.id]] <- as.factor(data[[twin.id]])
+    warning("Converted twin.id class to factor.")
+  }
+  if(!is.null(replicate)) {
+    classe_replicate <- class(data[[twin.id]])
+    if(classe_replicate != "factor") {
+      data[[replicate]] <- as.factor(data[[replicate]])
+      warning("Converted replicate class to factor.")
+    }
+  }
   # mz is set up as reference level
-  data[[type]] <- relevel(data[[type]], ref = "mz")
   # Models structures
   if(structure == "ACE") {
     E <- mc_id(data)
@@ -76,23 +87,38 @@ mc_twin <- function(id, twin.id, type, replicate = NULL, structure, data) {
     output <- E
   }
   if(structure == "full") {
+    data[[type]] <- relevel(data[[type]], ref = "mz")
+    warning("Type reference is mz.")
     if(is.null(replicate)) {
-      formula <- as.formula(paste("~",twin.id, sep = ""))
+      formula <- as.formula(paste("~", paste(twin.id, type, sep = "*"), sep = ""))
     }
     if(!is.null(replicate)) {
-      formula <- as.formula(paste("~",paste(twin.id, replicate, sep="*"), sep = ""))
+      formula <- as.formula(paste("~", paste(paste(twin.id, type, sep = "*"),
+                                             replicate, sep="*"), sep = ""))
     }
     output <- mc_twin_full(id = id, twin.id = twin.id, type = type,
                  replicate = replicate, formula = formula, data = data)
   }
   if(structure == "flex") {
+    data[[type]] <- relevel(data[[type]], ref = "mz")
+    warning("Type reference is mz.")
+    if(is.null(replicate)) {
+      formula <- as.formula(paste("~",type))
+    }
+    if(!is.null(replicate)) {
+      formula <- as.formula(paste("~", paste(paste(type, sep = ""),
+                                             replicate, sep="*"), sep = ""))
+    }
+    formula <- as.formula(paste("~", type))
     output <- mc_twin_full(id = id, twin.id = twin.id, type = type,
-                           replicate = replicate, formula = ~ 1, data = data)
+                           replicate = replicate, formula = formula,
+                           data = data)
   }
   if(structure == "uns") {
+    data[[type]] <- relevel(data[[type]], ref = "mz")
+    warning("Type reference is mz.")
     output <- mc_twin_full(id = id, twin.id = twin.id, type = type,
                            replicate = replicate, formula = ~ 1, data = data)
-    output <- output[c(1,3:length(output))]
   }
   return(output)
 }
@@ -151,43 +177,13 @@ mc_twin_bio <- function(id, twin.id, type, replicate = NULL,
 
 #' @rdname mc_twin
 mc_twin_full <- function(id, twin.id, type, replicate, formula, data) {
-  if(is.null(replicate)) {data[replicate] <- 1}
-  data_id <- split(data, data[id])
-  VV_MZ <- list()
-  COV_MZ <- list()
-  VV_DZ <- list()
-  COV_DZ <- list()
-  for(i in 1:length(data_id)) {
-    if(unique(data_id[[i]][type][1]) == "mz") {
-      VV_MZ[[i]] <- mc_dglm(formula,
-                            data = data_id[[i]], id = id)
-      COV_MZ[[i]] <- mc_ns(id = id, data = data_id[[i]])
-      VV_DZ[[i]] <- VV_MZ[[i]]
-      COV_DZ[[i]] <- COV_MZ[[i]]
-    }
-    if(unique(data_id[[i]][type]) ==  "dz") {
-      VV_DZ[[i]] <- mc_dglm(formula,
-                            data = data_id[[i]], id = id)
-      COV_DZ[[i]] <- mc_ns(id = id, data = data_id[[i]])
-      VV_MZ[[i]] <- lapply(VV_DZ[[i]], function(x){0*x})
-      COV_MZ[[i]] <- lapply(COV_DZ[[i]], function(x){0*x})
-    }
-  }
-  MAT_BASE_VAR <- list()
-  MAT_BASE_COV <- list()
-  MAT_DZ_VAR <- list()
-  MAT_DZ_COV <- list()
-  for(i in 1:length(VV_MZ[[1]])) {
-    MAT_BASE_VAR[[i]] <- bdiag(VV_MZ[[1]][[i]],VV_DZ[[1]][[i]])
-    MAT_DZ_VAR[[i]] <- bdiag(VV_MZ[[2]][[i]],VV_DZ[[2]][[i]])
-  }
-
-  for(i in 1:length(COV_MZ[[1]])) {
-    MAT_BASE_COV[[i]] <- bdiag(COV_MZ[[1]][[i]],COV_DZ[[1]][[i]])
-    MAT_DZ_COV[[i]] <- bdiag(COV_MZ[[2]][[i]],COV_DZ[[2]][[i]])
-  }
-  saida <- c(MAT_BASE_VAR, MAT_DZ_VAR, MAT_BASE_COV, MAT_DZ_COV)
-  return(saida)
+  VV <- mc_dglm(formula, id = id, data = data)
+  MAT_MZ <- mc_ns(id = id, data = data)
+  MAT_DZ <- mc_ns(id = id, data = data, group = type, marca = "mz")
+  output <- c(VV, MAT_MZ, MAT_DZ)
+  return(output)
 }
+
+
 
 

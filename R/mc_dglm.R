@@ -30,7 +30,8 @@ mc_dglm <- function(formula, id, data) {
     }
     return(ZZ)
     }
-    data.id <- split(data, data[id])
+    data[id] <- factor(data[[id]], levels=unique(data[[id]]))
+    data.id <- split(data, data[id], drop = TRUE)
     DD <- sum(abs(diff(do.call(c,lapply(data.id, function(x)dim(x)[1])))))
     if( DD != 0) {
       stop("Model requires equal number of observations by id. \n")
