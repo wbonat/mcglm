@@ -19,7 +19,11 @@
 
 pBIC <- function(object, verbose = TRUE) {
   Pseudo <- plogLik(object = object, verbose = FALSE)
-  pBIC <- Pseudo$df*log(length(object$observed)) - 2*Pseudo$plogLik
+  if(class(object) == "list") {
+    Y <- do.call(c,lapply(object, function(x)as.numeric(x$observed)))
+  }
+  NS <- length(Y)
+  pBIC <- Pseudo$df*log(NS) - 2*Pseudo$plogLik
   if (verbose) cat("pBIC", pBIC)
   return(invisible(list("pBIC" = pBIC)))
 }
