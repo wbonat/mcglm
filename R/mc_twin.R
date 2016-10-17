@@ -17,6 +17,7 @@
 #' for more than one observation taken at the same twin pair. It is used
 #' for example in twin longitudinal studies. In that case, the replication
 #' column should contain the time index.
+#' @param formula internal.
 #' @param structure model type options are full, flex, uns, ACE, ADE,
 #' AE, CE and E. See example for details.
 #' @param data data set.
@@ -32,6 +33,7 @@
 #' @examples
 #' id <- rep(1:5, each = 4)
 #' id.twin <- rep(1:2, 10)
+#' @importFrom stats relevel
 #' @export
 
 mc_twin <- function(id, twin.id, type, replicate = NULL, structure, data) {

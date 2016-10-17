@@ -37,6 +37,8 @@ column should contain the time index.}
 AE, CE and E. See example for details.}
 
 \item{data}{data set.}
+
+\item{formula}{internal.}
 }
 \value{
 A list of matrices of \code{dgCMatrix} class.
