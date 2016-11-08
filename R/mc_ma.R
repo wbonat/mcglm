@@ -49,7 +49,11 @@ mc_ma <- function(id, time, data, order = 1) {
   data <- data[order(data[id]),]
   data$id3 <- 1:dim(data)[1]
   Z1.list <- list()
-  data.id <- split(data, data[id])
+  data.id <- split(data, data[id], drop = TRUE)
+  DD <- sum(abs(diff(do.call(c,lapply(data.id, function(x)dim(x)[1])))))
+  if( DD != 0) {
+    stop("Model requires equal number of observations by id. \n")
+  }
   for(i in 1:length(data.id)) {
     NN <- dim(data.id[[i]])[1]
     ordem <- as.numeric(data.id[[i]][[time]])

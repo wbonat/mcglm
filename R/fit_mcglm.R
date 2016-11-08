@@ -12,21 +12,24 @@
 #' \code{"cloglog"}, \code{"loglog"}, \code{"identity"}, \code{"log"},
 #' \code{"sqrt"}, \code{"1/mu^2"} and \code{"inverse"}. \cr
 #' See \code{\link{mc_link_function}} for details.
+#' Default \code{link = "identity"}.
 #' @param list_variance a list specifying the variance function names.
 #' Options are: \code{"constant"}, \code{"tweedie"},
 #' \code{"poisson_tweedie"}, \code{"binomialP"} and \code{"binomialPQ"}.
 #' See \code{\link{mc_variance_function}} for details.
+#' Default \code{variance = "constant"}.
 #' @param list_covariance a list of covariance function names. Options
 #' are: \code{"identity"}, \code{"inverse"} and \code{"expm"}.
+#' Default \code{covariance = "identity"}.
 #' @param list_X a list of design matrices.
 #' See \code{\link[stats]{model.matrix}} for details.
 #' @param list_Z a list of knowm matrices to compose the matrix linear
 #' predictor.
-#' @param list_offset a list of offset values.
+#' @param list_offset a list of offset values. Default NULL.
 #' @param list_Ntrial a list of number of trials, useful only when
-#' analysing binomial data.
+#' analysing binomial data. Default 1.
 #' @param list_power_fixed a list of logicals indicating if the power
-#' parameters should be estimated or not.
+#' parameters should be estimated or not. Default \code{power_fixed = TRUE}.
 #' @param list_sparse a list of logicals indicating if the matrices
 #' should be set up as sparse matrices. This argument is useful only
 #' when using exponential-matrix covariance link function.
@@ -34,16 +37,16 @@
 #' should be sparse or not.
 #' @param y_vec a vector of the stacked response variables.
 #' @param correct a logical indicating if the algorithm will use the
-#' correction term or not.
-#' @param max_iter maximum number of iterations.
-#' @param tol a numeric specyfing the tolerance.
+#' correction term or not. Default \code{correct = TRUE}.
+#' @param max_iter maximum number of iterations. Default \code{max_iter = 20}.
+#' @param tol a numeric specyfing the tolerance. Default \code{tol = 1e-04}.
 #' @param method a string specyfing the method used to fit the models
-#' (\code{"chaser"} or \code{"rc"}).
+#' (\code{"chaser"} or \code{"rc"}). Default \code{method = "chaser"}.
 #' @param tunning a numeric value in general close to zero for the rc
 #' method and close to 1 for the chaser method. This argument control
-#' the step-length.
+#' the step-length. Default \code{tunning = 1}.
 #' @param verbose a logical if TRUE print the values of the covariance
-#' parameters used on each iteration.
+#' parameters used on each iteration. Default \code{verbose = FALSE}
 #' @usage fit_mcglm(list_initial, list_link, list_variance,
 #'          list_covariance, list_X, list_Z, list_offset,
 #'          list_Ntrial, list_power_fixed, list_sparse,

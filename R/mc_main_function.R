@@ -164,5 +164,7 @@ mcglm <- function(linear_pred, matrix_pred, link, variance,
         model_fit$data <- data
         class(model_fit) <- "mcglm"
     }
+    n_it <- length(na.exclude(model_fit$IterationCovariance[,1]))
+    if(con$max_it == n_it) {warning("Maximum iterations number reached. \n", call. = FALSE)}
     return(model_fit)
 }

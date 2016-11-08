@@ -27,15 +27,18 @@ covariance parameters.}
 Options are: \code{"logit"}, \code{"probit"}, \code{"cauchit"},
 \code{"cloglog"}, \code{"loglog"}, \code{"identity"}, \code{"log"},
 \code{"sqrt"}, \code{"1/mu^2"} and \code{"inverse"}. \cr
-See \code{\link{mc_link_function}} for details.}
+See \code{\link{mc_link_function}} for details.
+Default \code{link = "identity"}.}
 
 \item{list_variance}{a list specifying the variance function names.
 Options are: \code{"constant"}, \code{"tweedie"},
 \code{"poisson_tweedie"}, \code{"binomialP"} and \code{"binomialPQ"}.
-See \code{\link{mc_variance_function}} for details.}
+See \code{\link{mc_variance_function}} for details.
+Default \code{variance = "constant"}.}
 
 \item{list_covariance}{a list of covariance function names. Options
-are: \code{"identity"}, \code{"inverse"} and \code{"expm"}.}
+are: \code{"identity"}, \code{"inverse"} and \code{"expm"}.
+Default \code{covariance = "identity"}.}
 
 \item{list_X}{a list of design matrices.
 See \code{\link[stats]{model.matrix}} for details.}
@@ -43,13 +46,13 @@ See \code{\link[stats]{model.matrix}} for details.}
 \item{list_Z}{a list of knowm matrices to compose the matrix linear
 predictor.}
 
-\item{list_offset}{a list of offset values.}
+\item{list_offset}{a list of offset values. Default NULL.}
 
 \item{list_Ntrial}{a list of number of trials, useful only when
-analysing binomial data.}
+analysing binomial data. Default 1.}
 
 \item{list_power_fixed}{a list of logicals indicating if the power
-parameters should be estimated or not.}
+parameters should be estimated or not. Default \code{power_fixed = TRUE}.}
 
 \item{list_sparse}{a list of logicals indicating if the matrices
 should be set up as sparse matrices. This argument is useful only
@@ -60,21 +63,21 @@ should be sparse or not.}
 \item{y_vec}{a vector of the stacked response variables.}
 
 \item{correct}{a logical indicating if the algorithm will use the
-correction term or not.}
+correction term or not. Default \code{correct = TRUE}.}
 
-\item{max_iter}{maximum number of iterations.}
+\item{max_iter}{maximum number of iterations. Default \code{max_iter = 20}.}
 
-\item{tol}{a numeric specyfing the tolerance.}
+\item{tol}{a numeric specyfing the tolerance. Default \code{tol = 1e-04}.}
 
 \item{method}{a string specyfing the method used to fit the models
-(\code{"chaser"} or \code{"rc"}).}
+(\code{"chaser"} or \code{"rc"}). Default \code{method = "chaser"}.}
 
 \item{tunning}{a numeric value in general close to zero for the rc
 method and close to 1 for the chaser method. This argument control
-the step-length.}
+the step-length. Default \code{tunning = 1}.}
 
 \item{verbose}{a logical if TRUE print the values of the covariance
-parameters used on each iteration.}
+parameters used on each iteration. Default \code{verbose = FALSE}}
 }
 \value{
 A list with estimated regression and covariance parameters.

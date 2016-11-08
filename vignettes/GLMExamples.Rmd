@@ -1,5 +1,5 @@
 ---
-title: "Multivariate Covariance Generalized Linear Models"
+title: "Fitting generalized linear models using the mcglm package."
 author: "Wagner Hugo Bonat"
 date: "`r paste('mcglm', packageVersion('mcglm'), Sys.Date())`"
 vignette: >

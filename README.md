@@ -1,6 +1,6 @@
 
 
-# mcglm 0.2.0
+# mcglm 0.3.0
 
 [![Build Status](https://travis-ci.org/wbonat/mcglm.svg?branch=master)](https://travis-ci.org/wbonat/mcglm)
 Build status for the stable version (`master` branch)
@@ -37,20 +37,20 @@ library(devtools)
 install_github("wbonat/mcglm")
 ```
 
-Alternatively, download the package tarball: [mcglm_0.2.0.tar.gz][]
+Alternatively, download the package tarball: [mcglm_0.3.0.tar.gz][]
 and run from a UNIX terminal (make sure you are on the container file
 directory):
 
 
 ```
-R CMD INSTALL -l /path/to/your/R/library mcglm_0.2.0.tar.gz
+R CMD INSTALL -l /path/to/your/R/library mcglm_0.3.0.tar.gz
 ```
 
 Or, inside an `R` session:
 
 
 ```
-install.packages("mcglm_0.2.0.tar.gz", repos = NULL,
+install.packages("mcglm_0.3.0.tar.gz", repos = NULL,
                  lib.loc = "/path/to/your/R/library",
                  dependencies = TRUE)
 ```
@@ -62,13 +62,13 @@ library.
 
 ### Windows
 
-Download Windows binary version: [mcglm_0.2.0.zip][] (**do not unzip
+Download Windows binary version: [mcglm_0.3.0.zip][] (**do not unzip
 it under Windows**), put the file in your working directory, and from
 inside `R`:
 
 
 ```
-install.packages("mcglm_0.2.0.zip", repos = NULL,
+install.packages("mcglm_0.3.0.zip", repos = NULL,
                  dependencies = TRUE)
 ```
 
@@ -119,8 +119,8 @@ See [LICENSE](./LICENSE)
 [GNU General Public License (GPL) v3.0]: http://www.gnu.org/licenses/gpl-3.0.html
 [`roxygen2`]: https://github.com/klutometis/roxygen
 [`devtools`]: https://github.com/hadley/devtools
-[mcglm_0.2.0.tar.gz]: https://github.com/wbonat/mcglm/raw/master/downloads/mcglm_0.2.0.tar.gz
-[mcglm_0.2.0.zip]: https://github.com/wbonat/mcglm/raw/master/downloads/mcglm_0.2.0.zip
+[mcglm_0.3.0.tar.gz]: https://github.com/wbonat/mcglm/raw/master/downloads/mcglm_0.3.0.tar.gz
+[mcglm_0.3.0.zip]: https://github.com/wbonat/mcglm/raw/master/downloads/mcglm_0.3.0.zip
 [mcglm-manual.pdf]: https://github.com/wbonat/mcglm/raw/master/downloads/mcglm-manual.pdf
 [Gitflow worflow]: http://nvie.com/posts/a-successful-git-branching-model/
 [Wagner Hugo Bonat]: http://www.leg.ufpr.br/doku.php/pessoais:wbonat

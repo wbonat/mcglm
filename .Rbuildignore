@@ -9,6 +9,7 @@
 .Rd2pdf*
 buildPkg.R
 README.Rmd
+README.md
 Examples/
 downloads/
 ^data-raw$

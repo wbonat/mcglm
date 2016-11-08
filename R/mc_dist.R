@@ -50,7 +50,7 @@ mc_dist <- function(id, time, data, method = "euclidean") {
   data <- data[order(data[id]),]
   data$id3 <- 1:dim(data)[1]
   Z1.list <- list()
-  data.id <- split(data, data[id])
+  data.id <- split(data, data[id], drop = TRUE)
   for(i in 1:length(data.id)) {
       Z1.list[[i]] <- mc_dist_aux(time = time, method = method, data = data.id[[i]])
   }
