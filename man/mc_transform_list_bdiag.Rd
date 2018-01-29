@@ -27,4 +27,3 @@ This function take a list of matrices and return a list
 Wagner Hugo Bonat
 }
 \keyword{internal}
-

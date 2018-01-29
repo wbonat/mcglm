@@ -73,4 +73,3 @@ variables is always started at 0.
 \author{
 Wagner Hugo Bonat, \email{wbonat@ufpr.br}
 }
-

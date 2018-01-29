@@ -52,11 +52,10 @@ analysis of twin data.
 id <- rep(1:5, each = 4)
 id.twin <- rep(1:2, 10)
 }
-\author{
-Wagner Hugo Bonat, \email{wbonat@ufpr.br}
-}
 \seealso{
 \code{mc_id}, \code{mc_dist}, \code{mc_car},
 \code{mc_rw}, \code{mc_ns}, \code{mc_dglm} and \code{mc_mixed}.
 }
-
+\author{
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}

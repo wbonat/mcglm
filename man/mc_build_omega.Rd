@@ -29,4 +29,3 @@ This function build \eqn{\Omega} matrix according the
 Wagner Hugo Bonat
 }
 \keyword{internal}
-

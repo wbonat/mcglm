@@ -27,4 +27,3 @@ This function builds the correlation matrix between
 Wagner Hugo Bonat
 }
 \keyword{internal}
-

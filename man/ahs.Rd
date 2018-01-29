@@ -92,4 +92,3 @@ fit.ahs <- mcglm(linear_pred = c(form1, form2),
 summary(fit.ahs)
 }
 \keyword{datasets}
-

@@ -26,10 +26,9 @@ pseudo Akaike Information Criterion (pAIC), pseudo Kullback-Leibler
 Information Criterion (pKLIC) and pseudo Bayesian Information Criterion (pBIC)
 for objects of \code{mcglm} class.
 }
-\author{
-Wagner Hugo Bonat, \email{wbonat@ufpr.br}
-}
 \seealso{
 \code{plogLik}, \code{pAIC}, \code{pKLIC} and \code{pBIC}.
 }
-
+\author{
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}

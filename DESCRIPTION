@@ -2,7 +2,7 @@ Package: mcglm
 Type: Package
 Title: Multivariate Covariance Generalized Linear Models
 Version: 0.4.0
-Date: 2016-10-17
+Date: 2018-01-29
 Author: Wagner Hugo Bonat [aut, cre],
   Walmes Marques Zeviani [ctb],
   Fernando de Pol Mayer [ctb]
@@ -52,4 +52,4 @@ URL: https://github.com/wbonat/mcglm
 BugReports: https://github.com/wbonat/mcglm/issues
 Encoding: UTF-8
 VignetteBuilder: knitr
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

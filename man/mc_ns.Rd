@@ -33,11 +33,10 @@ of the matrix linear predictor used for fitting non-structured
 covariance matrix. In general this model is hard to fit due to the
 large number of parameters.
 }
-\author{
-Wagner Hugo Bonat, \email{wbonat@ufpr.br}
-}
 \seealso{
 \code{mc_id}, \code{mc_dglm}, \code{mc_dist}, \code{mc_ma},
 \code{mc_rw} \cr and \code{mc_mixed}.
 }
-
+\author{
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}

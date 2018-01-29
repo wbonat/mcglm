@@ -36,4 +36,3 @@ Extract model coefficients for objects
 \author{
 Wagner Hugo Bonat, \email{wbonat@ufpr.br}
 }
-

@@ -24,11 +24,10 @@ criterion.
 Extract the pseudo Kullback-Leibler information criterion
 (pKLIC) for objects of \code{mcglm} class.
 }
-\author{
-Wagner Hugo Bonat, \email{wbonat@ufpr.br}
-}
 \seealso{
 \code{gof}, \code{plogLik}, \code{ESS}, \code{pAIC},
 \code{GOSHO} and \code{RJC}.
 }
-
+\author{
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}

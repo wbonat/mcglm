@@ -27,11 +27,10 @@ M <- matrix(c(1,0.8,0.8,1), 2,2)
 dM <- matrix(c(0,1,1,0),2,2)
 mcglm::mc_dexp_gold(M = M, dM = dM)
 }
-\author{
-Wagner Hugo Bonat
-}
 \seealso{
 \code{\link[Matrix]{expm}}, \code{\link[base]{eigen}}.
 }
+\author{
+Wagner Hugo Bonat
+}
 \keyword{internal}
-

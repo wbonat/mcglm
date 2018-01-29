@@ -327,7 +327,7 @@ fit4.logitPQ <- mcglm(linear_pred = c(y1 ~ covariate),
                       link = "logit", variance = "binomialPQ",
                       power_fixed = FALSE,
                       Ntrial = list(rep(10,250)), 
-                      control_algorithm = list(tunning = 0.5),
+                      control_algorithm = list(tuning = 0.5),
                       data = data)
 ```
 

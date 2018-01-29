@@ -27,4 +27,3 @@ Compute the cross-variability matrix between covariance
 Wagner Hugo Bonat
 }
 \keyword{internal}
-

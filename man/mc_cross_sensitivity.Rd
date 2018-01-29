@@ -28,4 +28,3 @@ Compute the cross-sensitivity matrix between regression
 Wagner Hugo Bonat
 }
 \keyword{internal}
-

@@ -23,10 +23,9 @@ The function \code{mc_remove_na} removes NA from each
 component of the matrix linear predictor. It is in general used after
 the function \code{mc_complete_data}.
 }
-\author{
-Wagner Hugo Bonat, \email{wbonat@ufpr.br}
-}
 \seealso{
 \code{mc_dglm}, \code{mc_ns}, \code{mc_ma} and \code{mc_rw}.
 }
-
+\author{
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}

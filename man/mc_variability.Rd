@@ -34,4 +34,3 @@ This function implements the equation 8 of Bonat and
 Wagner Hugo Bonat
 }
 \keyword{internal}
-

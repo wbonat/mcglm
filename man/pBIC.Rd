@@ -23,11 +23,10 @@ Returns the value of the pseudo Bayesian information criterion (pBIC).
 Extract the pseudo Bayesian information criterion (pBIC)
 for objects of \code{mcglm} class.
 }
-\author{
-Wagner Hugo Bonat, \email{wbonat@ufpr.br}
-}
 \seealso{
 \code{gof}, \code{plogLik}, \code{ESS}, \code{pKLIC},
 \code{GOSHO} and \code{RJC}.
 }
-
+\author{
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}

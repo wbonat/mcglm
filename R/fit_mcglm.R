@@ -42,16 +42,16 @@
 #' @param tol a numeric specyfing the tolerance. Default \code{tol = 1e-04}.
 #' @param method a string specyfing the method used to fit the models
 #' (\code{"chaser"} or \code{"rc"}). Default \code{method = "chaser"}.
-#' @param tunning a numeric value in general close to zero for the rc
+#' @param tuning a numeric value in general close to zero for the rc
 #' method and close to 1 for the chaser method. This argument control
-#' the step-length. Default \code{tunning = 1}.
+#' the step-length. Default \code{tuning = 1}.
 #' @param verbose a logical if TRUE print the values of the covariance
 #' parameters used on each iteration. Default \code{verbose = FALSE}
 #' @usage fit_mcglm(list_initial, list_link, list_variance,
 #'          list_covariance, list_X, list_Z, list_offset,
 #'          list_Ntrial, list_power_fixed, list_sparse,
 #'          y_vec, correct, max_iter, tol, method,
-#'          tunning, verbose)
+#'          tuning, verbose)
 #' @return A list with estimated regression and covariance parameters.
 #' Details about the estimation procedures as iterations, sensitivity,
 #' variability are also provided. In general the users do not need to
@@ -81,7 +81,7 @@ fit_mcglm <- function(list_initial, list_link, list_variance,
                       list_sparse, y_vec,
                       correct = TRUE, max_iter, tol = 0.001,
                       method = "rc",
-                      tunning = 0, verbose) {
+                      tuning = 0, verbose) {
     ## Transformation from list to vector
     parametros <- mc_list2vec(list_initial, list_power_fixed)
     n_resp <- length(list_initial$regression)
@@ -152,7 +152,7 @@ fit_mcglm <- function(list_initial, list_link, list_variance,
                                    Cfeatures = Cfeatures,
                                    inv_J_beta = inv_J_beta, D = D,
                 correct = correct, compute_variability = TRUE)
-            step <- tunning * solve(cov_temp$Sensitivity, cov_temp$Score)
+            step <- tuning * solve(cov_temp$Sensitivity, cov_temp$Score)
         }
         if (method == "rc") {
             cov_temp <- mc_pearson(y_vec = y_vec, mu_vec = mu_vec,
@@ -160,7 +160,7 @@ fit_mcglm <- function(list_initial, list_link, list_variance,
                                    inv_J_beta = inv_J_beta, D = D,
                                    correct = correct,
                                    compute_variability = TRUE)
-            step <- solve(tunning * cov_temp$Score %*% t(cov_temp$Score)
+            step <- solve(tuning * cov_temp$Score %*% t(cov_temp$Score)
                           %*% solve(cov_temp$Variability) %*%
                             cov_temp$Sensitivity + cov_temp$Sensitivity)%*% cov_temp$Score
         }

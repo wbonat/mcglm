@@ -30,10 +30,9 @@ convergence is obtained.
 Residual and algorithm check analysis for objects of
 \code{mcglm} class.
 }
-\author{
-Wagner Hugo Bonat, \email{wbonat@ufpr.br}
-}
 \seealso{
 \code{residuals} and \code{fitted}.
 }
-
+\author{
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}

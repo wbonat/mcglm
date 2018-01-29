@@ -74,4 +74,3 @@ anova(fit)
 }
 }
 \keyword{datasets}
-

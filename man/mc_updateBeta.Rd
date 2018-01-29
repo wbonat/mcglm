@@ -28,4 +28,3 @@ This function update a list of regression parameters. It
 Wagner Hugo Bonat
 }
 \keyword{internal}
-

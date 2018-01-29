@@ -28,11 +28,10 @@ The function \code{mc_dglm} builds the components
 of the matrix linear predictor used for fitting double generalized
 linear models.
 }
-\author{
-Wagner Hugo Bonat, \email{wbonat@ufpr.br}
-}
 \seealso{
 \code{mc_id}, \code{mc_dist}, \code{mc_ma}, \code{mc_rw}
 \cr and \code{mc_mixed}.
 }
-
+\author{
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}

@@ -46,12 +46,11 @@ data <- data.frame("id" = id, "time" = time)
 mc_dist(id = "id", time = "time", data = data)
 mc_dist(id = "id", time = "time", data = data, method = "canberra")
 }
-\author{
-Wagner Hugo Bonat, \email{wbonat@ufpr.br}
-}
 \seealso{
 \code{\link[stats]{dist}}, \code{mc_id},
 \code{mc_conditional_test}, \code{mc_car}, \code{mc_ma},
 \code{mc_rw} and \code{mc_mixed}.
 }
-
+\author{
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}

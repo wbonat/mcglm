@@ -28,10 +28,9 @@ set with NA values for helping to construct the components of the
 matrix linear predictor in models that require equal number of
 observations by subjects (id).
 }
-\author{
-Wagner Hugo Bonat, \email{wbonat@ufpr.br}
-}
 \seealso{
 \code{mc_dglm}, \code{mc_ns}, \code{mc_ma} and \code{mc_rw}.
 }
-
+\author{
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}

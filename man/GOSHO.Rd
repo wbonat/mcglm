@@ -30,11 +30,10 @@ for an object of \code{mcglm} class.
 WARNING: This function is limited to models with ONE response variable.
 This function is general useful only for longitudinal data analysis.
 }
-\author{
-Wagner Hugo Bonat, \email{wbonat@ufpr.br}
-}
 \seealso{
 \code{gof}, \code{plogLik}, \code{pAIC}, \code{pKLIC},
 \code{ESS} and \code{RJC}.
 }
-
+\author{
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}

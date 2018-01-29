@@ -40,4 +40,3 @@ Compute the Pearson estimating function its sensitivity and
 Wagner Hugo Bonat
 }
 \keyword{internal}
-

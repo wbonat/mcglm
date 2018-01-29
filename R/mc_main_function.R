@@ -53,11 +53,11 @@
 #'
 #' @source Bonat, W. H. and Jorgensen, B. (2016) Multivariate
 #'     covariance generalized linear models.
-#'     Journal of Royal Statistical Society - Series C X(X):XX--XX.
+#'     Journal of Royal Statistical Society - Series C 65(5):649--675.
 #'
 #' @source Bonat, W. H. (2016). Multiple Response Variables Regression
 #'     Models in R: The mcglm Package.
-#'     Journal of Statistical Software, submitted.
+#'     Journal of Statistical Software, to appear.
 #'
 #' @export
 #' @import Matrix
@@ -108,7 +108,7 @@ mcglm <- function(linear_pred, matrix_pred, link, variance,
         cat("Automatic initial values selected.", "\n")
     }
     con <- list(correct = TRUE, max_iter = 20, tol = 1e-04,
-                method = "chaser", tunning = 1, verbose = FALSE)
+                method = "chaser", tuning = 1, verbose = FALSE)
     con[(namc <- names(control_algorithm))] <- control_algorithm
     if (!is.null(contrasts)) {
         list_X <- list()
@@ -141,7 +141,7 @@ mcglm <- function(linear_pred, matrix_pred, link, variance,
                                correct = con$correct,
                                max_iter = con$max_iter, tol = con$tol,
                                method = con$method,
-                               tunning = con$tunning,
+                               tuning = con$tuning,
                                verbose = con$verbose))
     if (class(model_fit) != "try-error") {
         model_fit$beta_names <- lapply(list_X, colnames)

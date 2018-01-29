@@ -6,11 +6,11 @@
 \source{
 Bonat, W. H. and Jorgensen, B. (2016) Multivariate
     covariance generalized linear models.
-    Journal of Royal Statistical Society - Series C X(X):XX--XX.
+    Journal of Royal Statistical Society - Series C 65(5):649--675.
 
 Bonat, W. H. (2016). Multiple Response Variables Regression
     Models in R: The mcglm Package.
-    Journal of Statistical Software, submitted.
+    Journal of Statistical Software, to appear.
 }
 \usage{
 mcglm(linear_pred, matrix_pred, link, variance, covariance,
@@ -76,11 +76,10 @@ The function \code{mcglm} is used to fit multivariate
     parameters and Pearson estimating function for covariance
     parameters. For details see Bonat and Jorgensen (2016).
 }
-\author{
-Wagner Hugo Bonat, \email{wbonat@ufpr.br}
-}
 \seealso{
 \code{fit_mcglm}, \code{mc_link_function} and
 \code{mc_variance_function}.
 }
-
+\author{
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}

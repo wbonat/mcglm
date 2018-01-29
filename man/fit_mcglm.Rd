@@ -17,7 +17,7 @@ fit_mcglm(list_initial, list_link, list_variance,
          list_covariance, list_X, list_Z, list_offset,
          list_Ntrial, list_power_fixed, list_sparse,
          y_vec, correct, max_iter, tol, method,
-         tunning, verbose)
+         tuning, verbose)
 }
 \arguments{
 \item{list_initial}{a list of initial values for regression and
@@ -72,9 +72,9 @@ correction term or not. Default \code{correct = TRUE}.}
 \item{method}{a string specyfing the method used to fit the models
 (\code{"chaser"} or \code{"rc"}). Default \code{method = "chaser"}.}
 
-\item{tunning}{a numeric value in general close to zero for the rc
+\item{tuning}{a numeric value in general close to zero for the rc
 method and close to 1 for the chaser method. This argument control
-the step-length. Default \code{tunning = 1}.}
+the step-length. Default \code{tuning = 1}.}
 
 \item{verbose}{a logical if TRUE print the values of the covariance
 parameters used on each iteration. Default \code{verbose = FALSE}}
@@ -91,11 +91,10 @@ This function implements the two main algorithms used
 for fitting multivariate covariance generalized linear models.
 The chaser and the reciprocal likelihood algorithms.
 }
-\author{
-Wagner Hugo Bonat, \email{wbonat@ufpr.br}
-}
 \seealso{
 \code{mcglm}, \code{mc_matrix_linear_predictor},
  \code{mc_link_function} and \cr \code{mc_variance_function}.
 }
-
+\author{
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}
