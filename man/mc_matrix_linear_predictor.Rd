@@ -41,11 +41,10 @@ Z1 <- Matrix(rep(1,5)\%*\%t(rep(1,5)))
 Z <- list(Z0, Z1)
 mc_matrix_linear_predictor(tau = c(1,0.8), Z = Z)
 }
-\author{
-Wagner Hugo Bonat, \email{wbonat@ufpr.br}
-}
 \seealso{
 \code{mc_id}, \code{mc_dist}, \code{mc_ma}, \code{mc_rw},
 \code{mc_mixed} and \code{mc_car}.
 }
-
+\author{
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}

@@ -26,4 +26,3 @@ This computes all information required about the number
 Wagner Hugo Bonat
 }
 \keyword{internal}
-

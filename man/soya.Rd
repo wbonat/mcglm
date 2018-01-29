@@ -50,4 +50,3 @@ fit <- mcglm(linear_pred = c(formu), matrix_pred = list(Z0),
           anova(fit)
 }
 \keyword{datasets}
-

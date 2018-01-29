@@ -34,4 +34,3 @@ It is an internal function useful inside the fitting
 Wagner Hugo Bonat
 }
 \keyword{internal}
-

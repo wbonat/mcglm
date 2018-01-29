@@ -12,21 +12,24 @@
 #' \code{"cloglog"}, \code{"loglog"}, \code{"identity"}, \code{"log"},
 #' \code{"sqrt"}, \code{"1/mu^2"} and \code{"inverse"}. \cr
 #' See \code{\link{mc_link_function}} for details.
+#' Default \code{link = "identity"}.
 #' @param list_variance a list specifying the variance function names.
 #' Options are: \code{"constant"}, \code{"tweedie"},
 #' \code{"poisson_tweedie"}, \code{"binomialP"} and \code{"binomialPQ"}.
 #' See \code{\link{mc_variance_function}} for details.
+#' Default \code{variance = "constant"}.
 #' @param list_covariance a list of covariance function names. Options
 #' are: \code{"identity"}, \code{"inverse"} and \code{"expm"}.
+#' Default \code{covariance = "identity"}.
 #' @param list_X a list of design matrices.
 #' See \code{\link[stats]{model.matrix}} for details.
 #' @param list_Z a list of knowm matrices to compose the matrix linear
 #' predictor.
-#' @param list_offset a list of offset values.
+#' @param list_offset a list of offset values. Default NULL.
 #' @param list_Ntrial a list of number of trials, useful only when
-#' analysing binomial data.
+#' analysing binomial data. Default 1.
 #' @param list_power_fixed a list of logicals indicating if the power
-#' parameters should be estimated or not.
+#' parameters should be estimated or not. Default \code{power_fixed = TRUE}.
 #' @param list_sparse a list of logicals indicating if the matrices
 #' should be set up as sparse matrices. This argument is useful only
 #' when using exponential-matrix covariance link function.
@@ -34,21 +37,21 @@
 #' should be sparse or not.
 #' @param y_vec a vector of the stacked response variables.
 #' @param correct a logical indicating if the algorithm will use the
-#' correction term or not.
-#' @param max_iter maximum number of iterations.
-#' @param tol a numeric specyfing the tolerance.
+#' correction term or not. Default \code{correct = TRUE}.
+#' @param max_iter maximum number of iterations. Default \code{max_iter = 20}.
+#' @param tol a numeric specyfing the tolerance. Default \code{tol = 1e-04}.
 #' @param method a string specyfing the method used to fit the models
-#' (\code{"chaser"} or \code{"rc"}).
-#' @param tunning a numeric value in general close to zero for the rc
+#' (\code{"chaser"} or \code{"rc"}). Default \code{method = "chaser"}.
+#' @param tuning a numeric value in general close to zero for the rc
 #' method and close to 1 for the chaser method. This argument control
-#' the step-length.
+#' the step-length. Default \code{tuning = 1}.
 #' @param verbose a logical if TRUE print the values of the covariance
-#' parameters used on each iteration.
+#' parameters used on each iteration. Default \code{verbose = FALSE}
 #' @usage fit_mcglm(list_initial, list_link, list_variance,
 #'          list_covariance, list_X, list_Z, list_offset,
 #'          list_Ntrial, list_power_fixed, list_sparse,
 #'          y_vec, correct, max_iter, tol, method,
-#'          tunning, verbose)
+#'          tuning, verbose)
 #' @return A list with estimated regression and covariance parameters.
 #' Details about the estimation procedures as iterations, sensitivity,
 #' variability are also provided. In general the users do not need to
@@ -78,7 +81,7 @@ fit_mcglm <- function(list_initial, list_link, list_variance,
                       list_sparse, y_vec,
                       correct = TRUE, max_iter, tol = 0.001,
                       method = "rc",
-                      tunning = 0, verbose) {
+                      tuning = 0, verbose) {
     ## Transformation from list to vector
     parametros <- mc_list2vec(list_initial, list_power_fixed)
     n_resp <- length(list_initial$regression)
@@ -149,7 +152,7 @@ fit_mcglm <- function(list_initial, list_link, list_variance,
                                    Cfeatures = Cfeatures,
                                    inv_J_beta = inv_J_beta, D = D,
                 correct = correct, compute_variability = TRUE)
-            step <- tunning * solve(cov_temp$Sensitivity, cov_temp$Score)
+            step <- tuning * solve(cov_temp$Sensitivity, cov_temp$Score)
         }
         if (method == "rc") {
             cov_temp <- mc_pearson(y_vec = y_vec, mu_vec = mu_vec,
@@ -157,7 +160,7 @@ fit_mcglm <- function(list_initial, list_link, list_variance,
                                    inv_J_beta = inv_J_beta, D = D,
                                    correct = correct,
                                    compute_variability = TRUE)
-            step <- solve(tunning * cov_temp$Score %*% t(cov_temp$Score)
+            step <- solve(tuning * cov_temp$Score %*% t(cov_temp$Score)
                           %*% solve(cov_temp$Variability) %*%
                             cov_temp$Sensitivity + cov_temp$Sensitivity)%*% cov_temp$Score
         }

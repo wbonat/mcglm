@@ -526,6 +526,7 @@ summary.mcglm <- function(object, verbose = TRUE,
     cat("Correction:", object$con$correct)
     cat("\n")
     cat("Number iterations:", iteration_cov)
+    cat("\n")
     }
     if (dim(tab_rho)[1] != 0) {
     names(output) <- c(paste("Resp.Variable", 1:n_resp),"Correlation")

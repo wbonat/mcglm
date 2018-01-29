@@ -48,12 +48,11 @@ A list with the Cholesky decomposition of \eqn{\Sigma},
 This function builds a variance-covariance matrix, based
     on the variance function and omega matrix.
 }
-\author{
-Wagner Hugo Bonat
-}
 \seealso{
 \code{\link{mc_link_function}},
     \code{\link{mc_variance_function}}, \code{\link{mc_build_omega}}.
 }
+\author{
+Wagner Hugo Bonat
+}
 \keyword{internal}
-

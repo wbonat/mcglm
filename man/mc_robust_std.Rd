@@ -29,10 +29,9 @@ Compute robust standard error for regression parameters
     in the context of clustered observations for an object of
     \code{mcglm} class.
 }
-\author{
-Wagner Hugo Bonat, \email{wbonat@ufpr.br}
-}
 \seealso{
 \code{mc_bias_correct_std}.
 }
-
+\author{
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}

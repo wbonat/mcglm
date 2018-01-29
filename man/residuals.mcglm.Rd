@@ -24,10 +24,9 @@ residuals values.
 \description{
 Compute residuals for an object of \code{mcglm} class.
 }
-\author{
-Wagner Hugo Bonat, \email{wbonat@ufpr.br}
-}
 \seealso{
 \code{fitted}.
 }
-
+\author{
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}

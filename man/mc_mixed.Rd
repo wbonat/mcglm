@@ -63,11 +63,10 @@ mc_mixed(~0 + SUBJECT/x1, data = data)
 mc_mixed(~0 + SUBJECT/(x1 + x2), data = data)
 
 }
-\author{
-Wagner Hugo Bonat, \email{wbonat@ufpr.br}
-}
 \seealso{
 \code{mc_id}, \code{mc_conditional_test},
  \code{mc_dist}, \code{mc_ma}, \code{mc_rw} and \code{mc_car}.
 }
-
+\author{
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}

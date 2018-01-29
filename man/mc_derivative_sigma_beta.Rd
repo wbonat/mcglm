@@ -29,4 +29,3 @@ Compute the derivatives of \eqn{V^{1/2}} matrix with
 Wagner Hugo Bonat
 }
 \keyword{internal}
-

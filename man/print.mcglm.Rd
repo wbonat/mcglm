@@ -14,10 +14,9 @@
 \description{
 The default print method for an object of \code{mcglm} class.
 }
-\author{
-Wagner Hugo Bonat, \email{wbonat@ufpr.br}
-}
 \seealso{
 \code{summary}.
 }
-
+\author{
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}

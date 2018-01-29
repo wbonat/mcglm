@@ -31,11 +31,10 @@ based on spatial coordinates. This way to specify the matrix linear
 predictor can also be applied for spatial continuous data,
 as an approximation.
 }
-\author{
-Wagner Hugo Bonat, \email{wbonat@ufpr.br}
-}
 \seealso{
 \code{mc_id}, \code{mc_compute_rho}, \code{mc_conditional_test},
  \code{mc_dist}, \code{mc_ma}, \code{mc_rw} \cr and \code{mc_mixed}.
 }
-
+\author{
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}

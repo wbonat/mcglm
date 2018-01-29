@@ -29,4 +29,3 @@ Compute the quasi-score function, its sensitivy and
 Wagner Hugo Bonat
 }
 \keyword{internal}
-

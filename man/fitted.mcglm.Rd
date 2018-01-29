@@ -21,4 +21,3 @@ Extract fitted values for objects of \code{mcglm} class.
 \author{
 Wagner Hugo Bonat, \email{wbonat@ufpr.br}
 }
-

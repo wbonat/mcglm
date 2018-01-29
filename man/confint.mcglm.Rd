@@ -30,4 +30,3 @@ Computes confidence intervals for parameters in a fitted
 \author{
 Wagner Hugo Bonat, \email{wbonat@ufpr.br}
 }
-

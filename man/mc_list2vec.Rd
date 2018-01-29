@@ -28,4 +28,3 @@ It is an internal function, in general the users never will
 Wagner Hugo Bonat
 }
 \keyword{internal}
-

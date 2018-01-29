@@ -26,11 +26,10 @@ Returns the value of the generalized error sum of squares (ESS).
 Extract the generalized error sum of squares (ESS) for
 objects of \code{mcglm} class.
 }
-\author{
-Wagner Hugo Bonat, \email{wbonat@ufpr.br}
-}
 \seealso{
 \code{gof}, \code{plogLik}, \code{pAIC}, \code{pKLIC},
 \code{GOSHO} and \code{RJC}.
 }
-
+\author{
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}

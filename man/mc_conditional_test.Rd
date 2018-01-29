@@ -39,4 +39,3 @@ flexible and can be used for any other conditional hypotheses test.
 \author{
 Wagner Hugo Bonat, \email{wbonat@ufpr.br}
 }
-
