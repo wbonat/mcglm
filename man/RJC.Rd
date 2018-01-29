@@ -29,11 +29,10 @@ Compute the Rotnitzky-Jewell information criterion
 for an object of \code{mcglm} class.
 WARNINGS: This function is limited to models with ONE response variable.
 }
-\author{
-Wagner Hugo Bonat, \email{wbonat@ufpr.br}
-}
 \seealso{
 \code{gof}, \code{plogLik}, \code{pAIC}, \code{pKLIC},
 \code{ESS} and \code{GOSHO}.
 }
-
+\author{
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}

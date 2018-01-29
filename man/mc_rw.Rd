@@ -45,11 +45,10 @@ mc_rw(id = "id", time = "time", data = data, order = 1, proper = FALSE)
 mc_rw(id = "id", time = "time", data = data, order = 1, proper = TRUE)
 mc_rw(id = "id", time = "time", data = data, order = 2, proper = TRUE)
 }
-\author{
-Wagner Hugo Bonat, \email{wbonat@ufpr.br}
-}
 \seealso{
 \code{mc_id}, \code{mc_dist}, \code{mc_car},
 \code{mc_ma}, \code{mc_mixed} and \code{mc_compute_rho}.
 }
-
+\author{
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}

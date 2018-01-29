@@ -27,4 +27,3 @@ It is an internal function.
 Wagner Hugo Bonat
 }
 \keyword{internal}
-

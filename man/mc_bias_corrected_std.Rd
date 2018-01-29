@@ -30,10 +30,9 @@ Compute bias-corrected standard error for regression
     object of \code{mcglm} class. It is also robust and has improved
     finite sample properties.
 }
-\author{
-Wagner Hugo Bonat, \email{wbonat@ufpr.br}
-}
 \seealso{
 \code{mc_robust_std}.
 }
-
+\author{
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}

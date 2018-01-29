@@ -55,4 +55,3 @@ This function builds the joint variance-covariance matrix
 Wagner Hugo Bonat
 }
 \keyword{internal}
-

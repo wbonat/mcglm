@@ -25,4 +25,3 @@ This function implements the equation 7 of Bonat and
 Wagner Hugo Bonat
 }
 \keyword{internal}
-

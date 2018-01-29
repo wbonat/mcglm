@@ -214,7 +214,7 @@ NULL
 #' fit.ca <- mcglm(linear_pred = c(form.ca), matrix_pred = list(Z1),
 #'                link = "log", variance = "tweedie", covariance = "inverse",
 #'                power_fixed = FALSE, data = soil,
-#'                control_algorith = list(max_iter = 500, tunning = 0.1))
+#'                control_algorith = list(max_iter = 500, tuning = 0.1))
 #' summary(fit.ca)
 #' # Conditional hypothesis test
 #' mc_conditional_test(fit.ca, parameters = c("power11","tau11","tau12"),
@@ -310,7 +310,7 @@ NULL
 #'             link = c("logit"), variance = c("binomialP"),
 #'             power_fixed = c(TRUE),
 #'             data = NewBorn,
-#'             control_algorithm = list(verbose = FALSE, tunning = 0.5))
+#'             control_algorithm = list(verbose = FALSE, tuning = 0.5))
 #' summary(fit)
 NULL
 

@@ -30,12 +30,11 @@ Given a matrix \code{U} the function \code{mc_expm}
     matrices to compute its derivatives. This function is based on
     the eigen-value decomposition it means that it is very slow.
 }
-\author{
-Wagner Hugo Bonat
-}
 \seealso{
 \code{\link[Matrix]{expm}}, \code{\link[base]{eigen}},
     \code{link[mcglm]{mc_dexp_gold}}.
 }
+\author{
+Wagner Hugo Bonat
+}
 \keyword{internal}
-

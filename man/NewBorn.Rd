@@ -83,8 +83,7 @@ fit <- mcglm(linear_pred = c(formu), matrix_pred = list(Z0),
             link = c("logit"), variance = c("binomialP"),
             power_fixed = c(TRUE),
             data = NewBorn,
-            control_algorithm = list(verbose = FALSE, tunning = 0.5))
+            control_algorithm = list(verbose = FALSE, tuning = 0.5))
 summary(fit)
 }
 \keyword{datasets}
-

@@ -32,12 +32,11 @@ Many arguments required by this function are provide by the
     of the U matrix with respect to the models parameters. It should
     be computed by the user.
 }
-\author{
-Wagner Hugo Bonat
-}
 \seealso{
 \code{\link[Matrix]{expm}}, \code{link[mcglm]{mc_dexp_gold}}
     and \code{link[mcglm]{mc_dexpm}}.
 }
+\author{
+Wagner Hugo Bonat
+}
 \keyword{internal}
-

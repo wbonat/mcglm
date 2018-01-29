@@ -50,10 +50,9 @@ fit0 <- mcglm(c(y ~ 1), list(mc_id(data)), data = data)
 mc_sic(fit0, scope = c("x1","x2"), data = data, response = 1)
 
 }
-\author{
-Wagner Hugo Bonat, \email{wbonat@ufpr.br}
-}
 \seealso{
 \code{mc_sic_covariance}.
 }
-
+\author{
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}

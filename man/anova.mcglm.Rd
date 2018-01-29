@@ -42,4 +42,3 @@ anova(fit.anova)
 \author{
 Wagner Hugo Bonat, \email{wbonat@ufpr.br}
 }
-

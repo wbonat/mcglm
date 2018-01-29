@@ -3,7 +3,7 @@
 #'
 #' @description Extract the pseudo Gaussian log-likelihood (plogLik),
 #' pseudo Akaike Information Criterion (pAIC), pseudo Kullback-Leibler
-#' Information Criterion (pKLIC) and Error Sum of Squares (ESS)
+#' Information Criterion (pKLIC) and pseudo Bayesian Information Criterion (pBIC)
 #' for objects of \code{mcglm} class.
 #'
 #' @param object an object or a list of objects representing a model
@@ -16,16 +16,16 @@
 #' @source Wang, M. (2014). Generalized Estimating Equations in Longitudinal Data
 #' Analysis: A Review and Recent Developments. Advances in Statistics, 1(1)1--13.
 #'
-#' @seealso \code{plogLik}, \code{pAIC}, \code{pKLIC}, \code{ESS}.
+#' @seealso \code{plogLik}, \code{pAIC}, \code{pKLIC} and \code{pBIC}.
 #' @export
 
 gof <- function(object) {
   pl <- plogLik(object, verbose = FALSE)
   AIC <- pAIC(object, verbose = FALSE)
   KLIC <- pKLIC(object, verbose = FALSE)
-  ESS2 <- ESS(object, verbose = FALSE)
+  BIC <- pBIC(object, verbose = FALSE)
   output <- data.frame("plogLik" = pl$plogLik, "Df" = pl$df,
                        "pAIC" = AIC$pAIC,"pKLIC" = KLIC$pKLIC,
-                       "ESS" = ESS2)
+                       "BIC" = BIC)
   return(output)
 }

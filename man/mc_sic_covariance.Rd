@@ -57,10 +57,9 @@ mc_sic_covariance(fit0, scope = Z1, idx = 1,
 data = data, response = 1)
 # As expected Tu < Chisq indicating non-significance of Z1 matrix
 }
-\author{
-Wagner Hugo Bonat, \email{wbonat@ufpr.br}
-}
 \seealso{
 \code{mc_sic}.
 }
-
+\author{
+Wagner Hugo Bonat, \email{wbonat@ufpr.br}
+}
