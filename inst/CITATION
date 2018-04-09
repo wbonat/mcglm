@@ -1,0 +1,15 @@
+bibentry(bibtype = "Article",
+  title        = "Multiple Response Variables Regression Models in {R}: The {mcglm} Package",
+  author       = person(given = c("Wagner", "Hugo"),
+                        family = "Bonat",
+                        email = "wbonat@ufpr.br"),
+  journal      = "Journal of Statistical Software",
+  year         = "2018",
+  volume       = "84",
+  number       = "4",
+  pages        = "1--30",
+  doi          = "10.18637/jss.v084.i04",
+
+  header       = "To cite mcglm in publications use:"
+)
+
