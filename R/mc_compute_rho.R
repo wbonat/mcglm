@@ -13,8 +13,8 @@
 #' of \code{mcglm} class.
 #' @param level the confidence level required.
 #'
-#' @source Bonat, W. H. (2016). Multiple Response Variables Regression
-#' Models in R: The mcglm Package. Journal of Statistical Software, submitted.
+#' @source Bonat, W. H. (2018). Multiple Response Variables Regression
+#' Models in R: The mcglm Package. Journal of Statistical Software, 84(4):1--30.
 #'
 #' @seealso \code{mc_car} and \code{mc_conditional_test}.
 #'

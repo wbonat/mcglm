@@ -11,7 +11,7 @@
 #'     parameters.
 #' @keywords internal
 #' @return The cross-sensitivity matrix. Equation (10) of Bonat and
-#'     Jorgensen (2015).
+#'     Jorgensen (2016).
 
 mc_cross_sensitivity <- function(Product_cov, Product_beta,
                                  n_beta_effective =

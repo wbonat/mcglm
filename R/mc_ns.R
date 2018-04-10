@@ -17,8 +17,8 @@
 #' @param data data set.
 #' @return A list of a n*(n-1)/2 matrices.
 #'
-#' @source Bonat, W. H. (2016). Multiple Response Variables Regression
-#' Models in R: The mcglm Package. Journal of Statistical Software, submitted.
+#' @source Bonat, W. H. (2018). Multiple Response Variables Regression
+#' Models in R: The mcglm Package. Journal of Statistical Software, 84(4):1--30.
 #'
 #' @seealso \code{mc_id}, \code{mc_dglm}, \code{mc_dist}, \code{mc_ma},
 #' \code{mc_rw} \cr and \code{mc_mixed}.

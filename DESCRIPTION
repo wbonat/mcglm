@@ -2,7 +2,7 @@ Package: mcglm
 Type: Package
 Title: Multivariate Covariance Generalized Linear Models
 Version: 0.4.0
-Date: 2018-01-29
+Date: 2018-04-09
 Author: Wagner Hugo Bonat [aut, cre],
   Walmes Marques Zeviani [ctb],
   Fernando de Pol Mayer [ctb]
@@ -12,7 +12,7 @@ Authors@R: c(person(c("Wagner","Hugo"), "Bonat", role = c("aut", "cre"),
 	     person(c("Walmes","Marques"), "Zeviani", role = "ctb"),
 	     person(c("Fernando", "de Pol"), "Mayer", role = "ctb"))
 Description: Fitting multivariate covariance generalized linear
-     models (McGLMs) to data.  McGLMs is a general framework for non-normal
+     models (McGLMs) to data.  McGLM is a general framework for non-normal
      multivariate data analysis, designed to handle multivariate response
      variables, along with a wide range of temporal and spatial correlation
      structures defined in terms of a covariance link function combined

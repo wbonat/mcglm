@@ -23,8 +23,8 @@
 #' function is a simple call of the \code{\link[Matrix]{bandSparse}}
 #' function from the \code{Matrix} package.
 #'
-#' @source Bonat, W. H. (2016). Multiple Response Variables Regression
-#' Models in R: The mcglm Package. Journal of Statistical Software, submitted.
+#' @source Bonat, W. H. (2018). Multiple Response Variables Regression
+#' Models in R: The mcglm Package. Journal of Statistical Software, 84(4):1--30.
 #'
 #' @return A matrix of \code{dgCMatrix} class.
 #'

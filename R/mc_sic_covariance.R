@@ -21,12 +21,12 @@
 #' degree of freedom, Tu-statistics and chi-squared reference values
 #' for each matrix in the scope argument.
 #'
-#' @source Bonat, W. H. (2016). Multiple Response Variables Regression
-#' Models in R: The mcglm Package. Journal of Statistical Software, submitted.
-#'
 #' @source Bonat, et. al. (2016). Modelling the covariance structure in
 #' marginal multivariate count models: Hunting in Bioko Island.
-#' Environmetrics, submitted.
+#' Journal of Agricultural Biological and Environmental Statistics, 22(4):446--464.
+
+#' @source Bonat, W. H. (2018). Multiple Response Variables Regression
+#' Models in R: The mcglm Package. Journal of Statistical Software, 84(4):1--30.
 #'
 #' @seealso \code{mc_sic}.
 #' @examples

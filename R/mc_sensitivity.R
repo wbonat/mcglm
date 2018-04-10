@@ -9,7 +9,7 @@
 #'     function.
 #' @keywords internal
 #' @details This function implements the equation 7 of Bonat and
-#'     Jorgensen (2015).
+#'     Jorgensen (2016).
 
 mc_sensitivity <- function(product) {
     n_par <- length(product)

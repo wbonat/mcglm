@@ -1,5 +1,5 @@
 ---
-title: "Multivariate Covariance Generalized Linear Models"
+title: "Choosing link, variance and covariance functions"
 author: "Wagner Hugo Bonat"
 date: "`r paste('mcglm', packageVersion('mcglm'), Sys.Date())`"
 vignette: >

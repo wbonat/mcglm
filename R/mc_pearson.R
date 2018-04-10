@@ -17,7 +17,7 @@
 #' @keywords internal
 #' @details Compute the Pearson estimating function its sensitivity and
 #'     variability matrices.  For more details see Bonat and Jorgensen
-#'     (2015) equations 6, 7 and 8.
+#'     (2016) equations 6, 7 and 8.
 
 mc_pearson <- function(y_vec, mu_vec, Cfeatures, inv_J_beta = NULL,
                        D = NULL, correct = FALSE,

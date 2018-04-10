@@ -53,11 +53,10 @@
 #'
 #' @source Bonat, W. H. and Jorgensen, B. (2016) Multivariate
 #'     covariance generalized linear models.
-#'     Journal of Royal Statistical Society - Series C 65(5):649--675.
+#'     Journal of Royal Statistical Society - Series C 65:649--675.
 #'
-#' @source Bonat, W. H. (2016). Multiple Response Variables Regression
-#'     Models in R: The mcglm Package.
-#'     Journal of Statistical Software, to appear.
+#' @source Bonat, W. H. (2018). Multiple Response Variables Regression
+#' Models in R: The mcglm Package. Journal of Statistical Software, 84(4):1--30.
 #'
 #' @export
 #' @import Matrix
