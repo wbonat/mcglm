@@ -28,7 +28,7 @@ Description: Fitting multivariate covariance generalized linear
      time series, longitudinal, spatial and spatio-temporal structures.
      The package offers a user-friendly interface for fitting McGLMs
      similar to the glm() R function. 
-     See Bonat (2018)<doi:10.18637/jss.v084.i04>, for more information 
+     See Bonat (2018) <doi:10.18637/jss.v084.i04>, for more information 
      and examples.
 Depends:
     R (>= 3.2.1)
