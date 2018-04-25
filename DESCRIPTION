@@ -47,7 +47,8 @@ Imports:
     stats,
     Matrix,
     assertthat,
-    graphics
+    graphics,
+    Rcpp (>= 0.12.16)
 License: GPL-3 | file LICENSE
 LazyData: TRUE
 URL: https://github.com/wbonat/mcglm
@@ -55,3 +56,4 @@ BugReports: https://github.com/wbonat/mcglm/issues
 Encoding: UTF-8
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
+LinkingTo: Rcpp, RcppArmadillo
