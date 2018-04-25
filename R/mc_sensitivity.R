@@ -12,7 +12,6 @@
 #'     Jorgensen (2016).
 #' @useDynLib mcglm
 #' @importFrom Rcpp sourceCpp
-NULL
 
 mc_sensitivity <- function(product) {
     #sourceCpp("src/mc_sensitivity_op.cpp")
