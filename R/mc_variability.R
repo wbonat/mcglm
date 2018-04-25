@@ -1,5 +1,5 @@
 #' @title Variability matrix
-#' @author Wagner Hugo Bonat
+#' @author Wagner Hugo Bonat and Eduardo Elias Ribeiro Jr
 #'
 #' @description Compute the variability matrix associated with the
 #'     Pearson estimating function.

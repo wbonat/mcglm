@@ -1,5 +1,5 @@
 #' @title Sensitivity matrix
-#' @author Wagner Hugo Bonat
+#' @author Wagner Hugo Bonat and Eduardo Elias Ribeiro Jr
 #'
 #' @description Compute the sensitivity matrix associated with the
 #'     Pearson estimating function.
