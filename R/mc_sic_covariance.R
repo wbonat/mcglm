@@ -83,8 +83,8 @@ mc_sic_covariance <- function(object, scope, idx, data, penalty = 2,
                                 list_covariance = object$covariance,
                                 list_power_fixed = object$power_fixed,
                                 compute_C = TRUE)
-        temp_score <- mc_pearson(y_vec = object$observed,
-                                 mu_vec = object$mu_list[[response]]$mu,
+        temp_score <- mc_pearson(y_vec = as.numeric(object$observed),
+                                 mu_vec = as.numeric(object$mu_list[[response]]$mu),
                                  Cfeatures = Cfeatures, correct = FALSE,
                                  compute_variability = TRUE)
 

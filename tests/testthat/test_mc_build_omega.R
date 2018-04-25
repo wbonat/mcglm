@@ -1,3 +1,4 @@
+print("test_mc_build_omega.R")
 ###############################################################
 # Test - mc_build_omega #######################################
 ###############################################################
@@ -64,3 +65,4 @@ test_that(
     expect_equal(as.matrix(D_Omega3[[2]]), as.matrix(actual$D_Omega[[3]]))
     }
 )
+print("test_mc_build_omega.R - OK")

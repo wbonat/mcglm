@@ -265,9 +265,9 @@ fit.joint.mcglm <- mcglm(linear_pred = c(lot1 ~ log(u), lot2 ~ log(u)),
                          data = clotting,
                          control_initial = list_initial,
                          control_algorithm = list("correct" = TRUE,
-                                                 "method" = "rc",
-                                                 "tuning" = 0.001,
-                                                 "max_iter" = 100))
+                                                 "method" = "chaser",
+                                                 "tuning" = 0.1,
+                                                 "max_iter" = 1000))
 summary(fit.joint.mcglm)
 ```
 

@@ -11,6 +11,7 @@
 #' @param D A matrix.
 #' @param correct Logical.
 #' @param compute_variability Logical.
+#' @param compute_sensitivity Logical.
 #' @return A list with three components: (i) a vector of quasi-score
 #'     values, (ii) the sensitivity and (iii) variability matrices
 #'     associated with the Pearson estimating function.
@@ -21,13 +22,18 @@
 
 mc_pearson <- function(y_vec, mu_vec, Cfeatures, inv_J_beta = NULL,
                        D = NULL, correct = FALSE,
+                       compute_sensitivity = TRUE,
                        compute_variability = FALSE) {
     product <- lapply(Cfeatures$D_C, mc_multiply,
                       bord2 = Cfeatures$inv_C)
     res <- y_vec - mu_vec
     pearson_score <- unlist(lapply(product, mc_core_pearson,
                                    inv_C = Cfeatures$inv_C, res = res))
-    sensitivity <- mc_sensitivity(product)
+    sensitivity <- matrix(NA, length(product), length(product))
+    if(compute_sensitivity == TRUE) {
+      sensitivity <- mc_sensitivity(product)
+    }
+
     output <- list(Score = pearson_score, Sensitivity = sensitivity,
                    Extra = product)
     if (correct == TRUE) {

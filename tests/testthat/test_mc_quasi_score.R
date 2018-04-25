@@ -18,13 +18,15 @@ Cfeatures <- mc_build_C(list_mu = list("resp1" = mu1, "resp2" = mu2),
                         list_sparse = list(FALSE, FALSE),
                         list_variance = list("tweedie", "binomialPQ"),
                         list_covariance = list("identity", "identity"),
-                        list_power_fixed = list(FALSE,FALSE), compute_C = FALSE,
+                        list_power_fixed = list(FALSE,FALSE), compute_C = TRUE,
                         compute_derivative_beta = TRUE)
 
 tt = mc_quasi_score(D = D, inv_C = Cfeatures$inv_C, y_vec = y_vec, mu_vec = mu_vec)
 tt$Sensitivity
 inv_J_beta <- solve(tt$Sensitivity)
 
-tt1 = mc_pearson(y_vec = y_vec, mu_vec = mu_vec, Cfeatures = Cfeatures, inv_J_beta = inv_J_beta, D = D,
-           correct = TRUE, compute_variability = TRUE)
+tt1 = mc_pearson(y_vec = y_vec, mu_vec = mu_vec,
+                 Cfeatures = Cfeatures, inv_J_beta = inv_J_beta,
+                 D = D, correct = TRUE,
+                 compute_variability = TRUE)
 names(tt1)

@@ -10,16 +10,13 @@
 #' @keywords internal
 #' @details This function implements the equation 7 of Bonat and
 #'     Jorgensen (2016).
+#' @useDynLib mcglm
+#' @importFrom Rcpp sourceCpp
+NULL
 
 mc_sensitivity <- function(product) {
-    n_par <- length(product)
-    Sensitivity <- matrix(0, n_par, n_par)
-    Sensitivity_temp <- matrix(0, n_par, n_par)
-    Sensitivity1 <- matrix(0, n_par, n_par)
-    for (i in 1:n_par) {
-        for (j in 1:n_par) {
-            Sensitivity[i, j] <- -sum(t(product[[i]]) * product[[j]])
-        }
-    }
+    #sourceCpp("src/mc_sensitivity_op.cpp")
+    Sensitivity <- mc_sensitivity_op(products = product)
+    Sensitivity <- forceSymmetric(Sensitivity, uplo = FALSE)
     return(Sensitivity)
 }

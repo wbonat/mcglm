@@ -5,3 +5,7 @@ mc_sensitivity_op <- function(products) {
     .Call('_mcglm_mc_sensitivity_op', PACKAGE = 'mcglm', products)
 }
 
+mc_variability_op <- function(sensitivity, W, k4) {
+    .Call('_mcglm_mc_variability_op', PACKAGE = 'mcglm', sensitivity, W, k4)
+}
+

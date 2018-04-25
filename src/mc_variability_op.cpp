@@ -4,7 +4,7 @@ using namespace arma;
 
 // [[Rcpp::depends("RcppArmadillo")]]
 // [[Rcpp::export]]
-sp_mat mc_variability_op(sp_mat sensitivity, List W, vec k4) {
+arma::sp_mat mc_variability_op(arma::sp_mat sensitivity, List W, arma::vec k4) {
   int n_par = W.size();
   sp_mat V = sp_mat(n_par, n_par);
   for (int i = 0; i <= n_par - 1; i++) {

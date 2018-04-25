@@ -17,9 +17,23 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// mc_variability_op
+arma::sp_mat mc_variability_op(arma::sp_mat sensitivity, List W, arma::vec k4);
+RcppExport SEXP _mcglm_mc_variability_op(SEXP sensitivitySEXP, SEXP WSEXP, SEXP k4SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::sp_mat >::type sensitivity(sensitivitySEXP);
+    Rcpp::traits::input_parameter< List >::type W(WSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type k4(k4SEXP);
+    rcpp_result_gen = Rcpp::wrap(mc_variability_op(sensitivity, W, k4));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_mcglm_mc_sensitivity_op", (DL_FUNC) &_mcglm_mc_sensitivity_op, 1},
+    {"_mcglm_mc_variability_op", (DL_FUNC) &_mcglm_mc_variability_op, 3},
     {NULL, NULL, 0}
 };
 
