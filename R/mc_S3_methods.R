@@ -459,11 +459,13 @@ summary.mcglm <- function(object, verbose = TRUE,
     tab_beta <- coef(object, std.error = TRUE,
                      response = i, type = "beta")[, 1:2]
     tab_beta$"Z value" <- tab_beta[, 1]/tab_beta[, 2]
+    tab_beta$"Pr(>|z|)"  <- 2*pnorm(-abs(tab_beta[, 1]/tab_beta[, 2]))
     rownames(tab_beta) <- object$beta_names[[i]]
     output[i][[1]]$Regression <- tab_beta
     tab_power <- coef(object, std.error = TRUE,
                       response = i, type = "power")[, 1:2]
     tab_power$"Z value" <- tab_power[, 1]/tab_power[, 2]
+    tab_power$"Pr(>|z|)"  <- 2*pnorm(-abs(tab_power[, 1]/tab_power[, 2]))
     rownames(tab_power) <- NULL
     if (dim(tab_power)[1] != 0) {
       output[i][[1]]$Power <- tab_power
@@ -471,12 +473,14 @@ summary.mcglm <- function(object, verbose = TRUE,
     tab_tau <- coef(object, std.error = TRUE,
                     response = i, type = "tau")[, 1:2]
     tab_tau$"Z value" <- tab_tau[, 1]/tab_tau[, 2]
+    tab_tau$"Pr(>|z|)"  <- 2*pnorm(-abs(tab_tau[, 1]/tab_tau[, 2]))
     rownames(tab_tau) <- NULL
     output[i][[1]]$tau <- tab_tau
     }
     tab_rho <- coef(object, std.error = TRUE,
                     response = NA, type = "correlation")[, c(3, 1, 2)]
     tab_rho$"Z value" <- tab_rho[, 2]/tab_rho[, 3]
+    tab_rho$"Pr(>|z|)"  <- 2*pnorm(-abs(tab_rho[, 2]/tab_rho[, 3]))
     if (dim(tab_rho)[1] != 0) {
       rownames(tab_rho) <- NULL
       output$Correlation <- tab_rho
