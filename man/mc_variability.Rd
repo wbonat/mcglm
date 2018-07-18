@@ -31,6 +31,6 @@ This function implements the equation 8 of Bonat and
     Jorgensen (2016).
 }
 \author{
-Wagner Hugo Bonat
+Wagner Hugo Bonat and Eduardo Elias Ribeiro Jr
 }
 \keyword{internal}

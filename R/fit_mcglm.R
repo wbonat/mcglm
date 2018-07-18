@@ -68,7 +68,7 @@
 #' Models in R: The mcglm Package. Journal of Statistical Software, 84(4):1--30.
 #'
 #' @importFrom stats as.formula binomial coef dist fitted glm make.link
-#' model.frame model.matrix na.exclude pchisq qchisq qnorm quasi
+#' model.frame model.matrix na.exclude pchisq qchisq qnorm pnorm quasi
 #' residuals vcov model.response
 #' @importFrom utils combn
 #' @importFrom grDevices dev.new
