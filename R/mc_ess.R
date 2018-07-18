@@ -12,8 +12,8 @@
 #' @seealso \code{gof}, \code{plogLik}, \code{pAIC}, \code{pKLIC},
 #' \code{GOSHO} and \code{RJC}.
 #'
-#' @source Bonat, W. H. (2016). Multiple Response Variables Regression
-#' Models in R: The mcglm Package. Journal of Statistical Software, submitted.
+#' @source Bonat, W. H. (2018). Multiple Response Variables Regression
+#' Models in R: The mcglm Package. Journal of Statistical Software, 84(4):1--30.
 #'
 #' @source Wang, M. (2014). Generalized Estimating Equations in Longitudinal Data
 #' Analysis: A Review and Recent Developments. Advances in Statistics, 1(1)1--13.

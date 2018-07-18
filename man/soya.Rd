@@ -6,8 +6,8 @@
 \title{Soybeans}
 \format{a \code{data.frame} with 75 records and 7 variables.}
 \source{
-Bonat, W. H. (2016). Multiple Response Variables Regression
-Models in R: The mcglm Package. Journal of Statistical Software, submitted.
+Bonat, W. H. (2018). Multiple Response Variables Regression
+Models in R: The mcglm Package. Journal of Statistical Software, 84(4):1--30.
 }
 \usage{
 data(soya)

@@ -1,3 +1,5 @@
+print("Running test_mc_build_C.R")
+
 ## Auxiliar function
 expect_smaller <- function(a, tol){
   if(a > tol) stop("Error: Elements of your input are not smaller than tolerance!")
@@ -128,6 +130,7 @@ test_that(
     }
   )
 
+print("Checking computations")
 #####################################################################################
 ## Checking all calculations ########################################################
 #####################################################################################
@@ -307,7 +310,7 @@ test_that(
 )
 print("OK")
 }
-
+print("Checking Poisson-Tweedie derivatives")
 ##########################################################################################
 ## poisson_tweedie variance function #####################################################
 ##########################################################################################
@@ -400,6 +403,7 @@ test_that(
   }
 )
 
+print("Checking binomiaPQ derivatives")
 ##########################################################################################
 ## binomialPQ variance function ##########################################################
 ##########################################################################################
@@ -1014,3 +1018,5 @@ test_that(
                  as.matrix(actual$D_C_beta[[4]]))
   }
 )
+
+print("test_mc_build.C - OK")

@@ -4,8 +4,8 @@
 \alias{pBIC}
 \title{Pseudo Bayesian Information Criterion}
 \source{
-Bonat, W. H. (2016). Multiple Response Variables Regression
-Models in R: The mcglm Package. Journal of Statistical Software, submitted.
+Bonat, W. H. (2018). Multiple Response Variables Regression
+Models in R: The mcglm Package. Journal of Statistical Software, 84(4):1--30.
 }
 \usage{
 pBIC(object, verbose = TRUE)

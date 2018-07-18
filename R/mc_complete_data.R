@@ -12,8 +12,8 @@
 #' @param id.exp how the index is expected to be for all subjects.
 #' @return A data.frame with the same number of observations by subject.
 #'
-#' @source Bonat, W. H. (2016). Multiple Response Variables Regression
-#' Models in R: The mcglm Package. Journal of Statistical Software, submitted.
+#' @source Bonat, W. H. (2018). Multiple Response Variables Regression
+#' Models in R: The mcglm Package. Journal of Statistical Software, 84(4):1--30.
 #'
 #' @seealso \code{mc_dglm}, \code{mc_ns}, \code{mc_ma} and \code{mc_rw}.
 #' @export

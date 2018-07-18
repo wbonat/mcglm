@@ -9,8 +9,8 @@
 #' @return A list of matrix.
 #' @seealso \code{mc_dist}, \code{mc_ma}, \code{mc_rw} and \code{mc_mixed}.
 #'
-#' @source Bonat, W. H. (2016). Multiple Response Variables Regression
-#' Models in R: The mcglm Package. Journal of Statistical Software, submitted.
+#' @source Bonat, W. H. (2018). Multiple Response Variables Regression
+#' Models in R: The mcglm Package. Journal of Statistical Software, 84(4):1--30.
 #'
 #' @export
 

@@ -1,5 +1,5 @@
 ---
-title: "Fitting generalized linear models using the mcglm package."
+title: "Fitting generalized linear models using the mcglm package"
 author: "Wagner Hugo Bonat"
 date: "`r paste('mcglm', packageVersion('mcglm'), Sys.Date())`"
 vignette: >
@@ -54,7 +54,7 @@ To install the stable version of [`mcglm`][], use
 
 ```{r, eval=FALSE}
 library(devtools)
-install_git("http://git.leg.ufpr.br/wbonat/mcglm.git")
+install_git("wbonat/mcglm")
 ```
 
 ```{r, eval=FALSE, error=FALSE, message=FALSE, warning=FALSE}
@@ -265,9 +265,9 @@ fit.joint.mcglm <- mcglm(linear_pred = c(lot1 ~ log(u), lot2 ~ log(u)),
                          data = clotting,
                          control_initial = list_initial,
                          control_algorithm = list("correct" = TRUE,
-                                                 "method" = "rc",
-                                                 "tuning" = 0.001,
-                                                 "max_iter" = 100))
+                                                 "method" = "chaser",
+                                                 "tuning" = 0.1,
+                                                 "max_iter" = 1000))
 summary(fit.joint.mcglm)
 ```
 
@@ -347,5 +347,5 @@ summary(fit.logit.power)
 
 <!---------------------------------------------------------------------- -->
 
-[`mcglm`]: http://git.leg.ufpr.br/wbonat/mcglm
-[mcglm/README]: http://git.leg.ufpr.br/wbonat/mcglm/blob/master/README.md
+[`mcglm`]: http://github.com/wbonat/mcglm
+[mcglm/README]: http://github.com/wbonat/mcglm/blob/master/README.md

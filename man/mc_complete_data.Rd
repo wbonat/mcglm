@@ -4,8 +4,8 @@
 \alias{mc_complete_data}
 \title{Complete Data Set with NA}
 \source{
-Bonat, W. H. (2016). Multiple Response Variables Regression
-Models in R: The mcglm Package. Journal of Statistical Software, submitted.
+Bonat, W. H. (2018). Multiple Response Variables Regression
+Models in R: The mcglm Package. Journal of Statistical Software, 84(4):1--30.
 }
 \usage{
 mc_complete_data(data, id, index, id.exp)

@@ -1,3 +1,4 @@
+print("test_mc_build_sigma.R")
 ## Tests mc_build_sigma
 x1 <- seq(0,1,l=10)
 X <- model.matrix(~ x1)
@@ -540,3 +541,5 @@ test_that(
 #                          power_fixed = FALSE, compute_derivative_beta = TRUE)
 #names(actual2)
 #length(actual2$D_Sigma_beta)
+
+print("test_mc_build_sigma.R - OK")

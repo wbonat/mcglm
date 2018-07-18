@@ -1,3 +1,4 @@
+print("test_mc_build_sigma_between.R")
 ## Tests mc_build_sigmab
 
 test_that(
@@ -42,3 +43,4 @@ test_that(
     expect_equal(D_inv_Sigmab3,  inv_Sigmab$D_inv_Sigmab[[3]])
   }
 )
+print("test_mc_build_sigma_between.R-OK")

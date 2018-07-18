@@ -6,8 +6,8 @@
 \alias{mc_twin_full}
 \title{Twin Models Structure}
 \source{
-Bonat, W. H. (2016). Multiple Response Variables Regression
-Models in R: The mcglm Package. Journal of Statistical Software, submitted.
+Bonat, W. H. (2018). Multiple Response Variables Regression
+Models in R: The mcglm Package. Journal of Statistical Software, 84(4):1--30.
 }
 \usage{
 mc_twin(id, twin.id, type, replicate = NULL, structure, data)

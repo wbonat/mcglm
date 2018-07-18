@@ -17,7 +17,7 @@ parameters.}
 }
 \value{
 The cross-sensitivity matrix. Equation (10) of Bonat and
-    Jorgensen (2015).
+    Jorgensen (2016).
 }
 \description{
 Compute the cross-sensitivity matrix between regression

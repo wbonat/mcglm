@@ -4,8 +4,8 @@
 \alias{mc_rw}
 \title{Random Walk Models Structure}
 \source{
-Bonat, W. H. (2016). Multiple Response Variables Regression
-Models in R: The mcglm Package. Journal of Statistical Software, submitted.
+Bonat, W. H. (2018). Multiple Response Variables Regression
+Models in R: The mcglm Package. Journal of Statistical Software, 84(4):1--30.
 }
 \usage{
 mc_rw(id, time, data, order = 1, proper = FALSE)

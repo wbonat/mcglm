@@ -1,5 +1,5 @@
 ---
-title: "Multivariate Covariance Generalized Linear Models"
+title: "Choosing link, variance and covariance functions."
 author: "Wagner Hugo Bonat"
 date: "`r paste('mcglm', packageVersion('mcglm'), Sys.Date())`"
 vignette: >
@@ -71,9 +71,9 @@ packageVersion("mcglm")
 The `mcglm` package implements the multivariate covariance generalized
 linear models (McGLMs) proposed by Bonat and J$\o$rgensen (2016).
 The core fit function `mcglm` is employed for fitting a set of models. 
-In this introductory vignette we restrict ourselves to model 
+In this introductory vignette, we restrict ourselves to models for 
 independent data, although a simple model for longitudinal data analysis
-in the Gaussian case is also presented. We present models to deal with
+in the Gaussian case is presented. We present models to deal with
 continuous, binomial/bounded and count univariate response variables.
 We explore the specification of different link, variance and covariance
 functions.
@@ -327,7 +327,7 @@ fit4.logitPQ <- mcglm(linear_pred = c(y1 ~ covariate),
                       link = "logit", variance = "binomialPQ",
                       power_fixed = FALSE,
                       Ntrial = list(rep(10,250)), 
-                      control_algorithm = list(tunning = 0.5),
+                      control_algorithm = list(tuning = 0.5),
                       data = data)
 ```
 

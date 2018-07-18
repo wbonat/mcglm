@@ -22,8 +22,8 @@
 #' AE, CE and E. See example for details.
 #' @param data data set.
 #'
-#' @source Bonat, W. H. (2016). Multiple Response Variables Regression
-#' Models in R: The mcglm Package. Journal of Statistical Software, submitted.
+#' @source Bonat, W. H. (2018). Multiple Response Variables Regression
+#' Models in R: The mcglm Package. Journal of Statistical Software, 84(4):1--30.
 #'
 #' @return A list of matrices of \code{dgCMatrix} class.
 #'

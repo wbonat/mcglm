@@ -6,11 +6,10 @@
 \source{
 Bonat, W. H. and Jorgensen, B. (2016) Multivariate
     covariance generalized linear models.
-    Journal of Royal Statistical Society - Series C X(X):XX--XX.
+    Journal of Royal Statistical Society - Series C 65:649--675.
 
-Bonat, W. H. (2016). Multiple Response Variables Regression
-    Models in R: The mcglm Package.
-    Journal of Statistical Software, submitted.
+Bonat, W. H. (2018). Multiple Response Variables Regression
+Models in R: The mcglm Package. Journal of Statistical Software, 84(4):1--30.
 }
 \usage{
 fit_mcglm(list_initial, list_link, list_variance,

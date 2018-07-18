@@ -62,11 +62,10 @@
 #'
 #' @source Bonat, W. H. and Jorgensen, B. (2016) Multivariate
 #'     covariance generalized linear models.
-#'     Journal of Royal Statistical Society - Series C X(X):XX--XX.
+#'     Journal of Royal Statistical Society - Series C 65:649--675.
 #'
-#' @source Bonat, W. H. (2016). Multiple Response Variables Regression
-#'     Models in R: The mcglm Package.
-#'     Journal of Statistical Software, submitted.
+#' @source Bonat, W. H. (2018). Multiple Response Variables Regression
+#' Models in R: The mcglm Package. Journal of Statistical Software, 84(4):1--30.
 #'
 #' @importFrom stats as.formula binomial coef dist fitted glm make.link
 #' model.frame model.matrix na.exclude pchisq qchisq qnorm quasi
@@ -151,9 +150,18 @@ fit_mcglm <- function(list_initial, list_link, list_variance,
             cov_temp <- mc_pearson(y_vec = y_vec, mu_vec = mu_vec,
                                    Cfeatures = Cfeatures,
                                    inv_J_beta = inv_J_beta, D = D,
-                correct = correct, compute_variability = TRUE)
+                correct = correct, compute_variability = FALSE)
             step <- tuning * solve(cov_temp$Sensitivity, cov_temp$Score)
         }
+        #if(method == "gradient") {
+        #  cov_temp <- mc_pearson(y_vec = y_vec, mu_vec = mu_vec,
+        #                         Cfeatures = Cfeatures,
+        #                         inv_J_beta = inv_J_beta, D = D,
+        #                         correct = correct,
+        #                         compute_sensitivity = FALSE,
+        #                         compute_variability = FALSE)
+        #  step <- tuning * cov_temp$Score
+        #}
         if (method == "rc") {
             cov_temp <- mc_pearson(y_vec = y_vec, mu_vec = mu_vec,
                                    Cfeatures = Cfeatures,
@@ -183,7 +191,9 @@ fit_mcglm <- function(list_initial, list_link, list_variance,
         cov_ini <- cov_next
         solucao_cov[i, ] <- cov_next
         ## Checking the convergence
+        #sol = abs(c(solucao_beta[i, ], solucao_cov[i, ]))
         tolera <- abs(c(solucao_beta[i, ], solucao_cov[i, ]) - c(solucao_beta[i - 1, ], solucao_cov[i - 1, ]))
+        #tolera <- tolera/sol
         # if(verbose == TRUE){print(round(tolera, 4))}
         if (all(tolera <= tol) == TRUE)
             break
@@ -222,7 +232,9 @@ fit_mcglm <- function(list_initial, list_link, list_variance,
     p2 <- rbind(V_cov_beta, cov_temp$Variability)
     joint_variability <- cbind(p1, p2)
     inv_S_beta <- inv_J_beta
-    inv_S_cov <- solve(cov_temp$Sensitivity)
+    # Problem 1 x 1 matrix
+    # IMPROVE IT
+    inv_S_cov <- solve(as.matrix(cov_temp$Sensitivity))
     mat0 <- Matrix(0, ncol = dim(S_cov_beta)[1], nrow = dim(S_cov_beta)[2])
     cross_term <- -inv_S_cov %*% S_cov_beta %*% inv_S_beta
     p1 <- rbind(inv_S_beta, cross_term)

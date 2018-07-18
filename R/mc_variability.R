@@ -1,5 +1,5 @@
 #' @title Variability matrix
-#' @author Wagner Hugo Bonat
+#' @author Wagner Hugo Bonat and Eduardo Elias Ribeiro Jr
 #'
 #' @description Compute the variability matrix associated with the
 #'     Pearson estimating function.
@@ -19,10 +19,8 @@
 mc_variability <- function(sensitivity, product, inv_C, C, res) {
     W <- lapply(product, mc_multiply2, bord2 = inv_C)
     n_par <- length(product)
-    Variability <- matrix(NA, ncol = n_par, nrow = n_par)
-    ## Take care here, I have found problems when using Matrix classes
-    ## in this step. I do not know why yet!!
     k4 <- res^4 - 3 * diag(C)^2
+<<<<<<< HEAD
     for (i in 1:n_par) {
         for (j in 1:n_par) {
             Variability[i, j] <-
@@ -30,5 +28,16 @@ mc_variability <- function(sensitivity, product, inv_C, C, res) {
                                 sum(k4 * diag(W[[i]]) * diag(W[[j]])))
         }
     }
+=======
+    Variability = mc_variability_op(sensitivity = sensitivity, W = W, k4 = k4)
+    #for (i in 1:n_par) {
+    #    for (j in 1:i) {
+    #        Variability[i, j] <-
+    #            as.numeric(-2 * sensitivity[i, j] +
+    #                            sum(k4 * diag(W[[i]]) * diag(W[[j]])))
+    #    }
+    #}
+    Variability <- forceSymmetric(Variability, uplo = FALSE)
+>>>>>>> ed1efc16a14bfc6b744915a1e686b8ce0cd0fd21
     return(Variability)
 }

@@ -5,7 +5,8 @@
 \title{Pearson estimating function}
 \usage{
 mc_pearson(y_vec, mu_vec, Cfeatures, inv_J_beta = NULL, D = NULL,
-  correct = FALSE, compute_variability = FALSE)
+  correct = FALSE, compute_sensitivity = TRUE,
+  compute_variability = FALSE)
 }
 \arguments{
 \item{y_vec}{A vector.}
@@ -19,6 +20,8 @@ mc_pearson(y_vec, mu_vec, Cfeatures, inv_J_beta = NULL, D = NULL,
 \item{D}{A matrix.}
 
 \item{correct}{Logical.}
+
+\item{compute_sensitivity}{Logical.}
 
 \item{compute_variability}{Logical.}
 }
@@ -34,7 +37,7 @@ Compute the Pearson estimating function its sensitivity
 \details{
 Compute the Pearson estimating function its sensitivity and
     variability matrices.  For more details see Bonat and Jorgensen
-    (2015) equations 6, 7 and 8.
+    (2016) equations 6, 7 and 8.
 }
 \author{
 Wagner Hugo Bonat

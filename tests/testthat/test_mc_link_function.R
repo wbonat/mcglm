@@ -3,46 +3,6 @@ library(mcglm)  ## devtools::load_all("../../")
 list.link <- list("logit", "probit","cauchit","cloglog", "loglog",
                   "identity","log","sqrt","1/mu^2","inverse")
 
-test_that("length of output, dimensions of mu and D.",
-{
-    ## Build elements.
-    x2 <- c(1, 1, 1, 0, 0)
-    x1 <- seq(0, 1, length.out = length(x2))
-    X <- model.matrix(~ x1 + x2)
-    L <- mapply(FUN = mc_link_function,
-                list.link,
-                MoreArgs = list(beta = c(0.1, 0.2, 0.3), X = X,
-                                offset = NULL),
-                SIMPLIFY = FALSE)
-    ## Test the length of output.
-    expected <- 2L
-    actual <- lapply(L, FUN = length)
-    output <- lapply(actual, function(x) { x - expected }) != 0
-    if (any(output)) {
-        message(paste0(
-            "Error: Problems on length of link function output: ",
-            paste(unlist(list.link[output]), collapse = ", "), "."))
-    }
-    ## Test the length of mu vector.
-    expected <- length(x1)
-    actual <- lapply(lapply(L, FUN = "[[", "mu"), FUN = length)
-    output <- lapply(actual, function(x) { x - expected }) != 0
-    if (any(output)) {
-        message(paste0(
-            "Error: Problems on length of mu vector output: ",
-            paste(unlist(list.link[output]), collapse = ", "), "."))
-    }
-    ## Test the dimension of D matrix.
-    expected <- dim(X)
-    actual <- lapply(lapply(L, FUN = "[[", "D"), FUN = dim)
-    output <- lapply(actual, function(x) { sum(x - expected) }) != 0
-    if (any(output)) {
-        message(paste0(
-            "Error: Problems on dimension of D matrix: ",
-            paste(unlist(list.link[output]), collapse = ", "), "."))
-    }
-})
-
 test_that("NA's on beta argument",
 {
     x2 <- c(1, 1, 1, 0, 0)
@@ -51,6 +11,7 @@ test_that("NA's on beta argument",
     expect_error(mc_link_function(beta = c(0.1, 0.2, NA), X = X,
                                   offset = NULL, link = "log"))
 })
+print("Testing link functions - Part II")
 
 test_that("NA's on X design matrix argument",
 {
@@ -81,6 +42,8 @@ test_that("String on mu argument",
                                   offset = c(NA, 2, 3, NA, NA),
                                   link = "log"))
 })
+
+print("Testing link functions - Part II")
 
 test_that("Test arguments of a user defined link function",
 {
@@ -146,4 +109,40 @@ test_that("Test returned values of a user defined link function",
                                   link = "udlf"))
 })
 
-print("Testing link functions ... OK")
+# Length of expectation elements
+## Build elements.
+x2 <- c(1, 1, 1, 0, 0)
+x1 <- seq(0, 1, length.out = length(x2))
+X <- model.matrix(~ x1 + x2)
+L <- mapply(FUN = mc_link_function, list.link,
+            MoreArgs = list(beta = c(0.1, 0.2, 0.3), X = X,
+                            offset = NULL),
+            SIMPLIFY = FALSE)
+## Test the length of output.
+expected <- 2L
+actual <- lapply(L, FUN = length)
+output <- lapply(actual, function(x) { x - expected }) != 0
+if (any(output)) {
+  message(paste0(
+    "Error: Problems on length of link function output: ",
+    paste(unlist(list.link[output]), collapse = ", "), "."))
+}
+## Test the length of mu vector.
+expected <- length(x1)
+actual <- lapply(lapply(L, function(x)x$mu), FUN = length)
+output <- lapply(actual, function(x) { x - expected }) != 0
+if (any(output)) {
+  message(paste0("Error: Problems on length of mu vector output: ",
+                paste(unlist(list.link[output]), collapse = ", "), "."))
+}
+
+## Test the dimension of D matrix.
+expected <- dim(X)
+actual <- lapply(lapply(L, function(x)x$D), FUN = dim)
+output <- lapply(actual, function(x) { sum(x - expected) }) != 0
+if (any(output)) {
+  message(paste0("Error: Problems on dimension of D matrix: ",
+                 paste(unlist(list.link[output]), collapse = ", "), "."))
+}
+
+

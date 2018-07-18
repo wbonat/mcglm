@@ -43,12 +43,12 @@
 #' # Compound symmetry + random slope for x1 and x2 plus interactions
 #' mc_mixed(~0 + SUBJECT/(x1 + x2), data = data)
 #'
-#' @source Bonat, W. H. (2016). Multiple Response Variables Regression
-#' Models in R: The mcglm Package. Journal of Statistical Software, submitted.
+#' @source Bonat, W. H. (2018). Multiple Response Variables Regression
+#' Models in R: The mcglm Package. Journal of Statistical Software, 84(4):1--30.
 #'
 #' @source Bonat, et. al. (2016). Modelling the covariance structure in
 #' marginal multivariate count models: Hunting in Bioko Island.
-#' Environmetrics, submitted.
+#' Journal of Agricultural Biological and Environmental Statistics, 22(4):446--464.
 #'
 #' @seealso \code{mc_id}, \code{mc_conditional_test},
 #'  \code{mc_dist}, \code{mc_ma}, \code{mc_rw} and \code{mc_car}.

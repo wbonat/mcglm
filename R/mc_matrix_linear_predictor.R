@@ -22,12 +22,12 @@
 #' @seealso \code{mc_id}, \code{mc_dist}, \code{mc_ma}, \code{mc_rw},
 #' \code{mc_mixed} and \code{mc_car}.
 #'
+#' @source Bonat, W. H. (2018). Multiple Response Variables Regression
+#' Models in R: The mcglm Package. Journal of Statistical Software, 84(4):1--30.
+#'
 #' @source Bonat, W. H. and Jorgensen, B. (2016) Multivariate
 #'     covariance generalized linear models.
-#'     Journal of Royal Statistical Society - Series C X(X):XX--XX.
-#'
-#' @source Bonat, W. H. (2016). Multiple Response Variables Regression
-#' Models in R: The mcglm Package. Journal of Statistical Software, submitted.
+#'     Journal of Royal Statistical Society - Series C 65:649--675.
 #'
 #' @examples
 #' require(Matrix)

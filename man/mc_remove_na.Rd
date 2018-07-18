@@ -4,8 +4,8 @@
 \alias{mc_remove_na}
 \title{Remove NA from Matrix Linear Predictor}
 \source{
-Bonat, W. H. (2016). Multiple Response Variables Regression
-Models in R: The mcglm Package. Journal of Statistical Software, submitted.
+Bonat, W. H. (2018). Multiple Response Variables Regression
+Models in R: The mcglm Package. Journal of Statistical Software, 84(4):1--30.
 }
 \usage{
 mc_remove_na(matrix_pred, cod)
