@@ -26,7 +26,7 @@ mc_variability <- function(sensitivity, product, inv_C, C, res) {
     for (i in 1:n_par) {
         for (j in 1:n_par) {
             Variability[i, j] <-
-                as.numeric(-2 * sensitivity[i, j] +
+                as.numeric(-2 * sensitivity[i, j] -
                                 sum(k4 * diag(W[[i]]) * diag(W[[j]])))
         }
     }
