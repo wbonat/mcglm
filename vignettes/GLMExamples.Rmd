@@ -3,7 +3,7 @@ title: "Fitting generalized linear models using the mcglm package"
 author: "Wagner Hugo Bonat"
 date: "`r paste('mcglm', packageVersion('mcglm'), Sys.Date())`"
 vignette: >
-  %\VignetteIndexEntry{Multivariate Covariance Generalized Linear Models}
+  %\VignetteIndexEntry{Fitting generalized linear models using the mcglm package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

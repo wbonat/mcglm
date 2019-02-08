@@ -38,7 +38,7 @@ trellis.par.set(ps)
 
 ## ---- eval=FALSE--------------------------------------------------
 #  library(devtools)
-#  install_git("http://git.leg.ufpr.br/wbonat/mcglm.git")
+#  install_git("wbonat/mcglm")
 
 ## ---- eval=FALSE, error=FALSE, message=FALSE, warning=FALSE-------
 #  library(mcglm)

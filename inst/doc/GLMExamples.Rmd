@@ -1,9 +1,9 @@
 ---
-title: "Fitting GLMs using McGLMs"
+title: "Fitting generalized linear models using the mcglm package"
 author: "Wagner Hugo Bonat"
 date: "`r paste('mcglm', packageVersion('mcglm'), Sys.Date())`"
 vignette: >
-  %\VignetteIndexEntry{Multivariate Covariance Generalized Linear Models}
+  %\VignetteIndexEntry{Fitting generalized linear models using the mcglm package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -54,7 +54,7 @@ To install the stable version of [`mcglm`][], use
 
 ```{r, eval=FALSE}
 library(devtools)
-install_git("http://git.leg.ufpr.br/wbonat/mcglm.git")
+install_git("wbonat/mcglm")
 ```
 
 ```{r, eval=FALSE, error=FALSE, message=FALSE, warning=FALSE}
@@ -70,7 +70,7 @@ packageVersion("mcglm")
 ##### Abstract
 The `mcglm` package implements the multivariate covariance generalized
 linear models (McGLMs) proposed by Bonat and J$\o$rgensen (2016).
-In this introductory vignette, we employed the `mcglm` package for
+In this introductory vignette we employed the `mcglm` package for
 fitting a set of generalized linear models and compare our results
 with the ones obtained by ordinary `R` functions like `lm` and `glm`.
 
@@ -94,20 +94,20 @@ fit.glm <- glm(counts ~ outcome + treatment, family = poisson)
 ```
 
 The orthodox quasi-Poisson model is obtained specifying the variance
-function as `tweedie` and fixing the power parameter at $1$.
+function as `tweedie` and fix the power parameter at $1$.
 Since, we are dealing with independent data, the matrix linear predictor
 is composed of a diagonal matrix.
 
 ```{r, warning = FALSE, message = FALSE}
 require(Matrix)
 # Matrix linear predictor
-Z0 <- mc_id(d.AD)
+Z0 <- Diagonal(dim(d.AD)[1],1)
 fit.qglm <- mcglm(linear_pred = c(counts ~ outcome + treatment),
-                  matrix_pred = list("resp1" = Z0),
+                  matrix_pred = list("resp1" = list(Z0)),
                   link = "log", variance = "tweedie", data = d.AD,
-                  control_algorithm = list("verbose" = FALSE,
-                                           "method" = "chaser",
-                                           "tuning" = 0.8))
+                  control_algorithm = list(verbose = FALSE,
+                                           method = "chaser",
+                                           tuning = 0.8))
 ```
 
 Comparing regression parameter estimates.
@@ -134,9 +134,9 @@ anorex.1 <- glm(Postwt ~ Prewt + Treat + offset(Prewt),
                family = gaussian, data = anorexia)
 
 # McGLM fit
-Z0 <- mc_id(anorexia)
+Z0 <- Diagonal(dim(anorexia)[1],1)
 fit.anorexia <- mcglm(linear_pred = c(Postwt ~ Prewt + Treat),
-                      matrix_pred = list(Z0),
+                      matrix_pred = list(list(Z0)),
                       link = "identity", variance = "constant",
                       offset = list(anorexia$Prewt),
                       power_fixed = TRUE, data = anorexia,
@@ -196,9 +196,9 @@ In that case, we have only one response variable, but the initial value
 for correlation parameter $\rho$ should be specified.
 
 ```{r, warning = FALSE, message = FALSE}
-Z0 <- mc_id(clotting)
+Z0 <- Diagonal(dim(clotting)[1], 1)
 fit.lot1.mcglm <- mcglm(linear_pred = c(lot1 ~ log(u)),
-                        matrix_pred = list(Z0),
+                        matrix_pred = list(list(Z0)),
                         link = "inverse", variance = "tweedie",
                         data = clotting,
                         control_initial = list_initial)
@@ -225,7 +225,7 @@ required, we just modify the `entries` regression and tau.
 
 ```{r, warning = FALSE, message = FALSE}
 fit.lot2.mcglm <- mcglm(linear_pred = c(lot2 ~ log(u)),
-                        matrix_pred = list(Z0),
+                        matrix_pred = list(list(Z0)),
                         link = "inverse", variance = "tweedie",
                         data = clotting,
                         control_initial = list_initial)
@@ -242,9 +242,9 @@ cbind("mcglm" = sqrt(diag(vcov(fit.lot2.mcglm))),
       "glm" = c(sqrt(diag(vcov(fit.lot2))),NA))
 ```
 
-The main contribution of the `mcglm`package is that it easily fits
+The main contribution of the `mcglm`package is that it easily fit
 multivariate regression models. For example, for the `clotting` data a
-bivariate Gamma model could be suitable choice.
+bivariate Gamma model is a suitable choice.
 
 ```{r, warning = FALSE, message = FALSE}
 # Initial values
@@ -255,19 +255,19 @@ list_initial$tau <- list(c(0.00149), c(0.001276))
 list_initial$rho = 0.80
 
 # Matrix linear predictor
-Z0 <- mc_id(clotting)
+Z0 <- Diagonal(dim(clotting)[1],1)
 
 # Fit bivariate Gamma model
 fit.joint.mcglm <- mcglm(linear_pred = c(lot1 ~ log(u), lot2 ~ log(u)),
-                         matrix_pred = list(Z0, Z0),
+                         matrix_pred = list(list(Z0), list(Z0)),
                          link = c("inverse", "inverse"),
                          variance = c("tweedie", "tweedie"),
                          data = clotting,
                          control_initial = list_initial,
                          control_algorithm = list("correct" = TRUE,
-                                                 "method" = "rc",
-                                                 "tuning" = 0.001,
-                                                 "max_iter" = 100))
+                                                 "method" = "chaser",
+                                                 "tuning" = 0.1,
+                                                 "max_iter" = 1000))
 summary(fit.joint.mcglm)
 ```
 
@@ -285,7 +285,7 @@ list_initial$rho = 0
 
 # Fit bivariate Gamma model
 fit.joint.log <- mcglm(linear_pred = c(lot1 ~ log(u), lot2 ~ log(u)),
-                       matrix_pred = list(Z0,Z0),
+                       matrix_pred = list(list(Z0),list(Z0)),
                        link = c("log", "log"),
                        variance = c("tweedie", "tweedie"),
                        data = clotting,
@@ -315,9 +315,9 @@ The same fitted by `mcglm` function.
 
 ```{r, warning = FALSE, message = FALSE}
 # Matrix linear predictor
-Z0 <- mc_id(data)
+Z0 <- Diagonal(dim(data)[1],1)
 fit.logit <- mcglm(linear_pred = c(resp ~ Age),
-                   matrix_pred = list(Z0),
+                   matrix_pred = list(list(Z0)),
                    link = "logit", variance = "binomialP",
                    Ntrial = list(data$Ntrial), data = data)
 ```
@@ -337,7 +337,7 @@ variance function.
 
 ```{r, warning = FALSE, message = FALSE}
 fit.logit.power <- mcglm(linear_pred = c(resp ~ Age),
-                         matrix_pred = list(Z0),
+                         matrix_pred = list(list(Z0)),
                          link = "logit", variance = "binomialP",
                          Ntrial = list(data$Ntrial),
                          power_fixed = FALSE, data = data)
@@ -347,5 +347,5 @@ summary(fit.logit.power)
 
 <!---------------------------------------------------------------------- -->
 
-[`mcglm`]: http://git.leg.ufpr.br/wbonat/mcglm
-[mcglm/README]: http://git.leg.ufpr.br/wbonat/mcglm/blob/master/README.md
+[`mcglm`]: http://github.com/wbonat/mcglm
+[mcglm/README]: http://github.com/wbonat/mcglm/blob/master/README.md

@@ -16,13 +16,12 @@ Build status for the stable version (`master` branch)
 [![Build Status](https://travis-ci.org/wbonat/mcglm.svg?branch=devel)](https://travis-ci.org/wbonat/mcglm)
 Build status for the development version (`devel` branch)
 
-The `mcglm` package fit multivariate covariance generalized linear models
+The `mcglm` package fits multivariate covariance generalized linear models
 (Bonat and Jorgensen, 2015).
 
 ## Introduction
 
-`mcglm` fit multivariate covariance generalized linear models. It allows
-use a different linear predictor for each response variable of a
+`mcglm` fits multivariate covariance generalized linear models. It allows use a different linear predictor for each response variable of a
 multivariate response. The response variable can be continous or
 dicrete, like counts and binary and also limited continuos ou
 discrete/continuous inflated responses. The most important and relevant

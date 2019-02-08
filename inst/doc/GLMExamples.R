@@ -38,7 +38,7 @@ trellis.par.set(ps)
 
 ## ---- eval=FALSE--------------------------------------------------
 #  library(devtools)
-#  install_git("http://git.leg.ufpr.br/wbonat/mcglm.git")
+#  install_git("wbonat/mcglm")
 
 ## ---- eval=FALSE, error=FALSE, message=FALSE, warning=FALSE-------
 #  library(mcglm)
@@ -61,13 +61,13 @@ fit.glm <- glm(counts ~ outcome + treatment, family = poisson)
 ## ---- warning = FALSE, message = FALSE----------------------------
 require(Matrix)
 # Matrix linear predictor
-Z0 <- mc_id(d.AD)
+Z0 <- Diagonal(dim(d.AD)[1],1)
 fit.qglm <- mcglm(linear_pred = c(counts ~ outcome + treatment),
-                  matrix_pred = list("resp1" = Z0),
+                  matrix_pred = list("resp1" = list(Z0)),
                   link = "log", variance = "tweedie", data = d.AD,
-                  control_algorithm = list("verbose" = FALSE,
-                                           "method" = "chaser",
-                                           "tuning" = 0.8))
+                  control_algorithm = list(verbose = FALSE,
+                                           method = "chaser",
+                                           tuning = 0.8))
 
 ## ---- warning = FALSE, message = FALSE----------------------------
 cbind("GLM" = coef(fit.glm),
@@ -82,9 +82,9 @@ anorex.1 <- glm(Postwt ~ Prewt + Treat + offset(Prewt),
                family = gaussian, data = anorexia)
 
 # McGLM fit
-Z0 <- mc_id(anorexia)
+Z0 <- Diagonal(dim(anorexia)[1],1)
 fit.anorexia <- mcglm(linear_pred = c(Postwt ~ Prewt + Treat),
-                      matrix_pred = list(Z0),
+                      matrix_pred = list(list(Z0)),
                       link = "identity", variance = "constant",
                       offset = list(anorexia$Prewt),
                       power_fixed = TRUE, data = anorexia,
@@ -119,9 +119,9 @@ list_initial$tau <- list(summary(fit.lot1)$dispersion)
 list_initial$rho = 0
 
 ## ---- warning = FALSE, message = FALSE----------------------------
-Z0 <- mc_id(clotting)
+Z0 <- Diagonal(dim(clotting)[1], 1)
 fit.lot1.mcglm <- mcglm(linear_pred = c(lot1 ~ log(u)),
-                        matrix_pred = list(Z0),
+                        matrix_pred = list(list(Z0)),
                         link = "inverse", variance = "tweedie",
                         data = clotting,
                         control_initial = list_initial)
@@ -140,7 +140,7 @@ list_initial$tau <- list("resp1" = c(var(1/clotting$lot2)))
 
 ## ---- warning = FALSE, message = FALSE----------------------------
 fit.lot2.mcglm <- mcglm(linear_pred = c(lot2 ~ log(u)),
-                        matrix_pred = list(Z0),
+                        matrix_pred = list(list(Z0)),
                         link = "inverse", variance = "tweedie",
                         data = clotting,
                         control_initial = list_initial)
@@ -162,19 +162,19 @@ list_initial$tau <- list(c(0.00149), c(0.001276))
 list_initial$rho = 0.80
 
 # Matrix linear predictor
-Z0 <- mc_id(clotting)
+Z0 <- Diagonal(dim(clotting)[1],1)
 
 # Fit bivariate Gamma model
 fit.joint.mcglm <- mcglm(linear_pred = c(lot1 ~ log(u), lot2 ~ log(u)),
-                         matrix_pred = list(Z0, Z0),
+                         matrix_pred = list(list(Z0), list(Z0)),
                          link = c("inverse", "inverse"),
                          variance = c("tweedie", "tweedie"),
                          data = clotting,
                          control_initial = list_initial,
                          control_algorithm = list("correct" = TRUE,
-                                                 "method" = "rc",
-                                                 "tunning" = 0.001,
-                                                 "max_iter" = 100))
+                                                 "method" = "chaser",
+                                                 "tuning" = 0.1,
+                                                 "max_iter" = 1000))
 summary(fit.joint.mcglm)
 
 ## ---- warning = FALSE, message = FALSE----------------------------
@@ -188,7 +188,7 @@ list_initial$rho = 0
 
 # Fit bivariate Gamma model
 fit.joint.log <- mcglm(linear_pred = c(lot1 ~ log(u), lot2 ~ log(u)),
-                       matrix_pred = list(Z0,Z0),
+                       matrix_pred = list(list(Z0),list(Z0)),
                        link = c("log", "log"),
                        variance = c("tweedie", "tweedie"),
                        data = clotting,
@@ -208,9 +208,9 @@ glm.out = glm(cbind(Menarche, Total-Menarche) ~ Age,
 
 ## ---- warning = FALSE, message = FALSE----------------------------
 # Matrix linear predictor
-Z0 <- mc_id(data)
+Z0 <- Diagonal(dim(data)[1],1)
 fit.logit <- mcglm(linear_pred = c(resp ~ Age),
-                   matrix_pred = list(Z0),
+                   matrix_pred = list(list(Z0)),
                    link = "logit", variance = "binomialP",
                    Ntrial = list(data$Ntrial), data = data)
 
@@ -224,7 +224,7 @@ cbind("GLM" = c(sqrt(diag(vcov(glm.out))),NA),
 
 ## ---- warning = FALSE, message = FALSE----------------------------
 fit.logit.power <- mcglm(linear_pred = c(resp ~ Age),
-                         matrix_pred = list(Z0),
+                         matrix_pred = list(list(Z0)),
                          link = "logit", variance = "binomialP",
                          Ntrial = list(data$Ntrial),
                          power_fixed = FALSE, data = data)
