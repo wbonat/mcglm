@@ -4,7 +4,8 @@
 \alias{mc_updateCov}
 \title{Updated covariance parameters}
 \usage{
-mc_updateCov(list_initial, covariance, list_power_fixed, information, n_resp)
+mc_updateCov(list_initial, covariance, list_power_fixed, information,
+  n_resp)
 }
 \arguments{
 \item{list_initial}{A list of initial values.}

@@ -32,10 +32,6 @@ load_all()
 ls("package:mcglm")
 packageVersion("mcglm")
 
-# How many objects in each class.
-table(sapply(ls("package:mcglm"),
-             function(x) class(eval(parse(text=x)))))
-
 #-----------------------------------------------------------------------
 # Check.
 
