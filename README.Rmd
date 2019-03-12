@@ -17,7 +17,7 @@ Build status for the stable version (`master` branch)
 Build status for the development version (`devel` branch)
 
 The `mcglm` package fits multivariate covariance generalized linear models
-(Bonat and Jorgensen, 2015).
+(Bonat and Jorgensen, 2016).
 
 ## Introduction
 
@@ -136,6 +136,6 @@ pkg.win.link <- paste0(
 [`r pkg.win`]: `r pkg.win.link`
 [mcglm-manual.pdf]: https://github.com/wbonat/mcglm/raw/master/downloads/mcglm-manual.pdf
 [Gitflow worflow]: http://nvie.com/posts/a-successful-git-branching-model/
-[Wagner Hugo Bonat]: http://www.leg.ufpr.br/doku.php/pessoais:wbonat
+[Wagner Hugo Bonat]: http://www.leg.ufpr.br/~wagner
 [Walmes Marques Zeviani]: http://www.leg.ufpr.br/~walmes
 [Fernando de Pol Mayer]: http://www.leg.ufpr.br/~fernandomayer
