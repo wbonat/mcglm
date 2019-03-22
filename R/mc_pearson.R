@@ -40,7 +40,7 @@ mc_pearson <- function(y_vec, mu_vec, Cfeatures, inv_J_beta = NULL,
         correction <- mc_correction(D_C = Cfeatures$D_C,
                                     inv_J_beta = inv_J_beta, D = D,
                                     inv_C = Cfeatures$inv_C)
-        output <- list(Score = pearson_score - correction,
+        output <- list(Score = pearson_score + correction,
                        Sensitivity = sensitivity, Extra = product)
     }
     if (compute_variability == TRUE) {

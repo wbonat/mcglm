@@ -20,10 +20,11 @@ mc_variability <- function(sensitivity, product, inv_C, C, res) {
     W <- lapply(product, mc_multiply2, bord2 = inv_C)
     n_par <- length(product)
     k4 <- res^4 - 3 * diag(C)^2
+    #Variability <- matrix(NA, nrow = n_par, ncol = n_par)
     #for (i in 1:n_par) {
     #    for (j in 1:n_par) {
     #        Variability[i, j] <-
-    #            as.numeric(-2 * sensitivity[i, j] -
+    #            as.numeric(-2 * sensitivity[i, j] +
     #                            sum(k4 * diag(W[[i]]) * diag(W[[j]])))
     #    }
     #}

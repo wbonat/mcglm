@@ -14,7 +14,7 @@ arma::sp_mat mc_variability_op(arma::sp_mat sensitivity, List W, arma::vec k4) {
       vec Wj;
       vec WW;
       Wj = as<sp_mat>(W[j]).diag();
-      V(i,j) = -2 * sensitivity(i,j) - sum(k4 % Wi % Wj);
+      V(i,j) = -2 * sensitivity(i,j) + sum(k4 % Wi % Wj);
     }
   }
   return V;
