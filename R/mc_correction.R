@@ -23,5 +23,5 @@ mc_correction <- function(D_C, inv_J_beta, D, inv_C) {
     output <- lapply(term1,
                      function(x, inv_J_beta) sum(x * inv_J_beta),
                      inv_J_beta = inv_J_beta)
-    return(unlist(output))
+    return(-unlist(output))
 }

@@ -37,7 +37,7 @@
 #' should be sparse or not.
 #' @param y_vec a vector of the stacked response variables.
 #' @param correct a logical indicating if the algorithm will use the
-#' correction term or not. Default \code{correct = TRUE}.
+#' correction term or not. Default \code{correct = FALSE}.
 #' @param max_iter maximum number of iterations. Default \code{max_iter = 20}.
 #' @param tol a numeric specyfing the tolerance. Default \code{tol = 1e-04}.
 #' @param method a string specyfing the method used to fit the models
@@ -78,7 +78,7 @@ fit_mcglm <- function(list_initial, list_link, list_variance,
                       list_covariance, list_X, list_Z,
                       list_offset, list_Ntrial, list_power_fixed,
                       list_sparse, y_vec,
-                      correct = TRUE, max_iter, tol = 0.001,
+                      correct = FALSE, max_iter, tol = 0.001,
                       method = "rc",
                       tuning = 0, verbose) {
     ## Transformation from list to vector
