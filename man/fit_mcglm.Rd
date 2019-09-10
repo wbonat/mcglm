@@ -62,7 +62,7 @@ should be sparse or not.}
 \item{y_vec}{a vector of the stacked response variables.}
 
 \item{correct}{a logical indicating if the algorithm will use the
-correction term or not. Default \code{correct = TRUE}.}
+correction term or not. Default \code{correct = FALSE}.}
 
 \item{max_iter}{maximum number of iterations. Default \code{max_iter = 20}.}
 

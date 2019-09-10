@@ -93,7 +93,8 @@ mc_initial_values <- function(linear_pred, matrix_pred, link,
             }
         }
         if (variance[[i]] == "tweedie" |
-                variance[[i]] == "poisson_tweedie") {
+                variance[[i]] == "poisson_tweedie" |
+            variance[[i]] == "geom_tweedie") {
             power_initial[[i]] <- 1
             if (!is.null(offset[[i]])) {
                 data_temp <- data

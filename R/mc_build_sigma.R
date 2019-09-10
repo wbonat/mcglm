@@ -259,5 +259,81 @@ mc_build_sigma <- function(mu, Ntrial = 1, tau, power, Z, sparse,
             }
         }
     }
+    if(variance == "geom_tweedie") {
+        if (covariance == "identity" | covariance == "expm") {
+          Omega <- mc_build_omega(tau = tau, Z = Z,
+                                  covariance_link = covariance,
+                                  sparse = sparse)
+          V_sqrt <- mc_variance_function(
+            mu = mu$mu, power = power,
+            Ntrial = Ntrial, variance = "power", inverse = FALSE,
+            derivative_power = !power_fixed,
+            derivative_mu = compute_derivative_beta)
+          Sigma <- forceSymmetric(Diagonal(length(mu$mu), mu$mu^2) +
+                                    V_sqrt$V_sqrt %*%
+                                    Omega$Omega %*% V_sqrt$V_sqrt)
+          chol_Sigma <- chol(Sigma)
+          inv_chol_Sigma <- solve(chol_Sigma)
+          D_Sigma <- lapply(Omega$D_Omega, mc_sandwich,
+                            bord1 = V_sqrt$V_sqrt,
+                            bord2 = V_sqrt$V_sqrt)
+          if (power_fixed == FALSE) {
+            D_Sigma_power <- mc_sandwich_power(
+              middle = Omega$Omega,
+              bord1 = V_sqrt$V_sqrt, bord2 = V_sqrt$D_V_sqrt_p)
+            D_Sigma <- c(D_Sigma_power = D_Sigma_power,
+                         D_Sigma_tau = D_Sigma)
+          }
+          output <- list(Sigma_chol = chol_Sigma,
+                         Sigma_chol_inv = inv_chol_Sigma,
+                         D_Sigma = D_Sigma)
+          if (compute_derivative_beta == TRUE) {
+            D_Sigma_beta <- mc_derivative_sigma_beta(
+              D = mu$D,
+              D_V_sqrt_mu = V_sqrt$D_V_sqrt_mu, Omega$Omega,
+              V_sqrt = V_sqrt$V_sqrt, variance = variance)
+            output$D_Sigma_beta <- D_Sigma_beta
+          }
+        }
+        if (covariance == "inverse") {
+          inv_Omega <- mc_build_omega(tau = tau, Z = Z,
+                                      covariance_link = "inverse",
+                                      sparse = sparse)
+          Omega <- chol2inv(chol(inv_Omega$inv_Omega))
+          V_sqrt <- mc_variance_function(
+            mu = mu$mu, power = power,
+            Ntrial = Ntrial, variance = "power", inverse = FALSE,
+            derivative_power = !power_fixed,
+            derivative_mu = compute_derivative_beta)
+          D_Omega <- lapply(inv_Omega$D_inv_Omega,
+                            mc_sandwich_negative, bord1 = Omega,
+                            bord2 = Omega)
+          D_Sigma <- lapply(D_Omega, mc_sandwich,
+                            bord1 = V_sqrt$V_sqrt,
+                            bord2 = V_sqrt$V_sqrt)
+          Sigma <- forceSymmetric(Diagonal(length(mu$mu), mu$mu^2) +
+                                    V_sqrt$V_sqrt %*% Omega %*%
+                                    V_sqrt$V_sqrt)
+          chol_Sigma <- chol(Sigma)
+          inv_chol_Sigma <- solve(chol_Sigma)
+          if (power_fixed == FALSE) {
+            D_Sigma_p <- mc_sandwich_power(
+              middle = Omega,
+              bord1 = V_sqrt$V_sqrt,
+              bord2 = V_sqrt$D_V_sqrt_power)
+            D_Sigma <- c(D_Sigma_p, D_Sigma)
+          }
+          output <- list(Sigma_chol = chol_Sigma,
+                         Sigma_chol_inv = inv_chol_Sigma,
+                         D_Sigma = D_Sigma)
+          if (compute_derivative_beta == TRUE) {
+            D_Sigma_beta <- mc_derivative_sigma_beta(
+              D = mu$D,
+              D_V_sqrt_mu = V_sqrt$D_V_sqrt_mu, Omega = Omega,
+              V_sqrt = V_sqrt$V_sqrt, variance = variance)
+            output$D_Sigma_beta <- D_Sigma_beta
+          }
+        }
+    }
     return(output)
 }

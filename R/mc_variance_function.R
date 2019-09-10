@@ -37,7 +37,7 @@
 #'
 #' @source Bonat, W. H. and Jorgensen, B. (2016) Multivariate
 #'     covariance generalized linear models.
-#'     Journal of Royal Statistical Society - Series C X(X):XX--XX.
+#'     Journal of Royal Statistical Society - Series C 65:649--675.
 #'
 #' @export
 #'

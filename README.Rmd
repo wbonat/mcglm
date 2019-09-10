@@ -21,7 +21,8 @@ The `mcglm` package fits multivariate covariance generalized linear models
 
 ## Introduction
 
-`mcglm` fits multivariate covariance generalized linear models. It allows use a different linear predictor for each response variable of a
+`mcglm` fits multivariate covariance generalized linear models. 
+It allows use a different linear predictor for each response variable of a
 multivariate response. The response variable can be continous or
 dicrete, like counts and binary and also limited continuos ou
 discrete/continuous inflated responses. The most important and relevant

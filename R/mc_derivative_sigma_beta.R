@@ -35,5 +35,13 @@ mc_derivative_sigma_beta <- function(D, D_V_sqrt_mu, Omega, V_sqrt,
                                   bord2 = D_V_sqrt_beta)
         }
     }
+    if (variance == "geom_tweedie") {
+      for (i in 1:n_beta) {
+        D_V_sqrt_beta <- Diagonal(n_obs, D_V_sqrt_mu * D[, i])
+        output[[i]] <- Diagonal(n_obs, 2*D[, i]) +
+          mc_sandwich_power(middle = Omega, bord1 = V_sqrt,
+                            bord2 = D_V_sqrt_beta)
+      }
+    }
     return(output)
 }
