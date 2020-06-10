@@ -4,7 +4,9 @@
 \name{ahs}
 \alias{ahs}
 \title{Australian Health Survey}
-\format{a \code{data.frame} with 5190 records and 15 variables.}
+\format{
+a \code{data.frame} with 5190 records and 15 variables.
+}
 \source{
 Deb, P. and Trivedi, P. K. (1997) Demand for medical care by
     the elderly: A finite mixture approach. Journal of Applied

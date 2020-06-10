@@ -149,7 +149,6 @@ NULL
 #'
 #'
 #' @examples
-#' \donttest{
 #' library(mcglm)
 #' library(Matrix)
 #' data(Hunting, package="mcglm")
@@ -163,7 +162,8 @@ NULL
 #'             offset = list(log(Hunting$OFFSET)), data = Hunting)
 #' summary(fit)
 #' anova(fit)
-#' }
+#'
+
 NULL
 
 #' @title Soil Chemistry Properties Data
@@ -205,23 +205,19 @@ NULL
 #' Models in R: The mcglm Package. Journal of Statistical Software, 84(4):1--30.
 #'
 #' @examples
-#' \donttest{
 #' data(soil, package="mcglm")
-#' neigh <- tri2nb(soil[,1:2])
-#' Z1 <- mc_car(neigh)
+#' neigh <- spdep::tri2nb(soil[,1:2])
+#' ## Sptail model
+#' ## Z1 <- mc_car(neigh) take too long
+#' Z1 <- mc_id(soil)
 #' # Linear predictor
 #' form.ca <- CA ~ COORD.X*COORD.Y + SAND + SILT + CLAY + PHWATER
 #' fit.ca <- mcglm(linear_pred = c(form.ca), matrix_pred = list(Z1),
 #'                link = "log", variance = "tweedie", covariance = "inverse",
-#'                power_fixed = FALSE, data = soil,
-#'                control_algorith = list(max_iter = 500, tuning = 0.1))
-#' summary(fit.ca)
-#' # Conditional hypothesis test
-#' mc_conditional_test(fit.ca, parameters = c("power11","tau11","tau12"),
-#'                    test = 2:3, fixed = 1)
-#' # Spatial autocorrelation
-#' mc_compute_rho(fit.ca)
-#' }
+#'                power_fixed = TRUE, data = soil,
+#'                control_algorith = list(max_iter = 1000, tuning = 0.1,
+#'                verbose = FALSE, tol = 1e-03))
+#' ## mc_compute_rho(fit.ca) only for spatial model
 #'
 
 NULL

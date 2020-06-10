@@ -4,10 +4,21 @@
 \alias{mc_build_C}
 \title{Build the joint covariance matrix}
 \usage{
-mc_build_C(list_mu, list_Ntrial, rho, list_tau, list_power, list_Z,
-  list_sparse, list_variance, list_covariance, list_power_fixed,
-  compute_C = FALSE, compute_derivative_beta = FALSE,
-  compute_derivative_cov = TRUE)
+mc_build_C(
+  list_mu,
+  list_Ntrial,
+  rho,
+  list_tau,
+  list_power,
+  list_Z,
+  list_sparse,
+  list_variance,
+  list_covariance,
+  list_power_fixed,
+  compute_C = FALSE,
+  compute_derivative_beta = FALSE,
+  compute_derivative_cov = TRUE
+)
 }
 \arguments{
 \item{list_mu}{A list with values of the mean.}

@@ -4,7 +4,9 @@
 \name{Hunting}
 \alias{Hunting}
 \title{Hunting in Pico Basile, Bioko Island, Equatorial Guinea.}
-\format{a \code{data.frame} with 1216 records and 11 variables.}
+\format{
+a \code{data.frame} with 1216 records and 11 variables.
+}
 \source{
 Bonat, et. al. (2017). Modelling the covariance structure in
 marginal multivariate count models: Hunting in Bioko Island.
@@ -56,7 +58,6 @@ the same HUNTER and MONTH.
 }
 }
 \examples{
-\donttest{
 library(mcglm)
 library(Matrix)
 data(Hunting, package="mcglm")
@@ -70,6 +71,6 @@ fit <- mcglm(linear_pred = c(formu), matrix_pred = list(c(Z0, Z1)),
             offset = list(log(Hunting$OFFSET)), data = Hunting)
 summary(fit)
 anova(fit)
-}
+
 }
 \keyword{datasets}

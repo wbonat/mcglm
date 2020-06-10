@@ -15,29 +15,31 @@
 #' @export
 
 # manova for objects of mcglm class ----------------------------------
-mc_manova <- function(object, ...) {
-  beta <- coef(object, type = "beta")[,1]
+mc_manova <- function (object, ...)
+{
+  beta <- coef(object, type = "beta")[, 1]
   n_beta <- length(beta)
   VCOV <- vcov(object)[1:n_beta, 1:n_beta]
-  ## Conditional variance-covariance model
   FF <- mc_build_F(vector = attr(object$list_X[[1]], "assign"))
   G <- Diagonal(length(object$mu_list), 1)
-  CC <- lapply(FF, function(x, G){kronecker(G,x)}, G = G)
-  N <- object$n_obs
+  CC <- lapply(FF, function(x, G) {
+    kronecker(G, x)
+  }, G = G)
+  N <- object$n_obs - dim(object$list_X[[1]])[2]
   test_W <- c()
   df <- c()
   p_value <- c()
-  for(i in 1:length(CC)) {
-    test_W[i] <- as.numeric(t(CC[[i]]%*%beta)%*%
-                              solve(CC[[i]]%*%VCOV%*%t(CC[[i]]))
-                            %*%(CC[[i]]%*%beta))
+  for (i in 1:length(CC)) {
+    test_W[i] <- as.numeric(t(CC[[i]] %*% beta) %*% solve(CC[[i]] %*%
+                                                            VCOV %*% t(CC[[i]])) %*% (CC[[i]] %*% beta))
     df[i] <- dim(CC[[i]])[1]
     p_value[i] <- stats::pchisq(test_W[i], df = df[i], lower.tail = FALSE)
   }
-  names <- c("Intercept", attr(stats::terms(object$linear_pred[[1]]), "term.labels"))
-  out <- data.frame("Effects" = names, "Df" = df,
-                    "Hotelling-Lawley" = round(test_W/N,3),
-                    "Qui-square" = round(test_W,3),
-                    "p-value" = round(p_value, 4) )
+  names <- c("Intercept", attr(stats::terms(object$linear_pred[[1]]),
+                               "term.labels"))
+  out <- data.frame(Effects = names, Df = df,
+                    `Hotelling-Lawley` = round(test_W/N,4),
+                    `Qui-square` = round(test_W, 4),
+                    `p-value` = round(p_value, 4))
   return(out)
 }

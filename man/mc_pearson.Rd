@@ -4,9 +4,16 @@
 \alias{mc_pearson}
 \title{Pearson estimating function}
 \usage{
-mc_pearson(y_vec, mu_vec, Cfeatures, inv_J_beta = NULL, D = NULL,
-  correct = FALSE, compute_sensitivity = TRUE,
-  compute_variability = FALSE)
+mc_pearson(
+  y_vec,
+  mu_vec,
+  Cfeatures,
+  inv_J_beta = NULL,
+  D = NULL,
+  correct = FALSE,
+  compute_sensitivity = TRUE,
+  compute_variability = FALSE
+)
 }
 \arguments{
 \item{y_vec}{A vector.}
