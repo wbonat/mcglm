@@ -41,8 +41,8 @@ Soil chemistry properties measured on a regular grid with
 }
 \examples{
 data(soil, package="mcglm")
-neigh <- spdep::tri2nb(soil[,1:2])
-## Sptail model
+## neigh <- spdep::tri2nb(soil[,1:2])
+## Spatial model
 ## Z1 <- mc_car(neigh) take too long
 Z1 <- mc_id(soil)
 # Linear predictor

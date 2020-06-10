@@ -42,7 +42,6 @@ Suggests:
     MASS,
     mvtnorm,
     tweedie,
-    spdep,
     devtools
 Imports:
     stats,
