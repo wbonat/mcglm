@@ -4,7 +4,7 @@
 \alias{mc_quasi_score}
 \title{Quasi-score function}
 \usage{
-mc_quasi_score(D, inv_C, y_vec, mu_vec)
+mc_quasi_score(D, inv_C, y_vec, mu_vec, W)
 }
 \arguments{
 \item{D}{A matrix. In general the output from
@@ -16,6 +16,8 @@ mc_quasi_score(D, inv_C, y_vec, mu_vec)
 \item{y_vec}{A vector.}
 
 \item{mu_vec}{A vector.}
+
+\item{W}{Matrix of weights.}
 }
 \value{
 The quasi-score vector, the Sensivity and variability

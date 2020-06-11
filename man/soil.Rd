@@ -4,9 +4,7 @@
 \name{soil}
 \alias{soil}
 \title{Soil Chemistry Properties Data}
-\format{
-a \code{data.frame} with 250 records and 9 variables.
-}
+\format{a \code{data.frame} with 250 records and 9 variables.}
 \source{
 Bonat, W. H. (2018). Multiple Response Variables Regression
 Models in R: The mcglm Package. Journal of Statistical Software, 84(4):1--30.

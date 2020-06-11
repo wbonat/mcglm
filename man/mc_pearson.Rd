@@ -4,16 +4,9 @@
 \alias{mc_pearson}
 \title{Pearson estimating function}
 \usage{
-mc_pearson(
-  y_vec,
-  mu_vec,
-  Cfeatures,
-  inv_J_beta = NULL,
-  D = NULL,
-  correct = FALSE,
-  compute_sensitivity = TRUE,
-  compute_variability = FALSE
-)
+mc_pearson(y_vec, mu_vec, Cfeatures, inv_J_beta = NULL, D = NULL,
+  correct = FALSE, compute_sensitivity = TRUE,
+  compute_variability = FALSE, W)
 }
 \arguments{
 \item{y_vec}{A vector.}
@@ -31,6 +24,8 @@ mc_pearson(
 \item{compute_sensitivity}{Logical.}
 
 \item{compute_variability}{Logical.}
+
+\item{W}{Matrix of weights.}
 }
 \value{
 A list with three components: (i) a vector of quasi-score

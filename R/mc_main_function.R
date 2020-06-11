@@ -43,6 +43,7 @@
 #' @param contrasts extra arguments to passed to
 #'     \code{\link[stats]{model.matrix}}.
 #' @param data a data frame.
+#' @param weights List of weights.
 #' @usage mcglm(linear_pred, matrix_pred, link, variance, covariance,
 #'        offset, Ntrial, power_fixed, data, control_initial,
 #'        contrasts, control_algorithm)
@@ -64,7 +65,7 @@
 mcglm <- function(linear_pred, matrix_pred, link, variance,
                   covariance, offset, Ntrial, power_fixed,
                   data, control_initial = "automatic",
-                  contrasts = NULL,
+                  contrasts = NULL, weights = NULL,
                   control_algorithm = list()) {
     n_resp <- length(linear_pred)
     linear_pred <- as.list(linear_pred)
@@ -109,20 +110,28 @@ mcglm <- function(linear_pred, matrix_pred, link, variance,
     con <- list(correct = TRUE, max_iter = 20, tol = 1e-04,
                 method = "chaser", tuning = 1, verbose = FALSE)
     con[(namc <- names(control_algorithm))] <- control_algorithm
+    list_model_frame <- lapply(linear_pred, model.frame, na.action = 'na.pass', data = data)
     if (!is.null(contrasts)) {
         list_X <- list()
         for (i in 1:n_resp) {
+            options(na.action='na.pass')
             list_X[[i]] <- model.matrix(linear_pred[[i]],
-                                        contrasts = contrasts[[i]],
-                                        data = data)
+                                        contrasts = contrasts[[i]])
+            options(na.action='na.omit')
         }
     } else {
+        options(na.action='na.pass')
         list_X <- lapply(linear_pred, model.matrix, data = data)
+        options(na.action='na.omit')
     }
-
-    list_model_frame <- lapply(linear_pred, model.frame, data = data)
     list_Y <- lapply(list_model_frame, model.response)
     y_vec <- as.numeric(do.call(c, list_Y))
+    if(is.null(weights)) {
+      C <- rep(1, length(y_vec))
+      C[is.na(y_vec)] = 0
+      weights = C
+      y_vec[is.na(y_vec)] <- 0
+    }
     sparse <- lapply(matrix_pred, function(x) {
         if (class(x) == "dgeMatrix") {
             FALSE
@@ -141,7 +150,8 @@ mcglm <- function(linear_pred, matrix_pred, link, variance,
                                max_iter = con$max_iter, tol = con$tol,
                                method = con$method,
                                tuning = con$tuning,
-                               verbose = con$verbose))
+                               verbose = con$verbose,
+                               weights = weights))
     if (class(model_fit) != "try-error") {
         model_fit$beta_names <- lapply(list_X, colnames)
         model_fit$power_fixed <- power_fixed

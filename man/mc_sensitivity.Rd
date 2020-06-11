@@ -4,10 +4,12 @@
 \alias{mc_sensitivity}
 \title{Sensitivity matrix}
 \usage{
-mc_sensitivity(product)
+mc_sensitivity(product, W)
 }
 \arguments{
 \item{product}{A list of matrix.}
+
+\item{W}{Matrix of weights.}
 }
 \value{
 The sensitivity matrix associated with the Pearson estimating

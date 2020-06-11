@@ -57,6 +57,8 @@ will be provided by the function \code{\link{mc_initial_values}}.}
 \item{contrasts}{extra arguments to passed to
 \code{\link[stats]{model.matrix}}.}
 
+\item{weights}{List of weights.}
+
 \item{control_algorithm}{a list of arguments to be passed for the
 fitting algorithm. See \code{\link[mcglm]{fit_mcglm}} for
 details.}

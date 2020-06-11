@@ -4,7 +4,7 @@
 \alias{mc_variability}
 \title{Variability matrix}
 \usage{
-mc_variability(sensitivity, product, inv_C, C, res)
+mc_variability(sensitivity, product, inv_C, C, res, W)
 }
 \arguments{
 \item{sensitivity}{A matrix. In general the output from
@@ -17,6 +17,8 @@ mc_variability(sensitivity, product, inv_C, C, res)
 \item{C}{A matrix. In general the output from \code{mc_build_C}.}
 
 \item{res}{A vector. The residuals vector, i.e. (y_vec - mu_vec).}
+
+\item{W}{Matrix of weights.}
 }
 \value{
 The variability matrix associated witht the Pearson
