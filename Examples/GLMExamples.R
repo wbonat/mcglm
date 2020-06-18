@@ -72,7 +72,7 @@ utils::data(anorexia, package = "MASS")
 
 # Orthodox GLM fit -----------------------------------------------------
 anorex.1 <- glm(Postwt ~ Prewt + Treat + offset(Prewt),
-               family = gaussian, data = anorexia)
+                family = gaussian, data = anorexia)
 summary(anorex.1)
 
 # Fitting by mcglm -----------------------------------------------------
@@ -83,7 +83,7 @@ fit.anorexia <- mcglm(linear_pred = c(Postwt ~ Prewt + Treat),
                       link = "identity", variance = "constant",
                       offset = list(anorexia$Prewt),
                       power_fixed = TRUE, data = anorexia,
-                      control_algorithm = list("correct" = FALSE))
+                      control_algorithm = list("correct" = TRUE))
 summary(fit.anorexia)
 
 # Comparing the results ------------------------------------------------
@@ -151,19 +151,19 @@ list_initial$tau <- list("resp1" = c(0.00149), "resp2" = c(0.001276))
 list_initial$rho = 0.80
 Z0 <- Diagonal(dim(clotting)[1],1)
 
-#fit.joint.mcglm <- mcglm(linear_pred = c(lot1 ~ log(u), lot2 ~ log(u)),
-#                         matrix_pred = list(list(Z0), list(Z0)),
-#                         link = c("inverse", "inverse"),
-#                         variance = c("tweedie", "tweedie"),
-#                         data = clotting, control_initial = list_initial,
-#                         control_algorithm = list(correct = TRUE,
-#                                                 method = "chaser",
-#                                                 verbose = TRUE,
-#                                                 tuning = 1,
-#                                                 max_iter = 100))
-#summary(fit.joint.mcglm)
-#plot(fit.joint.mcglm, type = "algorithm")
-#plot(fit.joint.mcglm)
+fit.joint.mcglm <- mcglm(linear_pred = c(lot1 ~ log(u), lot2 ~ log(u)),
+                         matrix_pred = list(list(Z0), list(Z0)),
+                         link = c("inverse", "inverse"),
+                         variance = c("tweedie", "tweedie"),
+                         data = clotting, control_initial = list_initial,
+                         control_algorithm = list(correct = TRUE,
+                                                  method = "chaser",
+                                                  verbose = TRUE,
+                                                  tuning = 1,
+                                                  max_iter = 100))
+summary(fit.joint.mcglm)
+plot(fit.joint.mcglm, type = "algorithm")
+plot(fit.joint.mcglm)
 
 # Bivariate Gamma model + log link function ----------------------------
 list_initial = list()

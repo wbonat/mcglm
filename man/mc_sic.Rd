@@ -12,7 +12,7 @@ marginal multivariate count models: Hunting in Bioko Island.
 Journal of Agricultural Biological and Environmental Statistics, 22(4):446--464.
 }
 \usage{
-mc_sic(object, scope, data, response, penalty = 2)
+mc_sic(object, scope, data, response, penalty = 2, weights)
 }
 \arguments{
 \item{object}{an object of \code{mcglm} class.}
@@ -25,6 +25,8 @@ mc_sic(object, scope, data, response, penalty = 2)
 SIC should be computed.}
 
 \item{penalty}{penalty term (default = 2).}
+
+\item{weights}{Vector of weights for model fitting.}
 }
 \value{
 A data frame containing SIC values, degree of freedom,

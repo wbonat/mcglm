@@ -14,7 +14,7 @@ Models in R: The mcglm Package. Journal of Statistical Software, 84(4):1--30.
 \usage{
 mcglm(linear_pred, matrix_pred, link, variance, covariance,
        offset, Ntrial, power_fixed, data, control_initial,
-       contrasts, control_algorithm)
+       contrasts, weights, control_algorithm)
 }
 \arguments{
 \item{linear_pred}{a list of formula see \code{\link[stats]{formula}}
@@ -57,7 +57,9 @@ will be provided by the function \code{\link{mc_initial_values}}.}
 \item{contrasts}{extra arguments to passed to
 \code{\link[stats]{model.matrix}}.}
 
-\item{weights}{List of weights.}
+\item{weights}{A list of weights for model fitting. Each element of
+the list should be a vector of weights of size equals the number of
+observations. Missing observations should be annotated as NA.}
 
 \item{control_algorithm}{a list of arguments to be passed for the
 fitting algorithm. See \code{\link[mcglm]{fit_mcglm}} for

@@ -15,6 +15,7 @@
 #' @param data data set containing all variables involved in the
 #'     model.
 #' @param penalty penalty term (default = 2).
+#' @param weights Vector of weights for model fitting.
 #' @param response index indicating for which response variable
 #'    SIC-covariance should be computed.
 #' @return A data frame containing SIC-covariance values,
@@ -45,7 +46,11 @@
 #' @export
 
 mc_sic_covariance <- function(object, scope, idx, data, penalty = 2,
-                              response) {
+                              response, weights) {
+  if(missing(weights)) {
+    weights <- rep(1, dim(object$C)[1])
+  }
+  W <- Diagonal(length(weights), 1)
     SIC <- c()
     df <- c()
     df_total <- c()
@@ -86,7 +91,7 @@ mc_sic_covariance <- function(object, scope, idx, data, penalty = 2,
         temp_score <- mc_pearson(y_vec = as.numeric(object$observed),
                                  mu_vec = as.numeric(object$mu_list[[response]]$mu),
                                  Cfeatures = Cfeatures, correct = FALSE,
-                                 compute_variability = TRUE)
+                                 compute_variability = TRUE, W = W)
 
         J <- temp_score$Sensitivity
         Sigma <- temp_score$Variability

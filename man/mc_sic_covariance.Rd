@@ -12,7 +12,8 @@ Bonat, W. H. (2018). Multiple Response Variables Regression
 Models in R: The mcglm Package. Journal of Statistical Software, 84(4):1--30.
 }
 \usage{
-mc_sic_covariance(object, scope, idx, data, penalty = 2, response)
+mc_sic_covariance(object, scope, idx, data, penalty = 2, response,
+  weights)
 }
 \arguments{
 \item{object}{an object of \code{mcglm} class.}
@@ -30,6 +31,8 @@ model.}
 
 \item{response}{index indicating for which response variable
 SIC-covariance should be computed.}
+
+\item{weights}{Vector of weights for model fitting.}
 }
 \value{
 A data frame containing SIC-covariance values,

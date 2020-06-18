@@ -16,7 +16,7 @@ fit_mcglm(list_initial, list_link, list_variance,
          list_covariance, list_X, list_Z, list_offset,
          list_Ntrial, list_power_fixed, list_sparse,
          y_vec, correct, max_iter, tol, method,
-         tuning, verbose)
+         tuning, verbose, weights)
 }
 \arguments{
 \item{list_initial}{a list of initial values for regression and
@@ -77,13 +77,15 @@ the step-length. Default \code{tuning = 1}.}
 
 \item{verbose}{a logical if TRUE print the values of the covariance
 parameters used on each iteration. Default \code{verbose = FALSE}}
+
+\item{weights}{Vector of weights for model fitting.}
 }
 \value{
-A list with estimated regression and covariance parameters.
+A list with regression and covariance parameter estimates.
 Details about the estimation procedures as iterations, sensitivity,
 variability are also provided. In general the users do not need to
 use this function directly. The \code{\link{mcglm}} provides GLM
-interface for fitting \code{mcglm} .
+interface for fitting \code{mcglm}.
 }
 \description{
 This function implements the two main algorithms used

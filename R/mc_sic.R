@@ -10,6 +10,7 @@
 #' @param scope a vector of covariate names to be tested.
 #' @param data data set containing all variables involved in the model.
 #' @param penalty penalty term (default = 2).
+#' @param weights Vector of weights for model fitting.
 #' @param response index indicating for which response variable the
 #' SIC should be computed.
 #'
@@ -40,7 +41,11 @@
 #'
 #' @export
 
-mc_sic <- function(object, scope, data, response, penalty = 2) {
+mc_sic <- function(object, scope, data, response, penalty = 2, weights) {
+  if(missing(weights)) {
+    weights <- rep(1, dim(object$C)[1])
+  }
+  W <- Diagonal(length(weights), 1)
     SIC <- c()
     df <- c()
     df_total <- c()
@@ -64,7 +69,7 @@ mc_sic <- function(object, scope, data, response, penalty = 2) {
                                     link = object$link[[response]])
         score_temp <- mc_quasi_score(D = mu_temp$D,
                                      inv_C = object$inv_C, y_vec = Y,
-                                     mu_vec = mu_temp$mu)
+                                     mu_vec = mu_temp$mu, W = W)
         S11 <- score_temp$Variability[1:n_ini_beta, 1:n_ini_beta]
         S22 <- score_temp$Variability[c(n_ini_beta + 1):n_total_beta,
                                       c(n_ini_beta + 1):n_total_beta]
