@@ -1,0 +1,44 @@
+---
+title: "Multivariate Covariance Generalized Linear Models"
+output: html_document
+author: "Wagner Hugo Bonat"
+date: "`r paste('mcglm', packageVersion('mcglm'), Sys.Date())`"
+vignette: >
+  %\VignetteIndexEntry{Multivariate Covariance Generalized Linear Models}        
+  %\VignetteEngine{knitr::rmarkdown} 
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r setup, include=FALSE}
+##----------------------------------------------------------------------
+
+library(knitr)
+
+opts_chunk$set(
+    dev.args=list(family="Palatino"))
+
+options(width=68)
+```
+
+****
+
+To install the stable version of [`mcglm`][], use
+`devtools::install_git()`. For more information, visit [mcglm/README].
+
+```{r, eval=FALSE}
+library(devtools)
+install_git("wbonat/mcglm")
+```
+
+```{r, eval=FALSE, error=FALSE, message=FALSE, warning=FALSE}
+library(mcglm)
+packageVersion("mcglm")
+```
+
+##### Abstract
+We present a quick introduction to the `mcglm`package.
+
