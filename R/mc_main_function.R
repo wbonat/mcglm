@@ -112,7 +112,8 @@ mcglm <- function(linear_pred, matrix_pred, link, variance,
   con <- list(correct = TRUE, max_iter = 20, tol = 1e-04,
               method = "chaser", tuning = 1, verbose = FALSE)
   con[(namc <- names(control_algorithm))] <- control_algorithm
-  list_model_frame <- lapply(linear_pred, model.frame, na.action = 'na.pass', data = data)
+  list_model_frame <- lapply(linear_pred, model.frame,
+                             na.action = 'na.pass', data = data)
   if (!is.null(contrasts)) {
     list_X <- list()
     for (i in 1:n_resp) {
@@ -134,8 +135,12 @@ mcglm <- function(linear_pred, matrix_pred, link, variance,
     weights = C
     y_vec[is.na(y_vec)] <- 0
   }
-  if(!is.null(weights)) {
+  if(!is.null(weights) & any(is.na(y_vec))) {
     y_vec[is.na(y_vec)] <- 0
+    if(class(weights) != "list") {weights <- as.list(weights)}
+    weights <- as.numeric(do.call(c, weights))
+  }
+  if(!is.null(weights) & !any(is.na(y_vec))) {
     if(class(weights) != "list") {weights <- as.list(weights)}
     weights <- as.numeric(do.call(c, weights))
   }

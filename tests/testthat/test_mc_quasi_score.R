@@ -22,7 +22,8 @@ Cfeatures <- mc_build_C(list_mu = list("resp1" = mu1, "resp2" = mu2),
                         list_power_fixed = list(FALSE,FALSE), compute_C = TRUE,
                         compute_derivative_beta = TRUE)
 
-tt = mc_quasi_score(D = D, inv_C = Cfeatures$inv_C, y_vec = y_vec, mu_vec = mu_vec, W = W)
+tt = mc_quasi_score(D = D, inv_C = Cfeatures$inv_C, C = Cfeatures$C,
+                    y_vec = y_vec, mu_vec = mu_vec, W = W)
 tt$Sensitivity
 inv_J_beta <- solve(tt$Sensitivity)
 

@@ -4,8 +4,11 @@
 \alias{mc_cross_sensitivity}
 \title{Cross-sensitivity}
 \usage{
-mc_cross_sensitivity(Product_cov, Product_beta,
-  n_beta_effective = length(Product_beta))
+mc_cross_sensitivity(
+  Product_cov,
+  Product_beta,
+  n_beta_effective = length(Product_beta)
+)
 }
 \arguments{
 \item{Product_cov}{A list of matrices.}

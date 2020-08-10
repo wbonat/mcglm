@@ -4,12 +4,12 @@
 \alias{mc_core_pearson}
 \title{Core of the Pearson estimating function.}
 \usage{
-mc_core_pearson(product, inv_C, res, W)
+mc_core_pearson(product, C, res, W)
 }
 \arguments{
 \item{product}{A matrix.}
 
-\item{inv_C}{A matrix.}
+\item{C}{A matrix.}
 
 \item{res}{A vector of residuals.}
 

@@ -12,8 +12,7 @@ Bonat, W. H. (2018). Multiple Response Variables Regression
 Models in R: The mcglm Package. Journal of Statistical Software, 84(4):1--30.
 }
 \usage{
-mc_sic_covariance(object, scope, idx, data, penalty = 2, response,
-  weights)
+mc_sic_covariance(object, scope, idx, data, penalty = 2, response, weights)
 }
 \arguments{
 \item{object}{an object of \code{mcglm} class.}

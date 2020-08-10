@@ -119,11 +119,12 @@ fit_mcglm <- function(list_initial, list_link, list_variance,
             list_power = list_initial$power, list_Z = list_Z,
             list_sparse = list_sparse, list_variance = list_variance,
             list_covariance = list_covariance,
-            list_power_fixed = list_power_fixed, compute_C = FALSE,
+            list_power_fixed = list_power_fixed, compute_C = TRUE,
             compute_derivative_beta = FALSE,
             compute_derivative_cov = FALSE)
         # Step 1.3 - Update the regression parameters
         beta_temp <- mc_quasi_score(D = D, inv_C = Cfeatures$inv_C,
+                                    C = Cfeatures$C,
                                     y_vec = y_vec, mu_vec = mu_vec,
                                     W = W)
         solucao_beta[i, ] <- as.numeric(beta_ini - solve(beta_temp$Sensitivity, beta_temp$Score))
@@ -219,6 +220,7 @@ fit_mcglm <- function(list_initial, list_link, list_variance,
                             compute_C = TRUE,
                             compute_derivative_beta = FALSE)
     beta_temp2 <- mc_quasi_score(D = D, inv_C = Cfeatures$inv_C,
+                                 C = Cfeatures$C,
                                  y_vec = y_vec, mu_vec = mu_vec, W = W)
     inv_J_beta <- solve(beta_temp2$Sensitivity)
 

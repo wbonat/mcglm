@@ -4,8 +4,12 @@
 \alias{mc_derivative_C_rho}
 \title{Derivative of C with respect to rho.}
 \usage{
-mc_derivative_C_rho(D_Sigmab, Bdiag_chol_Sigma_within,
-  t_Bdiag_chol_Sigma_within, II)
+mc_derivative_C_rho(
+  D_Sigmab,
+  Bdiag_chol_Sigma_within,
+  t_Bdiag_chol_Sigma_within,
+  II
+)
 }
 \arguments{
 \item{D_Sigmab}{A matrix.}

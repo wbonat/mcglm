@@ -1,19 +1,19 @@
 ---
-title: "Multivariate Covariance Generalized Linear Models"
+title: "Get Started"
 output: html_document
 author: "Wagner Hugo Bonat"
 date: "`r paste('mcglm', packageVersion('mcglm'), Sys.Date())`"
 vignette: >
-  %\VignetteIndexEntry{Multivariate Covariance Generalized Linear Models}        
+  %\VignetteIndexEntry{Get Started}        
   %\VignetteEngine{knitr::rmarkdown} 
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include=FALSE}
+```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r setup, include=FALSE}
+```{r, include=FALSE}
 ##----------------------------------------------------------------------
 
 library(knitr)
@@ -26,19 +26,170 @@ options(width=68)
 
 ****
 
-To install the stable version of [`mcglm`][], use
-`devtools::install_git()`. For more information, visit [mcglm/README].
+## Introduction to mcglm
 
-```{r, eval=FALSE}
-library(devtools)
-install_git("wbonat/mcglm")
+The `mcglm` package is designed for fitting multivariance covariance generalized linear models (McGLMs).
+[McGLMs][] is a further extension of the generalized linear models (GLM) designed with the following goals:
+
+- Goal 1: Make GLM more flexible to deal with
+    - Non-negative highly right-skewed data and continuous data with probability mass at zero;
+    - Under, equi, overdispersed, zero-inflated and heavy-tailed count data;
+    - Discrete and continuous bounded data.
+- Goal 2: Extend GLM to cGLM to deal with:
+    - Repeated measures and longitudinal data;
+    - Time series;
+    - Spatial and space-time data;
+    - Genetic and Twin data;
+    - Other types of dependent data.
+- Goal 3: Extend cGLM to McGLM to deal with:
+    - Multiple responses;
+    - Response variables of mixed types.
+
+The `mcglm` package allows a flexible specification of the mean and covariance 
+structures, and explicitly deals with multivariate response variables, through a 
+user friendly formula interface similar to the ordinary `glm` function.
+For details about the package, see [Bonat, 2018][].
+
+## Worked example
+
+Consider the `soya` data set available in the `mcglm`package. 
+The `soya`data set gather dat from an experiment carried out in a vegetation house 
+with soybeans. The experiment has two plants by plot with three levels of the factor 
+corresponding to amount of water in the soil `(water)` and five levels of potassium 
+fertilization `(pot)`. The plots were arranged in five blocks `(block)`. 
+Three response variables are of the interest, namely, grain
+yield (continuous), number of seeds (count) and number of viable peas (binomial) per plant.
+The experiment's goal is to measure the covariates effects on the response variable.
+
+### Continuous response variable
+
+Let's start by fitting a standard linear regression model for the continuous response, 
+i.e. grain yield. In the code below, we load the `mcglm` package and the `soya`data set.
+
+```{r, warning = FALSE, message = FALSE}
+require(mcglm)
+data(soya)
+head(soya)
 ```
 
-```{r, eval=FALSE, error=FALSE, message=FALSE, warning=FALSE}
-library(mcglm)
-packageVersion("mcglm")
+The first step for fitting a McGLM is to specify the linear predictor for each response variable.
+For instance, we have one response variable and the three covariates. Thus,
+
+```{r}
+form.grain <- grain ~ block + water * pot
 ```
 
-##### Abstract
-We present a quick introduction to the `mcglm`package.
+The second step is to specify the matrix linear predictor. For this example, we assume the
+observations are independent, consequently, the matrix linear predictor is composed of an 
+identity matrix and can be easily obtained using the `mc_id()` function.
 
+```{r}
+Z0 <- mc_id(soya)
+```
+
+We specifed the linear and matrix linear predictors, thus the next step is to fitting the model to data.
+
+```{r}
+fit_grain <- mcglm(linear_pred = c(form.grain), matrix_pred = list(Z0), data = soya)
+```
+Note that, we are using the default choice for the link, variance and covariance link functions, which correspond
+to `identity`, `constant`and `identity`. Consequently, such specification corresponds to the standard linear regression model. The output of the `mcglm` function is an object of `mcglm`class for which a set of methods is available. 
+
+```{r}
+methods(class = 'mcglm')
+```
+
+Let's summarize the fitting results.
+
+```{r}
+summary(fit_grain)
+```
+
+The first block of results presents the regression coefficients, while the second
+presents the dispersion parameter estimate. In this case only the variance of the Gaussian
+distribution. The last block presents the fitting algorithm, if the bias correction 
+term was used or not and the number of iterations required to reach convergence.
+
+### Counting response variable
+
+The model can easily be specified to deal with count data by choosing a suitable
+link and variance function. For example, a quasi-Poisson regression model
+is obtained by specifying the `link = "log"` and `variance = "tweedie"`.
+
+```{r}
+## Linear predictor
+form.seed <- seeds ~ block + water * pot
+
+## Model fitting
+fit_seed <- mcglm(linear_pred = c(form.seed), matrix_pred = list(Z0), 
+                  link = "log", variance = "tweedie", data = soya)
+```
+
+### Binomial response variable
+
+Similarly, we can easily fit a quasi-binomial regression model for the response 
+number of viable peas In this case, we have to create a new response variable
+with the proportions of viable peas and the total number of peas have to be included
+through the `Ntrial` argument. Finally, the standard logistic regression model is
+obtained by specifying `link = "logit"` and `variance = "binomialP"`.
+
+```{r}
+## Proportion of viable peas
+soya$viablepeasP <- soya$viablepeas / soya$totalpeas
+
+## Linear predictor
+form.peas <- viablepeasP ~ block + water * pot
+
+## Fitting
+fit_peas <- mcglm(linear_pred = c(form.peas), matrix_pred = list(Z0), 
+                  link = "logit", variance = "binomialP", 
+                  Ntrial = list(soya$totalpeas), 
+                  data = soya)
+
+```
+
+### Multiple response variables
+
+The joint regression model for the three response variables can easily be fitted
+as follows
+
+```{r}
+fit_joint <- mcglm(linear_pred = c(form.grain, form.seed, form.peas), 
+                   matrix_pred = list(Z0, Z0, Z0), 
+                   link = c("identity","log", "logit"), 
+                   variance = c("constant", "tweedie", "binomialP"),
+                   Ntrial = list(NULL, NULL, soya$totalpeas), 
+                   data = soya)
+```
+Beside the output for each response variable as shown in the `fit_grain` 
+model. The joint fit provides the correlation between response variables.
+
+```{r}
+summary(fit_joint, verbose = TRUE, print = "Correlation")
+```
+
+## Further options
+
+For continuous response variables the `mcglm` package provides the Tweedie family of
+distribution that can deal with non-negative highly right-skewed data and 
+continuous data with probability mass at zero. It is specified using
+`link = "log"`, `variance = "tweedie"` and `power_fixed = FALSE`. Note that,
+for `power_fixed = TRUE` it corresponds to the quasi-Poisson regression suitable for count data.
+For details, see [Bonat and Kokonendji, 2017][].
+
+For count response variables the `mcglm` package fits the extended Poisson-Tweedie [Bonat, et. al, 2018][] class.
+It is specified using `link = "log"` and `variance = "poisson_tweedie"`. The power parameter can be
+fixed or fitted based on data. This class deals with under, equi, overdispersed, zero-inflated and heavy-tailed count data. 
+
+Similarly, for discrete/continuous bounded data, the `mcglm`package fits the Flexible quasi-beta class [Bonat, et. al 2018(2)][]. The models are specified using `link = "logit"` and `variance = "binomialP"`. However,
+the user can specified other link function, see `?mc_link_function` for other options. For the variance function
+an even more flexible variance function is available as `"binomialPQ"`. For more article on the McGLMs class, see my [personal webpage][].
+
+<!---------------------------------------------------------------------- -->
+
+[McGLMs]: https://rss.onlinelibrary.wiley.com/doi/10.1111/rssc.12145 
+[Bonat, 2018]: https://www.jstatsoft.org/article/view/v084i04 
+[Bonat and Kokonendji, 2017]: http://www.leg.ufpr.br/~wagner/publication/bonat_jscs_2017/
+[Bonat, et. al, 2018]: http://www.leg.ufpr.br/~wagner/publication/bonat_sm_2017/
+[Bonat, et. al 2018(2)]: http://www.leg.ufpr.br/~wagner/publication/bonat_sm_2018/
+[personal webpage]: www.leg.ufpr.br/~wagner

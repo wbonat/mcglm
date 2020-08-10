@@ -4,9 +4,13 @@
 \alias{coef.mcglm}
 \title{Model Coefficients}
 \usage{
-\method{coef}{mcglm}(object, std.error = FALSE, response = c(NA,
-  1:length(object$beta_names)), type = c("beta", "tau", "power",
-  "correlation"), ...)
+\method{coef}{mcglm}(
+  object,
+  std.error = FALSE,
+  response = c(NA, 1:length(object$beta_names)),
+  type = c("beta", "tau", "power", "correlation"),
+  ...
+)
 }
 \arguments{
 \item{object}{an object of \code{mcglm} class.}

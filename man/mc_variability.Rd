@@ -4,17 +4,14 @@
 \alias{mc_variability}
 \title{Variability matrix}
 \usage{
-mc_variability(sensitivity, product, inv_C, C, res, W)
+mc_variability(product2, product, inv_C, C, res, W)
 }
 \arguments{
-\item{sensitivity}{A matrix. In general the output from
-\code{mc_sensitivity}.}
+\item{product2}{A list of matrix.}
 
 \item{product}{A list of matrix.}
 
 \item{inv_C}{A matrix. In general the output from \code{mc_build_C}.}
-
-\item{C}{A matrix. In general the output from \code{mc_build_C}.}
 
 \item{res}{A vector. The residuals vector, i.e. (y_vec - mu_vec).}
 

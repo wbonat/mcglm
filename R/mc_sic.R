@@ -69,6 +69,7 @@ mc_sic <- function(object, scope, data, response, penalty = 2, weights) {
                                     link = object$link[[response]])
         score_temp <- mc_quasi_score(D = mu_temp$D,
                                      inv_C = object$inv_C, y_vec = Y,
+                                     C = object$C,
                                      mu_vec = mu_temp$mu, W = W)
         S11 <- score_temp$Variability[1:n_ini_beta, 1:n_ini_beta]
         S22 <- score_temp$Variability[c(n_ini_beta + 1):n_total_beta,

@@ -1,6 +1,6 @@
 ---
 title: "Choosing link, variance and covariance functions"
-author: "Prof. Wagner Hugo Bonat"
+author: "Wagner Hugo Bonat"
 date: "`r paste('mcglm', packageVersion('mcglm'), Sys.Date())`"
 vignette: >
   %\VignetteIndexEntry{Choosing link, variance and covariance functions}        

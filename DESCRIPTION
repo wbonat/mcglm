@@ -2,7 +2,7 @@ Package: mcglm
 Type: Package
 Title: Multivariate Covariance Generalized Linear Models
 Version: 0.6.0
-Date: 2020-06-08
+Date: 2020-08-10
 Author: Wagner Hugo Bonat [aut, cre],
   Walmes Marques Zeviani [ctb],
   Fernando de Pol Mayer [ctb]

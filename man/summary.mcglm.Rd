@@ -4,8 +4,12 @@
 \alias{summary.mcglm}
 \title{Summarizing}
 \usage{
-\method{summary}{mcglm}(object, verbose = TRUE, print = c("Regression",
-  "power", "Dispersion", "Correlation"), ...)
+\method{summary}{mcglm}(
+  object,
+  verbose = TRUE,
+  print = c("Regression", "power", "Dispersion", "Correlation"),
+  ...
+)
 }
 \arguments{
 \item{object}{an object of \code{mcglm} class.}

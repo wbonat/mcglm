@@ -4,7 +4,9 @@
 \name{NewBorn}
 \alias{NewBorn}
 \title{Respiratory Physiotherapy on Premature Newborns.}
-\format{a \code{data.frame} with 270 records and 21 variables.}
+\format{
+a \code{data.frame} with 270 records and 21 variables.
+}
 \source{
 Bonat, W. H. and Jorgensen, B. (2016) Multivariate
     covariance generalized linear models.

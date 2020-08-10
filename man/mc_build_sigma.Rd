@@ -4,8 +4,18 @@
 \alias{mc_build_sigma}
 \title{Build variance-covariance matrix}
 \usage{
-mc_build_sigma(mu, Ntrial = 1, tau, power, Z, sparse, variance,
-  covariance, power_fixed, compute_derivative_beta = FALSE)
+mc_build_sigma(
+  mu,
+  Ntrial = 1,
+  tau,
+  power,
+  Z,
+  sparse,
+  variance,
+  covariance,
+  power_fixed,
+  compute_derivative_beta = FALSE
+)
 }
 \arguments{
 \item{mu}{A numeric vector. In general the output from

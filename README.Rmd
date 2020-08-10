@@ -140,7 +140,7 @@ pkg.win.link <- paste0(
 [`devtools`]: https://github.com/hadley/devtools
 [`r pkg.source`]: `r pkg.source.link`
 [`r pkg.win`]: `r pkg.win.link`
-[mcglm-manual.pdf]: www.leg.ufpr.br/~wagner/docmcglm/mcglm_0.6.0.pdf
+[mcglm-manual.pdf]: http://www.leg.ufpr.br/~wagner/docmcglm/mcglm_0.6.0.pdf
 [Gitflow worflow]: http://nvie.com/posts/a-successful-git-branching-model/
 [Wagner Hugo Bonat]: http://www.leg.ufpr.br/~wagner
 [Walmes Marques Zeviani]: http://www.leg.ufpr.br/~walmes

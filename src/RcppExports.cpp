@@ -7,35 +7,36 @@
 using namespace Rcpp;
 
 // mc_sensitivity_op
-arma::sp_mat mc_sensitivity_op(List products, arma::sp_mat W);
-RcppExport SEXP _mcglm_mc_sensitivity_op(SEXP productsSEXP, SEXP WSEXP) {
+arma::sp_mat mc_sensitivity_op(List products, List D_C);
+RcppExport SEXP _mcglm_mc_sensitivity_op(SEXP productsSEXP, SEXP D_CSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< List >::type products(productsSEXP);
-    Rcpp::traits::input_parameter< arma::sp_mat >::type W(WSEXP);
-    rcpp_result_gen = Rcpp::wrap(mc_sensitivity_op(products, W));
+    Rcpp::traits::input_parameter< List >::type D_C(D_CSEXP);
+    rcpp_result_gen = Rcpp::wrap(mc_sensitivity_op(products, D_C));
     return rcpp_result_gen;
 END_RCPP
 }
 // mc_variability_op
-arma::sp_mat mc_variability_op(arma::sp_mat sensitivity, List WE, arma::vec k4, arma::vec W);
-RcppExport SEXP _mcglm_mc_variability_op(SEXP sensitivitySEXP, SEXP WESEXP, SEXP k4SEXP, SEXP WSEXP) {
+arma::sp_mat mc_variability_op(List P2, arma::sp_mat C, List WE, arma::vec k4, arma::vec W);
+RcppExport SEXP _mcglm_mc_variability_op(SEXP P2SEXP, SEXP CSEXP, SEXP WESEXP, SEXP k4SEXP, SEXP WSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::sp_mat >::type sensitivity(sensitivitySEXP);
+    Rcpp::traits::input_parameter< List >::type P2(P2SEXP);
+    Rcpp::traits::input_parameter< arma::sp_mat >::type C(CSEXP);
     Rcpp::traits::input_parameter< List >::type WE(WESEXP);
     Rcpp::traits::input_parameter< arma::vec >::type k4(k4SEXP);
     Rcpp::traits::input_parameter< arma::vec >::type W(WSEXP);
-    rcpp_result_gen = Rcpp::wrap(mc_variability_op(sensitivity, WE, k4, W));
+    rcpp_result_gen = Rcpp::wrap(mc_variability_op(P2, C, WE, k4, W));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
     {"_mcglm_mc_sensitivity_op", (DL_FUNC) &_mcglm_mc_sensitivity_op, 2},
-    {"_mcglm_mc_variability_op", (DL_FUNC) &_mcglm_mc_variability_op, 4},
+    {"_mcglm_mc_variability_op", (DL_FUNC) &_mcglm_mc_variability_op, 5},
     {NULL, NULL, 0}
 };
 

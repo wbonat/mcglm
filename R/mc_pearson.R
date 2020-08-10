@@ -26,17 +26,17 @@ mc_pearson <- function(y_vec, mu_vec, Cfeatures, inv_J_beta = NULL,
                        compute_sensitivity = TRUE,
                        compute_variability = FALSE,
                        W) {
-    product <- lapply(Cfeatures$D_C, mc_multiply,
-                      bord2 = Cfeatures$inv_C)
-    res <- y_vec - mu_vec
-    pearson_score <- unlist(lapply(product, mc_core_pearson,
-                                   inv_C = Cfeatures$inv_C, res = res, W = W))
-
-    sensitivity <- matrix(NA, length(product), length(product))
+  inv_CW <- Cfeatures$inv_C %*% W
+  product <- lapply(Cfeatures$D_C, mc_multiply, bord2 = Cfeatures$inv_C)
+  product2 <- lapply(product, mc_multiply2, inv_CW)
+  res <- y_vec - mu_vec
+  pearson_score <- unlist(lapply(product2, mc_core_pearson,
+                                 C = Cfeatures$C,
+                                 res = res, W = W))
+  sensitivity <- matrix(NA, length(product), length(product))
     if(compute_sensitivity == TRUE) {
-      sensitivity <- mc_sensitivity(product, W = W)
+      sensitivity <- mc_sensitivity(product = product2, D_C = Cfeatures$D_C)
     }
-
     output <- list(Score = pearson_score, Sensitivity = sensitivity,
                    Extra = product)
     if (correct == TRUE) {
@@ -47,7 +47,7 @@ mc_pearson <- function(y_vec, mu_vec, Cfeatures, inv_J_beta = NULL,
                        Sensitivity = sensitivity, Extra = product)
     }
     if (compute_variability == TRUE) {
-        variability <- mc_variability(sensitivity = sensitivity,
+        variability <- mc_variability(product2 = product2,
                                       product = product,
                                       inv_C = Cfeatures$inv_C,
                                       C = Cfeatures$C, res = res, W = W)

@@ -4,7 +4,7 @@
 \alias{mc_quasi_score}
 \title{Quasi-score function}
 \usage{
-mc_quasi_score(D, inv_C, y_vec, mu_vec, W)
+mc_quasi_score(D, inv_C, C, y_vec, mu_vec, W)
 }
 \arguments{
 \item{D}{A matrix. In general the output from
@@ -12,6 +12,8 @@ mc_quasi_score(D, inv_C, y_vec, mu_vec, W)
 
 \item{inv_C}{A matrix. In general the output from
 \code{\link[mcglm]{mc_build_C}}.}
+
+\item{C}{A matrix. In general the output from \code{\link[mcglm]{mc_build_C}}.}
 
 \item{y_vec}{A vector.}
 
