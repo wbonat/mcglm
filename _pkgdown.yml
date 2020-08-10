@@ -1,0 +1,4 @@
+template:
+  params:
+    bootswatch: cerulean
+    ganalytics: UA-172302498-1
