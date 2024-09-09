@@ -26,6 +26,7 @@ mc_pearson <- function(y_vec, mu_vec, Cfeatures, inv_J_beta = NULL,
                        compute_sensitivity = TRUE,
                        compute_variability = FALSE,
                        W) {
+
     product <- lapply(Cfeatures$D_C, mc_multiply,
                       bord2 = Cfeatures$inv_C)
     res <- y_vec - mu_vec

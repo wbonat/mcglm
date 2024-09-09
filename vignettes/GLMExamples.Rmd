@@ -53,8 +53,8 @@ To install the stable version of [`mcglm`][], use
 `devtools::install_git()`. For more information, visit [mcglm/README].
 
 ```{r, eval=FALSE}
-library(devtools)
-install_git("wbonat/mcglm")
+#library(devtools)
+#install_git("wbonat/mcglm")
 ```
 
 ```{r, eval=FALSE, error=FALSE, message=FALSE, warning=FALSE}
